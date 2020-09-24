@@ -18,7 +18,7 @@ import {Header} from '../../../components';
 import styles from '../styles';
 import {AvatarItem} from '../../../components';
 import {logoutUserService} from '../../../redux/services/user';
-import {Thumbnail, Icon, Item, Label, Input} from 'native-base';
+import {Thumbnail, Icon, Item, Label, Input, Spinner} from 'native-base';
 import {fetchImageData, fetchMoreImageData} from '../../../redux/actions/fetch';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import FlashMessage, {showMessage} from 'react-native-flash-message';
@@ -32,6 +32,7 @@ import {GetOrders, GetOrdersMore} from '../../../redux/actions/orderAction';
 import {IOrderItem} from '../../../redux/models/orderModel';
 import moment from 'moment';
 import {AppState} from '../../../redux/store';
+import { InfoItem } from '../../../components/InfoItem';
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState>;
@@ -103,11 +104,28 @@ class OrderScreen extends Component<Props, State> {
     this.setState({page: 1});
     this.props.GetOrders(global.CUSTOMER_ID, 1, 10);
   }
+  renderContent() {
+    if(this.props.loading) {
+      return (
+        <View style={{flex:1}}>
+            <Spinner style={{justifyContent:'center',alignSelf:'center'}} />
+        </View>
+      )
+    }else if (!this.props.loading && (!this.props.orders || (this.props.orders && this.props.orders.length < 1)))
+    {
+      return(
+            <InfoItem
+              style={{marginTop: 30}}
+              imageResource={require('../../../assets/not-found-2.png')}
+              text={
+                'Siparişiniz bulunmamaktadır.'
+              }
+            />
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <FlatList
+      ); 
+      }else {
+        return(
+          <FlatList
           refreshing={this.props.loading ?? false}
           onRefresh={() => this.onRefresh()}
           onEndReached={() => {
@@ -181,8 +199,17 @@ class OrderScreen extends Component<Props, State> {
               </View>
             );
           }}
-          data={this.props.orders}
+          data={this.props.orders ?? []}
         />
+        )
+      }
+    
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+       {this.renderContent()}
       </View>
     );
   }

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, FlatList, ActivityIndicator, Button, Text} from 'react-native';
+import {View, FlatList, ActivityIndicator, Button, Text, Image} from 'react-native';
 import {
   NavigationScreenProp,
   NavigationState,
@@ -317,6 +317,7 @@ class CartScreen extends Component<Props, State> {
   }
 
   renderContent(cart: IProductItemCustomer[]) {
+    console.log("carrrt",cart)
     if (cart.length > 0) {
       return (
         <ScrollView>
@@ -327,12 +328,15 @@ class CartScreen extends Component<Props, State> {
             renderItem={({item, index}) => {
               return (
                 <View style={styles.item}>
-                  <View style={{paddingVertical: 10, width: '60%'}}>
+                  <View style={{paddingVertical: 10, width: '60%',flexDirection:'row'}}>
+                    <Image style={{width:40,height:40}} source={{uri:item.imagePath}} />
                     <Text
                       style={{
                         fontFamily: fonts.primaryFont,
                         color: colors.textColor,
                         fontWeight: 'bold',
+                        alignSelf:'center',
+                        marginLeft:5
                       }}>
                       {item.productName}
                     </Text>

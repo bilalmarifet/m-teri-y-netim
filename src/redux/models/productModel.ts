@@ -4,4 +4,5 @@ export interface IProductItem{
     productCode :string;
     price :number;
     productStatus:boolean;
+    imagePath:string;
 }

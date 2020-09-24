@@ -91,7 +91,7 @@ class Login extends Component<Props, {}> {
                         </Text>
               }
                       <Button loading={this.props.isLoading} text="Giriş yap" onPress={props.handleSubmit} />
-                      <Button loading={this.props.isLoading} text="Üye ol" onPress={()=> this.props.navigation.navigate("SignUp")} />
+                      <Button text="Üye ol" onPress={()=> this.props.navigation.navigate("SignUp")} />
                     </View>
                   </View>
                 );

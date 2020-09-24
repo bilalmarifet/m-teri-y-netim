@@ -26,9 +26,11 @@ import {
   List,
   ListItem,
   Body,
+  Right,
+  Left,
 } from 'native-base';
 import {fetchImageData, fetchMoreImageData} from '../../../redux/actions/fetch';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {TouchableOpacity, TouchableHighlight} from 'react-native-gesture-handler';
 import {showMessage} from 'react-native-flash-message';
 import {colors, fonts} from '../../../constants';
 import LinearGradient from 'react-native-linear-gradient';
@@ -89,21 +91,31 @@ class CustomerProfileScreen extends Component<Props, State> {
                 Kişisel Bilgiler
               </Text>
             </ListItem>
-            <ListItem>
+            <ListItem onPress={()=> console.log("asd")}>
+              <Left>
               <Text style={{fontFamily: fonts.primaryFont, fontWeight: '700'}}>
                 İsim:{' '}
                 <Text style={{fontWeight: 'normal'}}>
                   {this.props.userInfo.nameSurname}
                 </Text>
               </Text>
+              </Left>
+             <Right>
+             <Icon name="arrow-forward" style={{color:"#8A8A8E",fontSize:24}} />
+             </Right>
             </ListItem>
-            <ListItem>
+            <ListItem onPress={()=> console.log("asd")}>
+            <Left>
               <Text style={{fontFamily: fonts.primaryFont, fontWeight: '700'}}>
                 Email:{' '}
                 <Text style={{fontWeight: 'normal'}}>
                   {this.props.userInfo.email}
                 </Text>
               </Text>
+            </Left>
+            <Right>
+             <Icon name="arrow-forward" style={{color:"#8A8A8E",fontSize:24}} />
+             </Right>
             </ListItem>
             <ListItem onPress={() => this.props.logOut(this.props.navigation)}>
               <Text

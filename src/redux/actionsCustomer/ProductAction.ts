@@ -39,7 +39,7 @@ export function GetProductsForCustomer(productsList?: IProductItemCustomer[]) {
           .then(response => {
             if (response.data.isSuccess) {
               var productModel: IProductItemCustomer[] = [];
-
+              console.log(response.data.result.homeProductItemModels)
               response.data.result.homeProductItemModels.forEach(
                 (product: any) => {
                   let index = productsList.findIndex(
@@ -53,6 +53,7 @@ export function GetProductsForCustomer(productsList?: IProductItemCustomer[]) {
                     price: product.price,
                     productStatus: product.productStatus,
                     count: count,
+                    imagePath: product.imagePath
                   };
                   productModel.push(productItem);
                 },
@@ -75,7 +76,7 @@ export function GetProductsForCustomer(productsList?: IProductItemCustomer[]) {
   };
 }
 
-export function IncOrDecItemFromCart(
+export function   IncOrDecItemFromCart(
   productsList: IProductItemCustomer[],
   productId: number,
   isIncrease: boolean,
@@ -84,7 +85,11 @@ export function IncOrDecItemFromCart(
   return (dispatch: Dispatch<Action>) => {
     var list = [];
     dispatch(loadingForIncDec(true, productId));
+
+    
+    
     if (index) {
+      index = productsList.findIndex(e=>e.productId === productId)
       let count = productsList[index].count;
       list = [
         ...productsList.slice(0, index),

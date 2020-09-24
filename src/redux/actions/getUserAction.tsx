@@ -26,6 +26,7 @@ export function GetUser(employeeId: number) {
 
         )
             .then((response) => {
+                console.log("User geldi",response)
                 if (response.data.isSuccess) {
                     var userModel: IGetUserItem = {
                         userId: response.data.result.userId,

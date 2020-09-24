@@ -1,4 +1,4 @@
-export const WATER_BASE_URL_NEW = 'https://crmapi.fillsoftware.com';
+export const WATER_BASE_URL_NEW = 'http://apiv2.fillsoftware.com';
 
 export const WATER_BASE_URL = 'https://api.fillsoftware.com/api';
 

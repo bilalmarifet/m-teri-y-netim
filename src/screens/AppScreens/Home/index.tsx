@@ -131,12 +131,6 @@ class CustomerHomeScreen extends Component<Props, State> {
     else {
       let cart = this.props.navigation.getParam('cart') ?? 0
       return (
-//         <TouchableOpacity onPress={()=> {
-        
-// <Icon name="ios-add-circle" style={{color : colors.iconColorSecond}}/>
-//        </TouchableOpacity>
-
-
 <View style={{marginRight:-5,marginTop:-10,marginLeft:20,marginBottom:-10}}>
 
 
@@ -173,7 +167,7 @@ class CustomerHomeScreen extends Component<Props, State> {
    return(
     <FlatList
     contentContainerStyle={{paddingTop:20}}
-      data={[...this.props.productList,...this.props.productList,...this.props.productList,...this.props.productList,...this.props.productList,...this.props.productList,]}
+      data={this.props.productList}
 
       keyExtractor={item => item.productId}
       renderItem={({item, index}) => {
@@ -185,7 +179,7 @@ class CustomerHomeScreen extends Component<Props, State> {
           <View style={{paddingVertical:10}}>
           <Image
               style={{width: Dimensions.get('window').width/3.5, height: Dimensions.get('window').width/4}}
-              source={require('../../../assets/bread.jpg')}
+              source={{uri:item.imagePath}}
             />
            </View>
 

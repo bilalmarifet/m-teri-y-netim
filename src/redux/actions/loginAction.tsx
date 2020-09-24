@@ -13,6 +13,7 @@ import {Action} from '../states';
 import {navigate} from '../services/Navigator';
 import {NavigationScreenProp, NavigationState} from 'react-navigation';
 import NavigationService from '../../services/NavigationService';
+import { showSimpleMessage } from '../../components/showMessage';
 
 export function loginUserService(username: string, password: string) {
   return (dispatch: Dispatch<Action>) => {
@@ -61,12 +62,12 @@ export function loginUserService(username: string, password: string) {
             })
             .catch(error => {
               console.log(error);
-              dispatch(loginIsSucceed(false, error));
+              showSimpleMessage("Bir hata meydana geldi.Tekrar deneyiniz","danger")
               dispatch(reset());
             });
         } else {
           if (response.data.message == 'User.Login.UserNotFound') {
-            dispatch(loginIsSucceed(false, 'Böyle bir kullanıcı bulunamadı!'));
+            showSimpleMessage("Böyle bir kullanıcı bulunamadı.","danger")
             dispatch(reset());
           }
         }

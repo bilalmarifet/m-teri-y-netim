@@ -28,7 +28,7 @@ import {
   SafeAreaView,
 } from 'react-navigation';
 import {Formik} from 'formik';
-import * as Yup from 'yup';
+
 import {createBaseUser, BaseUser} from '../../../redux/actions/signUpActions';
 import styles from '../Login/styles';
 import {connect} from 'react-redux';
@@ -39,6 +39,10 @@ import {showMessage} from 'react-native-flash-message';
 import {userType} from '../../../redux/actions/profileActions';
 import { Input, Button } from '../../../components';
 import { BasestoreId, BaseStoreOwnerUserId } from '../../../services/AppConfig';
+import * as Yup from 'yup';
+import { colors } from '../../../constants';
+
+import TextInputMask from 'react-native-text-input-mask';
 
 // import Icon from 'react-native-vector-icons/Ionicons'
 // import { Input } from "react-native-elements";
@@ -63,13 +67,11 @@ interface userData {
 
 const loginSchema = Yup.object().shape({
   phoneNumber: Yup.string()
-    .min(9)
-
-    .required(),
+  .required("Lütfen telefon numaranızı giriniz"),
   companyName: Yup.string().max(50),
   adress: Yup.string()
-    .max(100)
-    .required(),
+    .max(250,"Adres maksimum 250 karakter olabilir")
+    .required("Lütfen adres giriniz."),
 });
 
 interface State {
@@ -116,7 +118,8 @@ class SignUpSecondScreen extends Component<Props, State> {
     user.userType = 3
     user.storeId = BasestoreId
     user.storeOwnerUserId = BaseStoreOwnerUserId
-      this.props.createBaseUser(user);
+    console.log(user)
+    this.props.createBaseUser(user);
   };
 
   render() {
@@ -150,13 +153,23 @@ class SignUpSecondScreen extends Component<Props, State> {
                           </Text>
                         </View>
                         <View style={{marginTop: '20%'}}>
-                        <Input
-                      placeholder="Telefon numarası"
-                      value={props.values.phoneNumber}
-                      onChangeText={props.handleChange("phoneNumber")}
-                      onBlur={props.handleBlur("phoneNumber")}
-                      error={props.touched.phoneNumber && props.errors.phoneNumber}
-                    />
+                    <TextInputMask
+                    style={{height: 40,
+                      borderBottomWidth: 1,
+                      borderBottomColor: (props.touched.phoneNumber && props.errors.phoneNumber) ? colors.accent : colors.borderColor,
+                      fontSize: 16,
+                      marginVertical: 10}}
+                    placeholder="Telefon numarası"
+  refInput={ref => { this.input = ref }}
+  onChangeText={(formatted, extracted) => {
+    console.log(formatted) // +1 (123) 456-78-90
+    console.log(extracted) // 1234567890
+    props.setFieldValue("phoneNumber",extracted)
+  }}
+  onBlur={props.handleBlur("phoneNumber")}
+  error={props.touched.phoneNumber && props.errors.phoneNumber}
+  mask={"+90 ([000]) [000] [00] [00]"}
+/>
                      {props.touched.phoneNumber && props.errors.phoneNumber && <Text style={{fontSize:12,color:colors.accent}}>
                         {props.errors.phoneNumber}
                         </Text>
