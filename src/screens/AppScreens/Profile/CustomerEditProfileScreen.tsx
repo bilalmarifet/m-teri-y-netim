@@ -42,12 +42,16 @@ import {getUserInfo, UserInfo} from '../../../redux/actions/profileActions';
 import {logOut} from '../../../redux/actions/loginAction';
 import TextInputMask from 'react-native-text-input-mask';
 import { ButtonGradient } from '../../../components/ButtonGradient';
+import { AppState } from '../../../redux/store';
+import { customerEdit } from '../../../redux/actions/customerEditAction';
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState>;
   logOut: (navigation?: NavigationScreenProp<NavigationState>) => void;
   getUserInfo: () => void;
   userInfo: UserInfo;
+  customerEdit: (user:UserInfo) => void;
+  loading: boolean;
 }
 
 interface itemProp {}
@@ -63,23 +67,21 @@ const changeProfileSchema = Yup.object().shape({
       .min(3,"İsim soyisim minumum 3 karakter olmalıdır.")
       .required("İsim soyisim girilmesi zorunludur."),
       phoneNumber: Yup.string()
-  .required("Lütfen telefon numaranızı giriniz").min(10,"Lütfen telefon numaranızı doğru giriniz.")
+  .required("Lütfen telefon numaranızı giriniz").min(10,"Lütfen telefon numaranızı doğru giriniz."),
+  address: Yup.string()
+    .max(250,"Adres maksimum 250 karakter olabilir")
+    .required("Lütfen adres giriniz."),
   });
   
 
 class CustomerEditProfileScreen extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.state = {
-      page: 1,
-      limit: 20,
-      change: false,
-    };
   }
 
   static navigationOptions = ({ navigation }) => {
     return {
-      title: 'Profilim',
+      title: 'Profil Düzenle',
 
       headerStyle: {
         backgroundColor: colors.headerColorTop,
@@ -101,18 +103,31 @@ class CustomerEditProfileScreen extends Component<Props, State> {
   };
 
   render() {
-    return <View style={styles.container}><ScrollView bounces={false} contentContainerStyle={{flex:1}}>
+    return <View style={styles.container}><ScrollView bounces={false} contentContainerStyle={{flexGrow:1}}>
       {this.renderContentNew()}</ScrollView></View>;
   }
 
     handleChangeProfile(values) {
-
+      console.log(this.props.userInfo)
+      var user: UserInfo  = {
+        nameSurname:  values.NameSurname,
+        email: values.email,
+        userType: 3,
+        address: values.address,
+        phoneNumber: values.phoneNumber,
+        carboyCount: this.props.userInfo.carboyCount,
+        companyName: this.props.userInfo.companyName,
+        dayOfWeeks: this.props.userInfo.dayOfWeeks,
+        description: this.props.userInfo.description,
+        fountainCount:this.props.userInfo.fountainCount,
+      }
+      this.props.customerEdit(user)
     }
 
   renderContentNew() {
     if(this.props.userInfo) {
       let user = this.props.userInfo
-
+        
       return(
         <View>
           <View style={{borderBottomWidth:0.5,borderBottomColor:colors.borderColor,paddingBottom:30}}>
@@ -121,14 +136,15 @@ class CustomerEditProfileScreen extends Component<Props, State> {
             {user.nameSurname}
           </Text>
           <Text style={{textAlign:'center',marginTop:10,fontFamily:fonts.primaryFont,fontSize:18}}>
-            {user.email} bilalmarifet@gmail.com
+            {user.email}
           </Text>
           </View>
               <Formik
                 initialValues={{
-                  NameSurname: user.nameSurname,
-                  email: user.email,
-                  phoneNumber: user.phoneNumber
+                  NameSurname: this.props.userInfo.nameSurname ?? "",
+                  email: this.props.userInfo.email ?? "",
+                  phoneNumber: this.props.userInfo.phoneNumber ?? "",
+                  address: this.props.userInfo.address ?? ""
                 }}
                 validationSchema={changeProfileSchema}
                 onSubmit={values => this.handleChangeProfile(values)}>
@@ -197,11 +213,27 @@ class CustomerEditProfileScreen extends Component<Props, State> {
               }
                         </View>
                        
+                        <View style={{marginTop:10}}>
+                        <Text style={{color:colors.textColor,fontSize:16,fontWeight:'600'}}>Adres</Text> 
+                        <Input
+                      placeholder="Adres"
+                      style={{color:colors.textColor,paddingLeft:20}}
+                      value={props.values.address}
+                      onChangeText={props.handleChange("address")}
+                      onBlur={props.handleBlur("address")}
+                      error={props.touched.address && props.errors.address}
+                    />
+                    {props.touched.address && props.errors.address && <Text style={{fontSize:12,color:colors.accent}}>
+                        {props.errors.address}
+                        </Text>
+              }
+                        </View>
+                       
                         <View>
                        
                         </View>
                     </View>
-                    <ButtonGradient text="Değişiklikleri kaydet" loading={false} onPress={props.handleSubmit} />
+                    <ButtonGradient style={{marginTop:20}} text="Değişiklikleri kaydet" loading={this.props.loading} onPress={props.handleSubmit} />
                     </View>
                   );
                 }}
@@ -216,15 +248,16 @@ class CustomerEditProfileScreen extends Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state: any) => ({
-  loading: state.profile.loading,
+const mapStateToProps = (state: AppState) => ({
+  loading: state.customerEdit.loadingCustomerEdit,
   userInfo: state.profile.userInfo,
-  message: state.profile.message,
 });
 
 function bindToAction(dispatch: any) {
   return {
-   
+    customerEdit: (user: UserInfo) => 
+    dispatch(customerEdit(user))
+    
 
   };
 }

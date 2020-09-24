@@ -1,13 +1,18 @@
 import axios from 'axios'
-import {WATER_CUSTOMER_EDIT, WATER_CUSTOMER_GETBY_ID} from './../constants'
-import { Dispatch } from "react";
-import {CUSTOMER_EDIT_FAILED,CUSTOMER_EDIT_SUCCEED, CUSTOMER_EDIT_LOADING, CUSTOMER_GETBY_ID_LOADING, CUSTOMER_GETBY_ID,} from './../types'
+import {WATER_CUSTOMER_EDIT, WATER_CUSTOMER_GETBY_ID, WATER_CUSTOMER_UPDATE_PASSWORD} from './../constants'
+
+import {CUSTOMER_EDIT_FAILED,CUSTOMER_EDIT_SUCCEED, CUSTOMER_EDIT_LOADING, CUSTOMER_GETBY_ID_LOADING, CUSTOMER_GETBY_ID, CUSTOMER_UPDATE_PASSWORD_LOADING} from './../types'
 import {Action} from '../states'
 import Axios from 'axios';
 import {AsyncStorage } from 'react-native'
 
 import { reset } from './loginAction';
 import { GetCustomers } from './homeAction';
+import { UserInfo, getUserInfo } from './profileActions';
+import { showSimpleMessage } from '../../components/showMessage';
+import { bool } from 'yup';
+import { Dispatch } from 'redux';
+
 
 
 export interface Customer {
@@ -67,13 +72,12 @@ export function getCustomerInfo(customerId : number) {
 
   }
 }
-export function customerEdit(id:number, nameSurname:string,  companyName:string,dayOfWeek :number,fountainCount:number,dayOfWeeks:string,adress : string,phoneNumber : string,carboyCount: number,description : string) {
-  return (dispatch :any) =>  {
 
 
 
-
-
+export function customerUpdatePassword(oldPassword:string,newPassword:string) {
+  return(dispatch:any) => {
+    dispatch(customerUpdatePasswordLoading(true))
     AsyncStorage.multiGet(['userToken', 'userId']).then((res) => {
       let token = res[0][1];
       let userId = res[1][1];
@@ -82,43 +86,110 @@ export function customerEdit(id:number, nameSurname:string,  companyName:string,
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
     }
-
-
-    axios.post(WATER_CUSTOMER_EDIT,
+    axios.post(WATER_CUSTOMER_UPDATE_PASSWORD,
       {
-          id: id,
-          nameSurname: nameSurname,
-          companyName: companyName,
-          dayOfWeek :dayOfWeek,
-          fountainCount:fountainCount,
-          dayOfWeeks: dayOfWeeks,
-          userId : userId,
-          address: adress,
-          phoneNumber :phoneNumber,
-          carboyCount: carboyCount,
-          description: description
+          oldPassword: oldPassword,
+          newPassword: newPassword,
+          userId: global.USERID
       },{
         headers: headers
       })
     .then((response) =>{
+      console.log(response)
     if(response.data.isSuccess){
         if(response.data.result){
-          dispatch(customerEditIsSucceed(true, "Müşteri Düzenlendi!"));
-      
-          dispatch(GetCustomers(1, "", 0, 1))
-          dispatch(reset())
+          showSimpleMessage("Bilgileriniz Güncellendi.","success")
+          dispatch(customerUpdatePasswordLoading(false))
         }
       }
+      else {
+        if(response.data.message === "Post.UpdatePassword.OldPasswordDidNotMatch")
+          {
+            showSimpleMessage("Mevcut şifrenizi yanlış girdiniz. Lütfen tekrar deneyiniz.","danger")
+          }
+else {
+  showSimpleMessage("Bilgileriniz Güncellenemedi. Lütfen sonra tekrar deneyiniz.","danger")
+}
+        
+          dispatch(customerUpdatePasswordLoading(false))
+      }
     })
-    .catch(error => {       
-      dispatch(customerEditIsSucceed(false,"Bir hata oluştu."));
-      dispatch(reset());
+    .catch(error => {      
+      console.log(error) 
+      showSimpleMessage("Bilgileriniz Güncellenemedi. Lütfen sonra tekrar deneyiniz.","danger")
+      dispatch(customerUpdatePasswordLoading(false))
 
     });
 
 
   }).catch(err=> {
+    console.log(err)
+    showSimpleMessage("Bilgileriniz Güncellenemedi. Lütfen sonra tekrar deneyiniz.","danger")
+    dispatch(customerUpdatePasswordLoading(false))
+  })
+ 
+  }
+}
+export function customerEdit(user:UserInfo) {
+  return (dispatch :any) =>  {
+    dispatch(customerEditLoading(true))
+    AsyncStorage.multiGet(['userToken', 'userId']).then((res) => {
+      let token = res[0][1];
+      let userId = res[1][1];
 
+      const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+    }
+    console.log(user,global.CUSTOMER_ID,userId)
+    axios.post(WATER_CUSTOMER_EDIT,
+      {
+          id: global.CUSTOMER_ID,
+          nameSurname: user.nameSurname,
+          companyName: user.companyName,
+          dayOfWeek :0,
+          fountainCount:user.fountainCount,
+          dayOfWeeks: user.dayOfWeeks,
+          userId : Number(userId),
+          address: user.address,
+          phoneNumber :user.phoneNumber,
+          carboyCount: user.carboyCount,
+          description: user.description,
+          email:user.email,
+      },{
+        headers: headers
+      })
+    .then((response) =>{
+      console.log(response)
+    if(response.data.isSuccess){
+        if(response.data.result){
+          showSimpleMessage("Bilgileriniz Güncellendi.","success")
+          dispatch(getUserInfo())
+          dispatch(customerEditLoading(false))
+        }
+      }
+      else {
+        if(response.data.message === "Customer.Update.EmailFound") {
+          showSimpleMessage("Bu email zaten kayıtlı. Lütfen başka bir email deneyiniz.","danger")
+        } else {
+          showSimpleMessage("Bilgileriniz Güncellenemedi. Lütfen sonra tekrar deneyiniz.","danger")
+        }
+        
+        dispatch(customerEditLoading(false))
+      }
+    })
+    .catch(error => {      
+      console.log(error) 
+      showSimpleMessage("Bilgileriniz Güncellenemedi. Lütfen sonra tekrar deneyiniz.","danger")
+      dispatch(customerEditLoading(false))
+
+    });
+
+
+  }).catch(err=> {
+    console.log(err)
+    showSimpleMessage("Bilgileriniz Güncellenemedi. Lütfen sonra tekrar deneyiniz.","danger")
+    dispatch(customerEditLoading(false))
   })
  
   }
@@ -140,6 +211,17 @@ export function customerEdit(id:number, nameSurname:string,  companyName:string,
   export const getCustomerLoading  = (bool : boolean) => ({
     type : CUSTOMER_GETBY_ID_LOADING,
     payload : bool
+  })
+
+
+  export const customerEditLoading = (bool: boolean) => ({
+    type: CUSTOMER_EDIT_LOADING,
+    payload: bool
+  })
+
+  export const customerUpdatePasswordLoading = (bool: boolean) => ({
+    type: CUSTOMER_UPDATE_PASSWORD_LOADING,
+    payload: bool
   })
 
 

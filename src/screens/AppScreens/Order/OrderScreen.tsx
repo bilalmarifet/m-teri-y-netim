@@ -34,6 +34,7 @@ import {IOrderItem} from '../../../redux/models/orderModel';
 import moment from 'moment';
 import {AppState} from '../../../redux/store';
 import { InfoItem } from '../../../components/InfoItem';
+import { TouchableHighlight } from 'react-native-gesture-handler';
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState>;
@@ -170,8 +171,9 @@ class OrderScreen extends Component<Props, State> {
           style={{paddingTop: 20}}
           renderItem={({item, index}) => {
             return (
-              <View style={styles.itemOrder}>
-                <View style={{paddingVertical: 10, width: '60%'}}>
+              <TouchableHighlight underlayColor="#CCC" onPress={()=>this.props.navigation.navigate('OrderDetail')} style={styles.itemOrder}>
+               <View>
+               <View style={{paddingVertical: 10, width: '60%'}}>
                   <Text
                     style={{
                       fontFamily: fonts.primaryFont,
@@ -211,7 +213,9 @@ class OrderScreen extends Component<Props, State> {
                     ' ' +
                     item.dateTime.slice(11, 16)}
                 </Text>
-              </View>
+             
+               </View>
+              </TouchableHighlight>
             );
           }}
           data={this.props.orders ?? []}

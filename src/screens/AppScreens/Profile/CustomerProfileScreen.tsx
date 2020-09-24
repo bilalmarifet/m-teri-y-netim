@@ -41,6 +41,7 @@ import * as Yup from 'yup'; // for everything
 import {Formik} from 'formik';
 import {getUserInfo, UserInfo} from '../../../redux/actions/profileActions';
 import {logOut} from '../../../redux/actions/loginAction';
+import { AppState } from '../../../redux/store';
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState>;
@@ -104,7 +105,7 @@ class CustomerProfileScreen extends Component<Props, State> {
             {user.nameSurname}
           </Text>
           <Text style={{textAlign:'center',marginTop:10,fontFamily:fonts.primaryFont,fontSize:18}}>
-            {user.email} bilalmarifet@gmail.com
+            {user.email}
           </Text>
           </View>
 
@@ -118,7 +119,7 @@ class CustomerProfileScreen extends Component<Props, State> {
             <View style={{backgroundColor:'#E5F1E5',width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="arrow-forward" style={{color:'#56A6A4',fontSize:12}} /></View>
           </View>
           </TouchableHighlight>
-          <TouchableHighlight onPress={()=> console.log()} underlayColor="#AAA"  style={{borderBottomWidth:1,borderBottomColor:colors.borderColor,padding:20,paddingVertical:15,backgroundColor:'white'}}>
+          <TouchableHighlight onPress={()=> this.props.navigation.navigate('CustomerEditPassword')} underlayColor="#AAA"  style={{borderBottomWidth:1,borderBottomColor:colors.borderColor,padding:20,paddingVertical:15,backgroundColor:'white'}}>
           <View style={{flexDirection:'row',justifyContent:'space-between'}}>
             <View style={{flexDirection:'row'}}>
             <Image source={require("../../../images/profile/002-man.png")} style={{width:34,height:34, borderRadius:17}} />
@@ -138,7 +139,7 @@ class CustomerProfileScreen extends Component<Props, State> {
             <View style={{backgroundColor:'#E5F1E5',width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="arrow-forward" style={{color:'#56A6A4',fontSize:12}} /></View>
           </View>
           </TouchableHighlight>
-          <TouchableHighlight onPress={()=> console.log()} underlayColor="#AAA"  style={{borderBottomWidth:1,borderBottomColor:colors.borderColor,padding:20,paddingVertical:15,backgroundColor:'white'}}>
+          <TouchableHighlight onPress={()=> this.props.logOut()} underlayColor="#AAA"  style={{borderBottomWidth:1,borderBottomColor:colors.borderColor,padding:20,paddingVertical:15,backgroundColor:'white'}}>
           <View style={{flexDirection:'row',justifyContent:'space-between'}}>
             <View style={{flexDirection:'row'}}>
             <Image source={require("../../../images/profile/006-log-out.png")} style={{width:34,height:34, borderRadius:17}} />
@@ -154,7 +155,7 @@ class CustomerProfileScreen extends Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: AppState) => ({
   loading: state.profile.loading,
   userInfo: state.profile.userInfo,
   message: state.profile.message,

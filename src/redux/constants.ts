@@ -21,6 +21,7 @@ export const WATER_CUSTOMER_ADD = WATER_BASE_URL + '/customer';
 export const WATER_CUSTOMER_DELETE =
   WATER_BASE_URL_NEW + '/api/customer/Delete';
 export const WATER_CUSTOMER_EDIT = WATER_BASE_URL_NEW + '/api/customer/Update';
+export const WATER_CUSTOMER_UPDATE_PASSWORD = WATER_BASE_URL_NEW + '/api/User/UpdatePassword'
 export const WATER_CUSTOMER_GETBY_ID =
   WATER_BASE_URL_NEW + '/api/customer/GetCustomerById';
 export const WATER_PRODUCT_ADD = WATER_BASE_URL_NEW + '/api/Product';

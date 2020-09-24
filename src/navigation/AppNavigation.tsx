@@ -25,6 +25,8 @@ import SignUpFirstScreen from "../screens/AuthScreens/SignUp/SignUpFirstScreen";
 import SignUpSecondScreen from "../screens/AuthScreens/SignUp/SignUpSecondScreen";
 import { Icon } from "native-base";
 import CustomerEditProfileScreen from "../screens/AppScreens/Profile/CustomerEditProfileScreen";
+import CustomerEditPasswordScreen from "../screens/AppScreens/Profile/CustomerEditPasswordScreen";
+import OrderDetailScreen from "../screens/AppScreens/Order/OrderDetailScreen";
 
 const MainStack = createStackNavigator(
   {
@@ -98,7 +100,7 @@ const cartStack = createStackNavigator(
 const CustomerOrderStack = createStackNavigator(
   {
     Order: {screen: OrderScreen},
-    Profile: CustomerProfileScreen,
+    OrderDetail: OrderDetailScreen
   },
   {
     initialRouteName: 'Order',
@@ -120,7 +122,8 @@ const CustomerOrderStack = createStackNavigator(
 const CustomerProfileStack = createStackNavigator(
   {
     Profile: CustomerProfileScreen,
-    CustomerEditProfile: CustomerEditProfileScreen
+    CustomerEditProfile: CustomerEditProfileScreen,
+    CustomerEditPassword: CustomerEditPasswordScreen
   },
   {
     initialRouteName: 'Profile',

@@ -27,6 +27,8 @@ class AuthLoading extends React.Component<Props, {}> {
     global.STORE_OWNER_USER_ID = Number(storeOwnerUserId);
     const customerId = await AsyncStorage.getItem('customerId');
     global.CUSTOMER_ID = customerId;
+    const userId = await AsyncStorage.getItem('userId');
+    global.USERID = userId
 
 
     console.log("token")

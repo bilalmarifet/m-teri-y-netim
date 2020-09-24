@@ -93,7 +93,9 @@ export interface State {
     CustomerEditMessage: string;
     customer : Customer;
     loading : boolean;
-
+    loadingCustomerEdit: boolean;
+    loadingCustomerUpdatePassword: boolean;
+    
   }
 
   export interface ProductAdd

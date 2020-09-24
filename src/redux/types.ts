@@ -23,7 +23,7 @@ export const CUSTOMER_DELETE_LOADING = 'CustomerDeleteLoading';
 export const CUSTOMER_EDIT_SUCCEED = 'CustomerEditSucceed';
 export const CUSTOMER_EDIT_FAILED = 'CustomerEditFailed';
 export const CUSTOMER_EDIT_LOADING = 'CustomerEditLoading';
-
+export const CUSTOMER_UPDATE_PASSWORD_LOADING = "CUSTOMER_UPDATE_PASSWORD_LOADING"
 export const CUSTOMER_GETBY_ID_LOADING = 'CustomerGetByIdLoading';
 export const CUSTOMER_GETBY_ID = 'CustomerGetById';
 export const CUSTOMER_GETBY_ID_FAILED = 'CustomerGetByIdFailed';
