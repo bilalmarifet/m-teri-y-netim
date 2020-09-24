@@ -91,7 +91,7 @@ class CustomerHomeScreen extends Component<Props, State> {
 
    return {
     title: 'Ürünler',
-    headerTintColor: 'white',
+
     headerStyle: {
       backgroundColor: colors.headerColorTop,
       headerTitleStyle: {
@@ -124,7 +124,6 @@ class CustomerHomeScreen extends Component<Props, State> {
          {this.props.loadingIncDec && this.props.loadingIndex === item.productId &&  <Spinner style={{position:"absolute",zIndex:1,backgroundColor:colors.borderColor,opacity:.8,width:'100%',height:'100%'}} color={colors.headerColor} />} 
 
          <View style={{  flexDirection: 'row', shadowColor: "#000",
-shadowColor: "#000",
 shadowOffset: {
 	width: 0,
 	height: 3,
@@ -133,19 +132,13 @@ shadowOpacity: 0.29,
 shadowRadius: 4.65,
 
 elevation: 7, }}>
-        <TouchableOpacity             style={{
-                borderColor:'#e8e8e8', borderStyle:'solid',borderWidth:1,    backgroundColor:'#ffff', justifyContent:'center',width:24,height:24,borderRadius:11,
-                  
-              }} onPress={()=> {
+        <TouchableOpacity style={styles.IncOrDecButton} onPress={()=> {
             this.props.IncOrDecItemFromCart(this.props.productList,item.productId,true);
            this.props.navigation.setParams({cart: cart + item.price});
             this.setState({page:this.state.page + 1})}}><Icon name="plus"            type="Feather"
             style={{ color:colors.priceAndPlusColor,fontSize:20 }} /></TouchableOpacity>
           <Text style={{alignSelf:'center', fontWeight:'bold', paddingHorizontal:5, color:colors.textColor}}>{item.count}</Text>
-          <TouchableOpacity             style={{
-                borderColor:'#e8e8e8', borderStyle:'solid',borderWidth:1,    backgroundColor:'#ffff', justifyContent:'center',width:24,height:24,borderRadius:11,
-                  
-              }} onPress={()=> {
+          <TouchableOpacity style={styles.IncOrDecButton} onPress={()=> {
             this.props.IncOrDecItemFromCart(this.props.productList,item.productId,false);
             this.props.navigation.setParams({cart: cart - item.price});
             this.setState({change : !this.state.change})}}><Icon name="minus"             type="Feather"
@@ -160,16 +153,22 @@ elevation: 7, }}>
     else {
       let cart = this.props.navigation.getParam('cart') ?? 0
       return (
-<View style={{position:'absolute', right:5,bottom:10, zIndex:1000}}>
+<View style={{position:'absolute', paddingLeft:5, paddingRight:5,paddingVertical:5, borderRadius:15, right:10, bottom:10, zIndex:1000,flexDirection: 'row', shadowColor: "#000",
+shadowOffset: {
+	width: 0,
+	height: 3,
+},
+shadowOpacity: 0.29,
+shadowRadius: 4.65,
 
-
+elevation: 7, }}>
 {this.props.loadingIncDec && this.props.loadingIndex === item.productId &&  <Spinner style={{zIndex:1,backgroundColor:colors.borderColor,opacity:.8}} size="small" color={colors.headerColor} />} 
-<TouchableOpacity style={{borderColor:'#e8e8e8', borderStyle:'solid',borderWidth:1, justifyContent:'center',width:24,height:24,borderRadius:11}} onPress={()=> {
+<TouchableOpacity style={styles.IncOrDecButton} onPress={()=> {
     this.props.IncOrDecItemFromCart(this.props.productList,item.productId,true)
    this.props.navigation.setParams({cart: cart + item.price});
    this.setState({change : !this.state.change})}}>
 
-<Icon name="plus"             type="Feather"
+<Icon name="plus" type="Feather"
                 style={{ color:colors.priceAndPlusColor,fontSize:20 }}  /></TouchableOpacity>
 </View>
 

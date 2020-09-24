@@ -6,6 +6,7 @@ import { Action } from '../states'
 import { IGetUserItem } from "../models/userModel";
 import { reset } from './loginAction';
 import {AsyncStorage } from 'react-native'
+import { user } from './getUserAction';
 
 
 
@@ -23,6 +24,9 @@ export interface UserInfo {
     password: string;
     oldPassword: string;
     userType : userType;
+    address: string;
+    customerId: number;
+    phoneNumber: string;
 }
 
 
@@ -143,16 +147,19 @@ export function getUserInfo() {
           console.log(WATER_CUSTOMER_GETBY_ID + `?customerId=${global.CUSTOMER_ID}`)
         axios.get(WATER_CUSTOMER_GETBY_ID + `?customerId=${global.CUSTOMER_ID}`).then((response)=> {
             var userInfo = {} as UserInfo
-          console.log(response)
+          console.log(response,"user bilgisi")
             if(response.data.isSuccess){
-              if(response.data.result){
+              if(response.data.result && response.data.result.getCustomerByIdResponseModels && response.data.result.getCustomerByIdResponseModels.length > 0){
+                let data: UserInfo = response.data.result.getCustomerByIdResponseModels[0]
                 console.log(response,"response");
-                let data = response.data.result.user;
                 userInfo.email  = data.email;
                 userInfo.nameSurname = data.nameSurname;
                 userInfo.oldPassword = data.oldPassword;
                 userInfo.password = data.password;
                 userInfo.userType = data.userType;
+                userInfo.address = data.address;
+                userInfo.customerId = data.customerId;
+                userInfo.phoneNumber = data.phoneNumber
                 dispatch(getUserInfoConst(userInfo));
               }
 
