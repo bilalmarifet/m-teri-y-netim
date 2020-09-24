@@ -16,6 +16,7 @@ import styles from "./styles";
 import { connect } from "react-redux";
 import { AppState } from "../../../redux/store";
 import { colors } from "../../../constants";
+import { SuccessButton } from "../../../components/SuccessButton";
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState>;
@@ -63,7 +64,7 @@ class Login extends Component<Props, {}> {
                     <View style={styles.headStyle}>
                       {/* <Icon name="emotsmile" size={100} /> */}
                       <Text style={styles.headText}>
-                        Müşteri Yönetim
+                     Giriş Yap
                       </Text>
                     </View>
                     <View style={styles.inputContainer}>
@@ -90,8 +91,8 @@ class Login extends Component<Props, {}> {
                         {props.errors.password}
                         </Text>
               }
-                      <Button loading={this.props.isLoading} text="Giriş yap" onPress={props.handleSubmit} />
-                      <Button text="Üye ol" onPress={()=> this.props.navigation.navigate("SignUp")} />
+                      <SuccessButton loading={this.props.isLoading} text="Giriş yap" onPress={props.handleSubmit} />
+                      <Button text="Üye ol" style={{backgroundColor:'#fff'}} onPress={()=> this.props.navigation.navigate("SignUp")} />
                     </View>
                   </View>
                 );

@@ -63,6 +63,7 @@ export function GetOrders(
               productCode: order.productCode,
               dateTime: order.dateTime,
               isPaid: order.isPaid,
+              status : order.status
             };
             orderModel.push(orderItem);
           });
