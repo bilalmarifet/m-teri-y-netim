@@ -76,7 +76,7 @@ class CustomerInfoScreen extends Component<Props, State> {
 
    return {
     title: 'Kişisel Bilgiler',
-    headerTintColor: 'white',
+
     headerStyle: {
       backgroundColor: colors.headerColor,
       height: 100,

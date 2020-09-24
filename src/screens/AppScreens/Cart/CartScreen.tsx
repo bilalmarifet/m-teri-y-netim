@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, FlatList, ActivityIndicator, Button, Text, Image, TouchableOpacity } from 'react-native';
+import { View, FlatList, ActivityIndicator, Button, Text, Image, TouchableOpacity,TouchableHighlight } from 'react-native';
 import {
   NavigationScreenProp,
   NavigationState,
@@ -86,7 +86,7 @@ class CartScreen extends Component<Props, State> {
   static navigationOptions = ({ navigation }) => {
     return {
       title: 'Sepet',
-      headerTintColor: 'white',
+
       headerStyle: {
         backgroundColor: colors.headerColorTop,
         
@@ -137,33 +137,7 @@ class CartScreen extends Component<Props, State> {
             elevation: 7,
           }}>
             <TouchableOpacity
-              style={{
-                borderColor: '#e8e8e8', borderStyle: 'solid', borderWidth: 1, backgroundColor: '#ffff', justifyContent: 'center', width: 24, height: 24, borderRadius: 11,
-
-              }}
-              onPress={() => {
-                this.props.IncOrDecItemFromCart(
-                  this.props.productList,
-                  item.productId,
-                  false,
-                  index,
-                );
-              }}>
-              <Icon
-                name="minus"
-                type="Feather"
-                style={{ color: colors.priceAndPlusColor, fontSize: 20 }}
-              />
-            </TouchableOpacity>
-            <Text style={{ alignSelf: 'center', marginRight: 8, marginLeft: 8 }}>
-              {item.count}
-            </Text>
-            <TouchableOpacity
-              style={{
-                borderColor: '#e8e8e8', borderStyle: 'solid', borderWidth: 1, justifyContent: 'center', width: 24,
-                height: 24, borderRadius: 10,
-                backgroundColor: '#ffff'
-              }}
+              style={styles.IncOrDecButton}
               onPress={() => {
                 this.props.IncOrDecItemFromCart(
                   this.props.productList,
@@ -178,6 +152,26 @@ class CartScreen extends Component<Props, State> {
                 style={{ color: colors.priceAndPlusColor, fontSize: 20 }}
               />
             </TouchableOpacity>
+            <Text style={{ alignSelf: 'center', marginRight: 8, marginLeft: 8 }}>
+              {item.count}
+            </Text>
+            <TouchableOpacity
+              style={styles.IncOrDecButton}
+              onPress={() => {
+                this.props.IncOrDecItemFromCart(
+                  this.props.productList,
+                  item.productId,
+                  false,
+                  index,
+                );
+              }}>
+              <Icon
+                name="minus"
+                type="Feather"
+                style={{ color: colors.priceAndPlusColor, fontSize: 20 }}
+              />
+            </TouchableOpacity>
+            
           </View>
         </View>
       );
@@ -239,8 +233,15 @@ class CartScreen extends Component<Props, State> {
   renderBottom(price: number) {
     if (price > 0) {
       return (
-        <TouchableOpacity
+        <TouchableHighlight
           onPress={() => this.handleCartAction()}
+          underlayColor="#AAA"
+          style={{
+            borderRadius: 5,
+              marginLeft: 20,
+              marginRight: 20,
+              marginTop: 10,
+              }}
         >
           <LinearGradient
             start={{ x: 0, y: 0.5 }}
@@ -248,26 +249,21 @@ class CartScreen extends Component<Props, State> {
             colors={['#30AE4A', '#7BAD7B']}
             style={{
               borderRadius: 5,
-
-              marginLeft: 20,
-              marginRight: 20,
-              marginTop: 10,
-              backgroundColor: colors.buttonBackgroundPrimary,
-              flexDirection: 'row',
               paddingTop: 5,
               paddingHorizontal: 10,
               paddingBottom: 10,
+              backgroundColor: colors.buttonBackgroundPrimary,
+              flexDirection: 'row',
+              
               justifyContent: 'space-between',
             }}>
 
-            <View>
-              <View style={{ flexDirection: 'row', paddingLeft: 10 }}>
+            <View style={{paddingLeft:10}}>
+              <View style={{ flexDirection: 'row'}}>
                 <Text
                   style={{
                     fontFamily: 'Roboto',
                     fontWeight: '600',
-
-                    alignSelf: 'center',
                     color: '#fff',
                   }}>
                   Toplam Fiyat :
@@ -275,23 +271,21 @@ class CartScreen extends Component<Props, State> {
                 <Text
                   style={{
                     fontFamily: 'Roboto',
-
                     color: '#fff',
-                    alignSelf: 'center'
                   }}>
                   {price} ₺
             </Text>
               </View>
+              <View>
               <Text style={{
                 fontFamily: 'Roboto',
-                marginLeft: 5,
                 color: '#fff',
-                alignSelf: 'center'
               }}>Siparişi Tamamla</Text>
+              </View>
             </View>
             <View>
               {this.props.isLoading ? (
-                <Spinner size="small" style={{ height: 35, width: 35 }} />
+                <Spinner size="small" color="white" style={{ height: 35, width: 35 }} />
               ) : (
                   <Icon name="chevron-right" style={{ color: 'white', marginTop: 10, fontSize: 18 }} type="Feather" />
 
@@ -300,7 +294,7 @@ class CartScreen extends Component<Props, State> {
 
 
           </LinearGradient>
-        </TouchableOpacity>
+        </TouchableHighlight>
       );
     }
   }

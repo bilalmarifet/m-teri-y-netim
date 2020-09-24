@@ -83,7 +83,7 @@ class OrderScreen extends Component<Props, State> {
   static navigationOptions = ({ navigation }) => {
     return {
       title: 'Siparişlerim',
-      headerTintColor: 'white',
+
       headerStyle: {
         backgroundColor: colors.headerColorTop,
         headerTitleStyle: {

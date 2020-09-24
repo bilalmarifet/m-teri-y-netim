@@ -3,7 +3,7 @@ export const colors = {
   accent: '#AF2923',
   containerBg: '#F0F2F5',
   textColor: '#393E46',
-  borderColor: '#ccc',
+  borderColor: '#E4E6EA',
   borderColorInner: '#193B52',
   headerColorTop : '#F0F2F5',
   headerColor: '#204051',

@@ -18,12 +18,13 @@ import CustomerHomeScreen from '../screens/AppScreens/Home/index';
 import CustomerInfoScreen from '../screens/AppScreens/Cart/CustomerInfoScreen'
 import CartScreen from '../screens/AppScreens/Cart/CartScreen';
 import OrderScreen from '../screens/AppScreens/Order/OrderScreen';
-import CustomerProfileScreen from '../screens/AppScreens/Order/CustomerProfileScreen';
+import CustomerProfileScreen from '../screens/AppScreens/Profile/CustomerProfileScreen';
 
 import {fonts, colors} from '../constants';
 import SignUpFirstScreen from "../screens/AuthScreens/SignUp/SignUpFirstScreen";
 import SignUpSecondScreen from "../screens/AuthScreens/SignUp/SignUpSecondScreen";
 import { Icon } from "native-base";
+import CustomerEditProfileScreen from "../screens/AppScreens/Profile/CustomerEditProfileScreen";
 
 const MainStack = createStackNavigator(
   {
@@ -38,10 +39,12 @@ const MainStack = createStackNavigator(
 const CustomerMain = createStackNavigator(
   {
     CustomerHome: {screen: CustomerHomeScreen},
+   
   },
   {
     initialRouteName: 'CustomerHome',
     defaultNavigationOptions: {
+      headerTintColor : colors.headerTitleColor,
       headerStyle: {
         backgroundColor: '#f4511e',
       },
@@ -79,6 +82,7 @@ const cartStack = createStackNavigator(
       headerStyle: {
         backgroundColor: '#f4511e',
       },
+      headerTintColor : colors.headerTitleColor,
       headerTitleStyle: {
         fontSize: 18,
         fontWeight:'bold',
@@ -102,6 +106,29 @@ const CustomerOrderStack = createStackNavigator(
       headerStyle: {
         backgroundColor: '#f4511e',
       },
+      headerTintColor : colors.headerTitleColor,
+      headerTitleStyle: {
+        fontSize: 18,
+        fontWeight:'bold',
+        fontFamily: fonts.primaryFont,
+        color:colors.headerTitleColor,
+      },
+    },
+  },
+);
+
+const CustomerProfileStack = createStackNavigator(
+  {
+    Profile: CustomerProfileScreen,
+    CustomerEditProfile: CustomerEditProfileScreen
+  },
+  {
+    initialRouteName: 'Profile',
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: '#f4511e',
+      },
+      headerTintColor : colors.headerTitleColor,
       headerTitleStyle: {
         fontSize: 18,
         fontWeight:'bold',
@@ -181,7 +208,7 @@ const CustomerMainStack = createBottomTabNavigator(
       },
     },
     Profile: {
-      screen: CustomerProfileScreen,
+      screen: CustomerProfileStack,
       navigationOptions: {
         tabBarLabel: 'Profil',
         tabBarOptions: {

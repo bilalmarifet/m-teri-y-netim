@@ -59,6 +59,12 @@ paddingVertical:10,
     shadowColor: '#000',
     position:'relative',
     marginBottom:10
+  },
+  IncOrDecButton:{
+    borderColor: '#e8e8e8', borderStyle: 'solid', borderWidth: 1, justifyContent: 'center', width: 24,
+                height: 24, borderRadius: 12,
+                backgroundColor: '#ffff',
+                paddingTop:1,paddingLeft:1
   }
 });
 
