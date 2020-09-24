@@ -92,7 +92,7 @@ class Login extends Component<Props, {}> {
                         </Text>
               }
                       <SuccessButton loading={this.props.isLoading} text="Giriş yap" onPress={props.handleSubmit} />
-                      <Button text="Üye ol" style={{backgroundColor:'#fff'}} onPress={()=> this.props.navigation.navigate("SignUp")} />
+                      <Button text="Üye ol" loading={false} style={{backgroundColor:'#fff',      paddingHorizontal: 10,  flexDirection:'row', justifyContent:'space-between'}} textStyle={{color:colors.IconNormalColor}} onPress={()=> this.props.navigation.navigate("SignUp")} />
                     </View>
                   </View>
                 );

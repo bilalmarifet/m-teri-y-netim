@@ -33,7 +33,15 @@ export function GetOrders(
 ) {
   return (dispatch: Dispatch<Action>) => {
     dispatch(loading(true, 'list'));
-    console.log('customerId', customerId);
+  AsyncStorage.multiGet(['userToken', 'userId']).then((res) => {
+      let token = res[0][1];
+      let userId = res[1][1];
+      
+      const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+    }
+
     var WATER_CUSTOMER_ORDERS_GET_CUSTOMER =
       WATER_CUSTOMER_ORDERS_GET +
       customerId +
@@ -43,7 +51,7 @@ export function GetOrders(
       pageSize;
 
     axios
-      .get(WATER_CUSTOMER_ORDERS_GET_CUSTOMER)
+      .get(WATER_CUSTOMER_ORDERS_GET_CUSTOMER, {headers:headers})
       .then(response => {
         if (response.data.isSuccess) {
           var takeTotal: number = response.data.result.takeTotalAmount;
@@ -78,7 +86,9 @@ export function GetOrders(
         console.log(err);
         dispatch(loading(false, 'list'));
       });
+    });
   };
+  
 }
 
 export function GetOrdersMore(
@@ -96,7 +106,15 @@ export function GetOrdersMore(
       pageIndex +
       '&pageSize=' +
       pageSize;
-
+      AsyncStorage.multiGet(['userToken', 'userId']).then((res) => {
+        let token = res[0][1];
+        let userId = res[1][1];
+        
+        const headers = {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+      }
+ 
     axios
       .get(WATER_CUSTOMER_ORDERS_GET_CUSTOMER)
       .then(response => {
@@ -132,6 +150,7 @@ export function GetOrdersMore(
         }
       })
       .catch(err => {});
+    });
   };
 }
 
