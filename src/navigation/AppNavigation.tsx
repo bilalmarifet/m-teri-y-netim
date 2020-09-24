@@ -23,6 +23,7 @@ import CustomerProfileScreen from '../screens/AppScreens/Order/CustomerProfileSc
 import {fonts, colors} from '../constants';
 import SignUpFirstScreen from "../screens/AuthScreens/SignUp/SignUpFirstScreen";
 import SignUpSecondScreen from "../screens/AuthScreens/SignUp/SignUpSecondScreen";
+import { Icon } from "native-base";
 
 const MainStack = createStackNavigator(
   {
@@ -42,10 +43,12 @@ const CustomerMain = createStackNavigator(
     initialRouteName: 'CustomerHome',
     defaultNavigationOptions: {
       headerStyle: {
-        backgroundColor: '#D6E4FF',
+        backgroundColor: '#f4511e',
       },
       headerTitleStyle: {
         fontSize: 18,
+        fontWeight:'bold',
+        color:colors.headerTitleColor,
         fontFamily: fonts.primaryFont,
       },
     },
@@ -74,11 +77,14 @@ const cartStack = createStackNavigator(
     initialRouteName: 'Cart',
     defaultNavigationOptions: {
       headerStyle: {
-        backgroundColor: '#D6E4FF',
+        backgroundColor: '#f4511e',
       },
       headerTitleStyle: {
         fontSize: 18,
+        fontWeight:'bold',
         fontFamily: fonts.primaryFont,
+        color:colors.headerTitleColor,
+
       },
     },
   },
@@ -94,11 +100,13 @@ const CustomerOrderStack = createStackNavigator(
     initialRouteName: 'Order',
     defaultNavigationOptions: {
       headerStyle: {
-        backgroundColor: '#D6E4FF',
+        backgroundColor: '#f4511e',
       },
       headerTitleStyle: {
         fontSize: 18,
+        fontWeight:'bold',
         fontFamily: fonts.primaryFont,
+        color:colors.headerTitleColor,
       },
     },
   },
@@ -116,18 +124,16 @@ const CustomerMainStack = createBottomTabNavigator(
           labelStyle: {
             color: colors.headerColor,
           },
+          activeTintColor: colors.IconColor,
         },
         tabBarIcon: ({focused}) => {
           return focused ? (
-            <Image
-              style={{width: 24, height: 24}}
-              source={require('../assets/plastic-4.png')}
-            />
+            <Icon name="shopping-bag" type="Feather"   style={{color: colors.IconColor}}  />
+
+      
           ) : (
-            <Image
-              style={{width: 24, height: 24}}
-              source={require('../assets/plastic-5.png')}
-            />
+            <Icon name="shopping-bag" type="Feather"   style={{color: colors.IconNormalColor}}  />
+
           );
         },
       },
@@ -140,19 +146,16 @@ const CustomerMainStack = createBottomTabNavigator(
           labelStyle: {
             color: colors.headerColor,
           },
+          activeTintColor: colors.IconColor,
         },
 
         tabBarIcon: ({focused}) => {
           return focused ? (
-            <Image
-              style={{width: 24, height: 24}}
-              source={require('../assets/shopping-cart.png')}
-            />
+            <Icon name="shopping-cart" type="Feather"    style={{color: colors.IconColor}}  />
+            
           ) : (
-            <Image
-              style={{width: 24, height: 24}}
-              source={require('../assets/shopping-cart-2.png')}
-            />
+            <Icon name="shopping-cart" type="Feather" style={{color: colors.IconNormalColor}}  />
+            
           );
         },
       },
@@ -168,15 +171,31 @@ const CustomerMainStack = createBottomTabNavigator(
         },
         tabBarIcon: ({focused}) => {
           return focused ? (
-            <Image
-              style={{width: 24, height: 24}}
-              source={require('../assets/order-2.png')}
-            />
+            <Icon name="briefcase" type="Feather"   style={{color: colors.IconColor}} />
+            
           ) : (
-            <Image
-              style={{width: 24, height: 24}}
-              source={require('../assets/checklist.png')}
-            />
+            <Icon name="briefcase" type="Feather" style={{color: colors.IconNormalColor}}  />
+            
+          );
+        },
+      },
+    },
+    Profile: {
+      screen: CustomerProfileScreen,
+      navigationOptions: {
+        tabBarLabel: 'Profil',
+        tabBarOptions: {
+          labelStyle: {
+            color: colors.headerColor,
+          },
+        },
+        tabBarIcon: ({focused}) => {
+          return focused ? (
+            <Icon name="user" type="Feather"   style={{color: colors.IconColor}} />
+            
+          ) : (
+            <Icon name="user" type="Feather" style={{color: colors.IconNormalColor}}  />
+            
           );
         },
       },

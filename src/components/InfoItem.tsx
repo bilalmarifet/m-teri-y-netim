@@ -8,7 +8,7 @@ import {
   Image,
   ImageSourcePropType,
 } from 'react-native';
-import {colors} from '../constants';
+import {colors, fonts} from '../constants';
 import {CardItem, Body} from 'native-base';
 
 interface Props extends TouchableOpacityProps {
@@ -21,8 +21,8 @@ export class InfoItem extends Component<Props, {}> {
     const {text, style, imageResource} = this.props;
     return (
       <View style={style}>
-        <CardItem>
-          <Body
+        <View>
+          <View
             style={{
               flexDirection: 'column',
               justifyContent: 'center',
@@ -31,21 +31,21 @@ export class InfoItem extends Component<Props, {}> {
             {imageResource ? (
               <Image source={imageResource} style={{width: 75, height: 75}} />
             ) : (
-              <Image source={require('../images/error.png')} />
+              <Image source={require('../images/not-found.png')} />
             )}
 
             <Text
               style={{
                 marginTop: 10,
-                color: '#aaa',
+                color: '#333',
                 fontSize: 18,
-                fontFamily: 'Avenir Next',
+                fontFamily: fonts.primaryFont,
                 textAlign: 'center',
               }}>
               {text}
             </Text>
-          </Body>
-        </CardItem>
+          </View>
+        </View>
       </View>
     );
   }

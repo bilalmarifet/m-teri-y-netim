@@ -7,6 +7,7 @@ import {
   Text,
   Alert,
   RefreshControl,
+  TouchableOpacity
 } from 'react-native';
 import {
   NavigationScreenProp,
@@ -20,7 +21,7 @@ import {AvatarItem} from '../../../components';
 import {logoutUserService} from '../../../redux/services/user';
 import {Thumbnail, Icon, Item, Label, Input, Spinner} from 'native-base';
 import {fetchImageData, fetchMoreImageData} from '../../../redux/actions/fetch';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+
 import FlashMessage, {showMessage} from 'react-native-flash-message';
 import {colors, fonts} from '../../../constants';
 import LinearGradient from 'react-native-linear-gradient';
@@ -82,18 +83,32 @@ class OrderScreen extends Component<Props, State> {
       title: 'Siparişlerim',
       headerTintColor: 'white',
       headerStyle: {
-        backgroundColor: colors.headerColor,
+        backgroundColor: colors.headerColorTop,
         headerTitleStyle: {
-          fontWeight: '600',
-          fontFamily: 'Avenir Next',
+
+          fontFamily: 'Roboto',
           fontSize: 18,
+  
         },
+        header:
+        {
+          shadowColor: 'transparent',
+          shadowRadius: 0,
+          shadowOffset: {
+              height: 0,
+          },
+       
+        },
+        elevation: 0,
+        borderBottomWidth:0.5,
+        borderBottomColor:'#ccc'
+
       },
       headerRight: () => (
         <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
           <Icon
             name="ios-settings"
-            style={{marginRight: 10, color: colors.containerBgThird}}
+            style={{marginRight: 10, fontWeight:'bold', color: colors.IconNormalColor}}
           />
         </TouchableOpacity>
       ),
@@ -116,9 +131,9 @@ class OrderScreen extends Component<Props, State> {
       return(
             <InfoItem
               style={{marginTop: 30}}
-              imageResource={require('../../../assets/not-found-2.png')}
+              imageResource={require('../../../assets/not-found.png')}
               text={
-                'Siparişiniz bulunmamaktadır.'
+                'Geçmiş Siparişiniz bulunmamaktadır.'
               }
             />
 
@@ -155,7 +170,7 @@ class OrderScreen extends Component<Props, State> {
           style={{paddingTop: 20}}
           renderItem={({item, index}) => {
             return (
-              <View style={styles.item}>
+              <View style={styles.itemOrder}>
                 <View style={{paddingVertical: 10, width: '60%'}}>
                   <Text
                     style={{

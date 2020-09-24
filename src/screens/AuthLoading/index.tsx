@@ -30,6 +30,7 @@ class AuthLoading extends React.Component<Props, {}> {
 
 
     console.log("token")
+  
     navigation.navigate(userToken ? "AppStack" : "AuthStack");
   };
 

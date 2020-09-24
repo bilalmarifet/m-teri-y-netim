@@ -47,13 +47,13 @@ export class TotalPriceText extends Component<Props, {}> {
               backgroundColor: 'white',
               margin: 1,
             }}>
-            <Icon style={{color: colors.iconColor,fontSize:20}} name="cart" />
+            <Icon style={{color: colors.iconColorSecond,fontSize:20}} name="shopping-cart" type="Feather"  />
 
             <Text
               style={{
                 alignSelf: 'center',
                 marginLeft: 6,
-                color: colors.textColor,
+                color: colors.priceAndPlusColor,
               }}>
               {totalPrice} TL
             </Text>

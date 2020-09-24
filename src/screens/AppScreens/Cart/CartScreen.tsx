@@ -1,30 +1,30 @@
-import React, {Component} from 'react';
-import {View, FlatList, ActivityIndicator, Button, Text, Image} from 'react-native';
+import React, { Component } from 'react';
+import { View, FlatList, ActivityIndicator, Button, Text, Image, TouchableOpacity } from 'react-native';
 import {
   NavigationScreenProp,
   NavigationState,
   SafeAreaView,
 } from 'react-navigation';
-import {connect} from 'react-redux';
-import {Header} from '../../../components';
+import { connect } from 'react-redux';
+import { Header } from '../../../components';
 import styles from '../styles';
-import {AvatarItem} from '../../../components';
-import {logoutUserService} from '../../../redux/services/user';
-import {Thumbnail, Icon, Card, Spinner} from 'native-base';
-import {fetchImageData, fetchMoreImageData} from '../../../redux/actions/fetch';
-import {TouchableOpacity, ScrollView} from 'react-native-gesture-handler';
-import {showMessage} from 'react-native-flash-message';
-import {colors, fonts} from '../../../constants';
+import { AvatarItem } from '../../../components';
+import { logoutUserService } from '../../../redux/services/user';
+import { Thumbnail, Icon, Card, Spinner } from 'native-base';
+import { fetchImageData, fetchMoreImageData } from '../../../redux/actions/fetch';
+import { ScrollView } from 'react-native-gesture-handler';
+import { showMessage } from 'react-native-flash-message';
+import { colors, fonts } from '../../../constants';
 import LinearGradient from 'react-native-linear-gradient';
 import {
   IncOrDecItemFromCart,
   IProductItemCustomer,
 } from '../../../redux/actionsCustomer/ProductAction';
-import {InfoItem} from '../../../components/InfoItem';
-import {product} from '../../AppScreens/Customer/orderAdd';
-import {AddOrderMultiple} from '../../../redux/actions/addOrderAction';
-import {AppState} from '../../../redux/store';
-import {UserInfo} from '../../../redux/actions/profileActions';
+import { InfoItem } from '../../../components/InfoItem';
+import { product } from '../../AppScreens/Customer/orderAdd';
+import { AddOrderMultiple } from '../../../redux/actions/addOrderAction';
+import { AppState } from '../../../redux/store';
+import { UserInfo } from '../../../redux/actions/profileActions';
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState>;
@@ -83,24 +83,32 @@ class CartScreen extends Component<Props, State> {
     }
   }
 
-  static navigationOptions = ({navigation}) => {
+  static navigationOptions = ({ navigation }) => {
     return {
       title: 'Sepet',
       headerTintColor: 'white',
       headerStyle: {
-        backgroundColor: colors.headerColor,
-        headerTitleStyle: {
-          fontWeight: '600',
-          fontFamily: 'Avenir Next',
-          fontSize: 25,
+        backgroundColor: colors.headerColorTop,
+        
+        header:
+        {
+          shadowColor: 'transparent',
+          shadowRadius: 0,
+          shadowOffset: {
+              height: 0,
+          },
+       
         },
+        elevation: 0,
+        borderBottomWidth:0.5,
+        borderBottomColor:'#ccc'
       },
     };
   };
   renderPlusButton(item: IProductItemCustomer, index: number) {
     if (item.count > 0) {
       return (
-        <View style={{flex: 1}}>
+        <View style={{ backgroundColor: '#F1F1F1', position: 'absolute', paddingLeft: 5, paddingRight: 5, paddingVertical: 5, borderRadius: 15, right: 10, bottom: 15 }}>
           {this.props.loadingIncDec &&
             this.props.loadingIndex === item.productId && (
               <Spinner
@@ -116,12 +124,22 @@ class CartScreen extends Component<Props, State> {
               />
             )}
 
-          <View style={{flex: 1, flexDirection: 'row'}}>
+          <View style={{
+            flexDirection: 'row', shadowColor: "#000",
+            shadowColor: "#000",
+            shadowOffset: {
+              width: 0,
+              height: 3,
+            },
+            shadowOpacity: 0.29,
+            shadowRadius: 4.65,
+
+            elevation: 7,
+          }}>
             <TouchableOpacity
               style={{
-                backgroundColor: colors.headerColor,
-                flex: 1,
-                justifyContent: 'center',
+                borderColor: '#e8e8e8', borderStyle: 'solid', borderWidth: 1, backgroundColor: '#ffff', justifyContent: 'center', width: 24, height: 24, borderRadius: 11,
+
               }}
               onPress={() => {
                 this.props.IncOrDecItemFromCart(
@@ -133,21 +151,18 @@ class CartScreen extends Component<Props, State> {
               }}>
               <Icon
                 name="minus"
-                type="MaterialCommunityIcons"
-                style={{color: 'white'}}
+                type="Feather"
+                style={{ color: colors.priceAndPlusColor, fontSize: 20 }}
               />
             </TouchableOpacity>
-            <Text style={{alignSelf: 'center', marginLeft: 10}}>
+            <Text style={{ alignSelf: 'center', marginRight: 8, marginLeft: 8 }}>
               {item.count}
             </Text>
             <TouchableOpacity
               style={{
-                backgroundColor: colors.headerColor,
-                flex: 1,
-                justifyContent: 'center',
-                marginLeft: 10,
-                borderTopRightRadius: 5,
-                borderBottomRightRadius: 5,
+                borderColor: '#e8e8e8', borderStyle: 'solid', borderWidth: 1, justifyContent: 'center', width: 24,
+                height: 24, borderRadius: 10,
+                backgroundColor: '#ffff'
               }}
               onPress={() => {
                 this.props.IncOrDecItemFromCart(
@@ -159,8 +174,8 @@ class CartScreen extends Component<Props, State> {
               }}>
               <Icon
                 name="plus"
-                type="MaterialCommunityIcons"
-                style={{color: 'white'}}
+                type="Feather"
+                style={{ color: colors.priceAndPlusColor, fontSize: 20 }}
               />
             </TouchableOpacity>
           </View>
@@ -173,8 +188,8 @@ class CartScreen extends Component<Props, State> {
         // <Icon name="ios-add-circle" style={{color : colors.iconColorSecond}}/>
         //        </TouchableOpacity>
 
-        <View style={{flex: 1}}>
-          <View style={{flex: 1, flexDirection: 'row'}}>
+        <View style={{ flex: 1 }}>
+          <View style={{ flex: 1, flexDirection: 'row' }}>
             <TouchableOpacity
               style={{
                 backgroundColor: colors.headerColor,
@@ -194,7 +209,7 @@ class CartScreen extends Component<Props, State> {
               <Icon
                 name="plus"
                 type="MaterialCommunityIcons"
-                style={{color: 'white'}}
+                style={{ color: 'white' }}
               />
             </TouchableOpacity>
           </View>
@@ -215,77 +230,77 @@ class CartScreen extends Component<Props, State> {
 
     return (
       <View style={styles.container}>
-        {this.renderContent(cart)}
-        {this.renderBottom(price)}
+
+        {this.renderContent(cart, price)}
+
       </View>
     );
   }
   renderBottom(price: number) {
     if (price > 0) {
       return (
-        <View
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            left: 0,
-            right: 0,
-            backgroundColor: colors.containerBgSecond,
-            flexDirection: 'row',
-            paddingTop: 10,
-            paddingHorizontal: 10,
-            paddingBottom: 10,
-            justifyContent: 'space-between',
-          }}>
-          <View style={{flexDirection: 'row'}}>
-            <Text
-              style={{
-                fontFamily: fonts.primaryFont,
-                fontWeight: '600',
-                fontSize: 18,
-                alignSelf: 'center',
-              }}>
-              TOPLAM:
-            </Text>
-            <Text
-              style={{
-                fontFamily: fonts.primaryFont,
-                alignSelf: 'center',
-                marginLeft: 5,
-              }}>
-              {price} TL
-            </Text>
-          </View>
-          <TouchableOpacity
-            onPress={() => this.handleCartAction()}
+        <TouchableOpacity
+          onPress={() => this.handleCartAction()}
+        >
+          <LinearGradient
+            start={{ x: 0, y: 0.5 }}
+            end={{ x: 1, y: 0.5 }}
+            colors={['#30AE4A', '#7BAD7B']}
             style={{
-              flexDirection: 'row',
-              backgroundColor: colors.headerColor,
               borderRadius: 5,
-              padding: 5,
-              justifyContent: 'center',
-              minWidth: 140,
+
+              marginLeft: 20,
+              marginRight: 20,
+              marginTop: 10,
+              backgroundColor: colors.buttonBackgroundPrimary,
+              flexDirection: 'row',
+              paddingTop: 5,
+              paddingHorizontal: 10,
+              paddingBottom: 10,
+              justifyContent: 'space-between',
             }}>
+
+            <View>
+              <View style={{ flexDirection: 'row', paddingLeft: 10 }}>
+                <Text
+                  style={{
+                    fontFamily: 'Roboto',
+                    fontWeight: '600',
+
+                    alignSelf: 'center',
+                    color: '#fff',
+                  }}>
+                  Toplam Fiyat :
+            </Text>
+                <Text
+                  style={{
+                    fontFamily: 'Roboto',
+
+                    color: '#fff',
+                    alignSelf: 'center'
+                  }}>
+                  {price} ₺
+            </Text>
+              </View>
+              <Text style={{
+                fontFamily: 'Roboto',
+                marginLeft: 5,
+                color: '#fff',
+                alignSelf: 'center'
+              }}>Siparişi Tamamla</Text>
+            </View>
             <View>
               {this.props.isLoading ? (
-                <Spinner size="small" style={{height: 35, width: 35}} />
+                <Spinner size="small" style={{ height: 35, width: 35 }} />
               ) : (
-                <View style={{flexDirection: 'row'}}>
-                  <Icon name="cart" style={{color: 'white'}} />
-                  <Text
-                    style={{
-                      // alignSelf: 'center',
-                      textAlign: 'center',
-                      marginLeft: 0,
-                      color: 'white',
-                      width: 100,
-                    }}>
-                    Alışverişi Tamamla
-                  </Text>
-                </View>
-              )}
+                  <Icon name="chevron-right" style={{ color: 'white', marginTop: 10, fontSize: 18 }} type="Feather" />
+
+                )}
             </View>
-          </TouchableOpacity>
-        </View>
+
+
+          </LinearGradient>
+        </TouchableOpacity>
       );
     }
   }
@@ -316,48 +331,67 @@ class CartScreen extends Component<Props, State> {
     );
   }
 
-  renderContent(cart: IProductItemCustomer[]) {
-    console.log("carrrt",cart)
+  renderContent(cart: IProductItemCustomer[], price: number) {
+    console.log("carrrt", cart)
     if (cart.length > 0) {
       return (
         <ScrollView>
           <FlatList
-            contentContainerStyle={{paddingTop: 20}}
+            contentContainerStyle={{ paddingTop: 0 }}
             data={cart}
             keyExtractor={item => item.productId}
-            renderItem={({item, index}) => {
+            renderItem={({ item, index }) => {
               return (
-                <View style={styles.item}>
-                  <View style={{paddingVertical: 10, width: '60%',flexDirection:'row'}}>
-                    <Image style={{width:40,height:40}} source={{uri:item.imagePath}} />
-                    <Text
-                      style={{
-                        fontFamily: fonts.primaryFont,
-                        color: colors.textColor,
-                        fontWeight: 'bold',
-                        alignSelf:'center',
-                        marginLeft:5
-                      }}>
-                      {item.productName}
-                    </Text>
+                <View style={styles.itemCart}>
+                  <View style={{ width: '60%', flexDirection: 'row' }}>
+                    <View>
+                      <Image style={{ width: 80, height: 80, marginLeft: 10 }} source={{ uri: item.imagePath }} />
+                    </View>
+                    <View style={{ marginTop: 10, marginLeft: 10 }}>
+
+                      <Text
+                        style={{
+                          fontFamily: 'roboto',
+                          color: colors.textColor,
+                          alignSelf: 'center',
+
+                        }}>
+                        {item.productName}
+                      </Text>
+                      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <View style={{ flex: 0.5 }}>
+                          <Text>{item.price} TL</Text>
+                        </View>
+
+
+
+
+
+                      </View>
+
+                    </View>
+
                   </View>
 
-                  <View style={{height: '100%'}}>
-                    {this.renderPlusButton(item, index)}
-                  </View>
+                  {this.renderPlusButton(item, index)}
+
+
                 </View>
               );
             }}
           />
+
+
+          {this.renderBottom(price)}
         </ScrollView>
       );
     } else {
       return (
         <InfoItem
-          style={{marginTop: 30}}
-          imageResource={require('../../../assets/not-found-2.png')}
+          style={{ marginTop: 30 }}
+          imageResource={require('../../../assets/not-found.png')}
           text={
-            'Sepete eklediğiniz ürün bulunmamaktadır. Sipariş vermek için sepete ürün eklemelisiniz.'
+            'Sepete eklediğiniz ürün bulunmamaktadır.'
           }
         />
       );
