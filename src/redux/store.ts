@@ -43,6 +43,7 @@ import deleteEmployeeCostReducers from './reducers/deleteEmployeeCostReducers';
 import orderDetailReducers from './reducers/orderDetailReducers';
 import DealerSelectionReducers from './reducers/DealerSelectionReducers';
 import productReducer from './reducersCustomer/productReducer';
+import { LOGOUT } from './types';
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
@@ -56,7 +57,8 @@ if (process.env.NODE_ENV === `development`) {
   middlewares.push(logger);
 }
 
-const rootReducer = combineReducers({
+
+const appReducer = combineReducers({
   getEmployeeCost: getEmployeeCostReducers,
   report: reportReducers,
   getUser: getUserReducers,
@@ -93,6 +95,15 @@ const rootReducer = combineReducers({
   dealerSelection: DealerSelectionReducers,
   CustomerproductForCustomer: productReducer,
 });
+
+const rootReducer = (state, action) => {
+  if (action.type === LOGOUT) {
+    state = undefined
+  };
+  
+  return appReducer(state, action)
+}
+
 
 export type AppState = ReturnType<typeof rootReducer>;
 

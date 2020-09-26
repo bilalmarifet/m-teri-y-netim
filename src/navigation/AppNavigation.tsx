@@ -5,7 +5,7 @@ import {
   createSwitchNavigator,
 } from "react-navigation";
 import {createStackNavigator} from  'react-navigation-stack'
-import { Dimensions, Image } from "react-native";
+import { AsyncStorage, Dimensions, Image } from "react-native";
 import {createDrawerNavigator} from 'react-navigation-drawer'
 const { width } = Dimensions.get("window");
 import {createBottomTabNavigator} from 'react-navigation-tabs'
@@ -122,7 +122,7 @@ const CustomerOrderStack = createStackNavigator(
 
 const CustomerProfileStack = createStackNavigator(
   {
-    Profile: CustomerProfileScreen,
+    Profile:  CustomerProfileScreen,
     CustomerEditProfile: CustomerEditProfileScreen,
     CustomerEditPassword: CustomerEditPasswordScreen
   },

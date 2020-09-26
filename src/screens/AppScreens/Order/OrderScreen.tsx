@@ -293,7 +293,7 @@ class OrderScreen extends Component<Props, State> {
                   </View>
                   <View style={{ flex: 0.4 }} >
                     <Text style={{ fontFamily: fonts.primaryFont }}>Ödeme Durumu</Text>
-                    <Text style={{ fontWeight: 'bold', fontFamily: fonts.primaryFont }}>Kapıda Kredi Kartı</Text>
+                        <Text style={{ fontWeight: 'bold', fontFamily: fonts.primaryFont }}>{item.paymentText  ? item.paymentText : "Kapıda Nakit Ödeme"}</Text>
                   </View>
                   <View style={{ flex: 0.4 }} >
                     <Text style={{ fontFamily: fonts.primaryFont }}>Durum</Text>

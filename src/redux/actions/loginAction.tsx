@@ -7,6 +7,7 @@ import {
   LOGIN_FAILED,
   LOGIN_STARTED,
   LOGIN_SUCCEED,
+  LOGOUT,
   RESET_PROPS,
 } from './../types';
 import {Action} from '../states';
@@ -84,10 +85,15 @@ export function loginUserService(username: string, password: string) {
 
 export function logOut(navigation?: NavigationScreenProp<NavigationState>) {
   return (dispatch: Dispatch<Action>) => {
+    global.TOKEN=undefined;
+    global.CUSTOMER_ID = undefined;
+    global.USERID = undefined;
+
     AsyncStorage.getAllKeys()
       .then(keys => AsyncStorage.multiRemove(keys))
       .then(() => {
-        NavigationService.navigate('AuthLoading', {});
+        dispatch(logout());
+        NavigationService.navigate('Login', {});
       });
   };
 }
@@ -107,6 +113,12 @@ export const loading = (loader: boolean) => ({
   type: LOGIN_STARTED,
   payload: loader,
 });
+
+export const logout = () => ({
+  type: LOGOUT,
+  payload: "",
+});
+
 
 export const loginIsSucceed = (loginIsSucced: boolean, message: string) => ({
   type: loginIsSucced ? LOGIN_SUCCEED : LOGIN_FAILED,

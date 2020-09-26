@@ -31,6 +31,7 @@ export const CUSTOMER_GETBY_ID_FAILED = 'CustomerGetByIdFailed';
 export const LOGIN_STARTED = 'loginStarted';
 export const LOGIN_SUCCEED = 'loginSucceed';
 export const LOGIN_FAILED = 'loginFailed';
+export const LOGOUT="logOutDis"
 export const RESET_PROPS = 'resetProps';
 
 export const SIGNUP_STARTED = 'SignUpStarted';

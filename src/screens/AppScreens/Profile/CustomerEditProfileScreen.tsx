@@ -6,7 +6,7 @@ import {
   Button,
   Text,
   Alert,
-  Image
+  Image, AsyncStorage
 } from 'react-native';
 import {
   NavigationScreenProp,
@@ -77,6 +77,7 @@ const changeProfileSchema = Yup.object().shape({
 class CustomerEditProfileScreen extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
+
   }
 
   static navigationOptions = ({ navigation }) => {

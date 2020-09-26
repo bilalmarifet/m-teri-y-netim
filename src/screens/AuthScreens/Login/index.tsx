@@ -17,6 +17,9 @@ import { connect } from "react-redux";
 import { AppState } from "../../../redux/store";
 import { colors } from "../../../constants";
 import { SuccessButton } from "../../../components/SuccessButton";
+import { Icon } from "native-base";
+import { TouchableHighlight, TouchableOpacity } from "react-native";
+import NavigationService from "../../../services/NavigationService";
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState>;
@@ -45,12 +48,22 @@ class Login extends Component<Props, {}> {
     this.props.loginUserService(values.username, values.password)
   };
 
+  static navigationOptions = ({}) => {
+    header: null
+   };
   render() {
     return (
       <View style={styles.container}>
+        <TouchableOpacity style={{position:'absolute', left:10, top:30}}  onPress={()=>this.props.navigation.navigate("Products")}>
+
+        <Icon name="x" type = "Feather" ></Icon>
+
+        </TouchableOpacity>
+
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
+   
           <ScrollView bounces={false}>
             <Formik
               initialValues={{ username: "", password: "" }}

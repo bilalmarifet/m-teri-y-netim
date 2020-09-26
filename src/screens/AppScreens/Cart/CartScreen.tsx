@@ -26,6 +26,7 @@ import { AddOrderMultiple, getPaymentMethod, PaymentMethod } from '../../../redu
 import { AppState } from '../../../redux/store';
 import { UserInfo } from '../../../redux/actions/profileActions';
 import { isLoadingOrderList } from '../../../redux/actions/orderDetailActions';
+import { showSimpleMessage } from '../../../components/showMessage';
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState>;
@@ -214,6 +215,15 @@ class CartScreen extends Component<Props, State> {
     }
   }
 
+  checkLogin(){
+    if(global.USERTOKEN){
+      this.props.navigation.navigate('CartCheckout');
+    }
+    else{
+      showSimpleMessage("Sipariş verebilmek için lütfen giriş yapınız", "info");
+      this.props.navigation.navigate("Login");
+    }
+  }
   render() {
     const cart = this.props.productList
       ? this.props.productList.length > 0
@@ -237,7 +247,7 @@ class CartScreen extends Component<Props, State> {
       return (
         <TouchableHighlight
 
-          onPress={() => this.props.navigation.navigate('CartCheckout')}
+          onPress={() => this.checkLogin()}
           underlayColor="#AAA"
           style={{
             borderRadius: 5,

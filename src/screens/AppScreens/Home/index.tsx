@@ -64,7 +64,8 @@ class CustomerHomeScreen extends Component<Props, State> {
   }
 
   componentDidMount() {
-    this.props.GetProductsForCustomer(this.props.productList)
+    this.props.GetProductsForCustomer(this.props.productList);
+    
     var TotalPrice = 0;
     this.props.productList ? this.props.productList.map(e=> TotalPrice += e.price * e.count  ) : null
     this.props.navigation.setParams({cart : TotalPrice})
@@ -90,7 +91,7 @@ class CustomerHomeScreen extends Component<Props, State> {
   static navigationOptions = ({navigation }) => {
 
    return {
-    title: 'Ürünler',
+    title: 'Anasayfa',
 
     headerStyle: {
       backgroundColor: colors.headerColorTop,
@@ -179,6 +180,7 @@ elevation: 7, }}>
   render() {
     const { navigation, imageData, fetchMoreImageData, loading } = this.props;
     const { page, limit } = this.state;
+    console.log("home");
     return (
       <View style={styles.container}>
        

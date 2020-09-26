@@ -71,7 +71,8 @@ export function GetOrders(
               productCode: order.productCode,
               dateTime: order.dateTime,
               isPaid: order.isPaid,
-              status : order.status
+              status : order.status,
+              paymentText : order.paymentText
             };
             orderModel.push(orderItem);
           });

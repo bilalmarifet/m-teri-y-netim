@@ -6,7 +6,7 @@ import {
   Button,
   Text,
   Alert,
-  Image
+  Image, AsyncStorage
 } from 'react-native';
 import {
   NavigationScreenProp,
@@ -30,8 +30,7 @@ import {
   Right,
   Left,
 } from 'native-base';
-import {fetchImageData, fetchMoreImageData} from '../../../redux/actions/fetch';
-import {TouchableOpacity,TouchableHighlight, ScrollView} from 'react-native-gesture-handler';
+import {TouchableOpacity,TouchableHighlight, ScrollView} from 'react-native';
 import {showMessage} from 'react-native-flash-message';
 import {colors, fonts} from '../../../constants';
 import LinearGradient from 'react-native-linear-gradient';
@@ -62,8 +61,13 @@ class CustomerProfileScreen extends Component<Props, State> {
       limit: 20,
       change: false,
     };
-  }
 
+  }
+  _bootstrapAsync = async () => {
+
+    
+ 
+  };
   componentDidMount() {
     this.props.getUserInfo();
   }
@@ -92,66 +96,100 @@ class CustomerProfileScreen extends Component<Props, State> {
 
   render() {
     return <View style={styles.container}><ScrollView bounces={false} contentContainerStyle={{flex:1}}>
+      
       {this.renderContentNew()}</ScrollView></View>;
   }
   renderContentNew() {
-    if(this.props.userInfo) {
-      let user = this.props.userInfo
-      return(
-        <View>
-          <View style={{borderBottomWidth:0.5,borderBottomColor:colors.borderColor,paddingBottom:30}}>
-          <Image style={{width:150,height:150,justifyContent:'center',borderRadius:75,marginTop:20,alignSelf:'center'}} source={require("../../../assets/bread.jpg")} />
-          <Text style={{textAlign:'center',marginTop:10,fontFamily:fonts.primaryFont,fontSize:18}}>
-            {user.nameSurname}
-          </Text>
-          <Text style={{textAlign:'center',marginTop:10,fontFamily:fonts.primaryFont,fontSize:18}}>
-            {user.email}
-          </Text>
-          </View>
-
-          <TouchableHighlight onPress={()=> this.props.navigation.navigate('CustomerEditProfile')} underlayColor="#AAA"  style={{borderBottomWidth:1,borderBottomColor:colors.borderColor,padding:20,paddingVertical:15,backgroundColor:'white'}}>
-          <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-            <View style={{flexDirection:'row'}}>
-            <Image source={require("../../../images/profile/001-settings.png")} style={{width:34,height:34, borderRadius:17}} />
-          <Text style={{alignSelf:'center',marginLeft:10,fontWeight:'600',fontFamily:fonts.primaryFont,fontSize:16}}>Profili Düzenle</Text>
-          
+    const userToken = global.TOKEN;
+    console.log("profile", userToken);
+    if(userToken){
+      if(this.props.userInfo) {
+        let user = this.props.userInfo
+        return(
+          <View>
+            <View style={{borderBottomWidth:0.5,borderBottomColor:colors.borderColor,paddingBottom:30}}>
+            <Image style={{width:150,height:150,justifyContent:'center',borderRadius:75,marginTop:20,alignSelf:'center'}} source={require("../../../assets/bread.jpg")} />
+            <Text style={{textAlign:'center',marginTop:10,fontFamily:fonts.primaryFont,fontSize:18}}>
+              {user.nameSurname}
+            </Text>
+            <Text style={{textAlign:'center',marginTop:10,fontFamily:fonts.primaryFont,fontSize:18}}>
+              {user.email}
+            </Text>
             </View>
-            <View style={{backgroundColor:colors.viewBackground,width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="arrow-forward" style={{color:colors.viewBackgroundText,fontSize:12}} /></View>
-          </View>
-          </TouchableHighlight>
-          <TouchableHighlight onPress={()=> this.props.navigation.navigate('CustomerEditPassword')} underlayColor="#AAA"  style={{borderBottomWidth:1,borderBottomColor:colors.borderColor,padding:20,paddingVertical:15,backgroundColor:'white'}}>
-          <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-            <View style={{flexDirection:'row'}}>
-            <Image source={require("../../../images/profile/002-man.png")} style={{width:34,height:34, borderRadius:17}} />
-          <Text style={{alignSelf:'center',marginLeft:10,fontWeight:'600',fontFamily:fonts.primaryFont,fontSize:16}}>Şifre Değiştir</Text>
-          
+  
+            <TouchableHighlight onPress={()=> this.props.navigation.navigate('CustomerEditProfile')} underlayColor="#AAA"  style={{borderBottomWidth:1,borderBottomColor:colors.borderColor,padding:20,paddingVertical:15,backgroundColor:'white'}}>
+            <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+              <View style={{flexDirection:'row'}}>
+              <Image source={require("../../../images/profile/001-settings.png")} style={{width:34,height:34, borderRadius:17}} />
+            <Text style={{alignSelf:'center',marginLeft:10,fontWeight:'600',fontFamily:fonts.primaryFont,fontSize:16}}>Profili Düzenle</Text>
+            
+              </View>
+              <View style={{backgroundColor:colors.viewBackground,width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="arrow-forward" style={{color:colors.viewBackgroundText,fontSize:12}} /></View>
             </View>
-            <View style={{backgroundColor:colors.viewBackground,width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="arrow-forward" style={{color:colors.viewBackgroundText,fontSize:12}} /></View>
-          </View>
-          </TouchableHighlight>
-          <TouchableHighlight onPress={()=> console.log()} underlayColor="#AAA"  style={{borderBottomWidth:1,borderBottomColor:colors.borderColor,padding:20,paddingVertical:15,backgroundColor:'white'}}>
-          <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-            <View style={{flexDirection:'row'}}>
-            <Image source={require("../../../images/profile/005-term-loan.png")} style={{width:34,height:34, borderRadius:17}} />
-          <Text style={{alignSelf:'center',marginLeft:10,fontWeight:'600',fontFamily:fonts.primaryFont,fontSize:16}}>Gizlilik Sözleşmesi</Text>
-          
+            </TouchableHighlight>
+            <TouchableHighlight onPress={()=> this.props.navigation.navigate('CustomerEditPassword')} underlayColor="#AAA"  style={{borderBottomWidth:1,borderBottomColor:colors.borderColor,padding:20,paddingVertical:15,backgroundColor:'white'}}>
+            <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+              <View style={{flexDirection:'row'}}>
+              <Image source={require("../../../images/profile/002-man.png")} style={{width:34,height:34, borderRadius:17}} />
+            <Text style={{alignSelf:'center',marginLeft:10,fontWeight:'600',fontFamily:fonts.primaryFont,fontSize:16}}>Şifre Değiştir</Text>
+            
+              </View>
+              <View style={{backgroundColor:colors.viewBackground,width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="arrow-forward" style={{color:colors.viewBackgroundText,fontSize:12}} /></View>
             </View>
-            <View style={{backgroundColor:colors.viewBackground,width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="arrow-forward" style={{color:colors.viewBackgroundText,fontSize:12}} /></View>
-          </View>
-          </TouchableHighlight>
-          <TouchableHighlight onPress={()=> this.props.logOut()} underlayColor="#AAA"  style={{borderBottomWidth:1,borderBottomColor:colors.borderColor,padding:20,paddingVertical:15,backgroundColor:'white'}}>
-          <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-            <View style={{flexDirection:'row'}}>
-            <Image source={require("../../../images/profile/006-log-out.png")} style={{width:34,height:34, borderRadius:17}} />
-          <Text style={{alignSelf:'center',marginLeft:10,fontWeight:'600',fontFamily:fonts.primaryFont,fontSize:16}}>Çıkış yap</Text>
-          
+            </TouchableHighlight>
+            <TouchableHighlight onPress={()=> console.log()} underlayColor="#AAA"  style={{borderBottomWidth:1,borderBottomColor:colors.borderColor,padding:20,paddingVertical:15,backgroundColor:'white'}}>
+            <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+              <View style={{flexDirection:'row'}}>
+              <Image source={require("../../../images/profile/005-term-loan.png")} style={{width:34,height:34, borderRadius:17}} />
+            <Text style={{alignSelf:'center',marginLeft:10,fontWeight:'600',fontFamily:fonts.primaryFont,fontSize:16}}>Gizlilik Sözleşmesi</Text>
+            
+              </View>
+              <View style={{backgroundColor:colors.viewBackground,width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="arrow-forward" style={{color:colors.viewBackgroundText,fontSize:12}} /></View>
             </View>
-            <View style={{backgroundColor:colors.viewBackground,width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="arrow-forward" style={{color:colors.viewBackgroundText,fontSize:12}} /></View>
+            </TouchableHighlight>
+            <TouchableHighlight onPress={()=> this.props.logOut()} underlayColor="#AAA"  style={{borderBottomWidth:1,borderBottomColor:colors.borderColor,padding:20,paddingVertical:15,backgroundColor:'white'}}>
+            <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+              <View style={{flexDirection:'row'}}>
+              <Image source={require("../../../images/profile/006-log-out.png")} style={{width:34,height:34, borderRadius:17}} />
+            <Text style={{alignSelf:'center',marginLeft:10,fontWeight:'600',fontFamily:fonts.primaryFont,fontSize:16}}>Çıkış yap</Text>
+            
+              </View>
+              <View style={{backgroundColor:colors.viewBackground,width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="arrow-forward" style={{color:colors.viewBackgroundText,fontSize:12}} /></View>
+            </View>
+            </TouchableHighlight>
           </View>
-          </TouchableHighlight>
-        </View>
-      )
+        )
+      }
     }
+    else{
+      return (
+      <View>
+        <Text style={{padding:20,fontSize:18,  fontFamily:fonts.primaryFont}}>Henüz giriş yapmadınız sipariş vermeniz ve profil bilgilerini görmek için lütfen giriş yapınız veya üye olunuz.</Text>
+        <TouchableHighlight onPress={()=> this.props.navigation.navigate('Login')} underlayColor="#AAA"  style={{borderBottomWidth:1,borderBottomColor:colors.borderColor,padding:20,paddingVertical:15,backgroundColor:'white'}}>
+            <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+              <View style={{flexDirection:'row'}}>
+              <Image source={require("../../../images/profile/login.png")} style={{width:34,height:34, borderRadius:17}} />
+            <Text style={{alignSelf:'center',marginLeft:10,fontWeight:'600',fontFamily:fonts.primaryFont,fontSize:16}}>Giriş Yap</Text>
+            
+              </View>
+              <View style={{backgroundColor:colors.viewBackground,width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="arrow-forward" style={{color:colors.viewBackgroundText,fontSize:12}} /></View>
+            </View>
+            </TouchableHighlight>
+            <TouchableHighlight onPress={()=> this.props.navigation.navigate('SignUp')} underlayColor="#AAA"  style={{borderBottomWidth:1,borderBottomColor:colors.borderColor,padding:20,paddingVertical:15,backgroundColor:'white'}}>
+            <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+              <View style={{flexDirection:'row'}}>
+              <Image source={require("../../../images/profile/register.png")} style={{width:34,height:34, borderRadius:17}} />
+            <Text style={{alignSelf:'center',marginLeft:10,fontWeight:'600',fontFamily:fonts.primaryFont,fontSize:16}}>Üye Ol</Text>
+            
+              </View>
+              <View style={{backgroundColor:colors.viewBackground,width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="arrow-forward" style={{color:colors.viewBackgroundText,fontSize:12}} /></View>
+            </View>
+            </TouchableHighlight>
+      </View>
+      );
+
+    }
+
   }
 }
 
