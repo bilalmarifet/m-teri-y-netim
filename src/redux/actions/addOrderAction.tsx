@@ -28,6 +28,7 @@ import {NotificationService} from '../../services/NotificationService';
 import { user } from './getUserAction';
 import { BasestoreId } from '../../services/AppConfig';
 import { showSimpleMessage } from '../../components/showMessage';
+import NavigationService from '../../services/NavigationService';
 
 export function chooseEmployee(userId: string) {}
 export interface userWithToken {
@@ -225,9 +226,11 @@ export function AddOrderMultiple(
   productList: product[],
   isPaid: boolean,
   customerId: number,
+  paymentType: number,
   type?: number,
   storeOwnerUserId?: number,
   customerName?: string,
+  
 ) {
   if (!type) {
     type = 0;
@@ -271,6 +274,7 @@ export function AddOrderMultiple(
               customerId: customerId,
               userId: userId,
               type: type,
+              paymentType: paymentType
             },
             {
               headers: headers,
@@ -308,21 +312,14 @@ export function AddOrderMultiple(
                 var notificationEmployee = {} as notificationEmployee;
                 notificationEmployee.userWithToken = notificationItemList;
                 notificationEmployee.orderId = response.data.result.orderId;
-                dispatch(getEmployeeList(notificationEmployee));
-
-                dispatch(addOrder(true, 'Sipariş Alındı!'));
                 dispatch(reset());
                 dispatch(GetOrders(customerId, 1, 10));
-                dispatch(GetCustomerDetail(customerId));
-                dispatch(getCustomerOrders(false));
+                NavigationService.navigate('Cart')
+                NavigationService.navigate('Order')
                 if (type === 1) {
                   dispatch(resetCartValues());
 
-                  showMessage({
-                    message: 'Sipariş  gönderildi.',
-                    type: 'success',
-                    icon: 'auto',
-                  });
+                  showSimpleMessage("Şiparişiniz alındı en kısa sürede size iletilecektir","success")
 
                   if (
                     response.data.result.userWithTokenItemResponses &&

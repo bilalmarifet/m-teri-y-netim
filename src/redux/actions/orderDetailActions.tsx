@@ -15,10 +15,11 @@ import { showMessage } from 'react-native-flash-message';
 
 export enum OrderStatus
     {
-        null = "0" ,
+        null = "0",
         Waiting = "1",
         Exported ="2",
-        Cannceled = "3"
+        Cannceled = "3",
+        OnTheWay = "4"
     }
 export interface orderDetail {
     orderId: number;
@@ -40,6 +41,7 @@ export interface orderDetail {
     carboyCount : number;
     customerId : number;
     totalPrice : number;
+    paymentText: string;
 
   }
 
@@ -232,11 +234,10 @@ export function getCustomerOrderDetail(orderId : number) {
       axios.get(WATER_GET_CUSTOMER_ORDER_DETAIL_NEW +`?orderId=${orderId}`,{
           headers : headers
         }).then((response) =>{
-          
+        console.log(response)
         var orderDetail = {} as orderDetail
 
           var count = 0
-          console.log(response,"res");
       if(response.data.isSuccess){
          let data = response.data.result
          orderDetail.companyName = data.companyName;
@@ -257,6 +258,7 @@ export function getCustomerOrderDetail(orderId : number) {
         orderDetail.description = data.description;
         orderDetail.customerId = data.customerId;
         orderDetail.totalPrice = data.totalPrice;
+        orderDetail.paymentText = data.paymentText;
 
         var orderProducts : IOrderProductItem[] = [] as IOrderProductItem[];
 
@@ -388,7 +390,7 @@ export const getOrderList = (orderList : orderListItem[]) => ({
 
 
 export const isLoading = (loading : boolean,message : string) => ({
-  type : GET_CUSTOMER_ORDER_DETAIL_LOADING ? GET_CUSTOMER_ORDER_DETAIL_LOADING : GET_CUSTOMER_ORDER_DETAIL_FAILED,
+  type : loading ? GET_CUSTOMER_ORDER_DETAIL_LOADING : GET_CUSTOMER_ORDER_DETAIL_FAILED,
   payload: message
 })
 

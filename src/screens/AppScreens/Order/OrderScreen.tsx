@@ -237,7 +237,7 @@ class OrderScreen extends Component<Props, State> {
           renderItem={({ item, index }) => {
             return (
 
-              <TouchableHighlight underlayColor="#E5E5E5" onPress={()=>this.props.navigation.navigate('OrderDetail')} style={styles.itemOrder}>
+              <TouchableHighlight underlayColor="#E5E5E5" onPress={()=>this.props.navigation.navigate('OrderDetail',{orderId:item.orderId})} style={styles.itemOrder}>
            
               <View>
                 <View style={{ flexDirection: 'row', height: 70, justifyContent: 'space-between' }}>

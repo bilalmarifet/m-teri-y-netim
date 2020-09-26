@@ -35,11 +35,16 @@ import moment from 'moment';
 import {AppState} from '../../../redux/store';
 import { InfoItem } from '../../../components/InfoItem';
 import { ScrollView } from 'react-native-gesture-handler';
+import { getCustomerOrderDetail, orderDetail, orderListItem, OrderStatus } from '../../../redux/actions/orderDetailActions';
+import { stat } from 'fs';
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState>;
-  loading: boolean;
+  loadingForOrderDetail: boolean;
   orders: IOrderItem[];
+  getCustomerOrderDetail: (orderId : number) => void;
+  orderDetail : orderDetail;
+
 }
 
 interface State {
@@ -85,61 +90,123 @@ class OrderDetailScreen extends Component<Props, State> {
      
     };
   };
+  componentDidMount() {
+    this.props.getCustomerOrderDetail(this.props.navigation.getParam('orderId'))
+  }
+
+   renderOrderStatus(status: OrderStatus) {
+    console.log(status,"status")
+    switch (status) {
+      case OrderStatus.Waiting:
+        console.log("girdii")  
+      return (
+        <View><Text style={{fontFamily:fonts.primaryFont,fontWeight:"600",fontSize:16,marginBottom:15}}>Sipariş Durumu</Text>
+        <View style={{flexDirection:'row',alignItems:'center',marginTop:10}}> 
+        <Icon type="AntDesign" name="check" style={{fontSize:12,color:colors.IconColor,marginTop:2}} />
+        <Text style={{marginLeft:10}}>Siparişiniz hazırlanıyor.</Text></View>
+        </View>
+        )
+      case OrderStatus.null: 
+      return (
+          <View><Text style={{fontFamily:fonts.primaryFont,fontWeight:"600",fontSize:16,marginBottom:15}}>Sipariş Durumu</Text>
+        <View style={{flexDirection:'row',alignItems:'center',marginTop:10}}> 
+        <Icon type="AntDesign" name="check" style={{fontSize:12,color:colors.IconColor,marginTop:2}} />
+        <Text style={{marginLeft:10}}>Siparişiniz hazırlanıyor.</Text></View>
+        </View>
+      )
+      case OrderStatus.OnTheWay:
+        return (
+          <View><Text style={{fontFamily:fonts.primaryFont,fontWeight:"600",fontSize:16,marginBottom:15}}>Sipariş Durumu</Text>
+          <View style={{flexDirection:'row',alignItems:'center',marginTop:10}}> 
+          <Icon type="AntDesign" name="check" style={{fontSize:12,color:colors.IconColor,marginTop:2}} />
+          <Text style={{marginLeft:10}}>Siparişiniz hazırlanıyor.</Text></View>
+          <View style={{flexDirection:'row',alignItems:'center',marginTop:10}}> 
+          <Icon type="AntDesign" name="check" style={{fontSize:12,color:colors.IconColor,marginTop:2}} />
+          <Text style={{marginLeft:10}}>Siparişiniz yolda.</Text></View>
+          <View style={{flexDirection:'row',alignItems:'center',marginTop:10}}> 
+          </View>
+          </View>
+        )
+      case OrderStatus.Exported:
+        return (
+          <View><Text style={{fontFamily:fonts.primaryFont,fontWeight:"600",fontSize:16,marginBottom:15}}>Sipariş Durumu</Text>
+          <View style={{flexDirection:'row',alignItems:'center',marginTop:10}}> 
+          <Icon type="AntDesign" name="check" style={{fontSize:12,color:colors.IconColor,marginTop:2}} />
+          <Text style={{marginLeft:10}}>Siparişiniz hazırlanıyor.</Text></View>
+          <View style={{flexDirection:'row',alignItems:'center',marginTop:10}}> 
+          <Icon type="AntDesign" name="check" style={{fontSize:12,color:colors.IconColor,marginTop:2}} />
+          <Text style={{marginLeft:10}}>Siparişiniz yolda.</Text></View>
+          <View style={{flexDirection:'row',alignItems:'center',marginTop:10}}> 
+          <Icon type="AntDesign" name="check" style={{fontSize:12,color:colors.IconColor,marginTop:2}} />
+          <Text style={{marginLeft:10}}>Siparişiniz tamamlandı.</Text></View></View>
+ 
+        )
+        break;
+    
+      default:
+        break;
+    }
+  }
 
   renderContent() {
-   
+      if(this.props.loadingForOrderDetail) {
+        return(<Spinner color={colors.IconColor} style={{flex:1}} />)
+      } 
+      if(this.props.orderDetail) {
+        let order = this.props.orderDetail
         return(
             <View>
                 <View style={{}}>
-                    <View style={{flexDirection:'row',justifyContent:'space-between',padding:20,backgroundColor:'white',borderBottomColor:colors.borderColor,borderBottomWidth:1}}>
+                    <View style={{padding:20,backgroundColor:'white',borderBottomColor:colors.borderColor,borderBottomWidth:1}}>
+                    <View style={{flexDirection:'row',justifyContent:'space-between'}}>
                     <View style={{flexDirection:'row'}}>
                         <Icon style={{fontSize:24}} type="MaterialCommunityIcons" name="calendar-today" />
-        <Text style={{fontFamily:fonts.primaryFont,marginLeft:10,marginTop:2}}>{this.state.order.dateTime}</Text>
+        <Text style={{fontFamily:fonts.primaryFont,marginLeft:10,marginTop:2}}>{order.createdDate}</Text>
                     </View>
-                    <Text style={{fontFamily:fonts.primaryFont,fontWeight:"600",fontSize:16}}>ID #123123</Text>
-                       
+                    
+                    <Text style={{fontFamily:fonts.primaryFont,fontWeight:"600",fontSize:16}}>ID #{order.orderId}</Text>
+                      
+                 </View>
+                 <View style={{marginTop:10,marginLeft:3}}>
+                      <Text style={{fontFamily:fonts.primaryFont, fontWeight:"600"}}>
+        Ödeme Türü: <Text style={{fontWeight:'normal'}}>{order.paymentText}</Text>
+                      </Text>
+                    </View> 
                     </View>
                     <View style={{padding:20,borderBottomColor:colors.borderColor,borderBottomWidth:1}}>
-                        <Text style={{fontFamily:fonts.primaryFont,fontWeight:"600",fontSize:16,marginBottom:15}}>Sipariş Durumu</Text>
-                        <View style={{flexDirection:'row',alignItems:'center',marginTop:10}}> 
-                        <Icon type="AntDesign" name="close" style={{fontSize:12,color:colors.accent,marginTop:2}} />
-                        <Text style={{marginLeft:10}}>Siparişiniz hazırlanıyor.</Text></View>
-                        <View style={{flexDirection:'row',alignItems:'center',marginTop:10}}> 
-                        <Icon type="AntDesign" name="close" style={{fontSize:12,color:colors.accent,marginTop:2}} />
-                        <Text style={{marginLeft:10}}>Siparişiniz yolda.</Text></View>
-                        <View style={{flexDirection:'row',alignItems:'center',marginTop:10}}> 
-                        <Icon type="AntDesign" name="check" style={{fontSize:12,color:colors.IconColor,marginTop:2}} />
-                        <Text style={{marginLeft:10}}>Siparişiniz tamamlandı.</Text></View>
+                        {this.renderOrderStatus(order.orderStatus)}
                     </View>
                     <View style={{padding:20,backgroundColor:'white',borderBottomColor:colors.borderColor,borderBottomWidth:1}}>
                     <Text style={{fontFamily:fonts.primaryFont,fontWeight:"600",fontSize:16}}>Adres</Text>
-                    <Text style={{fontFamily:fonts.primaryFont,marginTop:10}}>Cin cin mahallesi 231. sk. no:26 Pendik/Istanbul</Text>
+                    <Text style={{fontFamily:fonts.primaryFont,marginTop:10}}>{order.customerAddress}</Text>
                     </View>
                     <View style={{padding:20,borderBottomColor:colors.borderColor,borderBottomWidth:1}}>
                     <Text style={{fontFamily:fonts.primaryFont,fontWeight:"600",fontSize:16}}>Sipariş Detayı</Text>
-                    <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:10}}>
-                    <Text style={{fontFamily:fonts.primaryFont}}>19 lt damacana</Text>
-                    <Text style={{fontFamily:fonts.primaryFont}}>1 x 3.5      3.5 TL</Text>
+                    {order.orderProducts.map(element => {
+                      return(
+                        <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:10}}>
+                    <Text style={{fontFamily:fonts.primaryFont}}>{element.productName}</Text>
+                    <Text style={{fontFamily:fonts.primaryFont}}>{element.count} x {element.unitPrice}      {element.totalPrice}</Text>
                     </View>
-                    <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:10}}>
-                    <Text style={{fontFamily:fonts.primaryFont}}>6'li su</Text>
-                    <Text style={{fontFamily:fonts.primaryFont}}>5 x 15       75 TL</Text>
-                    </View>
+                      )
+                    })}
+                    
                     
                     </View>
                     <View style={{padding:20,backgroundColor:'white',borderBottomColor:colors.borderColor,borderBottomWidth:1}}>
                     <View style={{flexDirection:'row',justifyContent:'space-between'}}>
                     <Text style={{fontFamily:fonts.primaryFont,fontWeight:"600",fontSize:16}}>Toplam</Text>
-                    <Text style={{fontFamily:fonts.primaryFont,fontWeight:"900",fontSize:16}}>150 TL</Text>
+                    <Text style={{fontFamily:fonts.primaryFont,fontWeight:"900",fontSize:16}}>{order.displayTotalPrice}</Text>
                     
                     </View>
                     <Text style={{fontFamily:fonts.primaryFont,color:colors.textColor,marginTop:10}}>Sipariş detayınzı bu sayfadan kontrol edebilirsiniz.</Text>
                     <Text style={{fontFamily:fonts.primaryFont,color:colors.textColor,marginTop:5}}>Siparişiniz için teşekkür ederiz.</Text>
-                
+                 
                     </View>
                 </View>
             </View>
         )
+      }
          
       
     
@@ -158,11 +225,15 @@ class OrderDetailScreen extends Component<Props, State> {
 
 const mapStateToProps = (state: AppState) => ({
   orders: state.orders.orders,
+  loadingForOrderDetail: state.orderDetail.isLoading,
+  orderDetail : state.orderDetail.orderDetail,
+
 });
 
 function bindToAction(dispatch: any) {
   return {
-  
+    getCustomerOrderDetail: (orderId : number) => 
+    dispatch(getCustomerOrderDetail(orderId))
   };
 }
 

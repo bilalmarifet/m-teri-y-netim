@@ -34,6 +34,7 @@ interface Props {
     productList: product[],
     isPaid: boolean,
     customerId: number,
+    paymentType: number,
     type?: number,
     storeOwnerUserId?: number,
     customerName?: string,
@@ -44,12 +45,15 @@ interface Props {
   paymentMethods: PaymentMethod[];
   changePaymentMehtod : (index: number) => void;
   selectedPaymentMethod: number;
+  isLoadingAddOrder : boolean;
 }
 
-
-class CartScreen extends Component<Props, {}> {
+interface State {
+}
+class CartScreen extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
+
   }
 
 
@@ -87,74 +91,7 @@ class CartScreen extends Component<Props, {}> {
       </View>
     );
   }
-  renderBottom(price: number) {
-    if (price > 0) {
-      return (
-        <TouchableHighlight
-          onPress={() => this.handleCartAction()}
-          underlayColor="#AAA"
-          style={{
-            borderRadius: 5,
-              marginLeft: 20,
-              marginRight: 20,
-              marginTop: 10,
-              }}
-        >
-          <LinearGradient
-            start={{ x: 0, y: 0.5 }}
-            end={{ x: 1, y: 0.5 }}
-            colors={['#30AE4A', '#7BAD7B']}
-            style={{
-              borderRadius: 5,
-              paddingTop: 5,
-              paddingHorizontal: 10,
-              paddingBottom: 10,
-              backgroundColor: colors.buttonBackgroundPrimary,
-              flexDirection: 'row',
-              
-              justifyContent: 'space-between',
-            }}>
 
-            <View style={{paddingLeft:10}}>
-              <View style={{ flexDirection: 'row'}}>
-                <Text
-                  style={{
-                    fontFamily: 'Roboto',
-                    fontWeight: '600',
-                    color: '#fff',
-                  }}>
-                  Toplam Fiyat :
-            </Text>
-                <Text
-                  style={{
-                    fontFamily: 'Roboto',
-                    color: '#fff',
-                  }}>
-                  {price} ₺
-            </Text>
-              </View>
-              <View>
-              <Text style={{
-                fontFamily: 'Roboto',
-                color: '#fff',
-              }}>Siparişi Tamamla</Text>
-              </View>
-            </View>
-            <View>
-              {this.props.isLoading ? (
-                <Spinner size="small" color="white" style={{ height: 35, width: 35 }} />
-              ) : (
-                  <Icon name="chevron-right" style={{ color: 'white', marginTop: 10, fontSize: 18 }} type="Feather" />
-
-                )}
-            </View>
-
-
-          </LinearGradient>
-        </TouchableHighlight>
-      );
-    }
-  }
   handleCartAction(): void {
     var products: product[] = [];
     this.props.productList.map(element => {
@@ -172,6 +109,7 @@ class CartScreen extends Component<Props, {}> {
       products,
       false,
       global.CUSTOMER_ID,
+      this.props.paymentMethods[this.props.selectedPaymentMethod].paymentType,
       1,
       global.STORE_OWNER_USER_ID,
       this.props.userInfo
@@ -240,7 +178,7 @@ class CartScreen extends Component<Props, {}> {
       </View>
       {this.renderPaymentMethod()}
       
-      <ButtonGradient onPress={()=>console.log()} linearGredientStyle={{borderRadius:0,height:60}} style={{position:'absolute',bottom:0,left:0,right:0,height:60,borderRadius:0}} text="Alışverişi Tamamla" />
+      <ButtonGradient loading={this.props.isLoadingAddOrder} onPress={()=>this.handleCartAction()} linearGredientStyle={{borderRadius:0,height:60}} style={{position:'absolute',bottom:0,left:0,right:0,height:60,borderRadius:0}} text="Alışverişi Tamamla" />
      </View>
    )
   }
@@ -251,7 +189,8 @@ const mapStateToProps = (state: AppState) => ({
   userInfo: state.profile.userInfo,
   paymentMethods: state.addOrder.paymentMethods,
   loadingForGetPaymentMethods:state.addOrder.isLoadingGetPaymentMethods,
-  selectedPaymentMethod: state.addOrder.selectedPaymentMethodsIndex
+  selectedPaymentMethod: state.addOrder.selectedPaymentMethodsIndex,
+  isLoadingAddOrder: state.addOrder.isLoading,
 });
 
 function bindToAction(dispatch: any) {
@@ -260,6 +199,7 @@ function bindToAction(dispatch: any) {
       productList: product[],
       isPaid: boolean,
       customerId: number,
+      paymentType: number,
       type?: number,
       storeOwnerUserId?: number,
       customerName?: string,
@@ -269,6 +209,7 @@ function bindToAction(dispatch: any) {
           productList,
           isPaid,
           customerId,
+          paymentType,
           type,
           storeOwnerUserId,
           customerName,
@@ -277,7 +218,8 @@ function bindToAction(dispatch: any) {
       getPaymentMethod : () => 
       dispatch(getPaymentMethod()),
       changePaymentMehtod : (index: number) => 
-      dispatch(changePaymentMehtod(index))
+      dispatch(changePaymentMehtod(index)),
+      
   };
 }
 

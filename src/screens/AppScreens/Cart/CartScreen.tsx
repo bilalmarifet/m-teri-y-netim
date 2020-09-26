@@ -22,7 +22,7 @@ import {
 } from '../../../redux/actionsCustomer/ProductAction';
 import { InfoItem } from '../../../components/InfoItem';
 import { product } from '../../AppScreens/Customer/orderAdd';
-import { AddOrderMultiple, getPaymentMethod, PaymentMethod } from '../../../redux/actions/addOrderAction';
+import { getPaymentMethod, PaymentMethod } from '../../../redux/actions/addOrderAction';
 import { AppState } from '../../../redux/store';
 import { UserInfo } from '../../../redux/actions/profileActions';
 import { isLoadingOrderList } from '../../../redux/actions/orderDetailActions';
@@ -37,14 +37,7 @@ interface Props {
     isIncrease: boolean,
     index?: number,
   ) => void;
-  AddOrderMultiple: (
-    productList: product[],
-    isPaid: boolean,
-    customerId: number,
-    type?: number,
-    storeOwnerUserId?: number,
-    customerName?: string,
-  ) => void;
+  
   loadingIndex: number;
   loadingIncDec: boolean;
   userInfo: UserInfo;
@@ -299,33 +292,7 @@ class CartScreen extends Component<Props, State> {
     }
   }
   
-  handleCartAction(): void {
-    var products: product[] = [];
-    this.props.productList.map(element => {
-      var product: product = {
-        index: 0,
-        productId: element.productId,
-        unitPrice: element.price.toString(),
-        productCount: element.count.toString(),
-        productCode: element.productCode,
-        productGotUnitPrice: false,
-      };
-      products.push(product);
-    });
-    this.props.AddOrderMultiple(
-      products,
-      false,
-      global.CUSTOMER_ID,
-      1,
-      global.STORE_OWNER_USER_ID,
-      this.props.userInfo
-        ? this.props.userInfo.nameSurname
-          ? this.props.userInfo.nameSurname
-          : undefined
-        : undefined,
-    );
-  }
-
+  
   renderContent(cart: IProductItemCustomer[], price: number) {
     console.log("carrrt", cart)
     if (cart.length > 0) {
@@ -397,7 +364,6 @@ const mapStateToProps = (state: AppState) => ({
   AddOrderMessage: state.addOrder.AddOrderMessage,
   isSuccess: state.addOrder.isSuccess,
   isTried: state.addOrder.isTried,
-  isLoading: state.addOrder.isLoading,
   userInfo: state.profile.userInfo,
   
 });
@@ -413,25 +379,7 @@ function bindToAction(dispatch: any) {
       dispatch(
         IncOrDecItemFromCart(productsList, productId, isIncrease, index),
       ),
-    AddOrderMultiple: (
-      productList: product[],
-      isPaid: boolean,
-      customerId: number,
-      type?: number,
-      storeOwnerUserId?: number,
-      customerName?: string,
-    ) =>
-      dispatch(
-        AddOrderMultiple(
-          productList,
-          isPaid,
-          customerId,
-          type,
-          storeOwnerUserId,
-          customerName,
-        ),
-      ),
-     
+   
   };
 }
 
