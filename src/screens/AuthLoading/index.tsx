@@ -1,3 +1,4 @@
+import { config } from "process";
 import React from "react";
 import {
   ActivityIndicator,
@@ -7,6 +8,7 @@ import {
   View
 } from "react-native";
 import { NavigationScreenProp, NavigationState } from "react-navigation";
+import { BaseStoreOwnerUserId } from "../../services/AppConfig";
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState>;
@@ -22,18 +24,15 @@ class AuthLoading extends React.Component<Props, {}> {
     const { navigation } = this.props;
     const userToken = await AsyncStorage.getItem("userToken");
     global.TOKEN = userToken;
-    const storeOwnerUserId = await AsyncStorage.getItem('storeOwnerUserId');
-    console.log('storeOwnerUserId', storeOwnerUserId);
+    const storeOwnerUserId = BaseStoreOwnerUserId;
     global.STORE_OWNER_USER_ID = Number(storeOwnerUserId);
     const customerId = await AsyncStorage.getItem('customerId');
     global.CUSTOMER_ID = customerId;
     const userId = await AsyncStorage.getItem('userId');
     global.USERID = userId
-
-
-    console.log("token")
   
-    navigation.navigate(userToken ? "AppStack" : "AuthStack");
+   // navigation.navigate(userToken ? "AppStack" : "AuthStack");
+  navigation.navigate( "AppStack");
   };
 
   render() {
