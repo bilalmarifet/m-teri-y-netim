@@ -15,7 +15,7 @@ import SideBar from "../screens/AppScreens/SideBar";
 import Login from "../screens/AuthScreens/Login";
 import AuthLoading from "../screens/AuthLoading";
 import CustomerHomeScreen from '../screens/AppScreens/Home/index';
-import CustomerInfoScreen from '../screens/AppScreens/Cart/CustomerInfoScreen'
+
 import CartScreen from '../screens/AppScreens/Cart/CartScreen';
 import OrderScreen from '../screens/AppScreens/Order/OrderScreen';
 import CustomerProfileScreen from '../screens/AppScreens/Profile/CustomerProfileScreen';
@@ -27,6 +27,7 @@ import { Icon } from "native-base";
 import CustomerEditProfileScreen from "../screens/AppScreens/Profile/CustomerEditProfileScreen";
 import CustomerEditPasswordScreen from "../screens/AppScreens/Profile/CustomerEditPasswordScreen";
 import OrderDetailScreen from "../screens/AppScreens/Order/OrderDetailScreen";
+import CartCheckoutScreen from "../screens/AppScreens/Cart/CartCheckoutScreen";
 
 const MainStack = createStackNavigator(
   {
@@ -76,7 +77,7 @@ const AuthStack = createStackNavigator(
 const cartStack = createStackNavigator(
   {
     Cart: CartScreen,
-    CustomeInfo: CustomerInfoScreen,
+    CartCheckout: CartCheckoutScreen
   },
   {
     initialRouteName: 'Cart',

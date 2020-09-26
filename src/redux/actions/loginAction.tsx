@@ -14,10 +14,11 @@ import {navigate} from '../services/Navigator';
 import {NavigationScreenProp, NavigationState} from 'react-navigation';
 import NavigationService from '../../services/NavigationService';
 import { showSimpleMessage } from '../../components/showMessage';
+import { BasestoreId } from '../../services/AppConfig';
 
 export function loginUserService(username: string, password: string) {
   return (dispatch: Dispatch<Action>) => {
-    console.log(username + password);
+
 
     dispatch(loading(true));
 
@@ -25,6 +26,7 @@ export function loginUserService(username: string, password: string) {
       .post(WATER_USER_LOGIN, {
         username: username,
         password: password,
+        storeId : BasestoreId
       })
       .then(response => {
         if (response.data.isSuccess) {
@@ -74,7 +76,7 @@ export function loginUserService(username: string, password: string) {
       })
       .catch(err => {
         dispatch(loginIsSucceed(false, err));
-        // dispatch(reset());
+        showSimpleMessage("Böyle bir kullanıcı bulunamadı.","danger")
         dispatch(reset());
       });
   };
@@ -85,11 +87,7 @@ export function logOut(navigation?: NavigationScreenProp<NavigationState>) {
     AsyncStorage.getAllKeys()
       .then(keys => AsyncStorage.multiRemove(keys))
       .then(() => {
-        if (navigation) {
-          navigation.navigate('AuthLoading', {});
-        } else {
-          navigate('AuthLoading', {});
-        }
+        NavigationService.navigate('AuthLoading', {});
       });
   };
 }

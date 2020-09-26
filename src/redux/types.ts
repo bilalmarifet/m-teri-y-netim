@@ -99,7 +99,9 @@ export const GET_LAST_ORDER_SUCCEED = 'getLastOrderSucceed';
 export const RESET_CART = 'RESET_CART';
 export const ADD_ORDER_FAILED = 'AddOrderFailed';
 export const ADD_ORDER_IS_LOADING = 'AddOrderIsLoading';
-
+export const PAYMENT_METHODS_LOADING = "PAYMENT_METHODS_LOADING"
+export const GET_PAYMENT_METHODS = "GET_PAYMENT_METHODS"
+export const CHANGE_PAYMENT_METHODS = "CHANGE_PAYMENT_METHOD"
 export const EDIT_PRODUCT_SUCCEED = 'EditProductSucceed';
 export const EDIT_PRODUCT_LOADING = 'EditProductLoading';
 

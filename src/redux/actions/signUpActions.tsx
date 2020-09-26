@@ -21,6 +21,7 @@ import {Action} from '../states';
 import {UserFirstData} from '../reducers/signUpReducers';
 import {navigate} from '../services/Navigator';
 import NavigationService from '../../services/NavigationService';
+import { showSimpleMessage } from '../../components/showMessage';
 
 export interface BaseUser {
   nameSurname: string;
@@ -113,54 +114,26 @@ export function controlEmail(
         email: email,
       })
       .then(res => {
+        console.log(res)
         if (res.data.result) {
           dispatch(signUpFirstSucceed(user));
           dispatch(loginIsSucceed(true, ''));
           dispatch(reset());
         } else {
           if (res.data.message === 'Error.User.EmailCheck.EmailFound') {
-            dispatch(
-              loginIsSucceed(
-                false,
-                'Bu email adresi ile tanımlı kullanıcı bulundu. Şifrenizi unuttuysanız yeni şifre alabilirsiniz.',
-              ),
-            );
+              showSimpleMessage('Bu email adresi ile tanımlı kullanıcı bulundu. Şifrenizi unuttuysanız yeni şifre alabilirsiniz.',"danger")
             dispatch(reset());
           } else {
-            dispatch(loginIsSucceed(false, 'Bir Hata meydana geldi.'));
+            showSimpleMessage( 'Bir Hata meydana geldi.',"danger")
             dispatch(reset());
           }
         }
       })
       .catch(err => {
-        dispatch(loginIsSucceed(false, err));
+        showSimpleMessage( 'Bir Hata meydana geldi.',"danger")
         dispatch(reset());
       });
 
-    //   axios.post(WATER_USER_CREATE_CONTROL_EMAIL,
-    //     {
-    //         email: email,
-    //     })
-    //   .then((response) =>{
-    //   if(response.data.isSuccess){
-
-    //     dispatch(loginIsSucceed(true,""));
-    //     dispatch(reset());
-    //     }
-
-    //   else {
-    //     if(response.data.message == "User.Login.UserNotFound"){
-    //       dispatch(loginIsSucceed(false,"Böyle bir kullanıcı bulunamadı!"));
-    //       dispatch(reset());
-    //     }
-    //   }
-    //   })
-    //   .catch(() => {
-    //     dispatch(loginIsSucceed(false, "Bir hata oluştu."));
-    //     // dispatch(reset());
-    //     dispatch(reset());
-
-    //   });
   };
 }
 

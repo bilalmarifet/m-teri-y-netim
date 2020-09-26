@@ -13,7 +13,7 @@ import { UserFirstData } from "./reducers/signUpReducers";
 import { IProduct } from "./actions/productEditAction";
 import { Customer } from "./actions/customerEditAction";
 import { productCountList } from "./actions/reportAction";
-import { lastOrderInterface } from "./actions/addOrderAction";
+import { lastOrderInterface, PaymentMethod } from "./actions/addOrderAction";
 
 export interface State {
     data: any[];
@@ -123,7 +123,9 @@ export interface AddOrder
     isTried : boolean;
     isLoading : boolean;
     lastOrder : lastOrderInterface;
-    
+    isLoadingGetPaymentMethods: boolean;
+    paymentMethods: PaymentMethod[]
+    selectedPaymentMethodsIndex: number;
 
   }
 

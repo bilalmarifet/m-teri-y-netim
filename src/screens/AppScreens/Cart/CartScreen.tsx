@@ -10,7 +10,7 @@ import { Header } from '../../../components';
 import styles from '../styles';
 import { AvatarItem } from '../../../components';
 import { logoutUserService } from '../../../redux/services/user';
-import { Thumbnail, Icon, Card, Spinner } from 'native-base';
+import { Thumbnail, Icon, Card, Spinner, ListItem, Left, Radio, Right } from 'native-base';
 import { fetchImageData, fetchMoreImageData } from '../../../redux/actions/fetch';
 import { ScrollView } from 'react-native-gesture-handler';
 import { showMessage } from 'react-native-flash-message';
@@ -22,9 +22,10 @@ import {
 } from '../../../redux/actionsCustomer/ProductAction';
 import { InfoItem } from '../../../components/InfoItem';
 import { product } from '../../AppScreens/Customer/orderAdd';
-import { AddOrderMultiple } from '../../../redux/actions/addOrderAction';
+import { AddOrderMultiple, getPaymentMethod, PaymentMethod } from '../../../redux/actions/addOrderAction';
 import { AppState } from '../../../redux/store';
 import { UserInfo } from '../../../redux/actions/profileActions';
+import { isLoadingOrderList } from '../../../redux/actions/orderDetailActions';
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState>;
@@ -47,6 +48,7 @@ interface Props {
   loadingIndex: number;
   loadingIncDec: boolean;
   userInfo: UserInfo;
+  isLoading: boolean;
 }
 
 interface itemProp {
@@ -69,9 +71,7 @@ class CartScreen extends Component<Props, State> {
     };
   }
 
-  componentDidMount() {
-    // this.props.navigation.setParams({cart: 1});
-  }
+  
 
   showSimpleMessage() {
     if (this.props.Message) {
@@ -82,6 +82,8 @@ class CartScreen extends Component<Props, State> {
       });
     }
   }
+
+
 
   static navigationOptions = ({ navigation }) => {
     return {
@@ -234,7 +236,8 @@ class CartScreen extends Component<Props, State> {
     if (price > 0) {
       return (
         <TouchableHighlight
-          onPress={() => this.handleCartAction()}
+
+          onPress={() => this.props.navigation.navigate('CartCheckout')}
           underlayColor="#AAA"
           style={{
             borderRadius: 5,
@@ -284,12 +287,9 @@ class CartScreen extends Component<Props, State> {
               </View>
             </View>
             <View>
-              {this.props.isLoading ? (
-                <Spinner size="small" color="white" style={{ height: 35, width: 35 }} />
-              ) : (
                   <Icon name="chevron-right" style={{ color: 'white', marginTop: 10, fontSize: 18 }} type="Feather" />
 
-                )}
+
             </View>
 
 
@@ -298,6 +298,7 @@ class CartScreen extends Component<Props, State> {
       );
     }
   }
+  
   handleCartAction(): void {
     var products: product[] = [];
     this.props.productList.map(element => {
@@ -366,10 +367,6 @@ class CartScreen extends Component<Props, State> {
                     </View>
 
                   </View>
-
-                  {this.renderPlusButton(item, index)}
-
-
                 </View>
               );
             }}
@@ -402,6 +399,7 @@ const mapStateToProps = (state: AppState) => ({
   isTried: state.addOrder.isTried,
   isLoading: state.addOrder.isLoading,
   userInfo: state.profile.userInfo,
+  
 });
 
 function bindToAction(dispatch: any) {
@@ -433,6 +431,7 @@ function bindToAction(dispatch: any) {
           customerName,
         ),
       ),
+     
   };
 }
 

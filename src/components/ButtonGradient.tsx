@@ -16,6 +16,7 @@ interface Props extends TouchableOpacityProps {
     text: string;
     loading: boolean;
     style?: StyleProp<ViewStyle>
+    linearGredientStyle: StyleProp<ViewStyle>
 }
 
 export class ButtonGradient extends Component<Props, {}> {
@@ -32,7 +33,7 @@ export class ButtonGradient extends Component<Props, {}> {
                     start={{ x: 0.7, y: 0.5 }}
                     end={{ x: 1, y: 1 }}
                     colors={['#54A652', '#7ACE6F']}
-                    style={styles.buttonStyle}>
+                    style={[styles.buttonStyle,this.props.linearGredientStyle]}>
                     {loading ? <Spinner color="white" /> :
                         <Text style={styles.buttonTextStyle}>{text}</Text>}
 

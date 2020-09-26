@@ -17,7 +17,10 @@ export const colors = {
   buttonBackgroundPrimary : '#30AE4A',
   IconColor : '#30AE4A',
   IconNormalColor : '#393E46',
-  headerTitleColor :'#393E46'
+  headerTitleColor :'#393E46',
+  viewBackground: '#E5F1E5', // YESIL ARKA PLAN
+  viewBackgroundText: '#56A6A4',
+  textColorLighter: '#636363'
 };
 // export const colors = {
 //   primary: "#3F51B5",

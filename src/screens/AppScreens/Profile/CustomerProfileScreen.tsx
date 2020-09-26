@@ -116,7 +116,7 @@ class CustomerProfileScreen extends Component<Props, State> {
           <Text style={{alignSelf:'center',marginLeft:10,fontWeight:'600',fontFamily:fonts.primaryFont,fontSize:16}}>Profili Düzenle</Text>
           
             </View>
-            <View style={{backgroundColor:'#E5F1E5',width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="arrow-forward" style={{color:'#56A6A4',fontSize:12}} /></View>
+            <View style={{backgroundColor:colors.viewBackground,width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="arrow-forward" style={{color:colors.viewBackgroundText,fontSize:12}} /></View>
           </View>
           </TouchableHighlight>
           <TouchableHighlight onPress={()=> this.props.navigation.navigate('CustomerEditPassword')} underlayColor="#AAA"  style={{borderBottomWidth:1,borderBottomColor:colors.borderColor,padding:20,paddingVertical:15,backgroundColor:'white'}}>
@@ -126,7 +126,7 @@ class CustomerProfileScreen extends Component<Props, State> {
           <Text style={{alignSelf:'center',marginLeft:10,fontWeight:'600',fontFamily:fonts.primaryFont,fontSize:16}}>Şifre Değiştir</Text>
           
             </View>
-            <View style={{backgroundColor:'#E5F1E5',width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="arrow-forward" style={{color:'#56A6A4',fontSize:12}} /></View>
+            <View style={{backgroundColor:colors.viewBackground,width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="arrow-forward" style={{color:colors.viewBackgroundText,fontSize:12}} /></View>
           </View>
           </TouchableHighlight>
           <TouchableHighlight onPress={()=> console.log()} underlayColor="#AAA"  style={{borderBottomWidth:1,borderBottomColor:colors.borderColor,padding:20,paddingVertical:15,backgroundColor:'white'}}>
@@ -136,7 +136,7 @@ class CustomerProfileScreen extends Component<Props, State> {
           <Text style={{alignSelf:'center',marginLeft:10,fontWeight:'600',fontFamily:fonts.primaryFont,fontSize:16}}>Gizlilik Sözleşmesi</Text>
           
             </View>
-            <View style={{backgroundColor:'#E5F1E5',width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="arrow-forward" style={{color:'#56A6A4',fontSize:12}} /></View>
+            <View style={{backgroundColor:colors.viewBackground,width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="arrow-forward" style={{color:colors.viewBackgroundText,fontSize:12}} /></View>
           </View>
           </TouchableHighlight>
           <TouchableHighlight onPress={()=> this.props.logOut()} underlayColor="#AAA"  style={{borderBottomWidth:1,borderBottomColor:colors.borderColor,padding:20,paddingVertical:15,backgroundColor:'white'}}>
@@ -146,7 +146,7 @@ class CustomerProfileScreen extends Component<Props, State> {
           <Text style={{alignSelf:'center',marginLeft:10,fontWeight:'600',fontFamily:fonts.primaryFont,fontSize:16}}>Çıkış yap</Text>
           
             </View>
-            <View style={{backgroundColor:'#E5F1E5',width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="arrow-forward" style={{color:'#56A6A4',fontSize:12}} /></View>
+            <View style={{backgroundColor:colors.viewBackground,width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="arrow-forward" style={{color:colors.viewBackgroundText,fontSize:12}} /></View>
           </View>
           </TouchableHighlight>
         </View>

@@ -48,8 +48,8 @@ paddingVertical:10,
   itemOrder:{
     marginHorizontal:10,
     borderWidth: 0,
-    padding:5,
-
+    padding:10,
+    borderBottomWidth:1,
     borderBottomColor:'#cccc',
     borderStyle:'solid',
     flexDirection: 'column',

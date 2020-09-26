@@ -3,7 +3,7 @@ import {
   WATER_ADD_ORDER,
   WATER_ADD_ORDER_MULTIPLE_PRODUCT,
   WATER_GET_LAST_ORDER,
-  WATER_ADD_ORDER_AGAIN,
+  WATER_ADD_ORDER_AGAIN,WATER_GET_SELECT_PAYMET_METHOD
 } from './../constants';
 import {Dispatch} from 'react';
 import {
@@ -12,7 +12,7 @@ import {
   ADD_ORDER_IS_LOADING,
   GET_EMPLOYEE_TOKENS,
   GET_LAST_ORDER_SUCCEED,
-  RESET_CART,
+  RESET_CART, PAYMENT_METHODS_LOADING, GET_PAYMENT_METHODS, CHANGE_PAYMENT_METHODS
 } from './../types';
 import {Action} from '../states';
 
@@ -26,6 +26,8 @@ import {product} from '../../screens/AppScreens/Customer/orderAdd';
 import {showMessage} from 'react-native-flash-message';
 import {NotificationService} from '../../services/NotificationService';
 import { user } from './getUserAction';
+import { BasestoreId } from '../../services/AppConfig';
+import { showSimpleMessage } from '../../components/showMessage';
 
 export function chooseEmployee(userId: string) {}
 export interface userWithToken {
@@ -57,6 +59,11 @@ export interface lastOrderInterface {
       totalPrice: number;
     }
   ];
+}
+
+export interface PaymentMethod {
+  paymentType: number,
+  paymentTypeName: string;
 }
 
 export function getLastOrder(customerId: number) {
@@ -163,6 +170,55 @@ export function addOrderAgain(orderId: number, customerId: number) {
         dispatch(reset());
       });
   };
+}
+
+export function changePaymentMehtod(index: number) {
+  return(dispatch: any) => {
+    dispatch(paymentMethodChange(index))
+  }
+}
+
+export function getPaymentMethod() {
+  return(dispatch:any) => {
+    dispatch(isLoadingPaymentMethods(true))
+    AsyncStorage.multiGet(['userToken', 'userId'])
+      .then(res => {
+        let token = res[0][1];
+        var userId = res[1][1];
+        const headers = {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        };
+        axios
+          .get(
+            WATER_GET_SELECT_PAYMET_METHOD + `?storeId=${BasestoreId}`,
+            {
+              headers: headers,
+            },
+          )
+          .then(response => {
+            var paymentMethods: PaymentMethod[] = []
+            if (response.data.isSuccess) {
+                response.data.result.map((element:PaymentMethod) => {
+                  paymentMethods.push(element)
+                })
+                dispatch(PaymentMethodsGet(paymentMethods))
+            }else {
+              showSimpleMessage("Bir hata meydana geldi. Daha sonra tekrar deneyiniz","success")
+            }
+            dispatch(isLoadingPaymentMethods(false))
+          })
+          .catch(error => {
+            showSimpleMessage("Bir hata meydana geldi. Daha sonra tekrar deneyiniz","success")
+            dispatch(isLoadingPaymentMethods(false))
+          });
+      })
+      .catch(err => {
+        showSimpleMessage("Bir hata meydana geldi. Daha sonra tekrar deneyiniz","success")
+            
+        dispatch(isLoadingPaymentMethods(false))
+      });
+  }
 }
 
 export function AddOrderMultiple(
@@ -378,6 +434,21 @@ export function AddOrder(
       });
   };
 }
+
+
+export const paymentMethodChange = (index: number) => ({
+  type: CHANGE_PAYMENT_METHODS,
+  payload: index
+})
+export const isLoadingPaymentMethods = (loading: boolean) => ({
+  type: PAYMENT_METHODS_LOADING,
+  payload: loading,
+});
+export const PaymentMethodsGet = (list: PaymentMethod[]) => ({
+  type: GET_PAYMENT_METHODS,
+  payload: list,
+});
+
 
 export const isLoading = (loading: boolean) => ({
   type: ADD_ORDER_IS_LOADING,

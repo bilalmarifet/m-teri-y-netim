@@ -1,5 +1,5 @@
 import { AddOrder, Action } from "../states";
-import {ADD_ORDER_SUCCEED,ADD_ORDER_FAILED, RESET_PROPS, ADD_ORDER_IS_LOADING, GET_EMPLOYEE_TOKENS, GET_LAST_ORDER_SUCCEED} from "../types";
+import {ADD_ORDER_SUCCEED,ADD_ORDER_FAILED, RESET_PROPS, ADD_ORDER_IS_LOADING, GET_EMPLOYEE_TOKENS, GET_LAST_ORDER_SUCCEED, PAYMENT_METHODS_LOADING, GET_PAYMENT_METHODS, CHANGE_PAYMENT_METHODS} from "../types";
 import { notificationEmployee, lastOrderInterface } from "../actions/addOrderAction";
 
 
@@ -10,11 +10,28 @@ const initalState = {
     isLoading : false,
     notificationEmployee : {} as notificationEmployee,
     lastOrder : {} as lastOrderInterface,
-    
+    isLoadingGetPaymentMethods: false,
+    paymentMethods: [],
+    selectedPaymentMethodsIndex: 0
   };
 
 export default (state: AddOrder = initalState, action: Action) => {
   switch (action.type) {
+    case CHANGE_PAYMENT_METHODS:
+      return {
+        ...state,
+        selectedPaymentMethodsIndex: action.payload
+      }
+    case PAYMENT_METHODS_LOADING:
+      return {
+        ...state,
+        isLoadingGetPaymentMethods:action.payload
+      }
+    case GET_PAYMENT_METHODS:
+      return {
+        ...state,
+        paymentMethods: action.payload
+      }
     case ADD_ORDER_SUCCEED:    
       return {
         ...state,

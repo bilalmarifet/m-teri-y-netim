@@ -37,6 +37,7 @@ export const WATER_ADD_ORDER_AGAIN =
   WATER_BASE_URL_NEW + '/api/Order/OrderAddAgain';
 export const WATER_ADD_ORDER_MULTIPLE_PRODUCT =
   WATER_BASE_URL_NEW + '/api/Order/PostNew';
+export const WATER_GET_SELECT_PAYMET_METHOD = WATER_BASE_URL_NEW + '/api/StorePayment'
 export const WATER_GET_LAST_ORDER =
   WATER_BASE_URL_NEW + '/api/Order/GetCustomerLastOrder';
 export const WATER_GET_ORDER_LIST = WATER_BASE_URL_NEW + '/api/Order';

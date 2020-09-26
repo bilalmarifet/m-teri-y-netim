@@ -33,12 +33,12 @@ import * as Yup from 'yup';
 import styles from '../Login/styles';
 import {connect} from 'react-redux';
 import {AppState} from '../../../redux/store';
-import Hr from 'react-native-hr-component';
 import {controlEmail} from '../../../redux/actions/signUpActions';
 import {showMessage} from 'react-native-flash-message';
-import { colors } from '../../../constants';
+import { colors, fonts } from '../../../constants';
 import { Input, Button } from '../../../components';
 import { ButtonSecond } from '../../../components/ButtonSecond';
+import { SuccessButton } from '../../../components/SuccessButton';
 
 // import Icon from 'react-native-vector-icons/Ionicons'
 // import { Input } from "react-native-elements";
@@ -94,15 +94,7 @@ class SignUpFirstScreen extends Component<Props, State> {
     };
   }
 
-  showSimpleMessage() {
-    if (this.props.isFinished && !this.props.isSucceed) {
-      showMessage({
-        message: this.props.loginErrorMessage,
-        type: 'danger',
-        icon: 'auto',
-      });
-    }
-  }
+ 
 
   handleLogin = (values: userDataFirst) => {
     const {isSucceed} = this.props;
@@ -128,7 +120,6 @@ class SignUpFirstScreen extends Component<Props, State> {
                   NameSurname: '',
                   email: '',
                   password: '',
-                  IsSecureText: true,
                 }}
                 validationSchema={loginSchema}
                 onSubmit={values => this.handleLogin(values)}>
@@ -138,16 +129,15 @@ class SignUpFirstScreen extends Component<Props, State> {
                       <View style={[styles.inputContainer]}>
                         <View
                           style={{
-                            alignSelf: 'center',
-                            borderBottomWidth: 1,
                           }}>
                           <Text
                             style={{
-                              fontFamily: 'Avenir Next',
+                              fontFamily:fonts.primaryFont,
                               fontSize: 32,
                             }}>
                             Üye Ol
                           </Text>
+                          <Text style={{fontFamily:fonts.primaryFont, color:'#ccc'}}>hızlıca sipariş vermeye başla</Text>
                         </View>
                         <View style={{marginTop: '20%'}}>
                         <Input
@@ -188,17 +178,20 @@ class SignUpFirstScreen extends Component<Props, State> {
               }
                        
                         </View>
-                        <Button loading={this.props.isLoading} text="Devam et" onPress={props.handleSubmit} />
-                        <ButtonSecond text="Giriş yap" onPress={props.handleSubmit} />
+                        
+                        <SuccessButton loading={this.props.isLoading} text="Devam et" onPress={props.handleSubmit} />
                       </View>
+                  
+                  
                     </View>
                   );
                 }}
               </Formik>
+           
+           
             </ScrollView>
           </KeyboardAvoidingView>
         </SafeAreaView>
-        {this.showSimpleMessage()}
         </View>
     );
   }
