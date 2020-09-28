@@ -11,7 +11,8 @@ import {colors} from '../constants';
 import {NavigationScreenProp, NavigationState} from 'react-navigation';
 import {IProductItemCustomer} from '../redux/actionsCustomer/ProductAction';
 import LinearGradient from 'react-native-linear-gradient';
-import {Icon} from 'native-base';
+import Icon from 'react-native-vector-icons/Feather';
+
 
 interface Props extends TextInputProps {
   navigation: NavigationScreenProp<NavigationState>;
@@ -47,7 +48,7 @@ export class TotalPriceText extends Component<Props, {}> {
               backgroundColor: 'white',
               margin: 1,
             }}>
-            <Icon style={{color: colors.iconColorSecond,fontSize:20}} name="shopping-cart" type="Feather"  />
+            <Icon style={{color: colors.headerColorTop,fontSize:20}} name="shopping-cart"  />
 
             <Text
               style={{

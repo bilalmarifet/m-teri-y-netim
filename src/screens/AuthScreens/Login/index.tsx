@@ -4,7 +4,7 @@ import {
   Text,
   KeyboardAvoidingView,
   ScrollView,
-  Platform
+  Platform, Image
 } from "react-native";
 import { NavigationScreenProp, NavigationState } from "react-navigation";
 import { Formik } from "formik";
@@ -21,6 +21,7 @@ import { SuccessButton } from "../../../components/SuccessButton";
 import { TouchableHighlight, TouchableOpacity } from "react-native";
 import NavigationService from "../../../services/NavigationService";
 import Icon from 'react-native-vector-icons/Feather';
+import { BaseImage } from "../../../services/AppConfig";
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState>;
@@ -76,9 +77,9 @@ class Login extends Component<Props, {}> {
                 return (
                   <View>
                     <View style={styles.headStyle}>
-                      {/* <Icon name="emotsmile" size={100} /> */}
+                      <Image source={BaseImage} style={{width:100,height:100,marginBottom:10}} />
                       <Text style={styles.headText}>
-                     Giriş Yap
+                     Ozan Su
                       </Text>
                     </View>
                     <View style={styles.inputContainer}>
@@ -106,7 +107,7 @@ class Login extends Component<Props, {}> {
                         </Text>
               }
                       <SuccessButton loading={this.props.isLoading} text="Giriş yap" onPress={props.handleSubmit} />
-                      <Button text="Üye ol" loading={false} style={{backgroundColor:'#fff',paddingHorizontal: 10,  flexDirection:'row', justifyContent:'space-between'}} textStyle={{color:colors.IconNormalColor}} onPress={()=> this.props.navigation.navigate("SignUp")} />
+                      <Button text="Üye ol" loading={false} style={{backgroundColor:colors.IconColor,paddingHorizontal: 10,  flexDirection:'row', justifyContent:'space-between'}} textStyle={{color:'white'}} onPress={()=> this.props.navigation.navigate("SignUp")} />
                     </View>
                   </View>
                 );

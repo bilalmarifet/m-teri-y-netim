@@ -224,7 +224,7 @@ elevation: 3, }}>
           <Text style={{fontFamily:'roboto',color:colors.textColor, width:'90%'}}>
              {item.productName}
            </Text>
-           <Text style={{fontFamily:fonts.primaryFont,marginTop:5,color:colors.priceAndPlusColor}}>
+           <Text style={{fontFamily:fonts.primaryFont,marginTop:5,color:colors.priceAndPlusColor,fontWeight:'bold'}}>
              {item.price} TL
            </Text>
            </View>

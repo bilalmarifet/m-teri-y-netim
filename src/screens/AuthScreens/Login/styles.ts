@@ -4,18 +4,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.containerBg,
-    justifyContent: "center"
+    paddingTop:'30%'
   },
   headStyle: {
-    paddingVertical: 30,
-    justifyContent: "center",
+    marginTop:'5%',
     alignItems: "center",
     borderBottomWidth: 1,
     borderBottomColor: colors.borderColor
   },
   headText: {
     fontSize: 40,
-    fontWeight: "700"
+    fontWeight: "700",
+    marginBottom:20,
+    color:colors.IconColor
   },
   inputContainer: {
     justifyContent: "center",
@@ -25,10 +26,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center"
   },
-  linkText: {
-    color: colors.primary,
-    fontWeight: "700"
-  }
+
 });
 
 export default styles;
