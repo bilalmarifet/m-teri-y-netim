@@ -132,11 +132,11 @@ class CustomerEditProfileScreen extends Component<Props, State> {
       return(
         <View>
           <View style={{borderBottomWidth:0.5,borderBottomColor:colors.borderColor,paddingBottom:30}}>
-          <Image style={{width:150,height:150,justifyContent:'center',borderRadius:75,marginTop:20,alignSelf:'center'}} source={require("../../../assets/bread.jpg")} />
-          <Text style={{textAlign:'center',marginTop:10,fontFamily:fonts.primaryFont,fontSize:18}}>
+        
+          <Text style={{marginLeft:30,marginTop:10,fontFamily:fonts.primaryFont,fontSize:18}}>
             {user.nameSurname}
           </Text>
-          <Text style={{textAlign:'center',marginTop:10,fontFamily:fonts.primaryFont,fontSize:18}}>
+          <Text style={{marginLeft:30,marginTop:10,fontFamily:fonts.primaryFont,fontSize:18,color:colors.textColorLighter}}>
             {user.email}
           </Text>
           </View>

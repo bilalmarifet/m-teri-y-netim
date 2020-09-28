@@ -23,11 +23,12 @@ import CustomerProfileScreen from '../screens/AppScreens/Profile/CustomerProfile
 import {fonts, colors} from '../constants';
 import SignUpFirstScreen from "../screens/AuthScreens/SignUp/SignUpFirstScreen";
 import SignUpSecondScreen from "../screens/AuthScreens/SignUp/SignUpSecondScreen";
-import { Icon } from "native-base";
+
 import CustomerEditProfileScreen from "../screens/AppScreens/Profile/CustomerEditProfileScreen";
 import CustomerEditPasswordScreen from "../screens/AppScreens/Profile/CustomerEditPasswordScreen";
 import OrderDetailScreen from "../screens/AppScreens/Order/OrderDetailScreen";
 import CartCheckoutScreen from "../screens/AppScreens/Cart/CartCheckoutScreen";
+import Icon from "react-native-vector-icons/Feather";
 
 const MainStack = createStackNavigator(
   {
@@ -159,11 +160,11 @@ const CustomerMainStack = createBottomTabNavigator(
         },
         tabBarIcon: ({focused}) => {
           return focused ? (
-            <Icon name="shopping-bag" type="Feather"   style={{color: colors.IconColor}}  />
+            <Icon name="shopping-bag" style={{color: colors.IconColor,fontSize:30}}  />
 
       
           ) : (
-            <Icon name="shopping-bag" type="Feather"   style={{color: colors.IconNormalColor}}  />
+            <Icon name="shopping-bag" style={{color: colors.IconNormalColor,fontSize:30}}  />
 
           );
         },
@@ -182,10 +183,12 @@ const CustomerMainStack = createBottomTabNavigator(
 
         tabBarIcon: ({focused}) => {
           return focused ? (
-            <Icon name="shopping-cart" type="Feather"    style={{color: colors.IconColor}}  />
+            <Icon name="shopping-cart"  style={{color: colors.IconColor,fontSize:30}}  />
+
             
           ) : (
-            <Icon name="shopping-cart" type="Feather" style={{color: colors.IconNormalColor}}  />
+            <Icon name="shopping-cart" style={{color: colors.IconNormalColor,fontSize:30}}  />
+
             
           );
         },
@@ -202,10 +205,12 @@ const CustomerMainStack = createBottomTabNavigator(
         },
         tabBarIcon: ({focused}) => {
           return focused ? (
-            <Icon name="briefcase" type="Feather"   style={{color: colors.IconColor}} />
+            <Icon name="briefcase" style={{color: colors.IconColor,fontSize:30}}  />
+
             
           ) : (
-            <Icon name="briefcase" type="Feather" style={{color: colors.IconNormalColor}}  />
+            <Icon name="briefcase"  style={{color: colors.IconNormalColor,fontSize:30}}  />
+
             
           );
         },
@@ -222,10 +227,12 @@ const CustomerMainStack = createBottomTabNavigator(
         },
         tabBarIcon: ({focused}) => {
           return focused ? (
-            <Icon name="user" type="Feather"   style={{color: colors.IconColor}} />
+            <Icon name="user" style={{color: colors.IconColor,fontSize:30}}  />
+
             
           ) : (
-            <Icon name="user" type="Feather" style={{color: colors.IconNormalColor}}  />
+            <Icon name="user" style={{color: colors.IconNormalColor,fontSize:30}}  />
+
             
           );
         },

@@ -10,7 +10,7 @@ import { Header } from '../../../components';
 import styles from '../styles';
 import { AvatarItem } from '../../../components';
 import { logoutUserService } from '../../../redux/services/user';
-import { Thumbnail, Icon, Card, Spinner, ListItem, Left, Radio, Right } from 'native-base';
+import { Thumbnail, Card, Spinner, ListItem, Left, Radio, Right } from 'native-base';
 import { fetchImageData, fetchMoreImageData } from '../../../redux/actions/fetch';
 import { ScrollView } from 'react-native-gesture-handler';
 import { showMessage } from 'react-native-flash-message';
@@ -27,7 +27,8 @@ import { AppState } from '../../../redux/store';
 import { UserInfo } from '../../../redux/actions/profileActions';
 import { isLoadingOrderList } from '../../../redux/actions/orderDetailActions';
 import { showSimpleMessage } from '../../../components/showMessage';
-
+import Icon from 'react-native-vector-icons/Feather';
+import IconMat from 'react-native-vector-icons/MaterialCommunityIcons'
 interface Props {
   navigation: NavigationScreenProp<NavigationState>;
 
@@ -122,7 +123,6 @@ class CartScreen extends Component<Props, State> {
 
           <View style={{
             flexDirection: 'row', shadowColor: "#000",
-            shadowColor: "#000",
             shadowOffset: {
               width: 0,
               height: 3,
@@ -144,7 +144,6 @@ class CartScreen extends Component<Props, State> {
               }}>
               <Icon
                 name="plus"
-                type="Feather"
                 style={{ color: colors.priceAndPlusColor, fontSize: 20 }}
               />
             </TouchableOpacity>
@@ -163,7 +162,7 @@ class CartScreen extends Component<Props, State> {
               }}>
               <Icon
                 name="minus"
-                type="Feather"
+
                 style={{ color: colors.priceAndPlusColor, fontSize: 20 }}
               />
             </TouchableOpacity>
@@ -198,7 +197,6 @@ class CartScreen extends Component<Props, State> {
               }}>
               <Icon
                 name="plus"
-                type="MaterialCommunityIcons"
                 style={{ color: 'white' }}
               />
             </TouchableOpacity>
@@ -209,7 +207,7 @@ class CartScreen extends Component<Props, State> {
   }
 
   checkLogin(){
-    if(global.USERTOKEN){
+    if(global.TOKEN){
       this.props.navigation.navigate('CartCheckout');
     }
     else{
@@ -315,6 +313,7 @@ class CartScreen extends Component<Props, State> {
             renderItem={({ item, index }) => {
               return (
                 <View style={styles.itemCart}>
+                  {this.renderPlusButton(item,index)}
                   <View style={{ width: '60%', flexDirection: 'row' }}>
                     <View>
                       <Image style={{ width: 80, height: 80, marginLeft: 10 }} source={{ uri: item.imagePath }} />

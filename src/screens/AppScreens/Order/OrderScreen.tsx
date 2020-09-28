@@ -7,7 +7,7 @@ import {
   Text,
   Alert,
   RefreshControl,
-  TouchableOpacity
+  TouchableOpacity,TouchableHighlight
 } from 'react-native';
 import {
   NavigationScreenProp,
@@ -19,7 +19,7 @@ import { Header } from '../../../components';
 import styles from '../styles';
 import { AvatarItem } from '../../../components';
 import { logoutUserService } from '../../../redux/services/user';
-import { Thumbnail, Icon, Item, Label, Input, Spinner } from 'native-base';
+import { Thumbnail, Item, Label, Input, Spinner } from 'native-base';
 import { fetchImageData, fetchMoreImageData } from '../../../redux/actions/fetch';
 
 import FlashMessage, { showMessage } from 'react-native-flash-message';
@@ -34,8 +34,8 @@ import { IOrderItem } from '../../../redux/models/orderModel';
 import moment from 'moment';
 import { AppState } from '../../../redux/store';
 import { InfoItem } from '../../../components/InfoItem';
-import { TouchableHighlight } from 'react-native-gesture-handler';
 import { stat } from 'fs';
+import Icon from 'react-native-vector-icons/Feather';
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState>;
@@ -240,7 +240,7 @@ class OrderScreen extends Component<Props, State> {
               <TouchableHighlight underlayColor="#E5E5E5" onPress={()=>this.props.navigation.navigate('OrderDetail',{orderId:item.orderId})} style={styles.itemOrder}>
            
               <View>
-                <View style={{ flexDirection: 'row', height: 70, justifyContent: 'space-between' }}>
+                <View style={{ flex:1,flexDirection: 'row', height: 70, justifyContent: 'space-between' }}>
                   <View style={{ paddingVertical: 10, flex: 0.7 }}>
                     <Text
                       style={{
@@ -261,9 +261,9 @@ class OrderScreen extends Component<Props, State> {
                  Açıklama : 19 litre olarak verilecektir.
                </Text> */}
                   </View>
-                  <View style={{ flex: 0.3, flexDirection: 'column' }}>
+                  <View style={{ flex: 0.3, flexDirection: 'column',marginRight:10 }}>
                     <View style={{ flexDirection: 'row' }}>
-                      <Icon type="Feather" name="clock" style={{ fontSize: 15, color: '#e1e1e1', marginTop: 12, marginRight: 5 }}></Icon>
+                      <Icon  name="clock" style={{ fontSize: 15, color: '#e1e1e1', marginTop: 12, marginRight: 5 }}></Icon>
                       <Text
                         style={{
                           fontFamily: fonts.primaryFont,
@@ -288,15 +288,15 @@ class OrderScreen extends Component<Props, State> {
                 </View>
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                   <View style={{ flex: 0.2 }} >
-                    <Text style={{ fontFamily: fonts.primaryFont }}>Fiyat</Text>
+                    <Text style={{ fontFamily: fonts.primaryFont,marginBottom:5 }}>Fiyat</Text>
                     <Text style={{ fontWeight: 'bold', fontFamily: fonts.primaryFont }}>{item.totalPrice} ₺</Text>
                   </View>
                   <View style={{ flex: 0.4 }} >
-                    <Text style={{ fontFamily: fonts.primaryFont }}>Ödeme Durumu</Text>
+                    <Text style={{ fontFamily: fonts.primaryFont ,marginBottom:5}}>Ödeme Durumu</Text>
                         <Text style={{ fontWeight: 'bold', fontFamily: fonts.primaryFont }}>{item.paymentText  ? item.paymentText : "Kapıda Nakit Ödeme"}</Text>
                   </View>
                   <View style={{ flex: 0.4 }} >
-                    <Text style={{ fontFamily: fonts.primaryFont }}>Durum</Text>
+                    <Text style={{ fontFamily: fonts.primaryFont,marginBottom:5 }}>Durum</Text>
                     {this.renderStatus(item.status)}
 
                   </View>

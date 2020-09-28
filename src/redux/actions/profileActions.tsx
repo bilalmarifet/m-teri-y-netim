@@ -7,6 +7,7 @@ import { IGetUserItem } from "../models/userModel";
 import { reset } from './loginAction';
 import { AsyncStorage } from 'react-native'
 import { user } from './getUserAction';
+import { Console } from 'console';
 
 
 
@@ -156,6 +157,7 @@ export function getUserInfo() {
         var userInfo = {} as UserInfo
         console.log(response, "user bilgisi")
         if (response.data.isSuccess) {
+
           if (response.data.result && response.data.result.getCustomerByIdResponseModels && response.data.result.getCustomerByIdResponseModels.length > 0) {
             let data: UserInfo = response.data.result.getCustomerByIdResponseModels[0]
             console.log(response, "response");

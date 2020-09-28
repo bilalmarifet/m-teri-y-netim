@@ -30,6 +30,8 @@ export function loginUserService(username: string, password: string) {
         storeId : BasestoreId
       })
       .then(response => {
+        console.log(response,"loginACC")
+        console.log(response.data.result.customerId.toString())
         if (response.data.isSuccess) {
           console.log(response.data.result);
           let storeOwnerUserId = response.data.result.storeUserId;

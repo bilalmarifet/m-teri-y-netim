@@ -20,7 +20,6 @@ import {AvatarItem} from '../../../components';
 import {logoutUserService} from '../../../redux/services/user';
 import {
   Thumbnail,
-  Icon,
   Item,
   Label,
   Input,
@@ -41,6 +40,7 @@ import {Formik} from 'formik';
 import {getUserInfo, UserInfo} from '../../../redux/actions/profileActions';
 import {logOut} from '../../../redux/actions/loginAction';
 import { AppState } from '../../../redux/store';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState>;
@@ -108,11 +108,10 @@ class CustomerProfileScreen extends Component<Props, State> {
         return(
           <View>
             <View style={{borderBottomWidth:0.5,borderBottomColor:colors.borderColor,paddingBottom:30}}>
-            <Image style={{width:150,height:150,justifyContent:'center',borderRadius:75,marginTop:20,alignSelf:'center'}} source={require("../../../assets/bread.jpg")} />
-            <Text style={{textAlign:'center',marginTop:10,fontFamily:fonts.primaryFont,fontSize:18}}>
+              <Text style={{marginLeft:30,marginTop:10,fontFamily:fonts.primaryFont,fontSize:18}}>
               {user.nameSurname}
             </Text>
-            <Text style={{textAlign:'center',marginTop:10,fontFamily:fonts.primaryFont,fontSize:18}}>
+            <Text style={{marginLeft:30,marginTop:10,fontFamily:fonts.primaryFont,fontSize:18,color:colors.textColorLighter}}>
               {user.email}
             </Text>
             </View>
@@ -124,7 +123,7 @@ class CustomerProfileScreen extends Component<Props, State> {
             <Text style={{alignSelf:'center',marginLeft:10,fontWeight:'600',fontFamily:fonts.primaryFont,fontSize:16}}>Profili Düzenle</Text>
             
               </View>
-              <View style={{backgroundColor:colors.viewBackground,width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="arrow-forward" style={{color:colors.viewBackgroundText,fontSize:12}} /></View>
+              <View style={{backgroundColor:colors.viewBackground,width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="chevron-forward" style={{color:colors.viewBackgroundText,fontSize:12}} /></View>
             </View>
             </TouchableHighlight>
             <TouchableHighlight onPress={()=> this.props.navigation.navigate('CustomerEditPassword')} underlayColor="#AAA"  style={{borderBottomWidth:1,borderBottomColor:colors.borderColor,padding:20,paddingVertical:15,backgroundColor:'white'}}>
@@ -134,7 +133,7 @@ class CustomerProfileScreen extends Component<Props, State> {
             <Text style={{alignSelf:'center',marginLeft:10,fontWeight:'600',fontFamily:fonts.primaryFont,fontSize:16}}>Şifre Değiştir</Text>
             
               </View>
-              <View style={{backgroundColor:colors.viewBackground,width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="arrow-forward" style={{color:colors.viewBackgroundText,fontSize:12}} /></View>
+              <View style={{backgroundColor:colors.viewBackground,width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="chevron-forward" style={{color:colors.viewBackgroundText,fontSize:12}} /></View>
             </View>
             </TouchableHighlight>
             <TouchableHighlight onPress={()=> console.log()} underlayColor="#AAA"  style={{borderBottomWidth:1,borderBottomColor:colors.borderColor,padding:20,paddingVertical:15,backgroundColor:'white'}}>
@@ -144,7 +143,7 @@ class CustomerProfileScreen extends Component<Props, State> {
             <Text style={{alignSelf:'center',marginLeft:10,fontWeight:'600',fontFamily:fonts.primaryFont,fontSize:16}}>Gizlilik Sözleşmesi</Text>
             
               </View>
-              <View style={{backgroundColor:colors.viewBackground,width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="arrow-forward" style={{color:colors.viewBackgroundText,fontSize:12}} /></View>
+              <View style={{backgroundColor:colors.viewBackground,width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="chevron-forward" style={{color:colors.viewBackgroundText,fontSize:12}} /></View>
             </View>
             </TouchableHighlight>
             <TouchableHighlight onPress={()=> this.props.logOut()} underlayColor="#AAA"  style={{borderBottomWidth:1,borderBottomColor:colors.borderColor,padding:20,paddingVertical:15,backgroundColor:'white'}}>
@@ -154,7 +153,7 @@ class CustomerProfileScreen extends Component<Props, State> {
             <Text style={{alignSelf:'center',marginLeft:10,fontWeight:'600',fontFamily:fonts.primaryFont,fontSize:16}}>Çıkış yap</Text>
             
               </View>
-              <View style={{backgroundColor:colors.viewBackground,width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="arrow-forward" style={{color:colors.viewBackgroundText,fontSize:12}} /></View>
+              <View style={{backgroundColor:colors.viewBackground,width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="chevron-forward" style={{color:colors.viewBackgroundText,fontSize:12}} /></View>
             </View>
             </TouchableHighlight>
           </View>
@@ -172,7 +171,7 @@ class CustomerProfileScreen extends Component<Props, State> {
             <Text style={{alignSelf:'center',marginLeft:10,fontWeight:'600',fontFamily:fonts.primaryFont,fontSize:16}}>Giriş Yap</Text>
             
               </View>
-              <View style={{backgroundColor:colors.viewBackground,width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="arrow-forward" style={{color:colors.viewBackgroundText,fontSize:12}} /></View>
+              <View style={{backgroundColor:colors.viewBackground,width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="chevron-forward" style={{color:colors.viewBackgroundText,fontSize:12}} /></View>
             </View>
             </TouchableHighlight>
             <TouchableHighlight onPress={()=> this.props.navigation.navigate('SignUp')} underlayColor="#AAA"  style={{borderBottomWidth:1,borderBottomColor:colors.borderColor,padding:20,paddingVertical:15,backgroundColor:'white'}}>
@@ -182,7 +181,7 @@ class CustomerProfileScreen extends Component<Props, State> {
             <Text style={{alignSelf:'center',marginLeft:10,fontWeight:'600',fontFamily:fonts.primaryFont,fontSize:16}}>Üye Ol</Text>
             
               </View>
-              <View style={{backgroundColor:colors.viewBackground,width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="arrow-forward" style={{color:colors.viewBackgroundText,fontSize:12}} /></View>
+              <View style={{backgroundColor:colors.viewBackground,width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="chevron-forward" style={{color:colors.viewBackgroundText,fontSize:12}} /></View>
             </View>
             </TouchableHighlight>
       </View>

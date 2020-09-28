@@ -10,7 +10,7 @@ import { Header } from '../../../components';
 import styles from '../styles';
 import { AvatarItem } from '../../../components';
 import { logoutUserService } from '../../../redux/services/user';
-import { Thumbnail, Icon, Card, Spinner, Radio } from 'native-base';
+import { Thumbnail, Card, Spinner, Radio } from 'native-base';
 import { fetchImageData, fetchMoreImageData } from '../../../redux/actions/fetch';
 import { ScrollView } from 'react-native-gesture-handler';
 import { showMessage } from 'react-native-flash-message';
@@ -26,6 +26,7 @@ import { AddOrderMultiple, changePaymentMehtod, getPaymentMethod, PaymentMethod 
 import { AppState } from '../../../redux/store';
 import { UserInfo } from '../../../redux/actions/profileActions';
 import { ButtonGradient } from '../../../components/ButtonGradient';
+import Icon from 'react-native-vector-icons/Feather';
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState>;
@@ -56,6 +57,9 @@ class CartScreen extends Component<Props, State> {
 
   }
 
+  componentDidMount(){
+    this.props.getPaymentMethod()
+  }
 
   static navigationOptions = ({ navigation }) => {
     return {
@@ -93,6 +97,7 @@ class CartScreen extends Component<Props, State> {
   }
 
   handleCartAction(): void {
+    let selectedPaymentMethod =  this.props.paymentMethods ? this.props.paymentMethods.length > 0 ? this.props.selectedPaymentMethod ? this.props.paymentMethods[this.props.selectedPaymentMethod].paymentType : 0 : 0 : 0
     var products: product[] = [];
     this.props.productList.map(element => {
       var product: product = {
@@ -109,7 +114,7 @@ class CartScreen extends Component<Props, State> {
       products,
       false,
       global.CUSTOMER_ID,
-      this.props.paymentMethods[this.props.selectedPaymentMethod].paymentType,
+      selectedPaymentMethod,
       1,
       global.STORE_OWNER_USER_ID,
       this.props.userInfo
@@ -120,6 +125,7 @@ class CartScreen extends Component<Props, State> {
     );
   }
   renderPaymentMethod() {
+    console.log(global.USERID)
     if(this.props.loadingForGetPaymentMethods) {
       return (
         <View>
@@ -130,7 +136,7 @@ class CartScreen extends Component<Props, State> {
     else if(this.props.paymentMethods && this.props.paymentMethods.length > 0) {
       return(
         <View style={{padding:20}}>
-          <Text style={{fontFamily:fonts.primaryFont,fontWeight:"600"}}>Ödeme Yönetemi </Text>
+          <Text style={{fontFamily:fonts.primaryFont,fontWeight:"600"}}>Ödeme Yöntemi </Text>
 
                         
           {this.props.paymentMethods.map((element,index)=> {
@@ -140,8 +146,7 @@ class CartScreen extends Component<Props, State> {
 
               <Text style={{fontFamily:fonts.primaryFont}}>{element.paymentTypeName}</Text>
 
-
-              <Radio style={{marginRight:15}} selected={index === this.props.selectedPaymentMethod} />
+              {index === this.props.selectedPaymentMethod && <Icon  name="check" style={{marginRight:15,fontSize:18,color:colors.IconColor}} />}
 
           </View>
           </TouchableOpacity>
@@ -178,7 +183,7 @@ class CartScreen extends Component<Props, State> {
       </View>
       {this.renderPaymentMethod()}
       
-      <ButtonGradient loading={this.props.isLoadingAddOrder} onPress={()=>this.handleCartAction()} linearGredientStyle={{borderRadius:0,height:60}} style={{position:'absolute',bottom:0,left:0,right:0,height:60,borderRadius:0}} text="Alışverişi Tamamla" />
+      <ButtonGradient loading={this.props.isLoadingAddOrder || this.props.loadingForGetPaymentMethods} onPress={()=>this.handleCartAction()} linearGredientStyle={{borderRadius:0,height:60}} style={{position:'absolute',bottom:0,left:0,right:0,height:60,borderRadius:0}} text="Alışverişi Tamamla" />
      </View>
    )
   }

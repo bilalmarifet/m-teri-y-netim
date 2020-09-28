@@ -1,2 +1,2 @@
-export const BasestoreId = 2260;
-export const BaseStoreOwnerUserId = 2395;
+export const BasestoreId = 2263;
+export const BaseStoreOwnerUserId = 2416;

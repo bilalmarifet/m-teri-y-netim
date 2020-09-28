@@ -19,7 +19,7 @@ import {Header} from '../../../components';
 import styles from '../styles';
 import {AvatarItem} from '../../../components';
 import {logoutUserService} from '../../../redux/services/user';
-import {Thumbnail, Icon, Item, Label, Input, Spinner} from 'native-base';
+import {Thumbnail, Item, Label, Input, Spinner} from 'native-base';
 import {fetchImageData, fetchMoreImageData} from '../../../redux/actions/fetch';
 
 import FlashMessage, {showMessage} from 'react-native-flash-message';
@@ -37,6 +37,7 @@ import { InfoItem } from '../../../components/InfoItem';
 import { ScrollView } from 'react-native-gesture-handler';
 import { getCustomerOrderDetail, orderDetail, orderListItem, OrderStatus } from '../../../redux/actions/orderDetailActions';
 import { stat } from 'fs';
+import Icon from 'react-native-vector-icons/Feather';
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState>;
@@ -102,7 +103,7 @@ class OrderDetailScreen extends Component<Props, State> {
       return (
         <View><Text style={{fontFamily:fonts.primaryFont,fontWeight:"600",fontSize:16,marginBottom:15}}>Sipariş Durumu</Text>
         <View style={{flexDirection:'row',alignItems:'center',marginTop:10}}> 
-        <Icon type="AntDesign" name="check" style={{fontSize:12,color:colors.IconColor,marginTop:2}} />
+        <Icon  name="check" style={{fontSize:12,color:colors.IconColor,marginTop:2}} />
         <Text style={{marginLeft:10}}>Siparişiniz hazırlanıyor.</Text></View>
         </View>
         )
@@ -110,7 +111,7 @@ class OrderDetailScreen extends Component<Props, State> {
       return (
           <View><Text style={{fontFamily:fonts.primaryFont,fontWeight:"600",fontSize:16,marginBottom:15}}>Sipariş Durumu</Text>
         <View style={{flexDirection:'row',alignItems:'center',marginTop:10}}> 
-        <Icon type="AntDesign" name="check" style={{fontSize:12,color:colors.IconColor,marginTop:2}} />
+        <Icon  name="check" style={{fontSize:12,color:colors.IconColor,marginTop:2}} />
         <Text style={{marginLeft:10}}>Siparişiniz hazırlanıyor.</Text></View>
         </View>
       )
@@ -118,10 +119,10 @@ class OrderDetailScreen extends Component<Props, State> {
         return (
           <View><Text style={{fontFamily:fonts.primaryFont,fontWeight:"600",fontSize:16,marginBottom:15}}>Sipariş Durumu</Text>
           <View style={{flexDirection:'row',alignItems:'center',marginTop:10}}> 
-          <Icon type="AntDesign" name="check" style={{fontSize:12,color:colors.IconColor,marginTop:2}} />
+          <Icon  name="check" style={{fontSize:12,color:colors.IconColor,marginTop:2}} />
           <Text style={{marginLeft:10}}>Siparişiniz hazırlanıyor.</Text></View>
           <View style={{flexDirection:'row',alignItems:'center',marginTop:10}}> 
-          <Icon type="AntDesign" name="check" style={{fontSize:12,color:colors.IconColor,marginTop:2}} />
+          <Icon  name="check" style={{fontSize:12,color:colors.IconColor,marginTop:2}} />
           <Text style={{marginLeft:10}}>Siparişiniz yolda.</Text></View>
           <View style={{flexDirection:'row',alignItems:'center',marginTop:10}}> 
           </View>
@@ -131,13 +132,13 @@ class OrderDetailScreen extends Component<Props, State> {
         return (
           <View><Text style={{fontFamily:fonts.primaryFont,fontWeight:"600",fontSize:16,marginBottom:15}}>Sipariş Durumu</Text>
           <View style={{flexDirection:'row',alignItems:'center',marginTop:10}}> 
-          <Icon type="AntDesign" name="check" style={{fontSize:12,color:colors.IconColor,marginTop:2}} />
+          <Icon  name="check" style={{fontSize:12,color:colors.IconColor,marginTop:2}} />
           <Text style={{marginLeft:10}}>Siparişiniz hazırlanıyor.</Text></View>
           <View style={{flexDirection:'row',alignItems:'center',marginTop:10}}> 
-          <Icon type="AntDesign" name="check" style={{fontSize:12,color:colors.IconColor,marginTop:2}} />
+          <Icon  name="check" style={{fontSize:12,color:colors.IconColor,marginTop:2}} />
           <Text style={{marginLeft:10}}>Siparişiniz yolda.</Text></View>
           <View style={{flexDirection:'row',alignItems:'center',marginTop:10}}> 
-          <Icon type="AntDesign" name="check" style={{fontSize:12,color:colors.IconColor,marginTop:2}} />
+          <Icon  name="check" style={{fontSize:12,color:colors.IconColor,marginTop:2}} />
           <Text style={{marginLeft:10}}>Siparişiniz tamamlandı.</Text></View></View>
  
         )
@@ -160,7 +161,7 @@ class OrderDetailScreen extends Component<Props, State> {
                     <View style={{padding:20,backgroundColor:'white',borderBottomColor:colors.borderColor,borderBottomWidth:1}}>
                     <View style={{flexDirection:'row',justifyContent:'space-between'}}>
                     <View style={{flexDirection:'row'}}>
-                        <Icon style={{fontSize:24}} type="MaterialCommunityIcons" name="calendar-today" />
+                        <Icon style={{fontSize:24}}  name="clock" />
         <Text style={{fontFamily:fonts.primaryFont,marginLeft:10,marginTop:2}}>{order.createdDate}</Text>
                     </View>
                     
@@ -182,7 +183,7 @@ class OrderDetailScreen extends Component<Props, State> {
                     </View>
                     <View style={{padding:20,borderBottomColor:colors.borderColor,borderBottomWidth:1}}>
                     <Text style={{fontFamily:fonts.primaryFont,fontWeight:"600",fontSize:16}}>Sipariş Detayı</Text>
-                    {order.orderProducts.map(element => {
+                    {order.orderProducts && order.orderProducts.map(element => {
                       return(
                         <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:10}}>
                     <Text style={{fontFamily:fonts.primaryFont}}>{element.productName}</Text>

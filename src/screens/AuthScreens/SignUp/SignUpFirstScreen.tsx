@@ -18,7 +18,7 @@ import {
   Form,
   Item,
   Label,
-  Icon,
+
   Spinner,
 } from 'native-base';
 

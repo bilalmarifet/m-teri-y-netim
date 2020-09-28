@@ -181,6 +181,7 @@ export function changePaymentMehtod(index: number) {
 
 export function getPaymentMethod() {
   return(dispatch:any) => {
+    console.log("girdi")
     dispatch(isLoadingPaymentMethods(true))
     AsyncStorage.multiGet(['userToken', 'userId'])
       .then(res => {
@@ -198,6 +199,7 @@ export function getPaymentMethod() {
             },
           )
           .then(response => {
+            console.log(response)
             var paymentMethods: PaymentMethod[] = []
             if (response.data.isSuccess) {
                 response.data.result.map((element:PaymentMethod) => {

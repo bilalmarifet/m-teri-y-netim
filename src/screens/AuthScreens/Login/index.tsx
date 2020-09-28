@@ -9,7 +9,7 @@ import {
 import { NavigationScreenProp, NavigationState } from "react-navigation";
 import { Formik } from "formik";
 import * as Yup from "yup";
-// import Icon from "react-native-vector-icons/SimpleLineIcons";
+
 import { loginUserService } from "../../../redux/actions/loginAction";
 import { Input, Button } from "../../../components";
 import styles from "./styles";
@@ -17,9 +17,10 @@ import { connect } from "react-redux";
 import { AppState } from "../../../redux/store";
 import { colors } from "../../../constants";
 import { SuccessButton } from "../../../components/SuccessButton";
-import { Icon } from "native-base";
+
 import { TouchableHighlight, TouchableOpacity } from "react-native";
 import NavigationService from "../../../services/NavigationService";
+import Icon from 'react-native-vector-icons/Feather';
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState>;
@@ -54,9 +55,9 @@ class Login extends Component<Props, {}> {
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity style={{position:'absolute', left:10, top:30}}  onPress={()=>this.props.navigation.navigate("Products")}>
+        <TouchableOpacity style={{position:'absolute', left:10, top:50}}  onPress={()=>this.props.navigation.navigate("Products")}>
 
-        <Icon name="x" type = "Feather" ></Icon>
+        <Icon style={{fontSize:24}} name="x" ></Icon>  
 
         </TouchableOpacity>
 

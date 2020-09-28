@@ -6,7 +6,7 @@ import { Header } from "../../../components";
 import styles from "../styles";
 import { AvatarItem } from "../../../components";
 import { logoutUserService } from "../../../redux/services/user";
-import {Thumbnail,Icon, Spinner} from 'native-base'
+import {Thumbnail, Spinner} from 'native-base'
 import {
   fetchImageData,
   fetchMoreImageData
@@ -20,6 +20,7 @@ import { IProductItem } from "../../../redux/models/productModel";
 import { GetProductsForCustomer, IProductItemCustomer, IncOrDecItemFromCart } from "../../../redux/actionsCustomer/ProductAction";
 import { TotalPriceText } from "../../../components/TotalPriceText";
 import { getUserInfo } from "../../../redux/actions/profileActions";
+import Icon from "react-native-vector-icons/Feather";
 
 
 
@@ -132,17 +133,17 @@ shadowOffset: {
 shadowOpacity: 0.29,
 shadowRadius: 4.65,
 
-elevation: 7, }}>
+elevation: 3, }}>
         <TouchableOpacity style={styles.IncOrDecButton} onPress={()=> {
             this.props.IncOrDecItemFromCart(this.props.productList,item.productId,true);
            this.props.navigation.setParams({cart: cart + item.price});
-            this.setState({page:this.state.page + 1})}}><Icon name="plus"            type="Feather"
+            this.setState({page:this.state.page + 1})}}><Icon name="plus" 
             style={{ color:colors.priceAndPlusColor,fontSize:20 }} /></TouchableOpacity>
           <Text style={{alignSelf:'center', fontWeight:'bold', paddingHorizontal:5, color:colors.textColor}}>{item.count}</Text>
           <TouchableOpacity style={styles.IncOrDecButton} onPress={()=> {
             this.props.IncOrDecItemFromCart(this.props.productList,item.productId,false);
             this.props.navigation.setParams({cart: cart - item.price});
-            this.setState({change : !this.state.change})}}><Icon name="minus"             type="Feather"
+            this.setState({change : !this.state.change})}}><Icon name="minus"
             style={{ color:colors.priceAndPlusColor,fontSize:20 }} /></TouchableOpacity>
           
           
@@ -154,25 +155,28 @@ elevation: 7, }}>
     else {
       let cart = this.props.navigation.getParam('cart') ?? 0
       return (
-<View style={{position:'absolute', paddingLeft:5, paddingRight:5,paddingVertical:5, borderRadius:15, right:10, bottom:10, zIndex:1000,flexDirection: 'row', shadowColor: "#000",
+        <View style={{backgroundColor:'#F1F1F1',position:'absolute', paddingLeft:5, paddingRight:5,paddingVertical:5, borderRadius:15, right:10, bottom:10}}>
+        {this.props.loadingIncDec && this.props.loadingIndex === item.productId &&  <Spinner style={{position:"absolute",zIndex:1,backgroundColor:colors.borderColor,opacity:.8,width:'100%',height:'100%'}} color={colors.headerColor} />} 
+
+        <View style={{  flexDirection: 'row', shadowColor: "#000",
 shadowOffset: {
-	width: 0,
-	height: 3,
+ width: 0,
+ height: 3,
 },
 shadowOpacity: 0.29,
 shadowRadius: 4.65,
 
-elevation: 7, }}>
+elevation: 3, }}>
 {this.props.loadingIncDec && this.props.loadingIndex === item.productId &&  <Spinner style={{zIndex:1,backgroundColor:colors.borderColor,opacity:.8}} size="small" color={colors.headerColor} />} 
 <TouchableOpacity style={styles.IncOrDecButton} onPress={()=> {
     this.props.IncOrDecItemFromCart(this.props.productList,item.productId,true)
    this.props.navigation.setParams({cart: cart + item.price});
    this.setState({change : !this.state.change})}}>
 
-<Icon name="plus" type="Feather"
+<Icon name="plus"
                 style={{ color:colors.priceAndPlusColor,fontSize:20 }}  /></TouchableOpacity>
 </View>
-
+</View>
      )
     }
   }
