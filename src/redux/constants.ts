@@ -29,6 +29,9 @@ export const WATER_ADD_CASH = WATER_BASE_URL_NEW + '/api/Cash';
 
 export const WATER_GET_PRODUCT =
   WATER_BASE_URL_NEW + '/api/Product/GetByUserId';
+
+  export const WATER_GET_CAMPAIGN=  WATER_BASE_URL_NEW + '/api/Campaign/GetByStoreId';
+
 export const WATER_EDIT_PRODUCT = WATER_BASE_URL_NEW + '/api/Product/Update';
 export const WATER_GET_PRODUCT_BY_ID =
   WATER_BASE_URL_NEW + '/api/Product/GetProductById';

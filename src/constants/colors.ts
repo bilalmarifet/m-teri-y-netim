@@ -32,5 +32,6 @@ export const colors = {
 // };
 
 export const fonts = {
-  primaryFont: 'Roboto',
+  primaryFont: 'OpenSans-Regular',
+  h3Font  : 'Ubuntu-Regular'
 };

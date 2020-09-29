@@ -30,6 +30,28 @@ const styles = StyleSheet.create({
     shadowRadius: 5.46,
     elevation: 5,
   },
+  itemCampaign: {
+    width:150,
+    height:180,
+    marginHorizontal: 10,
+    borderWidth: 0,
+    paddingLeft: 10,
+    borderRadius: 10,
+   paddingBottom:30,
+    flexDirection: 'column',
+    marginBottom: 10,
+    borderColor: colors.borderColor,
+    backgroundColor: colors.containerBgInner,
+    shadowColor: '#000',
+    position:'relative',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.32,
+    shadowRadius: 5.46,
+    elevation: 5,
+  },
   itemCart: {
 
     borderWidth: 0,
@@ -61,7 +83,10 @@ paddingVertical:10,
     marginBottom:10
   },
   IncOrDecButton:{
-    borderColor: '#e8e8e8', borderStyle: 'solid', borderWidth: 1, justifyContent: 'center', width: 24,
+    borderColor: '#e8e8e8',
+     borderStyle: 'solid', 
+    borderWidth: 1,
+     justifyContent: 'center', width: 24,
                 height: 24, borderRadius: 12,
                 backgroundColor: '#ffff',
                 paddingTop:1,paddingLeft:1

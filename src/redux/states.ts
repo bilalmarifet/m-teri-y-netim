@@ -14,6 +14,7 @@ import { IProduct } from "./actions/productEditAction";
 import { Customer } from "./actions/customerEditAction";
 import { productCountList } from "./actions/reportAction";
 import { lastOrderInterface, PaymentMethod } from "./actions/addOrderAction";
+import { ICampaignItem } from "./actionsCustomer/ProductAction";
 
 export interface State {
     data: any[];
@@ -113,6 +114,7 @@ export interface State {
 
   export interface ProductState{
     products:IProductItem[];
+    campaings : ICampaignItem[];
     isProductLoading :boolean | null;
 }
 
@@ -143,6 +145,7 @@ export interface AddOrder
   export interface CustomerPriceProductState{
     products:ICustomerPriceProductItem[];
     isProductLoading :boolean;
+
 }
 
 export interface AddCustomerPrice
