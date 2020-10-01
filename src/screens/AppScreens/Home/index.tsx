@@ -207,7 +207,7 @@ class CustomerHomeScreen extends Component<Props, State> {
     if (item.count > 0) {
       let cart = this.props.navigation.getParam('cart') ?? 0
       return (
-        <View style={{  position: 'absolute', top:0, right:-5, zIndex:10, paddingVertical: 5, paddingLeft: 5, paddingRight:5 }}>
+        <View style={{ position: 'absolute', top: 0, right: 0, zIndex: 10, paddingVertical: 5, paddingLeft: 5, paddingRight: 5 }}>
           {this.props.loadingIncDec && this.props.loadingIndex === item.productId && <Spinner style={{ position: "absolute", backgroundColor: colors.borderColor, opacity: .8, width: '100%', height: '100%' }} color={colors.headerColor} />}
 
           <View >
@@ -234,17 +234,17 @@ class CustomerHomeScreen extends Component<Props, State> {
     else {
       let cart = this.props.navigation.getParam('cart') ?? 0
       return (
-        <View style={{  position: 'absolute', top: 0, zIndex:10, paddingVertical: 5, paddingLeft: 5, paddingRight:5, right:-5}}>
+        <View style={{ position: 'absolute', top: 0, zIndex: 10, paddingVertical: 5, paddingLeft: 5, paddingRight: 5, right: 0 }}>
           {this.props.loadingIncDec && this.props.loadingIndex === item.productId && <Spinner style={{ position: "absolute", zIndex: 1, backgroundColor: colors.borderColor, opacity: .8, width: '100%', height: '100%' }} color={colors.headerColor} />}
 
-          <View style={{zIndex:100}} >
+          <View style={{ zIndex: 100 }} >
             {this.props.loadingIncDec && this.props.loadingIndex === item.productId && <Spinner style={{ zIndex: 1, backgroundColor: colors.borderColor, opacity: .8 }} size="small" color={colors.headerColor} />}
             <TouchableOpacity style={styles.IncOrDecButton} onPress={() => {
               this.props.IncOrDecItemFromCart(this.props.productList, item.productId, true)
               this.props.navigation.setParams({ cart: cart + item.price });
               this.setState({ change: !this.state.change })
             }}>
-        
+
 
               <Icon name="plus"
                 style={{ color: colors.priceAndPlusColor, fontSize: 20 }} /></TouchableOpacity>
@@ -254,42 +254,68 @@ class CustomerHomeScreen extends Component<Props, State> {
     }
   }
 
-  renderProductItem(item:IProductItemCustomer, index:number){
+  renderProductItem(item: IProductItemCustomer, index: number) {
     return (
-      <View style={{ marginBottom: 10}}>
-      <View style={styles.itemCampaign}>
-        <View style={{ paddingVertical: 10, justifyContent: 'center', alignContent: 'center', alignSelf: 'center' }}>
-          <Image
-            style={{ width: Dimensions.get('window').width / 4.5, height: Dimensions.get('window').width / 5 }}
-            source={{ uri: item.imagePath }}
-          />
-        </View>
+      <View style={{ marginBottom: 10 }}>
+        <View style={styles.itemCampaign}>
+          <View style={{ paddingVertical: 10, justifyContent: 'center', alignContent: 'center', alignSelf: 'center' }}>
+            <Image
+              style={{ width: Dimensions.get('window').width / 4.5, height: Dimensions.get('window').width / 5 }}
+              source={{ uri: item.imagePath }}
+            />
+          </View>
 
 
-        {this.renderPlusButtonCampaign(item, index)}
+          {this.renderPlusButtonCampaign(item, index)}
 
-        <Text style={{ fontFamily: 'roboto', color: colors.textColor, width: '90%' }}>
-          {item.productName}
-        </Text>
-        <Text style={{ fontFamily: fonts.primaryFont, marginTop: 5, color: colors.priceAndPlusColor, fontWeight: 'bold' }}>
-          {item.price} TL
+          <Text style={{ fontFamily: 'roboto', color: colors.textColor, width: '90%' }}>
+            {item.productName}
+          </Text>
+          <Text style={{ fontFamily: fonts.primaryFont, marginTop: 5, color: colors.priceAndPlusColor, fontWeight: 'bold' }}>
+            {item.price} TL
       </Text>
-      </View>
+        </View>
 
       </View>
 
     );
   }
 
-renderCampaignProducts(){
-  
-  let count:number = 0 ;
-  this.props.productList.forEach((item:IProductItemCustomer)=>{
-    
-    this.renderProductItem(item, count);
-    count++;
-  });
-}
+  renderCampaignProducts() {
+
+    let count: number = 0;
+    this.props.productList.forEach((item: IProductItemCustomer) => {
+
+      this.renderProductItem(item, count);
+      count++;
+    });
+  }
+  renderCampaignProductsList() {
+    let campaignProductList = this.props.productList.filter(e => e.isCampaign === true)
+    if (campaignProductList && campaignProductList.length > 0) {
+
+      return (
+        <View style={{
+          marginTop: 20, backgroundColor: '#fff', flex: 1, shadowOffset: {
+            width: 0,
+            height: 2,
+          },
+          shadowOpacity: 0.32,
+          shadowRadius: 5.46,
+          elevation: 1,
+        }}>
+
+          <Text style={{ paddingLeft: 10, marginTop: 5, fontFamily: fonts.h3Font, color: '#555', fontSize: 16 }}>Kampanyalı Ürünler</Text>
+          <ScrollView horizontal={true} style={{ paddingTop: 10 }} showsHorizontalScrollIndicator={false}>
+            {campaignProductList.map((item: IProductItemCustomer, index) => {
+              return this.renderProductItem(item, index)
+
+            })}
+          </ScrollView>
+        </View>
+      )
+    }
+  }
 
   render() {
     const { navigation, imageData, fetchMoreImageData, loading, campaings } = this.props;
@@ -306,25 +332,9 @@ renderCampaignProducts(){
               currentImageEmitter={index => console.warn(`current pos is: ${index}`)}
             />
           }
-          <View style={{
-            marginTop: 20, backgroundColor: '#fff',  flex: 1, shadowOffset: {
-              width: 0,
-              height: 2,
-            },
-            shadowOpacity: 0.32,
-            shadowRadius: 5.46,
-            elevation: 1,
-          }}>
-
-            <Text style={{ paddingLeft: 10, marginTop: 5, fontFamily: fonts.h3Font, color: '#555', fontSize: 16 }}>Kampanyalı Ürünler</Text>
-            <ScrollView horizontal={true} style={{marginTop:10}} showsHorizontalScrollIndicator={false}>
-            {this.props.productList.map((item:IProductItemCustomer, index) => {
-        return  this.renderProductItem(item, index)
-      })}
-            </ScrollView>
-          </View>
+          {this.renderCampaignProductsList()}
           <View style={{ marginTop: 10 }}>
-            <Text style={{ paddingLeft: 10, fontFamily: fonts.h3Font, color: '#555', fontWeight:'200', fontSize: 18 }}>Tüm Ürünlerimiz</Text>
+            <Text style={{ paddingLeft: 10, fontFamily: fonts.h3Font, color: '#555', fontWeight: '200', fontSize: 18 }}>Tüm Ürünlerimiz</Text>
           </View>
 
           {this.renderContent()}
@@ -343,7 +353,7 @@ renderCampaignProducts(){
 
         <FlatList
           contentContainerStyle={{ paddingTop: 5 }}
-          data={this.props.productList}
+          data={this.props.productList.filter(e => e.isCampaign !== true)}
 
           keyExtractor={item => item.productId}
           renderItem={({ item, index }) => {

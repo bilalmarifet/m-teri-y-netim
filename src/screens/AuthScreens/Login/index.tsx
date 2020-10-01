@@ -22,11 +22,15 @@ import { TouchableHighlight, TouchableOpacity } from "react-native";
 import NavigationService from "../../../services/NavigationService";
 import Icon from 'react-native-vector-icons/Feather';
 import { BaseImage } from "../../../services/AppConfig";
+import { District, getDistrict } from "../../../redux/actions/DistrictAction";
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState>;
   loginUserService: (username: string, password: string) => void;
   isLoading: boolean;
+  getDistrict :() => void;
+  isLoadingDistrict : boolean;
+  districtList: District[];
 }
 interface userData {
   username: string;
@@ -44,15 +48,27 @@ const loginSchema = Yup.object().shape({
     .required("Şifre girilmesi zorunludur.")
 });
 
+
 class Login extends Component<Props, {}> {
   handleLogin = (values: userData) => {
     const { navigation } = this.props;
     this.props.loginUserService(values.username, values.password)
   };
+  componentDidMount() {
+      this.props.getDistrict()
+  }
 
   static navigationOptions = ({}) => {
     header: null
    };
+   gotoDistrictOrNot() {
+     if(this.props.districtList && this.props.districtList.length > 0) {
+      this.props.navigation.navigate("DistrictSelection")
+     }
+     else {
+      this.props.navigation.navigate("SignUp")
+     }
+   }
   render() {
     return (
       <View style={styles.container}>
@@ -107,7 +123,7 @@ class Login extends Component<Props, {}> {
                         </Text>
               }
                       <SuccessButton loading={this.props.isLoading} text="Giriş yap" onPress={props.handleSubmit} />
-                      <Button text="Üye ol" loading={false} style={{backgroundColor:colors.IconColor,paddingHorizontal: 10,  flexDirection:'row', justifyContent:'space-between'}} textStyle={{color:'white'}} onPress={()=> this.props.navigation.navigate("SignUp")} />
+                      <Button text="Üye ol" loading={this.props.isLoadingDistrict} style={{backgroundColor:colors.IconColor,paddingHorizontal: 10,  flexDirection:'row', justifyContent:'space-between'}} textStyle={{color:'white'}} onPress={()=> this.gotoDistrictOrNot()} />
                     </View>
                   </View>
                 );
@@ -126,12 +142,16 @@ const mapStateToProps = (state: AppState) => ({
   isSucceed: state.login.isSucceed,
   isLoading: state.login.isLoading,
   loginErrorMessage: state.login.loginErrorMessage,
+  isLoadingDistrict : state.District.loading,
+  districtList: state.District.DistrictList
 });
 
 function bindToAction(dispatch: any) {
   return {
     loginUserService: (username: string, password: string) =>
       dispatch(loginUserService(username, password)),
+      getDistrict :() =>
+      dispatch(getDistrict())
   };
 }
 

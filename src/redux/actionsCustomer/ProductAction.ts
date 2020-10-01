@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { WATER_GET_CAMPAIGN, WATER_GET_PRODUCT } from './../constants';
+import { WATER_GET_CAMPAIGN, WATER_GET_PRODUCT, WATER_GET_PRODUCTS_FOR_CUSTOMER } from './../constants';
 import { Dispatch } from 'react';
 import { PRODUCT_GET, PRODUCT_LOADING } from './../types';
 import { Action } from '../states';
@@ -17,6 +17,10 @@ import { Item } from 'native-base';
 
 export interface IProductItemCustomer extends IProductItem {
   count: number;
+  active: boolean;
+  isCampaign: boolean | null
+  newPrice: number;
+  productCount: number;
 }
 
 export interface ICampaignItem {
@@ -65,6 +69,7 @@ export function GetCampaignHome() {
                     name: campaign.name,
                     photoPath: campaign.photoPath,
                     storeId: campaign.storeId
+                    
                   }
                   campaignModel.push(campaignItem);
                 },
@@ -86,7 +91,7 @@ export function GetCampaignHome() {
       });
   };
 }
-export function GetProductsForCustomer(productsList?: IProductItemCustomer[]) {
+export function GetProductsForCustomer(productsList?: IProductItemCustomer[] = []) {
   return (dispatch: Dispatch<Action>) => {
     dispatch(loading(true));
     console.log("owner id", global.STORE_OWNER_USER_ID);
@@ -103,14 +108,13 @@ export function GetProductsForCustomer(productsList?: IProductItemCustomer[]) {
 
         axios
           .get(
-            WATER_GET_PRODUCT + '?userId=' + global.STORE_OWNER_USER_ID,
+            WATER_GET_PRODUCTS_FOR_CUSTOMER + `?customerId=${global.CUSTOMER_ID}&storeId=${BasestoreId}`,
 
             { headers: headers },
           )
           .then(response => {
             if (response.data.isSuccess) {
               var productModel: IProductItemCustomer[] = [];
-              console.log(response.data.result.homeProductItemModels)
               response.data.result.homeProductItemModels.forEach(
                 (product: any) => {
                   let index = productsList.findIndex(
@@ -124,7 +128,11 @@ export function GetProductsForCustomer(productsList?: IProductItemCustomer[]) {
                     price: product.price,
                     productStatus: product.productStatus,
                     count: count,
-                    imagePath: product.imagePath
+                    imagePath: product.imagePath,
+                    active: product.active,   
+                    newPrice: product.newPrice,
+                    productCount: product.productCount,
+                    isCampaign: product.isCampaign
                   };
                   productModel.push(productItem);
                 },

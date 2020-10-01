@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   },
   itemCampaign: {
     width:150,
-    height:180,
+    height:200,
     marginHorizontal: 10,
     borderWidth: 0,
     paddingLeft: 10,
@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
    paddingBottom:30,
     flexDirection: 'column',
     marginBottom: 10,
+    marginTop:5,
     borderColor: colors.borderColor,
     backgroundColor: colors.containerBgInner,
     shadowColor: '#000',

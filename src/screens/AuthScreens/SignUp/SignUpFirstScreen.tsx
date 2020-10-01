@@ -75,6 +75,7 @@ const loginSchema = Yup.object().shape({
 
 interface State {
   userType: number;
+  DistrictId: number;
 }
 class SignUpFirstScreen extends Component<Props, State> {
   static navigationOptions = (screenProps: NavigationScreenProps) => {
@@ -91,6 +92,7 @@ class SignUpFirstScreen extends Component<Props, State> {
     super(props);
     this.state = {
       userType: this.props.navigation.getParam('userType'),
+      DistrictId : this.props.navigation.getParam('DistrictId')
     };
   }
 
@@ -98,8 +100,6 @@ class SignUpFirstScreen extends Component<Props, State> {
 
   handleLogin = (values: userDataFirst) => {
     const {isSucceed} = this.props;
-    // this.props.navigation.setParams({NameSurname : values.NameSurname , email : values.email,password : values.password})
-
     this.props.controlEmail(values.NameSurname, values.password, values.email);
   };
 
@@ -107,6 +107,7 @@ class SignUpFirstScreen extends Component<Props, State> {
     if (this.props.isSucceed) {
       this.props.navigation.navigate('SignUpSecond', {
         userType: this.state.userType,
+        DistrictId: this.state.DistrictId
       });
     }
     return (

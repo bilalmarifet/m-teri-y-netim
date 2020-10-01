@@ -29,6 +29,7 @@ import CustomerEditPasswordScreen from "../screens/AppScreens/Profile/CustomerEd
 import OrderDetailScreen from "../screens/AppScreens/Order/OrderDetailScreen";
 import CartCheckoutScreen from "../screens/AppScreens/Cart/CartCheckoutScreen";
 import Icon from "react-native-vector-icons/Feather";
+import DistrictSelectionScreen from "../screens/AuthScreens/SignUp/DistrictSelectionScreen";
 
 const MainStack = createStackNavigator(
   {
@@ -67,7 +68,8 @@ const AuthStack = createStackNavigator(
   {
     Login: { screen: Login },
     SignUp: SignUpFirstScreen,
-    SignUpSecond: SignUpSecondScreen
+    SignUpSecond: SignUpSecondScreen,
+    DistrictSelection: DistrictSelectionScreen
   },
   {
     initialRouteName: "Login",
