@@ -223,7 +223,7 @@ class CartScreen extends Component<Props, State> {
       : [];
 
     var price = 0;
-    cart.map(e => (price += e.price * e.count));
+    cart.map(e => (price +=(e.isCampaign ? e.newPrice : e.price) * e.count));
 
     return (
       <View style={styles.container}>
@@ -235,6 +235,7 @@ class CartScreen extends Component<Props, State> {
   }
   renderBottom(price: number) {
     if (price > 0) {
+      price = price.toFixed(2)
       return (
         <TouchableHighlight
 

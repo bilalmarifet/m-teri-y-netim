@@ -66,6 +66,7 @@ export class NotificationService {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             }
+            console.log("addNotification")
             axios.post(WATER_INSERT_NOTIFICATION,
                 {
                     orderId: this.orderId,
@@ -77,21 +78,22 @@ export class NotificationService {
                 headers: headers
             })
                 .then((response) => {
-                    if (response.data.isSuccess) {
-                        if (response.data.result) {
-                            let data = response.data.result;
-                            this.sendPush(data.message, data.title);
+                    console.log("addNotification",res)
+                    // if (response.data.isSuccess) {
+                    //     if (response.data.result) {
+                    //         let data = response.data.result;
+                    //         this.sendPush(data.message, data.title);
 
 
-                        }
-                    }
+                    //     }
+                    // }
                 })
                 .catch(error => {
-
+                    console.log("addNotification",error)
                 });
 
         }).catch(err => {
-
+            console.log("addNotification",err)
         })
 
 

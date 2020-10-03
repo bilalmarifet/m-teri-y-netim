@@ -210,15 +210,17 @@ class OrderScreen extends Component<Props, State> {
           refreshing={this.props.loading ?? false}
           onRefresh={() => this.onRefresh()}
           onEndReached={() => {
-            if (this.props.orders && this.props.orders.length > 9) {
+            if (!this.props.isOrderLoadingMore && this.props.orders && this.props.orders.length > 9) {
               var pagenew = this.state.page + 1;
-              this.setState({ page: pagenew });
-              if (pagenew == 1) {
-                pagenew = pagenew + 1;
+              
+              if(this.props.orders && this.props.orders.length > 0 && this.props.orders.length >= (10 * this.state.page)) {
+                this.props.GetOrdersMore(global.CUSTOMER_ID, pagenew, 10);
                 this.setState({ page: pagenew });
-              }
-              this.props.GetOrdersMore(global.CUSTOMER_ID, pagenew, 10);
+              }else {
 
+              }
+             
+             
             }
           }
 

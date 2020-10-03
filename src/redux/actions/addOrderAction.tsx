@@ -49,6 +49,12 @@ interface addOrderInterface {
   userId: number;
 }
 
+interface userWithTokenItemResponses {
+id: number;
+isOwner: boolean;
+name: string;
+tokens: string[]
+}
 export interface lastOrderInterface {
   orderId: number;
   orderProducts: [
@@ -60,6 +66,10 @@ export interface lastOrderInterface {
       totalPrice: number;
     }
   ];
+}
+interface notificationInsertReponseModel  {
+  message : string;
+  title: string;
 }
 
 export interface PaymentMethod {
@@ -266,7 +276,8 @@ export function AddOrderMultiple(
 
           list.push(OrderItem);
         });
-        console.log(list,isPaid,customerId,userId,type)
+
+        console.log("order addd",list,isPaid,customerId,userId,type)
         axios
           .post(
             WATER_ADD_ORDER_MULTIPLE_PRODUCT,
@@ -299,21 +310,18 @@ export function AddOrderMultiple(
             if (response.data.isSuccess) {
               if (response.data.result) {
                 let data = response.data.result.userWithTokenItemResponses;
-                var notificationItemList: {
-                  id: any;
-                  name: any;
-                  tokens: any;
-                }[] = [];
-                data.forEach((element: any) => {
-                  notificationItemList.push({
-                    id: element.id,
-                    name: element.name,
-                    tokens: element.tokens,
-                  });
+                var notificationItemResponsesList: userWithTokenItemResponses[] = []
+                data.forEach((element: userWithTokenItemResponses) => {
+                  var notificationItemResponse = {} as userWithTokenItemResponses
+                  notificationItemResponse.id = element.id
+                  notificationItemResponse.isOwner = element.isOwner
+                  notificationItemResponse.name = element.name
+                  var tokenList : String[] = []
+                  element.tokens.forEach((e:string) => {
+                    tokenList.push(e)
+                  })
+                  notificationItemResponsesList.push(notificationItemResponse)
                 });
-                var notificationEmployee = {} as notificationEmployee;
-                notificationEmployee.userWithToken = notificationItemList;
-                notificationEmployee.orderId = response.data.result.orderId;
                 dispatch(reset());
                 dispatch(GetOrders(customerId, 1, 10));
                 NavigationService.navigate('Cart')
@@ -322,28 +330,44 @@ export function AddOrderMultiple(
                   dispatch(resetCartValues());
 
                   showSimpleMessage("Şiparişiniz alındı en kısa sürede size iletilecektir","success")
-
-                  if (
-                    response.data.result.userWithTokenItemResponses &&
-                    response.data.result.userWithTokenItemResponses[0]
-                  ) {
-                    let tmpToken =
-                      response.data.result.userWithTokenItemResponses[0];
-
-                    const notificationService = new NotificationService(
-                      global.STORE_OWNER_USER_ID,
-                      1,
-                      response.data.result.orderId,
-                      response.data.result.userWithTokenItemResponses[0].tokens,
-                    );
-                    let text = customerName
-                      ? `Müşteriniz ${customerName}'den hemen teslim edilmek üzere sipariş alındı`
-                      : 'Müşterinizden hemen teslim edilmek üzere sipariş alındı';
-                    notificationService.sendPush(text, 'Müşteri Siparişi');
+                         
+                  let tmpEmployee = notificationItemResponsesList.find(e=> e.isOwner === false);
+                  let notificationInsertReponse: notificationInsertReponseModel = response.data.result.notificationInsertReponseModel
+                  if(notificationInsertReponse && notificationInsertReponse.message ) {
+             
+                    if(tmpEmployee) {
+                      const notificationService = new NotificationService(
+                        tmpEmployee.id,
+                        1,
+                        response.data.result.orderId,
+                        response.data.result.userWithTokenItemResponses[0].tokens,
+                      );
+                      notificationService.sendPush(notificationInsertReponse.message, notificationInsertReponse.title);
+                      notificationService.addNotification();
+                    }
+                      
                   }
+                    let tmpBase = notificationItemResponsesList.find(e => e.isOwner === true)
+                    if(tmpBase) {
+                      const notificationServiceForBase = new NotificationService(
+                        global.STORE_OWNER_USER_ID,
+                        1,
+                        response.data.result.orderId,
+                        tmpBase.tokens,
+                      );
+                      let text = customerName
+                        ? `Müşteriniz ${customerName}'den hemen teslim edilmek üzere sipariş alındı`
+                        : 'Müşterinizden hemen teslim edilmek üzere sipariş alındı';
+                        let textUnder = tmpEmployee ? `Gelen sipariş ${tmpEmployee.name} adlı çalışana atandı` : 
+                        "Teslim edilmek üzere siparişiniz alındı."
+                        notificationServiceForBase.sendPush(textUnder, text);
+                    
+                    }
+                    
                 }
               }
             }
+            
           })
           .catch(error => {
             console.log(error)
@@ -410,7 +434,6 @@ export function AddOrder(
                 var notificationEmployee = {} as notificationEmployee;
                 notificationEmployee.userWithToken = notificationItemList;
                 notificationEmployee.orderId = response.data.result.orderId;
-                dispatch(getEmployeeList(notificationEmployee));
 
                 dispatch(addOrder(true, 'Sipariş Alındı!'));
                 dispatch(reset());

@@ -26,10 +26,13 @@ export class TotalPriceText extends Component<Props, {}> {
     var totalPrice = 0;
     productList
       ? productList.length > 0
-        ? productList.map(e => (totalPrice += e.count * e.price))
+        ? productList.map(e => (totalPrice += e.count * (e.isCampaign ? e.newPrice : e.price)))
         : null
       : null;
 
+    if(totalPrice > 0 ) {
+      totalPrice = totalPrice.toFixed(2)
+    }
     return totalPrice ? (
       <TouchableOpacity
         onPress={() => this.props.navigation.navigate('Cart')}

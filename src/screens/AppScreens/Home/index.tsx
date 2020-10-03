@@ -271,9 +271,14 @@ class CustomerHomeScreen extends Component<Props, State> {
           <Text style={{ fontFamily: 'roboto', color: colors.textColor, width: '90%' }}>
             {item.productName}
           </Text>
-          <Text style={{ fontFamily: fonts.primaryFont, marginTop: 5, color: colors.priceAndPlusColor, fontWeight: 'bold' }}>
-            {item.price} TL
+          <View style={{flexDirection:'row'}}>
+          <Text style={{ fontFamily: fonts.primaryFont, marginTop: 5, color: colors.textColorLighter,textDecorationLine:"line-through" }}>
+    {item.price} 
       </Text>
+      <Text style={{ marginLeft:5,fontFamily: fonts.primaryFont, marginTop: 5, color: colors.priceAndPlusColor, fontWeight: 'bold'}}>
+    {item.newPrice} TL
+      </Text>
+          </View>
         </View>
 
       </View>
@@ -305,7 +310,7 @@ class CustomerHomeScreen extends Component<Props, State> {
           elevation: 1,
         }}>
 
-          <Text style={{ paddingLeft: 10, marginTop: 5, fontFamily: fonts.h3Font, color: '#555', fontSize: 16 }}>Kampanyalı Ürünler</Text>
+          <Text style={{ paddingLeft: 10, marginTop: 5, fontFamily: fonts.h3Font, color: '#555', fontSize: 16 }}>Fırsat Ürünleri</Text>
           <ScrollView horizontal={true} style={{ paddingTop: 10 }} showsHorizontalScrollIndicator={false}>
             {campaignProductList.map((item: IProductItemCustomer, index) => {
               return this.renderProductItem(item, index)
