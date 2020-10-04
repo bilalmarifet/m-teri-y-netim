@@ -30,6 +30,10 @@ import OrderDetailScreen from "../screens/AppScreens/Order/OrderDetailScreen";
 import CartCheckoutScreen from "../screens/AppScreens/Cart/CartCheckoutScreen";
 import Icon from "react-native-vector-icons/Feather";
 import DistrictSelectionScreen from "../screens/AuthScreens/SignUp/DistrictSelectionScreen";
+import ForgotPasswordScreen from "../screens/AuthScreens/Login/ForgotPasswordScreen";
+import UpdateForgotPassowordScreen from "../screens/AuthScreens/Login/UpdateForgotPassowordScreen";
+import CompareCodeScreen from "../screens/AuthScreens/Login/CompareCodeScreen";
+import UserAgreementScreen from "../screens/AuthScreens/Login/UserAgreementScreen";
 
 const MainStack = createStackNavigator(
   {
@@ -69,7 +73,11 @@ const AuthStack = createStackNavigator(
     Login: { screen: Login },
     SignUp: SignUpFirstScreen,
     SignUpSecond: SignUpSecondScreen,
-    DistrictSelection: DistrictSelectionScreen
+    DistrictSelection: DistrictSelectionScreen,
+    ForgotPassword: ForgotPasswordScreen,
+    CompareCode: CompareCodeScreen,
+    UpdateForgotPassoword : UpdateForgotPassowordScreen,
+    UserAgreement: UserAgreementScreen
   },
   {
     initialRouteName: "Login",
@@ -80,7 +88,8 @@ const AuthStack = createStackNavigator(
 const cartStack = createStackNavigator(
   {
     Cart: CartScreen,
-    CartCheckout: CartCheckoutScreen
+    CartCheckout: CartCheckoutScreen,
+    CustomerEditProfile: CustomerEditProfileScreen,
   },
   {
     initialRouteName: 'Cart',
@@ -162,11 +171,11 @@ const CustomerMainStack = createBottomTabNavigator(
         },
         tabBarIcon: ({focused}) => {
           return focused ? (
-            <Icon name="shopping-bag" style={{color: colors.IconColor,fontSize:30}}  />
+            <Icon name="shopping-bag" style={{color: colors.IconColor,fontSize:24}}  />
 
       
           ) : (
-            <Icon name="shopping-bag" style={{color: colors.IconNormalColor,fontSize:30}}  />
+            <Icon name="shopping-bag" style={{color: colors.IconNormalColor,fontSize:24}}  />
 
           );
         },
@@ -185,11 +194,11 @@ const CustomerMainStack = createBottomTabNavigator(
 
         tabBarIcon: ({focused}) => {
           return focused ? (
-            <Icon name="shopping-cart"  style={{color: colors.IconColor,fontSize:30}}  />
+            <Icon name="shopping-cart"  style={{color: colors.IconColor,fontSize:24}}  />
 
             
           ) : (
-            <Icon name="shopping-cart" style={{color: colors.IconNormalColor,fontSize:30}}  />
+            <Icon name="shopping-cart" style={{color: colors.IconNormalColor,fontSize:24}}  />
 
             
           );
@@ -207,11 +216,11 @@ const CustomerMainStack = createBottomTabNavigator(
         },
         tabBarIcon: ({focused}) => {
           return focused ? (
-            <Icon name="briefcase" style={{color: colors.IconColor,fontSize:30}}  />
+            <Icon name="briefcase" style={{color: colors.IconColor,fontSize:24}}  />
 
             
           ) : (
-            <Icon name="briefcase"  style={{color: colors.IconNormalColor,fontSize:30}}  />
+            <Icon name="briefcase"  style={{color: colors.IconNormalColor,fontSize:24}}  />
 
             
           );
@@ -229,11 +238,11 @@ const CustomerMainStack = createBottomTabNavigator(
         },
         tabBarIcon: ({focused}) => {
           return focused ? (
-            <Icon name="user" style={{color: colors.IconColor,fontSize:30}}  />
+            <Icon name="user" style={{color: colors.IconColor,fontSize:24}}  />
 
             
           ) : (
-            <Icon name="user" style={{color: colors.IconNormalColor,fontSize:30}}  />
+            <Icon name="user" style={{color: colors.IconNormalColor,fontSize:24}}  />
 
             
           );

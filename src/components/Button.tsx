@@ -23,7 +23,7 @@ export class Button extends Component<Props, {}> {
       <TouchableOpacity disabled={loading} {...this.props} style={[styles.buttonStyle, this.props.style]} >
      
         <Text style={[styles.buttonTextStyle, this.props.textStyle]} >{text}</Text> 
-    {loading ? <Spinner color="white" /> :<Icon name="chevron-right" style={{ color: 'white',  fontSize: 18 }} type="Feather" /> }
+    {loading ? <Spinner size={18} color="white" /> :<Icon name="chevron-right" style={{ color: 'white',  fontSize: 18 }} type="Feather" /> }
 
       </TouchableOpacity>
     );

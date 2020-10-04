@@ -105,7 +105,7 @@ class CustomerHomeScreen extends Component<Props, State> {
   static navigationOptions = ({ navigation }) => {
 
     return {
-      title: 'Anasayfa',
+      title: 'Ozansu Meşrubat',
 
       headerStyle: {
         backgroundColor: colors.headerColorTop,
@@ -332,6 +332,8 @@ class CustomerHomeScreen extends Component<Props, State> {
         <View style={styles.container}>
           {campaings &&
             <SliderBox
+            autoplay={true}
+            circleLoop
               images={this.props.campaings.map((item) => { return item.photoPath; })}
               onCurrentImagePressed={index => console.warn(`image ${index} pressed`)}
               currentImageEmitter={index => console.warn(`current pos is: ${index}`)}

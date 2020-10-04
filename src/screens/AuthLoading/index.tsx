@@ -7,6 +7,7 @@ import {
   Image,
   StatusBar,
   StyleSheet,
+  Text,
   View
 } from "react-native";
 import { Colors } from "react-native/Libraries/NewAppScreen";
@@ -45,6 +46,7 @@ class AuthLoading extends React.Component<Props, {}> {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
          <Image source={BaseImageWithName} width={200}  />
+         <Text style={{marginTop:10,color:colors.textColorLighter,fontStyle:"italic"}}>Bahçeşehire özel</Text>
         <Spinner color={colors.IconColor} />
       </View>
     );

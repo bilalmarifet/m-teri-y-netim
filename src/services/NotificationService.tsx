@@ -78,7 +78,7 @@ export class NotificationService {
                 headers: headers
             })
                 .then((response) => {
-                    console.log("addNotification",res)
+                    console.log("addNotification",response)
                     // if (response.data.isSuccess) {
                     //     if (response.data.result) {
                     //         let data = response.data.result;

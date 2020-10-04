@@ -179,7 +179,7 @@ class CartScreen extends Component<Props, State> {
   
       </View>
       <Text style={{marginTop:20,fontFamily:fonts.primaryFont,color:colors.textColorLighter}}>{this.props.userInfo.address}</Text>
-      <TouchableOpacity style={{position:'absolute',right:10,bottom:10}}>
+      <TouchableOpacity onPress={()=> this.props.navigation.navigate('CustomerEditProfile')} style={{position:'absolute',right:10,bottom:10}}>
         <Text style={{fontFamily:fonts.primaryFont,fontSize:15}}>Düzenle</Text>
       </TouchableOpacity> 
       </View>

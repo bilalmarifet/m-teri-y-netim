@@ -332,7 +332,7 @@ class CartScreen extends Component<Props, State> {
                       </Text>
                       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                         <View style={{ flex: 0.5 }}>
-                          <Text>{item.price} TL</Text>
+                          <Text>{item.isCampaign ? item.newPrice:  item.price} TL</Text>
                         </View>
 
 

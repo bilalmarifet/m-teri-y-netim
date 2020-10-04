@@ -29,6 +29,10 @@ export const CUSTOMER_GETBY_ID = 'CustomerGetById';
 export const CUSTOMER_GETBY_ID_FAILED = 'CustomerGetByIdFailed';
 
 export const LOGIN_STARTED = 'loginStarted';
+export const LOADING_FORGOT_PASSWORD =  'LOADING_FORGOT_PASSWORD';
+export const LOADING_USER_AGREEMENT = "LOADING_USER_AGREEMENT";
+export const GET_USER_AGREEMENT = 'GET_USER_AGREEMENT';
+export const LOADING_FORGOT_PASSWORD_CHANGE =  'LOADING_FORGOT_PASSWORD_CHANGE';
 export const LOGIN_SUCCEED = 'loginSucceed';
 export const LOGIN_FAILED = 'loginFailed';
 export const LOGOUT="logOutDis"

@@ -320,6 +320,7 @@ export function AddOrderMultiple(
                   element.tokens.forEach((e:string) => {
                     tokenList.push(e)
                   })
+                  notificationItemResponse.tokens = tokenList
                   notificationItemResponsesList.push(notificationItemResponse)
                 });
                 dispatch(reset());
@@ -334,20 +335,22 @@ export function AddOrderMultiple(
                   let tmpEmployee = notificationItemResponsesList.find(e=> e.isOwner === false);
                   let notificationInsertReponse: notificationInsertReponseModel = response.data.result.notificationInsertReponseModel
                   if(notificationInsertReponse && notificationInsertReponse.message ) {
-             
+                    console.log(tmpEmployee, "tmpEmployee")
                     if(tmpEmployee) {
                       const notificationService = new NotificationService(
                         tmpEmployee.id,
                         1,
                         response.data.result.orderId,
-                        response.data.result.userWithTokenItemResponses[0].tokens,
+                        tmpEmployee.tokens,
                       );
+                      console.log(notificationService.orderId,notificationService.toUserId,notificationService.tokenList)
                       notificationService.sendPush(notificationInsertReponse.message, notificationInsertReponse.title);
                       notificationService.addNotification();
                     }
                       
                   }
                     let tmpBase = notificationItemResponsesList.find(e => e.isOwner === true)
+                    console.log(tmpBase, "tmpBase")
                     if(tmpBase) {
                       const notificationServiceForBase = new NotificationService(
                         global.STORE_OWNER_USER_ID,

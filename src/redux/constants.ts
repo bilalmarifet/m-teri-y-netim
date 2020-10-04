@@ -11,6 +11,9 @@ export const WATER_CUSTOMER_CALL_DETECT =
 export const WATER_CUSTOMER_CALL_DETECT_NEW =
   WATER_BASE_URL_NEW + '/api/customer/CustomerByPhoneNew';
 export const WATER_USER_LOGIN = WATER_BASE_URL_NEW + '/api/User/login';
+export const WATER_USER_FORGOT_PASSWORD = WATER_BASE_URL_NEW + '/api/User/ForgetPassword'
+export const WATER_GET_USER_TERM = WATER_BASE_URL_NEW + '/GetTerm'
+export const WATER_UPDATE_PASSWORD_FORGOT = WATER_BASE_URL_NEW + '/api/User/UpdatePasswordForget'
 export const WATER_CUSTOMER_ORDERS_GET =
   WATER_BASE_URL_NEW + '/api/customer/CustomerOrder?customerid=';
 export const WATER_CUSTOMER_ORDERS_GET_DETAIL =

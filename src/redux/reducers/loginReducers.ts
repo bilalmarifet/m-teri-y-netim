@@ -1,15 +1,41 @@
-import { LOGIN_STARTED,LOGIN_FAILED,LOGIN_SUCCEED,RESET_PROPS } from "../types";
+import { LOGIN_STARTED,LOGIN_FAILED,LOGIN_SUCCEED,RESET_PROPS, LOADING_FORGOT_PASSWORD, LOADING_FORGOT_PASSWORD_CHANGE, LOADING_USER_AGREEMENT, GET_USER_AGREEMENT } from "../types";
 import {Action, UserState} from '../states';
+import { boolean } from "yup";
 
 const intialState = {
     isLoading : false,
     isFinished : false,
     isSucceed : false,
-    loginErrorMessage:""
+    loginErrorMessage:"",
+    isLoadingForgotPassword: false,
+    isLoadingForgotPasswordChange: false,
+    loadingForAgreement: false,
+    agremeent: ""
 };
 
 export default (state: UserState = intialState, action: Action) => {
   switch (action.type) {
+    case LOADING_USER_AGREEMENT:
+      return {
+        ...state,
+        loadingForAgreement: action.payload
+      }
+    case GET_USER_AGREEMENT :
+      return {
+        ...state,
+        loadingForAgreement: false,
+        agremeent: action.payload
+      }
+    case LOADING_FORGOT_PASSWORD_CHANGE:
+      return {
+        ...state,
+        isLoadingForgotPasswordChange: action.payload
+      }
+    case LOADING_FORGOT_PASSWORD:
+    return {
+      ...state,
+      isLoadingForgotPassword: action.payload
+    }
     case LOGIN_STARTED:
       return {
         ...state,

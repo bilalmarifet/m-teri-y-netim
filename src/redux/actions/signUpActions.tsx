@@ -22,6 +22,7 @@ import {UserFirstData} from '../reducers/signUpReducers';
 import {navigate} from '../services/Navigator';
 import NavigationService from '../../services/NavigationService';
 import { showSimpleMessage } from '../../components/showMessage';
+import { BasestoreId } from '../../services/AppConfig';
 
 export interface BaseUser {
   nameSurname: string;
@@ -112,6 +113,7 @@ export function controlEmail(
     axios
       .post(WATER_USER_CREATE_EMAIL_CONTROL, {
         email: email,
+        storeId: BasestoreId
       })
       .then(res => {
         console.log(res)

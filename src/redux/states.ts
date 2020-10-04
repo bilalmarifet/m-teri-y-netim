@@ -39,6 +39,10 @@ export interface State {
     isFinished: boolean;
     isSucceed: boolean;
     loginErrorMessage : string;
+    isLoadingForgotPassword: boolean;
+    isLoadingForgotPasswordChange: boolean;
+    loadingForAgreement: boolean;
+    agremeent: string;
 
 
   }
