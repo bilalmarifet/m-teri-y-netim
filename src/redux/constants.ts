@@ -79,6 +79,8 @@ export const WATER_DELETE_EMPLOYEE = WATER_BASE_URL_NEW + '/api/employe/Delete';
 export const WATER_GET_USER = WATER_BASE_URL_NEW + '/api/User?employeId=';
 export const WATER_GET_ABOUT_US =
   WATER_BASE_URL_NEW + '/api/Cash/GetByName?identityName=hakkimizda';
+
+export const WATER_GET_STORE_INFO_BY_STORE_ID = WATER_BASE_URL_NEW + '/storeInfo'
 export const WATER_UPDATE_STORE_INFO = WATER_BASE_URL_NEW + '/UpdateStore';
 export const WATER_GET_STORE_INFO = WATER_BASE_URL_NEW + '/GetStoreByUserId';
 export const WATER_USER_CREATE_EMAIL_CONTROL =

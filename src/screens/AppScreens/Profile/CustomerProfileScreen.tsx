@@ -136,11 +136,21 @@ class CustomerProfileScreen extends Component<Props, State> {
               <View style={{backgroundColor:colors.viewBackground,width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="chevron-forward" style={{color:colors.viewBackgroundText,fontSize:12}} /></View>
             </View>
             </TouchableHighlight>
-            <TouchableHighlight onPress={()=> console.log()} underlayColor="#AAA"  style={{borderBottomWidth:1,borderBottomColor:colors.borderColor,padding:20,paddingVertical:15,backgroundColor:'white'}}>
+            <TouchableHighlight onPress={()=> this.props.navigation.navigate('UserAgreement')} underlayColor="#AAA"  style={{borderBottomWidth:1,borderBottomColor:colors.borderColor,padding:20,paddingVertical:15,backgroundColor:'white'}}>
             <View style={{flexDirection:'row',justifyContent:'space-between'}}>
               <View style={{flexDirection:'row'}}>
               <Image source={require("../../../images/profile/005-term-loan.png")} style={{width:34,height:34, borderRadius:17}} />
             <Text style={{alignSelf:'center',marginLeft:10,fontWeight:'600',fontFamily:fonts.primaryFont,fontSize:16}}>Gizlilik Sözleşmesi</Text>
+            
+              </View>
+              <View style={{backgroundColor:colors.viewBackground,width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="chevron-forward" style={{color:colors.viewBackgroundText,fontSize:12}} /></View>
+            </View>
+            </TouchableHighlight>
+            <TouchableHighlight onPress={()=> console.log()} underlayColor="#AAA"  style={{borderBottomWidth:1,borderBottomColor:colors.borderColor,padding:20,paddingVertical:15,backgroundColor:'white'}}>
+            <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+              <View style={{flexDirection:'row'}}>
+              <Image source={require("../../../images/profile/007-contact-book.png")} style={{width:34,height:34, borderRadius:17}} />
+            <Text style={{alignSelf:'center',marginLeft:10,fontWeight:'600',fontFamily:fonts.primaryFont,fontSize:16}}>Bize Ulaşın</Text>
             
               </View>
               <View style={{backgroundColor:colors.viewBackground,width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="chevron-forward" style={{color:colors.viewBackgroundText,fontSize:12}} /></View>
@@ -174,6 +184,27 @@ class CustomerProfileScreen extends Component<Props, State> {
               <View style={{backgroundColor:colors.viewBackground,width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="chevron-forward" style={{color:colors.viewBackgroundText,fontSize:12}} /></View>
             </View>
             </TouchableHighlight>
+            <TouchableHighlight onPress={()=> this.props.navigation.navigate('StoreInfo')} underlayColor="#AAA"  style={{borderBottomWidth:1,borderBottomColor:colors.borderColor,padding:20,paddingVertical:15,backgroundColor:'white'}}>
+            <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+              <View style={{flexDirection:'row'}}>
+              <Image source={require("../../../images/profile/007-contact-book.png")} style={{width:34,height:34, borderRadius:17}} />
+            <Text style={{alignSelf:'center',marginLeft:10,fontWeight:'600',fontFamily:fonts.primaryFont,fontSize:16}}>Bize Ulaşın</Text>
+            
+              </View>
+              <View style={{backgroundColor:colors.viewBackground,width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="chevron-forward" style={{color:colors.viewBackgroundText,fontSize:12}} /></View>
+            </View>
+            </TouchableHighlight>
+            <TouchableHighlight onPress={()=> this.props.navigation.navigate('UserAgreement')} underlayColor="#AAA"  style={{borderBottomWidth:1,borderBottomColor:colors.borderColor,padding:20,paddingVertical:15,backgroundColor:'white'}}>
+            <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+              <View style={{flexDirection:'row'}}>
+              <Image source={require("../../../images/profile/005-term-loan.png")} style={{width:34,height:34, borderRadius:17}} />
+            <Text style={{alignSelf:'center',marginLeft:10,fontWeight:'600',fontFamily:fonts.primaryFont,fontSize:16}}>Gizlilik Sözleşmesi</Text>
+            
+              </View>
+              <View style={{backgroundColor:colors.viewBackground,width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="chevron-forward" style={{color:colors.viewBackgroundText,fontSize:12}} /></View>
+            </View>
+            </TouchableHighlight>
+
             <TouchableHighlight onPress={()=> this.props.navigation.navigate('Login')} underlayColor="#AAA"  style={{borderBottomWidth:1,borderBottomColor:colors.borderColor,padding:20,paddingVertical:15,backgroundColor:'white'}}>
             <View style={{flexDirection:'row',justifyContent:'space-between'}}>
               <View style={{flexDirection:'row'}}>

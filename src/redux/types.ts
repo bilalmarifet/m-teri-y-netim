@@ -80,6 +80,9 @@ export const UPADTE_STORE_INFO = 'UPADTEStoreInfo';
 export const UPADTE_STORE_INFO_LOADING = 'UPADTEStoreInfoLoading';
 export const UPADTE_STORE_INFO_FAILED = 'UPADTEStoreInfoFailed';
 
+export const LOADING_GET_STORE_INFORMATION = 'LOADING_GET_STORE_INFORMATION';
+export const GET_STORE_INFORMATION = 'GET_STORE_INFORMATION';
+
 export const UPDATE_USER_GENERAL_LOADING = 'updateUserGeneralLoading';
 export const UPDATE_USER_GENERAL_FAILED = 'updateUserGeneralFailed';
 export const UPDATE_USER_GENERAL = 'updateUserGeneral';

@@ -72,7 +72,7 @@ class Login extends Component<Props, {}> {
   render() {
     return (
       <View style={[styles.container,{paddingTop:0}]}>
-        <TouchableOpacity style={{position:'absolute', left:10, top:50}}  onPress={()=>this.props.navigation.navigate("Products")}>
+        <TouchableOpacity style={{position:'absolute', left:10, top:50,zIndex:10}}  onPress={()=>this.props.navigation.navigate("Products")}>
 
         <Icon style={{fontSize:24}} name="x" ></Icon>  
 

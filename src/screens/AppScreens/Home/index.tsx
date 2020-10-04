@@ -23,6 +23,7 @@ import { getUserInfo } from "../../../redux/actions/profileActions";
 import Icon from "react-native-vector-icons/Feather";
 import { SliderBox } from "react-native-image-slider-box";
 import { ScrollView } from "react-native-gesture-handler";
+import FastImage from "react-native-fast-image";
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState>;
@@ -370,10 +371,17 @@ class CustomerHomeScreen extends Component<Props, State> {
 
                 <View style={styles.item}>
                   <View style={{ paddingVertical: 10, justifyContent: 'center', alignContent: 'center', alignSelf: 'center' }}>
-                    <Image
+                    {/* <Image
                       style={{ width: Dimensions.get('window').width / 3.5, height: Dimensions.get('window').width / 4 }}
                       source={{ uri: item.imagePath }}
-                    />
+                    /> */}
+                    <FastImage
+        style={{ width: Dimensions.get('window').width / 3.5, height: Dimensions.get('window').width / 4 }}
+        source={{
+            uri: item.imagePath,
+            priority: FastImage.priority.normal,
+        }}
+    />
                   </View>
 
 
