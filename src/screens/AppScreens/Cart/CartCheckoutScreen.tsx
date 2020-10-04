@@ -99,16 +99,18 @@ class CartScreen extends Component<Props, State> {
   handleCartAction(): void {
     let selectedPaymentMethod =  this.props.paymentMethods ? this.props.paymentMethods.length > 0 ? this.props.selectedPaymentMethod ? this.props.paymentMethods[this.props.selectedPaymentMethod].paymentType : 0 : 0 : 0
     var products: product[] = [];
-    this.props.productList.map(element => {
-      var product: product = {
-        index: 0,
-        productId: element.productId,
-        unitPrice: element.price.toString(),
-        productCount: element.count.toString(),
-        productCode: element.productCode,
-        productGotUnitPrice: false,
-      };
-      products.push(product);
+    this.props.productList.map(element =>  {
+      if(element.count > 0) {
+        var product: product = {
+          index: 0,
+          productId: element.productId,
+          unitPrice: element.isCampaign ? element.newPrice.toString() : element.price.toString(),
+          productCount: element.count.toString(),
+          productCode: element.productCode,
+          productGotUnitPrice: false,
+        };
+        products.push(product);
+      }
     });
     this.props.AddOrderMultiple(
       products,
@@ -177,7 +179,7 @@ class CartScreen extends Component<Props, State> {
   
       </View>
       <Text style={{marginTop:20,fontFamily:fonts.primaryFont,color:colors.textColorLighter}}>{this.props.userInfo.address}</Text>
-      <TouchableOpacity style={{position:'absolute',right:10,bottom:10}}>
+      <TouchableOpacity onPress={()=> this.props.navigation.navigate('CustomerEditProfile')} style={{position:'absolute',right:10,bottom:10}}>
         <Text style={{fontFamily:fonts.primaryFont,fontSize:15}}>Düzenle</Text>
       </TouchableOpacity> 
       </View>

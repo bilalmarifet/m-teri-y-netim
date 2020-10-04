@@ -139,14 +139,13 @@ export function GetOrdersMore(
               productCode: order.productCode,
               dateTime: order.dateTime,
               isPaid: order.isPaid,
+              status : order.status,
+              paymentText : order.paymentText
             };
             orderModel.push(orderItem);
           });
 
           dispatch(ordersMore(orderModel));
-          dispatch(takeTotalAmount(takeTotal));
-          dispatch(tookTotalAmount(tookTotal));
-          dispatch(restTotalAmount(restTotal));
         } else {
         }
       })

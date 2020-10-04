@@ -44,6 +44,7 @@ import { colors, fonts } from '../../../constants';
 
 import TextInputMask from 'react-native-text-input-mask';
 import { SuccessButton } from '../../../components/SuccessButton';
+import { District } from '../../../redux/actions/DistrictAction';
 
 // import Icon from 'react-native-vector-icons/Ionicons'
 // import { Input } from "react-native-elements";
@@ -58,6 +59,7 @@ interface Props {
   loginErrorMessage: string;
   createBaseUser: (user: BaseUser) => void;
   userFirstData: UserFirstData;
+  districtList: District[]
 }
 
 interface userData {
@@ -77,6 +79,7 @@ const loginSchema = Yup.object().shape({
 
 interface State {
   userType: number;
+  DistrictName : string | undefined;
 }
 
 class SignUpSecondScreen extends Component<Props, State> {
@@ -94,7 +97,20 @@ class SignUpSecondScreen extends Component<Props, State> {
     super(props);
     this.state = {
       userType: this.props.navigation.getParam('userType'),
+      DistrictName: ''
     };
+    
+  }
+  componentDidMount(){
+    this.getDistrictName()
+  }
+  getDistrictName(){
+ 
+   let id =  this.props.navigation.getParam('DistrictId')
+   console.log(id)
+   if(id && this.props.districtList && this.props.districtList.length > 0 ) {
+     this.setState({DistrictName: this.props.districtList.find(e=>e.id === id)?.districtName})
+   }
   }
 
   showSimpleMessage() {
@@ -120,12 +136,14 @@ class SignUpSecondScreen extends Component<Props, State> {
     user.storeId = BasestoreId
     user.storeOwnerUserId = BaseStoreOwnerUserId
     console.log(user)
+    if(this.state.DistrictName && this.state.DistrictName.length > 0) {
+      user.address = this.state.DistrictName + user.address
+    }
     this.props.createBaseUser(user);
   };
 
   render() {
 
-    console.log(this.state.userType);
     return (
       <View>
         <SafeAreaView>
@@ -175,6 +193,9 @@ class SignUpSecondScreen extends Component<Props, State> {
                           </Text>
                           }
 
+                         <View>
+                         <Text style={{fontFamily:fonts.primaryFont,fontSize:15,marginTop:10}}>{this.state.DistrictName}<Text style={{color:colors.textColorLighter,}}> (seçtiğiniz mahalleyi adrese eklemenize gerek yoktur.)</Text></Text>
+                         </View>
                           <Input
                             placeholder="Adres"
                             value={props.values.adress}
@@ -212,6 +233,7 @@ const mapStateToProps = (state: AppState) => ({
   isSecondLoading: state.signUp.isSecondLoading,
   loginErrorMessage: state.signUp.loginErrorMessage,
   userFirstData: state.signUp.userFirstData,
+  districtList: state.District.DistrictList
 });
 
 function bindToAction(dispatch: any) {

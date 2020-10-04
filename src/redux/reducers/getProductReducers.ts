@@ -1,10 +1,12 @@
 import { ProductState, Action } from "../states";
 import { PRODUCT_GET, PRODUCT_LOADING } from "../types";
+import { CAMPAIGN_LIST_GET } from "../typesCustomer";
 
 
 const intialState = {
   products: [],
-  isProductLoading: false || null
+  isProductLoading: false || null,
+  campaings : []
 };
 
 export default (state: ProductState = intialState, action: Action) => {

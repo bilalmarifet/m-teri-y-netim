@@ -109,7 +109,8 @@ class OrderScreen extends Component<Props, State> {
       }
     };
   };
-  renderStatus(status: number) {
+  renderStatus(status: number,dateTime: string) {
+    
     if (status == 2) {
       return (
         <LinearGradient
@@ -146,7 +147,8 @@ class OrderScreen extends Component<Props, State> {
         </LinearGradient>
       );
     }
-    else if (status == 1) {
+    else if (status == 1) { 
+      let isInFirstFiveMin = moment.duration(moment(new Date()).diff(moment(dateTime))).asMinutes()
       return (
         <LinearGradient
           start={{ x: 0, y: 0.5 }}
@@ -159,7 +161,7 @@ class OrderScreen extends Component<Props, State> {
             flexDirection: 'row',
             paddingTop: 5,
           }}>
-          <Text style={{ color: 'white', fontFamily: fonts.primaryFont }}>Bekliyor</Text>
+          <Text style={{ color: 'white', fontFamily: fonts.primaryFont }}>{isInFirstFiveMin > 5 ? "Sıraya Alındı": "İşlemde" }</Text>
         </LinearGradient>
       );
     }
@@ -210,15 +212,17 @@ class OrderScreen extends Component<Props, State> {
           refreshing={this.props.loading ?? false}
           onRefresh={() => this.onRefresh()}
           onEndReached={() => {
-            if (this.props.orders && this.props.orders.length > 9) {
+            if (!this.props.isOrderLoadingMore && this.props.orders && this.props.orders.length > 9) {
               var pagenew = this.state.page + 1;
-              this.setState({ page: pagenew });
-              if (pagenew == 1) {
-                pagenew = pagenew + 1;
+              
+              if(this.props.orders && this.props.orders.length > 0 && this.props.orders.length >= (10 * this.state.page)) {
+                this.props.GetOrdersMore(global.CUSTOMER_ID, pagenew, 10);
                 this.setState({ page: pagenew });
-              }
-              this.props.GetOrdersMore(global.CUSTOMER_ID, pagenew, 10);
+              }else {
 
+              }
+             
+             
             }
           }
 
@@ -297,7 +301,7 @@ class OrderScreen extends Component<Props, State> {
                   </View>
                   <View style={{ flex: 0.4 }} >
                     <Text style={{ fontFamily: fonts.primaryFont,marginBottom:5 }}>Durum</Text>
-                    {this.renderStatus(item.status)}
+                    {this.renderStatus(item.status,item.dateTime)}
 
                   </View>
                   <View></View>

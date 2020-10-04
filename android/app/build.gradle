@@ -123,7 +123,7 @@ android {
     dexOptions {
        javaMaxHeapSize "3g"
     }
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdkVersion 29
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -131,11 +131,11 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.hostelapp"
+        applicationId "com.ozanSu"
         minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 3
-        versionName "1.2"
+        targetSdkVersion 29
+        versionCode 8
+        versionName "1.7"
     }
     splits {
         abi {

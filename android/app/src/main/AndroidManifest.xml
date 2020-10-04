@@ -1,18 +1,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.hostelapp">
+  package="com.ozanSu">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
       android:usesCleartextTraffic="true"
-      android:name=".MainApplication"
+      android:name="com.ozanSu.MainApplication"
       android:label="@string/app_name"
       android:icon="@mipmap/ic_launcher"
       android:roundIcon="@mipmap/ic_launcher_round"
       android:allowBackup="false"
       android:theme="@style/AppTheme">
       <activity
-        android:name=".MainActivity"
+        android:name="com.ozanSu.MainActivity"
         android:label="@string/app_name"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
         android:windowSoftInputMode="adjustResize">

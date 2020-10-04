@@ -214,11 +214,12 @@ class CustomerEditProfileScreen extends Component<Props, State> {
               }
                         </View>
                        
-                        <View style={{marginTop:10}}>
+                        <View style={{marginTop:10,minHeight:50}}>
                         <Text style={{color:colors.textColor,fontSize:16,fontWeight:'600'}}>Adres</Text> 
                         <Input
+                        multiline
                       placeholder="Adres"
-                      style={{color:colors.textColor,paddingLeft:20}}
+                      style={{color:colors.textColor,paddingLeft:20,minHeight:50}}
                       value={props.values.address}
                       onChangeText={props.handleChange("address")}
                       onBlur={props.handleBlur("address")}

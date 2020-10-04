@@ -7,48 +7,39 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00E356F31AD99517003FC87E /* HostelAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* HostelAppTests.m */; };
-		102D0A3D6691C4D276DBE90E /* libPods-HostelApp-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D170CADC146B136ADBD82D2 /* libPods-HostelApp-tvOS.a */; };
+		00D074A73E044BA6A533B356 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 959E9DCD7D9244108B7D24D2 /* OpenSans-BoldItalic.ttf */; };
+		00F1F0FA5BF54E01AC239D5B /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 45FA7CC4278A4D15A05D52FD /* OpenSans-SemiBold.ttf */; };
+		02EFA3C179D34A9C8D3E8AE4 /* Ubuntu-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F3C14537AB84DFEA49C224F /* Ubuntu-Regular.ttf */; };
+		0B6EE39ED9954033BD7BDE75 /* Ubuntu-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52B75DAEBFAB4A37BAE76BA6 /* Ubuntu-BoldItalic.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		1F26EF8325220C7A006F63EC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		1F26EF8425220C7F006F63EC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
-		1F26EF8525220CC9006F63EC /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A23E10E524325FC00010D3D1 /* Fontisto.ttf */; };
-		1F26EF8625220CC9006F63EC /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A23E10E624325FC00010D3D1 /* Octicons.ttf */; };
-		1F26EF8725220CC9006F63EC /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A23E10E724325FC00010D3D1 /* Feather.ttf */; };
-		1F26EF8825220CC9006F63EC /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A23E10E824325FC00010D3D1 /* Entypo.ttf */; };
-		1F26EF8925220CC9006F63EC /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A23E10E924325FC00010D3D1 /* FontAwesome5_Brands.ttf */; };
-		1F26EF8A25220CC9006F63EC /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A23E10EA24325FC00010D3D1 /* MaterialCommunityIcons.ttf */; };
-		1F26EF8B25220CC9006F63EC /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A23E10EB24325FC00010D3D1 /* AntDesign.ttf */; };
-		1F26EF8C25220CC9006F63EC /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A23E10EC24325FC00010D3D1 /* Foundation.ttf */; };
-		1F26EF8D25220CC9006F63EC /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A23E10ED24325FC00010D3D1 /* Ionicons.ttf */; };
-		1F26EF8E25220CC9006F63EC /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A23E10EE24325FC00010D3D1 /* FontAwesome5_Solid.ttf */; };
-		1F26EF8F25220CC9006F63EC /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A23E10EF24325FC00010D3D1 /* FontAwesome5_Regular.ttf */; };
-		1F26EF9025220CC9006F63EC /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A23E10F024325FC00010D3D1 /* FontAwesome.ttf */; };
-		1F26EF9125220CC9006F63EC /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A23E10F124325FC00010D3D1 /* Zocial.ttf */; };
-		1F26EF9225220CC9006F63EC /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A23E10F224325FC10010D3D1 /* EvilIcons.ttf */; };
-		1F26EF9325220CC9006F63EC /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A23E10F324325FC10010D3D1 /* SimpleLineIcons.ttf */; };
-		1F26EF9425220CC9006F63EC /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A23E10F424325FC10010D3D1 /* MaterialIcons.ttf */; };
-		1F26EF9725220D48006F63EC /* Roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F26EF9525220D48006F63EC /* Roboto.ttf */; };
-		1F26EF9825220D48006F63EC /* Roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F26EF9625220D48006F63EC /* Roboto_medium.ttf */; };
+		1F421F4EFB114442BDA510E0 /* Ubuntu-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E85C54CE1E6340AEB945A148 /* Ubuntu-Italic.ttf */; };
 		1F57FA75251BDB7C0081A1BF /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F57FA74251BDB7C0081A1BF /* Dummy.swift */; };
+		1FD76F19252A374B00D56AA2 /* Roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F26EF9625220D48006F63EC /* Roboto_medium.ttf */; };
+		1FD76F1A252A374B00D56AA2 /* Roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F26EF9525220D48006F63EC /* Roboto.ttf */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* HostelAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* HostelAppTests.m */; };
-		AF482F947F531A1B972FBC3E /* libPods-HostelApp-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DED29041650E0BF33FA14E25 /* libPods-HostelApp-tvOSTests.a */; };
-		BDC2D475578F94631C5089AB /* libPods-HostelAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8518382294C46642AFCDABDB /* libPods-HostelAppTests.a */; };
+		3725730503D3488693E5331B /* OpenSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57FD910828A7455D86168EEC /* OpenSans-LightItalic.ttf */; };
+		3F64CAA06C1B45C19343D93B /* Ubuntu-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F305AD1F5DC49E7B91E1B1F /* Ubuntu-LightItalic.ttf */; };
+		54B31333414A4002A574A203 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A0C309F87F2464D9902BDFB /* OpenSans-Bold.ttf */; };
+		5A5BB260983841DC8CFD4071 /* OpenSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3753E5DD4113423BA83B253B /* OpenSans-Italic.ttf */; };
+		6908FCC485BA4D3F826AA290 /* OpenSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 96A47163039F43D38D1E2C4A /* OpenSans-ExtraBoldItalic.ttf */; };
+		6EA7D6D8C6DB4A7DAA8C6BB5 /* Ubuntu-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 574899E3CF72474280109D8B /* Ubuntu-Bold.ttf */; };
+		6EF52B80EBEC4AAA831B9496 /* Ubuntu-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D3599EF6BF441B193469BD0 /* Ubuntu-Medium.ttf */; };
+		9368DBA5BD3A41089DE6E408 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 37258EDFF9614DE9B5BD7225 /* OpenSans-Light.ttf */; };
+		9821C6184321465D8978CA3F /* OpenSans-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11051815BC284FDB9E827786 /* OpenSans-SemiBoldItalic.ttf */; };
+		BC9AC9D2A777473E80FC008F /* Ubuntu-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F43DEF21518E48EC86B8ED18 /* Ubuntu-Light.ttf */; };
+		BF0A908FBD144BF68077D4FC /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB232378A519447EBC9CAF25 /* OpenSans-Regular.ttf */; };
+		C8E96730143842EC959CDD34 /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A281EAF1A4FB4667A7EE4CB2 /* OpenSans-ExtraBold.ttf */; };
 		CD47E03CBE09BE2C43CC7610 /* libPods-HostelApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 87ED51A87966EB5B5F8B60C2 /* libPods-HostelApp.a */; };
+		DBBBFB32ACE94B158F7AD4B1 /* Ubuntu-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AECA5065FF6F4507BB1E73DF /* Ubuntu-MediumItalic.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		00E356F41AD99517003FC87E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = HostelApp;
-		};
 		2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
@@ -60,10 +51,10 @@
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
-		00E356EE1AD99517003FC87E /* HostelAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HostelAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* HostelAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HostelAppTests.m; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* HostelApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HostelApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		11051815BC284FDB9E827786 /* OpenSans-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-SemiBoldItalic.ttf"; path = "../src/assets/fonts/OpenSans-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* OzanSu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OzanSu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = HostelApp/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = HostelApp/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -76,47 +67,34 @@
 		1F57FA74251BDB7C0081A1BF /* Dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dummy.swift; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* HostelApp-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HostelApp-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* HostelApp-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "HostelApp-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		33A5E7F5D49D6F95887E7D06 /* Pods-HostelApp-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HostelApp-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-HostelApp-tvOSTests/Pods-HostelApp-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		341E935BC06A373DD4FEB1CB /* Pods-HostelApp-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HostelApp-tvOS.release.xcconfig"; path = "Target Support Files/Pods-HostelApp-tvOS/Pods-HostelApp-tvOS.release.xcconfig"; sourceTree = "<group>"; };
-		7D170CADC146B136ADBD82D2 /* libPods-HostelApp-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HostelApp-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		37258EDFF9614DE9B5BD7225 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Light.ttf"; path = "../src/assets/fonts/OpenSans-Light.ttf"; sourceTree = "<group>"; };
+		3753E5DD4113423BA83B253B /* OpenSans-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Italic.ttf"; path = "../src/assets/fonts/OpenSans-Italic.ttf"; sourceTree = "<group>"; };
+		3F305AD1F5DC49E7B91E1B1F /* Ubuntu-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Ubuntu-LightItalic.ttf"; path = "../src/assets/fonts/Ubuntu-LightItalic.ttf"; sourceTree = "<group>"; };
+		45FA7CC4278A4D15A05D52FD /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-SemiBold.ttf"; path = "../src/assets/fonts/OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
+		52B75DAEBFAB4A37BAE76BA6 /* Ubuntu-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Ubuntu-BoldItalic.ttf"; path = "../src/assets/fonts/Ubuntu-BoldItalic.ttf"; sourceTree = "<group>"; };
+		574899E3CF72474280109D8B /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Ubuntu-Bold.ttf"; path = "../src/assets/fonts/Ubuntu-Bold.ttf"; sourceTree = "<group>"; };
+		57FD910828A7455D86168EEC /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-LightItalic.ttf"; path = "../src/assets/fonts/OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
+		5D3599EF6BF441B193469BD0 /* Ubuntu-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Ubuntu-Medium.ttf"; path = "../src/assets/fonts/Ubuntu-Medium.ttf"; sourceTree = "<group>"; };
 		8518382294C46642AFCDABDB /* libPods-HostelAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HostelAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		87ED51A87966EB5B5F8B60C2 /* libPods-HostelApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HostelApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9CB74DD464BFE178489B5433 /* Pods-HostelApp-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HostelApp-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-HostelApp-tvOSTests/Pods-HostelApp-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		A23E10E524325FC00010D3D1 /* Fontisto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fontisto.ttf; sourceTree = "<group>"; };
-		A23E10E624325FC00010D3D1 /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
-		A23E10E724325FC00010D3D1 /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Feather.ttf; sourceTree = "<group>"; };
-		A23E10E824325FC00010D3D1 /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.ttf; sourceTree = "<group>"; };
-		A23E10E924325FC00010D3D1 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Brands.ttf; sourceTree = "<group>"; };
-		A23E10EA24325FC00010D3D1 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialCommunityIcons.ttf; sourceTree = "<group>"; };
-		A23E10EB24325FC00010D3D1 /* AntDesign.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AntDesign.ttf; sourceTree = "<group>"; };
-		A23E10EC24325FC00010D3D1 /* Foundation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Foundation.ttf; sourceTree = "<group>"; };
-		A23E10ED24325FC00010D3D1 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ionicons.ttf; sourceTree = "<group>"; };
-		A23E10EE24325FC00010D3D1 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Solid.ttf; sourceTree = "<group>"; };
-		A23E10EF24325FC00010D3D1 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Regular.ttf; sourceTree = "<group>"; };
-		A23E10F024325FC00010D3D1 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
-		A23E10F124325FC00010D3D1 /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zocial.ttf; sourceTree = "<group>"; };
-		A23E10F224325FC10010D3D1 /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EvilIcons.ttf; sourceTree = "<group>"; };
-		A23E10F324325FC10010D3D1 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
-		A23E10F424325FC10010D3D1 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
+		959E9DCD7D9244108B7D24D2 /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-BoldItalic.ttf"; path = "../src/assets/fonts/OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
+		96A47163039F43D38D1E2C4A /* OpenSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-ExtraBoldItalic.ttf"; path = "../src/assets/fonts/OpenSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		9A0C309F87F2464D9902BDFB /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Bold.ttf"; path = "../src/assets/fonts/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		9F3C14537AB84DFEA49C224F /* Ubuntu-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Ubuntu-Regular.ttf"; path = "../src/assets/fonts/Ubuntu-Regular.ttf"; sourceTree = "<group>"; };
+		A281EAF1A4FB4667A7EE4CB2 /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-ExtraBold.ttf"; path = "../src/assets/fonts/OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
 		A97A4E0557304ABC060C6391 /* Pods-HostelAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HostelAppTests.release.xcconfig"; path = "Target Support Files/Pods-HostelAppTests/Pods-HostelAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		AECA5065FF6F4507BB1E73DF /* Ubuntu-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Ubuntu-MediumItalic.ttf"; path = "../src/assets/fonts/Ubuntu-MediumItalic.ttf"; sourceTree = "<group>"; };
+		BB232378A519447EBC9CAF25 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Regular.ttf"; path = "../src/assets/fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		D7CBE4C574C1133E6A0A3A14 /* Pods-HostelApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HostelApp.release.xcconfig"; path = "Target Support Files/Pods-HostelApp/Pods-HostelApp.release.xcconfig"; sourceTree = "<group>"; };
-		DED29041650E0BF33FA14E25 /* libPods-HostelApp-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HostelApp-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E48BA9E0E5F47476845B09DE /* Pods-HostelApp-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HostelApp-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-HostelApp-tvOS/Pods-HostelApp-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		E85C54CE1E6340AEB945A148 /* Ubuntu-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Ubuntu-Italic.ttf"; path = "../src/assets/fonts/Ubuntu-Italic.ttf"; sourceTree = "<group>"; };
 		EB6A86484A6B6C6503825EC6 /* Pods-HostelAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HostelAppTests.debug.xcconfig"; path = "Target Support Files/Pods-HostelAppTests/Pods-HostelAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		F43DEF21518E48EC86B8ED18 /* Ubuntu-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Ubuntu-Light.ttf"; path = "../src/assets/fonts/Ubuntu-Light.ttf"; sourceTree = "<group>"; };
 		FE29834A5672B4DC9E25DF8D /* Pods-HostelApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HostelApp.debug.xcconfig"; path = "Target Support Files/Pods-HostelApp/Pods-HostelApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		00E356EB1AD99517003FC87E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BDC2D475578F94631C5089AB /* libPods-HostelAppTests.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		13B07F8C1A680F5B00A75B9A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -129,7 +107,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				102D0A3D6691C4D276DBE90E /* libPods-HostelApp-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,7 +114,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF482F947F531A1B972FBC3E /* libPods-HostelApp-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,8 +157,6 @@
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				87ED51A87966EB5B5F8B60C2 /* libPods-HostelApp.a */,
-				7D170CADC146B136ADBD82D2 /* libPods-HostelApp-tvOS.a */,
-				DED29041650E0BF33FA14E25 /* libPods-HostelApp-tvOSTests.a */,
 				8518382294C46642AFCDABDB /* libPods-HostelAppTests.a */,
 			);
 			name = Frameworks;
@@ -201,7 +175,6 @@
 				1F26EF9625220D48006F63EC /* Roboto_medium.ttf */,
 				1F26EF9525220D48006F63EC /* Roboto.ttf */,
 				1F57FA74251BDB7C0081A1BF /* Dummy.swift */,
-				A23E10E424325FC00010D3D1 /* Fonts */,
 				13B07FAE1A68108700A75B9A /* HostelApp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* HostelAppTests */,
@@ -219,8 +192,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* HostelApp.app */,
-				00E356EE1AD99517003FC87E /* HostelAppTests.xctest */,
+				13B07F961A680F5B00A75B9A /* OzanSu.app */,
 				2D02E47B1E0B4A5D006451C7 /* HostelApp-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* HostelApp-tvOSTests.xctest */,
 			);
@@ -230,32 +202,26 @@
 		9BB54597F486494BB1F9E9F0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9A0C309F87F2464D9902BDFB /* OpenSans-Bold.ttf */,
+				959E9DCD7D9244108B7D24D2 /* OpenSans-BoldItalic.ttf */,
+				A281EAF1A4FB4667A7EE4CB2 /* OpenSans-ExtraBold.ttf */,
+				96A47163039F43D38D1E2C4A /* OpenSans-ExtraBoldItalic.ttf */,
+				3753E5DD4113423BA83B253B /* OpenSans-Italic.ttf */,
+				37258EDFF9614DE9B5BD7225 /* OpenSans-Light.ttf */,
+				57FD910828A7455D86168EEC /* OpenSans-LightItalic.ttf */,
+				BB232378A519447EBC9CAF25 /* OpenSans-Regular.ttf */,
+				45FA7CC4278A4D15A05D52FD /* OpenSans-SemiBold.ttf */,
+				11051815BC284FDB9E827786 /* OpenSans-SemiBoldItalic.ttf */,
+				574899E3CF72474280109D8B /* Ubuntu-Bold.ttf */,
+				52B75DAEBFAB4A37BAE76BA6 /* Ubuntu-BoldItalic.ttf */,
+				E85C54CE1E6340AEB945A148 /* Ubuntu-Italic.ttf */,
+				F43DEF21518E48EC86B8ED18 /* Ubuntu-Light.ttf */,
+				3F305AD1F5DC49E7B91E1B1F /* Ubuntu-LightItalic.ttf */,
+				5D3599EF6BF441B193469BD0 /* Ubuntu-Medium.ttf */,
+				AECA5065FF6F4507BB1E73DF /* Ubuntu-MediumItalic.ttf */,
+				9F3C14537AB84DFEA49C224F /* Ubuntu-Regular.ttf */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
-		};
-		A23E10E424325FC00010D3D1 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				A23E10E524325FC00010D3D1 /* Fontisto.ttf */,
-				A23E10E624325FC00010D3D1 /* Octicons.ttf */,
-				A23E10E724325FC00010D3D1 /* Feather.ttf */,
-				A23E10E824325FC00010D3D1 /* Entypo.ttf */,
-				A23E10E924325FC00010D3D1 /* FontAwesome5_Brands.ttf */,
-				A23E10EA24325FC00010D3D1 /* MaterialCommunityIcons.ttf */,
-				A23E10EB24325FC00010D3D1 /* AntDesign.ttf */,
-				A23E10EC24325FC00010D3D1 /* Foundation.ttf */,
-				A23E10ED24325FC00010D3D1 /* Ionicons.ttf */,
-				A23E10EE24325FC00010D3D1 /* FontAwesome5_Solid.ttf */,
-				A23E10EF24325FC00010D3D1 /* FontAwesome5_Regular.ttf */,
-				A23E10F024325FC00010D3D1 /* FontAwesome.ttf */,
-				A23E10F124325FC00010D3D1 /* Zocial.ttf */,
-				A23E10F224325FC10010D3D1 /* EvilIcons.ttf */,
-				A23E10F324325FC10010D3D1 /* SimpleLineIcons.ttf */,
-				A23E10F424325FC10010D3D1 /* MaterialIcons.ttf */,
-			);
-			name = Fonts;
-			path = "../node_modules/react-native-vector-icons/Fonts";
 			sourceTree = "<group>";
 		};
 		BE5ABC086B37A48B91EB87F6 /* Pods */ = {
@@ -263,10 +229,6 @@
 			children = (
 				FE29834A5672B4DC9E25DF8D /* Pods-HostelApp.debug.xcconfig */,
 				D7CBE4C574C1133E6A0A3A14 /* Pods-HostelApp.release.xcconfig */,
-				E48BA9E0E5F47476845B09DE /* Pods-HostelApp-tvOS.debug.xcconfig */,
-				341E935BC06A373DD4FEB1CB /* Pods-HostelApp-tvOS.release.xcconfig */,
-				9CB74DD464BFE178489B5433 /* Pods-HostelApp-tvOSTests.debug.xcconfig */,
-				33A5E7F5D49D6F95887E7D06 /* Pods-HostelApp-tvOSTests.release.xcconfig */,
 				EB6A86484A6B6C6503825EC6 /* Pods-HostelAppTests.debug.xcconfig */,
 				A97A4E0557304ABC060C6391 /* Pods-HostelAppTests.release.xcconfig */,
 			);
@@ -276,25 +238,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* HostelAppTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "HostelAppTests" */;
-			buildPhases = (
-				EEA7C06B95D3D79B541E407E /* [CP] Check Pods Manifest.lock */,
-				00E356EA1AD99517003FC87E /* Sources */,
-				00E356EB1AD99517003FC87E /* Frameworks */,
-				00E356EC1AD99517003FC87E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				00E356F51AD99517003FC87E /* PBXTargetDependency */,
-			);
-			name = HostelAppTests;
-			productName = HostelAppTests;
-			productReference = 00E356EE1AD99517003FC87E /* HostelAppTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		13B07F861A680F5B00A75B9A /* HostelApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "HostelApp" */;
@@ -313,14 +256,13 @@
 			);
 			name = HostelApp;
 			productName = HostelApp;
-			productReference = 13B07F961A680F5B00A75B9A /* HostelApp.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* OzanSu.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2D02E47A1E0B4A5D006451C7 /* HostelApp-tvOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "HostelApp-tvOS" */;
 			buildPhases = (
-				897CF58CF1640C11E95BA052 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F122414F3F0027D42C /* Start Packager */,
 				2D02E4771E0B4A5D006451C7 /* Sources */,
 				2D02E4781E0B4A5D006451C7 /* Frameworks */,
@@ -340,7 +282,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "HostelApp-tvOSTests" */;
 			buildPhases = (
-				AEF04BAFFB90F692DFE10C4A /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
 				2D02E48D1E0B4A5D006451C7 /* Frameworks */,
 				2D02E48E1E0B4A5D006451C7 /* Resources */,
@@ -364,11 +305,8 @@
 				LastUpgradeCheck = 940;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
-					00E356ED1AD99517003FC87E = {
-						CreatedOnToolsVersion = 6.2;
-						TestTargetID = 13B07F861A680F5B00A75B9A;
-					};
 					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = 8TSHZ8SJ45;
 						LastSwiftMigration = 1130;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -397,7 +335,6 @@
 			projectRoot = "";
 			targets = (
 				13B07F861A680F5B00A75B9A /* HostelApp */,
-				00E356ED1AD99517003FC87E /* HostelAppTests */,
 				2D02E47A1E0B4A5D006451C7 /* HostelApp-tvOS */,
 				2D02E48F1E0B4A5D006451C7 /* HostelApp-tvOSTests */,
 			);
@@ -405,37 +342,32 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		00E356EC1AD99517003FC87E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		13B07F8E1A680F5B00A75B9A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F26EF9725220D48006F63EC /* Roboto.ttf in Resources */,
-				1F26EF9825220D48006F63EC /* Roboto_medium.ttf in Resources */,
-				1F26EF8525220CC9006F63EC /* Fontisto.ttf in Resources */,
-				1F26EF8625220CC9006F63EC /* Octicons.ttf in Resources */,
-				1F26EF8725220CC9006F63EC /* Feather.ttf in Resources */,
-				1F26EF8825220CC9006F63EC /* Entypo.ttf in Resources */,
-				1F26EF8925220CC9006F63EC /* FontAwesome5_Brands.ttf in Resources */,
-				1F26EF8A25220CC9006F63EC /* MaterialCommunityIcons.ttf in Resources */,
-				1F26EF8B25220CC9006F63EC /* AntDesign.ttf in Resources */,
-				1F26EF8C25220CC9006F63EC /* Foundation.ttf in Resources */,
-				1F26EF8D25220CC9006F63EC /* Ionicons.ttf in Resources */,
-				1F26EF8E25220CC9006F63EC /* FontAwesome5_Solid.ttf in Resources */,
-				1F26EF8F25220CC9006F63EC /* FontAwesome5_Regular.ttf in Resources */,
-				1F26EF9025220CC9006F63EC /* FontAwesome.ttf in Resources */,
-				1F26EF9125220CC9006F63EC /* Zocial.ttf in Resources */,
-				1F26EF9225220CC9006F63EC /* EvilIcons.ttf in Resources */,
-				1F26EF9325220CC9006F63EC /* SimpleLineIcons.ttf in Resources */,
-				1F26EF9425220CC9006F63EC /* MaterialIcons.ttf in Resources */,
+				1FD76F19252A374B00D56AA2 /* Roboto_medium.ttf in Resources */,
+				1FD76F1A252A374B00D56AA2 /* Roboto.ttf in Resources */,
 				1F26EF8425220C7F006F63EC /* LaunchScreen.xib in Resources */,
 				1F26EF8325220C7A006F63EC /* Images.xcassets in Resources */,
+				54B31333414A4002A574A203 /* OpenSans-Bold.ttf in Resources */,
+				00D074A73E044BA6A533B356 /* OpenSans-BoldItalic.ttf in Resources */,
+				C8E96730143842EC959CDD34 /* OpenSans-ExtraBold.ttf in Resources */,
+				6908FCC485BA4D3F826AA290 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
+				5A5BB260983841DC8CFD4071 /* OpenSans-Italic.ttf in Resources */,
+				9368DBA5BD3A41089DE6E408 /* OpenSans-Light.ttf in Resources */,
+				3725730503D3488693E5331B /* OpenSans-LightItalic.ttf in Resources */,
+				BF0A908FBD144BF68077D4FC /* OpenSans-Regular.ttf in Resources */,
+				00F1F0FA5BF54E01AC239D5B /* OpenSans-SemiBold.ttf in Resources */,
+				9821C6184321465D8978CA3F /* OpenSans-SemiBoldItalic.ttf in Resources */,
+				6EA7D6D8C6DB4A7DAA8C6BB5 /* Ubuntu-Bold.ttf in Resources */,
+				0B6EE39ED9954033BD7BDE75 /* Ubuntu-BoldItalic.ttf in Resources */,
+				1F421F4EFB114442BDA510E0 /* Ubuntu-Italic.ttf in Resources */,
+				BC9AC9D2A777473E80FC008F /* Ubuntu-Light.ttf in Resources */,
+				3F64CAA06C1B45C19343D93B /* Ubuntu-LightItalic.ttf in Resources */,
+				6EF52B80EBEC4AAA831B9496 /* Ubuntu-Medium.ttf in Resources */,
+				DBBBFB32ACE94B158F7AD4B1 /* Ubuntu-MediumItalic.ttf in Resources */,
+				02EFA3C179D34A9C8D3E8AE4 /* Ubuntu-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -492,57 +424,45 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-HostelApp/Pods-HostelApp-resources.sh",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Feather.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Foundation.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Octicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Zocial.ttf",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AntDesign.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Entypo.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EvilIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Feather.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Brands.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Regular.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Solid.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Fontisto.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Foundation.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Ionicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialCommunityIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Octicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SimpleLineIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Zocial.ttf",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HostelApp/Pods-HostelApp-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		897CF58CF1640C11E95BA052 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-HostelApp-tvOS-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AEF04BAFFB90F692DFE10C4A /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-HostelApp-tvOSTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DCC5A059BEB1A44230A9B1D1 /* [CP] Check Pods Manifest.lock */ = {
@@ -561,28 +481,6 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-HostelApp-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EEA7C06B95D3D79B541E407E /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-HostelAppTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -630,14 +528,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		00E356EA1AD99517003FC87E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				00E356F31AD99517003FC87E /* HostelAppTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		13B07F871A680F5B00A75B9A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -668,11 +558,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* HostelApp */;
-			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
-		};
 		2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 2D02E47A1E0B4A5D006451C7 /* HostelApp-tvOS */;
@@ -693,51 +578,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		00E356F61AD99517003FC87E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = EB6A86484A6B6C6503825EC6 /* Pods-HostelAppTests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = HostelAppTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-lc++",
-					"$(inherited)",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HostelApp.app/HostelApp";
-			};
-			name = Debug;
-		};
-		00E356F71AD99517003FC87E /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A97A4E0557304ABC060C6391 /* Pods-HostelAppTests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COPY_PHASE_STRIP = NO;
-				INFOPLIST_FILE = HostelAppTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-lc++",
-					"$(inherited)",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HostelApp.app/HostelApp";
-			};
-			name = Release;
-		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FE29834A5672B4DC9E25DF8D /* Pods-HostelApp.debug.xcconfig */;
@@ -746,15 +586,17 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = 8TSHZ8SJ45;
 				INFOPLIST_FILE = HostelApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.4;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = HostelApp;
+				PRODUCT_BUNDLE_IDENTIFIER = org.ozanSu.app;
+				PRODUCT_NAME = OzanSu;
 				SWIFT_OBJC_BRIDGING_HEADER = "HostelApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -769,15 +611,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8TSHZ8SJ45;
 				INFOPLIST_FILE = HostelApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.4;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = HostelApp;
+				PRODUCT_BUNDLE_IDENTIFIER = org.ozanSu.app;
+				PRODUCT_NAME = OzanSu;
 				SWIFT_OBJC_BRIDGING_HEADER = "HostelApp-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -786,7 +630,6 @@
 		};
 		2D02E4971E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E48BA9E0E5F47476845B09DE /* Pods-HostelApp-tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -814,7 +657,6 @@
 		};
 		2D02E4981E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 341E935BC06A373DD4FEB1CB /* Pods-HostelApp-tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -842,7 +684,6 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9CB74DD464BFE178489B5433 /* Pods-HostelApp-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -869,7 +710,6 @@
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 33A5E7F5D49D6F95887E7D06 /* Pods-HostelApp-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -996,15 +836,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "HostelAppTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				00E356F61AD99517003FC87E /* Debug */,
-				00E356F71AD99517003FC87E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "HostelApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -1,13 +1,14 @@
 import axios from 'axios'
-import { WATER_GET_USER, WATER_GET_ABOUT_US, WATER_GET_USER_INFO, WATER_UPDATE_USER_INFO_GENERAL, WATER_UPDATE_STORE_INFO, WATER_GET_STORE_INFO, WATER_SUPPORT_SEND_MESSAGE, WATER_CUSTOMER_GETBY_ID } from './../constants'
+import { WATER_GET_USER, WATER_GET_ABOUT_US, WATER_GET_USER_INFO, WATER_UPDATE_USER_INFO_GENERAL, WATER_UPDATE_STORE_INFO, WATER_GET_STORE_INFO, WATER_SUPPORT_SEND_MESSAGE, WATER_CUSTOMER_GETBY_ID, WATER_GET_STORE_INFO_BY_STORE_ID } from './../constants'
 import { Dispatch } from "react";
-import { USER_GET, USER_LOADING, ABOUT_US_CONTEXT, GET_USER_INFO, GET_USER_INFO_LOADING, GET_USER_INFO_FAILED, ABOUT_US_CONTEXT_LOADING, ABOUT_US_CONTEXT_FAILED, UPDATE_USER_GENERAL, UPDATE_USER_GENERAL_LOADING, UPDATE_USER_GENERAL_FAILED, UPDATE_USER_SECURITY_LOADING, UPDATE_USER_SECURITY_FAILED, UPDATE_USER_SECURITY, GET_STORE_INFO_LOADING, GET_STORE_INFO_FAILED, GET_STORE_INFO, UPADTE_STORE_INFO_LOADING, UPADTE_STORE_INFO_FAILED, UPADTE_STORE_INFO, SEND_SUPPORT_MESSAGE_LOADING, SEND_SUPPORT_MESSAGE_FAILED, SEND_SUPPORT_MESSAGE_SUCCEED } from './../types'
+import { USER_GET, USER_LOADING, ABOUT_US_CONTEXT, GET_USER_INFO, GET_USER_INFO_LOADING, GET_USER_INFO_FAILED, ABOUT_US_CONTEXT_LOADING, ABOUT_US_CONTEXT_FAILED, UPDATE_USER_GENERAL, UPDATE_USER_GENERAL_LOADING, UPDATE_USER_GENERAL_FAILED, UPDATE_USER_SECURITY_LOADING, UPDATE_USER_SECURITY_FAILED, UPDATE_USER_SECURITY, GET_STORE_INFO_LOADING, GET_STORE_INFO_FAILED, GET_STORE_INFO, UPADTE_STORE_INFO_LOADING, UPADTE_STORE_INFO_FAILED, UPADTE_STORE_INFO, SEND_SUPPORT_MESSAGE_LOADING, SEND_SUPPORT_MESSAGE_FAILED, SEND_SUPPORT_MESSAGE_SUCCEED, LOADING_GET_STORE_INFORMATION, GET_STORE_INFORMATION } from './../types'
 import { Action } from '../states'
 import { IGetUserItem } from "../models/userModel";
 import { reset } from './loginAction';
 import { AsyncStorage } from 'react-native'
 import { user } from './getUserAction';
 import { Console } from 'console';
+import { BasestoreId, BaseStoreOwnerUserId } from '../../services/AppConfig';
 
 
 
@@ -137,6 +138,36 @@ export function updateStoreInfo(store: storeInfo) {
     })
 
   }
+}
+
+export interface storeInformation {
+  storeName: string;
+  address: string;
+  userNameSurname: string;
+  phoneNumber: string;
+}
+export function getStoreInformationFromStoreId() {
+  return (dispatch: Dispatch<Action>) => {
+    dispatch(loadingForGetStoreInformation(true))
+
+  axios.get(WATER_GET_STORE_INFO_BY_STORE_ID +`?storeId=${BasestoreId}`).then((res) => {
+
+    if (res.data.isSuccess) {
+      console.log(res)
+      let data: storeInformation = res.data.result
+      dispatch(GetStoreInformation(data))
+
+    } else {
+  dispatch(loadingForGetStoreInformation(false))
+
+    }
+
+  }).catch(err => {
+
+    dispatch(loadingForGetStoreInformation(false))
+
+  })
+}
 }
 
 export function getUserInfo() {
@@ -430,6 +461,17 @@ export const updateStore = () => ({
   payload: null
 })
 
+
+export const loadingForGetStoreInformation = (loader: boolean) => ({
+  type: LOADING_GET_STORE_INFORMATION,
+  payload: loader
+})
+
+
+export const GetStoreInformation = (val: storeInformation ) => ({
+  type: GET_STORE_INFORMATION,
+  payload: val
+})
 
 
 

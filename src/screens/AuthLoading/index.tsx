@@ -1,14 +1,20 @@
+import { Spinner } from "native-base";
 import { config } from "process";
 import React from "react";
 import {
   ActivityIndicator,
   AsyncStorage,
+  Image,
   StatusBar,
   StyleSheet,
+  Text,
   View
 } from "react-native";
+import { Colors } from "react-native/Libraries/NewAppScreen";
 import { NavigationScreenProp, NavigationState } from "react-navigation";
-import { BaseStoreOwnerUserId } from "../../services/AppConfig";
+import { colors } from "../../constants";
+import { BaseImage, BaseImageWithName, BaseStoreOwnerUserId } from "../../services/AppConfig";
+import * as Animatable from 'react-native-animatable';
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState>;
@@ -17,9 +23,10 @@ interface Props {
 class AuthLoading extends React.Component<Props, {}> {
   constructor(props: Props) {
     super(props);
-    this._bootstrapAsync();
+    setTimeout(  () => this._bootstrapAsync(), 2000);
+     
   }
-
+  
   _bootstrapAsync = async () => {
     const { navigation } = this.props;
     const userToken = await AsyncStorage.getItem("userToken");
@@ -38,7 +45,9 @@ class AuthLoading extends React.Component<Props, {}> {
   render() {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator />
+         <Image source={BaseImageWithName} width={200}  />
+         <Text style={{marginTop:10,color:colors.textColorLighter,fontStyle:"italic"}}>Bahçeşehire özel</Text>
+        <Spinner color={colors.IconColor} />
       </View>
     );
   }

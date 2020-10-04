@@ -10,16 +10,17 @@ import {
   LOADING_GET_PRODUCTS_FOR_CUSTOMER,
   GET_PRODUCTS_FOR_CUSTOMER,
   INC_OR_DEC_FROM_CART,
-  LOADING_INC_OR_DEC_FROM_CART,
+  LOADING_INC_OR_DEC_FROM_CART, CAMPAIGN_LIST_GET
 } from '../typesCustomer';
 import {number} from 'yup';
-import {IProductItemCustomer} from '../actionsCustomer/ProductAction';
+import {ICampaignItem, IProductItemCustomer} from '../actionsCustomer/ProductAction';
 
 const initalState = {
   loading: false,
   productList: [],
   loadingIncDec: false,
   loadingIndex: 0,
+  campaings:[]
 };
 
 interface State {
@@ -27,6 +28,7 @@ interface State {
   loading: boolean;
   loadingIncDec: boolean;
   loadingIndex: number;
+  campaings:ICampaignItem[];
 }
 export default (state: State = initalState, action: Action) => {
   switch (action.type) {
@@ -62,6 +64,13 @@ export default (state: State = initalState, action: Action) => {
           e.count !== 0 ? {...e, count: 0} : e,
         ),
       };
+
+      case CAMPAIGN_LIST_GET:
+        console.log(action.payload, "reducers");
+        return {
+          ...state,
+          campaings:action.payload
+        };
     default:
       return state;
   }

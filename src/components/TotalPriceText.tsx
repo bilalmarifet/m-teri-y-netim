@@ -11,7 +11,8 @@ import {colors} from '../constants';
 import {NavigationScreenProp, NavigationState} from 'react-navigation';
 import {IProductItemCustomer} from '../redux/actionsCustomer/ProductAction';
 import LinearGradient from 'react-native-linear-gradient';
-import {Icon} from 'native-base';
+import Icon from 'react-native-vector-icons/Feather';
+
 
 interface Props extends TextInputProps {
   navigation: NavigationScreenProp<NavigationState>;
@@ -25,10 +26,13 @@ export class TotalPriceText extends Component<Props, {}> {
     var totalPrice = 0;
     productList
       ? productList.length > 0
-        ? productList.map(e => (totalPrice += e.count * e.price))
+        ? productList.map(e => (totalPrice += e.count * (e.isCampaign ? e.newPrice : e.price)))
         : null
       : null;
 
+    if(totalPrice > 0 ) {
+      totalPrice = totalPrice.toFixed(2)
+    }
     return totalPrice ? (
       <TouchableOpacity
         onPress={() => this.props.navigation.navigate('Cart')}
@@ -47,7 +51,7 @@ export class TotalPriceText extends Component<Props, {}> {
               backgroundColor: 'white',
               margin: 1,
             }}>
-            <Icon style={{color: colors.iconColorSecond,fontSize:20}} name="shopping-cart" type="Feather"  />
+            <Icon style={{color: colors.headerColorTop,fontSize:20}} name="shopping-cart"  />
 
             <Text
               style={{

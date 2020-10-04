@@ -11,6 +11,9 @@ export const WATER_CUSTOMER_CALL_DETECT =
 export const WATER_CUSTOMER_CALL_DETECT_NEW =
   WATER_BASE_URL_NEW + '/api/customer/CustomerByPhoneNew';
 export const WATER_USER_LOGIN = WATER_BASE_URL_NEW + '/api/User/login';
+export const WATER_USER_FORGOT_PASSWORD = WATER_BASE_URL_NEW + '/api/User/ForgetPassword'
+export const WATER_GET_USER_TERM = WATER_BASE_URL_NEW + '/GetTerm'
+export const WATER_UPDATE_PASSWORD_FORGOT = WATER_BASE_URL_NEW + '/api/User/UpdatePasswordForget'
 export const WATER_CUSTOMER_ORDERS_GET =
   WATER_BASE_URL_NEW + '/api/customer/CustomerOrder?customerid=';
 export const WATER_CUSTOMER_ORDERS_GET_DETAIL =
@@ -29,6 +32,10 @@ export const WATER_ADD_CASH = WATER_BASE_URL_NEW + '/api/Cash';
 
 export const WATER_GET_PRODUCT =
   WATER_BASE_URL_NEW + '/api/Product/GetByUserId';
+
+export const WATER_GET_PRODUCTS_FOR_CUSTOMER =  WATER_BASE_URL_NEW + '/api/Product/ProductsForCustomer';
+  export const WATER_GET_CAMPAIGN=  WATER_BASE_URL_NEW + '/api/Campaign/GetByStoreId';
+
 export const WATER_EDIT_PRODUCT = WATER_BASE_URL_NEW + '/api/Product/Update';
 export const WATER_GET_PRODUCT_BY_ID =
   WATER_BASE_URL_NEW + '/api/Product/GetProductById';
@@ -59,6 +66,8 @@ export const WATER_PRODUCT_FOR_CUSTOMER =
   WATER_BASE_URL_NEW + '/api/Product/ProductForCustomer?productId=';
 export const WATER_CUSTOMER_ORDER_DELETE =
   WATER_BASE_URL_NEW + '/api/Order/Delete';
+  export const WATER_GET_DISTRICT = WATER_BASE_URL_NEW + '/api/storeDistrict';
+
 export const WATER_CUSTOMER_ORDER_UPDATE = WATER_BASE_URL + '/Order/Update';
 export const WATER_EMPLOYEE_GET = WATER_BASE_URL_NEW + '/api/employe';
 export const WATER_ADD_EMPLOYEE = WATER_BASE_URL_NEW + '/api/employe';
@@ -70,6 +79,8 @@ export const WATER_DELETE_EMPLOYEE = WATER_BASE_URL_NEW + '/api/employe/Delete';
 export const WATER_GET_USER = WATER_BASE_URL_NEW + '/api/User?employeId=';
 export const WATER_GET_ABOUT_US =
   WATER_BASE_URL_NEW + '/api/Cash/GetByName?identityName=hakkimizda';
+
+export const WATER_GET_STORE_INFO_BY_STORE_ID = WATER_BASE_URL_NEW + '/storeInfo'
 export const WATER_UPDATE_STORE_INFO = WATER_BASE_URL_NEW + '/UpdateStore';
 export const WATER_GET_STORE_INFO = WATER_BASE_URL_NEW + '/GetStoreByUserId';
 export const WATER_USER_CREATE_EMAIL_CONTROL =

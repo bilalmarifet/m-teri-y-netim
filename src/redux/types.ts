@@ -29,6 +29,10 @@ export const CUSTOMER_GETBY_ID = 'CustomerGetById';
 export const CUSTOMER_GETBY_ID_FAILED = 'CustomerGetByIdFailed';
 
 export const LOGIN_STARTED = 'loginStarted';
+export const LOADING_FORGOT_PASSWORD =  'LOADING_FORGOT_PASSWORD';
+export const LOADING_USER_AGREEMENT = "LOADING_USER_AGREEMENT";
+export const GET_USER_AGREEMENT = 'GET_USER_AGREEMENT';
+export const LOADING_FORGOT_PASSWORD_CHANGE =  'LOADING_FORGOT_PASSWORD_CHANGE';
 export const LOGIN_SUCCEED = 'loginSucceed';
 export const LOGIN_FAILED = 'loginFailed';
 export const LOGOUT="logOutDis"
@@ -75,6 +79,9 @@ export const GET_STORE_INFO_FAILED = 'getStoreInfoFailed';
 export const UPADTE_STORE_INFO = 'UPADTEStoreInfo';
 export const UPADTE_STORE_INFO_LOADING = 'UPADTEStoreInfoLoading';
 export const UPADTE_STORE_INFO_FAILED = 'UPADTEStoreInfoFailed';
+
+export const LOADING_GET_STORE_INFORMATION = 'LOADING_GET_STORE_INFORMATION';
+export const GET_STORE_INFORMATION = 'GET_STORE_INFORMATION';
 
 export const UPDATE_USER_GENERAL_LOADING = 'updateUserGeneralLoading';
 export const UPDATE_USER_GENERAL_FAILED = 'updateUserGeneralFailed';
@@ -127,6 +134,9 @@ export const PRODUCT_FOR_CUSTOMER_LOADING = 'ProductForCustomerLoading';
 
 export const ORDER_DELETE_SUCCEED = 'OrderDeleteSucceed';
 export const ORDER_DELETE_FAILED = 'OrderDeleteFailed';
+export const GET_DISTRICT = "GET_DISTRICT";
+export const LOADING_GET_DISTRICT =  "LOADING_GET_DISTRICT";
+export const LOADING_REMOVE_DISTRICT =  "LOADING_REMOVE_DISTRICT";
 
 export const UPDATE_ORDER_SUCCEED = 'UpdateOrderSucceed';
 export const UPDATE_ORDER_FAILED = 'UpdateOrderFailed';
