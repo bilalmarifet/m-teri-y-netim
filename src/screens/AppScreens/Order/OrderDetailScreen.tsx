@@ -155,6 +155,7 @@ class OrderDetailScreen extends Component<Props, State> {
       } 
       if(this.props.orderDetail) {
         let order = this.props.orderDetail
+        console.log(order)
         return(
             <View>
                 <View style={{}}>

@@ -29,6 +29,7 @@ import { isLoadingOrderList } from '../../../redux/actions/orderDetailActions';
 import { showSimpleMessage } from '../../../components/showMessage';
 import Icon from 'react-native-vector-icons/Feather';
 import IconMat from 'react-native-vector-icons/MaterialCommunityIcons'
+import FastImage from 'react-native-fast-image';
 interface Props {
   navigation: NavigationScreenProp<NavigationState>;
 
@@ -317,7 +318,15 @@ class CartScreen extends Component<Props, State> {
                   {this.renderPlusButton(item,index)}
                   <View style={{ width: '60%', flexDirection: 'row' }}>
                     <View>
-                      <Image style={{ width: 80, height: 80, marginLeft: 10 }} source={{ uri: item.imagePath }} />
+                    <FastImage
+     style={{ width: 80, height: 80, marginLeft: 10 }}
+        source={{
+            uri: item.imagePath,
+            priority: FastImage.priority.normal,
+        }}
+    />
+
+
                     </View>
                     <View style={{ marginTop: 10, marginLeft: 10 }}>
 

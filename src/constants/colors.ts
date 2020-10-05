@@ -4,19 +4,20 @@ export const colors = {
   containerBg: '#F0F2F5',
   textColor: '#393E46',
   borderColor: '#E4E6EA',
-  headerColorTop : '#57A4C3', //navigation header color
+  borderColorInner: '#193B52',
+  headerColorTop : '#F0F2F5',
   headerColor: '#204051',
   textColorSecond: 'green',
-  priceAndPlusColor : '#00a1d5',
+  priceAndPlusColor : '#fe7171',
   iconColor: '#2A5163',
   iconColorSecond: '#204051',
   containerBgInner: '#fff',
   containerBgSecond: '#84a9ac',
   containerBgThird: '#cae8d5',
   buttonBackgroundPrimary : '#30AE4A',
-  IconColor : '#00a1d5', 
+  IconColor : '#BD481F',
   IconNormalColor : '#393E46',
-  headerTitleColor :'white', // navigation header color
+  headerTitleColor :'#393E46',
   viewBackground: '#E5F1E5', // YESIL ARKA PLAN
   viewBackgroundText: '#56A6A4',
   textColorLighter: '#636363'
