@@ -106,7 +106,7 @@ class CustomerHomeScreen extends Component<Props, State> {
   static navigationOptions = ({ navigation }) => {
 
     return {
-      title: 'Ozansu Meşrubat',
+      title: 'Tuğra Group',
 
       headerStyle: {
         backgroundColor: colors.headerColorTop,
@@ -260,10 +260,13 @@ class CustomerHomeScreen extends Component<Props, State> {
       <View style={{ marginBottom: 10 }}>
         <View style={styles.itemCampaign}>
           <View style={{ paddingVertical: 10, justifyContent: 'center', alignContent: 'center', alignSelf: 'center' }}>
-            <Image
-              style={{ width: Dimensions.get('window').width / 4.5, height: Dimensions.get('window').width / 5 }}
-              source={{ uri: item.imagePath }}
-            />
+<FastImage
+       style={{ width: Dimensions.get('window').width / 4.5, height: Dimensions.get('window').width / 5 }}
+        source={{
+            uri: item.imagePath,
+            priority: FastImage.priority.normal,
+        }}
+    />
           </View>
 
 
@@ -329,8 +332,8 @@ class CustomerHomeScreen extends Component<Props, State> {
     const { page, limit } = this.state;
     console.log("home");
     return (
-      <ScrollView>
-        <View style={styles.container}>
+      <ScrollView style={{backgroundColor:colors.containerBg}} contentContainerStyle={{flexGrow:1}}>
+        <View style={[styles.container]}>
           {campaings &&
             <SliderBox
             autoplay={true}

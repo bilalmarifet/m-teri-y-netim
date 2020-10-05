@@ -194,7 +194,7 @@ class SignUpSecondScreen extends Component<Props, State> {
                           }
 
                          <View>
-                         <Text style={{fontFamily:fonts.primaryFont,fontSize:15,marginTop:10}}>{this.state.DistrictName}<Text style={{color:colors.textColorLighter,}}> (seçtiğiniz mahalleyi adrese eklemenize gerek yoktur.)</Text></Text>
+                        {this.state.DistrictName ? <Text style={{fontFamily:fonts.primaryFont,fontSize:15,marginTop:10}}>{this.state.DistrictName}<Text style={{color:colors.textColorLighter,}}> (seçtiğiniz mahalleyi adrese eklemenize gerek yoktur.)</Text></Text> : null}
                          </View>
                           <Input
                             placeholder="Adres"
