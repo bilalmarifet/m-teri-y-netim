@@ -106,13 +106,13 @@ class CustomerHomeScreen extends Component<Props, State> {
   static navigationOptions = ({ navigation }) => {
 
     return {
-      title: 'Tuğra Group',
+      title: 'OzanSu Meşrubat',
 
       headerStyle: {
         backgroundColor: colors.headerColorTop,
         headerTitleStyle: {
-          fontFamily: 'Roboto'
-
+          fontFamily: 'Roboto',
+         
         },
         header:
         {
@@ -121,6 +121,7 @@ class CustomerHomeScreen extends Component<Props, State> {
           shadowOffset: {
             height: 0,
           },
+ 
 
         },
         elevation: 0,
