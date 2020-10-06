@@ -113,34 +113,38 @@ class StoreInfoScreen extends Component<Props, State> {
             )
         }
         let storeInfo = this.props.storeInformation
+        let userNameSurname = storeInfo ? storeInfo.userNameSurname ?? "" : ""
+        let address = storeInfo ? storeInfo.address ?? "" : ""
+        let phoneNumber = storeInfo ? storeInfo.phoneNumber ?? "" : ""
+        let storeName = storeInfo ? storeInfo.storeName ?? "" : ""
         return(
 
           <View>
             <View style={{borderBottomWidth:0.5,borderBottomColor:colors.borderColor,paddingBottom:30}}>
               <Text style={{marginLeft:30,marginTop:10,fontFamily:fonts.primaryFont,fontSize:18}}>
-              Şirket İsmi: {storeInfo.storeName}
+              Şirket İsmi: {storeName}
             </Text>
             <Text style={{marginLeft:30,marginTop:10,fontFamily:fonts.primaryFont,fontSize:18,color:colors.textColorLighter}}>
-              {storeInfo.userNameSurname}
+              {userNameSurname}
             </Text>
             </View>
   
-            <TouchableHighlight onPress={()=> () => Linking.openURL(`tel:${storeInfo.phoneNumber}`)} underlayColor="#AAA"  style={{borderBottomWidth:1,borderBottomColor:colors.borderColor,padding:20,paddingVertical:15,backgroundColor:'white'}}>
+            <TouchableHighlight onPress={()=> () => Linking.openURL(`tel:${phoneNumber}`)} underlayColor="#AAA"  style={{borderBottomWidth:1,borderBottomColor:colors.borderColor,padding:20,paddingVertical:15,backgroundColor:'white'}}>
             <View style={{flexDirection:'row',justifyContent:'space-between'}}>
               <View style={{flexDirection:'row'}}>
               <Image source={require("../../../images/profile/007-phone-call.png")} style={{width:34,height:34, borderRadius:17}} />
-            <Text style={{alignSelf:'center',marginLeft:10,fontWeight:'600',fontFamily:fonts.primaryFont,fontSize:16}}>{storeInfo.phoneNumber}</Text>
+            <Text style={{alignSelf:'center',marginLeft:10,fontWeight:'600',fontFamily:fonts.primaryFont,fontSize:16}}>{phoneNumber}</Text>
             
               </View>
               <View style={{backgroundColor:colors.viewBackground,width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="chevron-forward" style={{color:colors.viewBackgroundText,fontSize:12}} /></View>
             </View>
             </TouchableHighlight>
-            <TouchableHighlight onPress={ () => Platform.OS === "ios" ? Linking.openURL('http://maps.apple.com/maps?daddr=' + storeInfo.address ): Linking.openURL('http://maps.google.com/maps?daddr=' + storeInfo.address)
+            <TouchableHighlight onPress={ () => Platform.OS === "ios" ? Linking.openURL('http://maps.apple.com/maps?daddr=' + address ): Linking.openURL('http://maps.google.com/maps?daddr=' + address)
            } underlayColor="#AAA"  style={{borderBottomWidth:1,borderBottomColor:colors.borderColor,padding:20,paddingVertical:15,backgroundColor:'white'}}>
             <View style={{flexDirection:'row',justifyContent:'space-between'}}>
               <View style={{flexDirection:'row'}}>
               <Image source={require("../../../images/profile/009-location.png")} style={{width:34,height:34, borderRadius:17}} />
-            <Text style={{alignSelf:'center',marginLeft:10,width:Dimensions.get('window').width - 110,fontWeight:'600',fontFamily:fonts.primaryFont,fontSize:16}}>{storeInfo.address}   aklsjdk lajsdlk asjdkl ajslkdj aslkdja lksdjalsdjalskjdladmlaksjd lkasjdlka jdlk ajsldjalskd</Text>
+            <Text style={{alignSelf:'center',marginLeft:10,width:Dimensions.get('window').width - 110,fontWeight:'600',fontFamily:fonts.primaryFont,fontSize:16}}>{address}</Text>
             
               </View>
 
