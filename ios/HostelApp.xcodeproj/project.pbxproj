@@ -54,7 +54,7 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* HostelAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HostelAppTests.m; sourceTree = "<group>"; };
 		11051815BC284FDB9E827786 /* OpenSans-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-SemiBoldItalic.ttf"; path = "../src/assets/fonts/OpenSans-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* Tugran Group.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tugran Group.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* AbantSu Taşdelen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AbantSu Taşdelen.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = HostelApp/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = HostelApp/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -192,7 +192,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* Tugran Group.app */,
+				13B07F961A680F5B00A75B9A /* AbantSu Taşdelen.app */,
 				2D02E47B1E0B4A5D006451C7 /* HostelApp-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* HostelApp-tvOSTests.xctest */,
 			);
@@ -256,7 +256,7 @@
 			);
 			name = HostelApp;
 			productName = HostelApp;
-			productReference = 13B07F961A680F5B00A75B9A /* Tugran Group.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* AbantSu Taşdelen.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2D02E47A1E0B4A5D006451C7 /* HostelApp-tvOS */ = {
@@ -595,8 +595,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.tugranGroup.app;
-				PRODUCT_NAME = "Tugran Group";
+				PRODUCT_BUNDLE_IDENTIFIER = org.abantsutasdelen;
+				PRODUCT_NAME = "AbantSu Taşdelen";
 				SWIFT_OBJC_BRIDGING_HEADER = "HostelApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -620,8 +620,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.tugranGroup.app;
-				PRODUCT_NAME = "Tugran Group";
+				PRODUCT_BUNDLE_IDENTIFIER = org.abantsutasdelen;
+				PRODUCT_NAME = "AbantSu Taşdelen";
 				SWIFT_OBJC_BRIDGING_HEADER = "HostelApp-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
