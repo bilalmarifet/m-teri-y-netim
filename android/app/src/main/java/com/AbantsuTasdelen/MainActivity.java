@@ -1,4 +1,4 @@
-package com.ozanSu;
+package com.AbantsuTasdelen;
 
 import com.facebook.react.ReactActivity;
 
