@@ -131,11 +131,11 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.ozanSu"
+        applicationId "com.TugraGroup"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion 29
-        versionCode 9
-        versionName "1.8"
+        versionCode 1
+        versionName "1.0"
     }
     splits {
         abi {

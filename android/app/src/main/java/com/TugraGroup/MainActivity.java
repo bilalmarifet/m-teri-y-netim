@@ -1,4 +1,4 @@
-package com.ozanSu;
+package com.TugraGroup;
 
 import com.facebook.react.ReactActivity;
 
