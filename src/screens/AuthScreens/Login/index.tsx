@@ -95,7 +95,7 @@ class Login extends Component<Props, {}> {
                     <View style={[styles.headStyle,{marginTop:Dimensions.get('window').height / 10}]}>
                       {/* <Image source={BaseImage} style={{width:100,height:100,marginBottom:10}} /> */}
                       <Text style={[styles.headText]}>
-                     Tuğra Group
+                     Kolay Sipariş
                       </Text>
                     </View>
                     <View style={[styles.inputContainer,{paddingBottom:0}]}>
@@ -151,7 +151,7 @@ class Login extends Component<Props, {}> {
                                   fontSize: 16,
 
                                 }}>
-                                Kullanıcı Sözleşmesini{' '}
+                                Gizlilik Sözleşmesini{' '}
                               </Text>
                             </TouchableOpacity>
                             <Text

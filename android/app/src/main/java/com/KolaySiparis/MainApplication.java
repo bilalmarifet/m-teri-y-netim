@@ -1,4 +1,4 @@
-package com.TugraGroup;
+package com.KolaySiparis;
 
 import android.app.Application;
 import android.content.Context;
