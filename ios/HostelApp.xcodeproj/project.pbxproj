@@ -13,14 +13,13 @@
 		0B6EE39ED9954033BD7BDE75 /* Ubuntu-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52B75DAEBFAB4A37BAE76BA6 /* Ubuntu-BoldItalic.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		1F26EF8325220C7A006F63EC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		1F26EF8425220C7F006F63EC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		1F421F4EFB114442BDA510E0 /* Ubuntu-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E85C54CE1E6340AEB945A148 /* Ubuntu-Italic.ttf */; };
 		1F57FA75251BDB7C0081A1BF /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F57FA74251BDB7C0081A1BF /* Dummy.swift */; };
+		1FC98C4C252FA2CE00EC5E6D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FC98C4B252FA2CE00EC5E6D /* Images.xcassets */; };
 		1FD76F19252A374B00D56AA2 /* Roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F26EF9625220D48006F63EC /* Roboto_medium.ttf */; };
 		1FD76F1A252A374B00D56AA2 /* Roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F26EF9525220D48006F63EC /* Roboto.ttf */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
-		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* HostelAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* HostelAppTests.m */; };
 		3725730503D3488693E5331B /* OpenSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57FD910828A7455D86168EEC /* OpenSans-LightItalic.ttf */; };
@@ -54,17 +53,17 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* HostelAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HostelAppTests.m; sourceTree = "<group>"; };
 		11051815BC284FDB9E827786 /* OpenSans-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-SemiBoldItalic.ttf"; path = "../src/assets/fonts/OpenSans-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* Kolay Sipariş.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Kolay Sipariş.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* Çubukçu Ticaret.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Çubukçu Ticaret.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = HostelApp/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = HostelApp/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = HostelApp/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = HostelApp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = HostelApp/main.m; sourceTree = "<group>"; };
 		1F26EF9525220D48006F63EC /* Roboto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Roboto.ttf; path = "../node_modules/native-base/Fonts/Roboto.ttf"; sourceTree = "<group>"; };
 		1F26EF9625220D48006F63EC /* Roboto_medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Roboto_medium.ttf; path = "../node_modules/native-base/Fonts/Roboto_medium.ttf"; sourceTree = "<group>"; };
 		1F57FA73251BDB7B0081A1BF /* HostelApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HostelApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		1F57FA74251BDB7C0081A1BF /* Dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dummy.swift; sourceTree = "<group>"; };
+		1FC98C4B252FA2CE00EC5E6D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = HostelApp/Images.xcassets; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* HostelApp-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HostelApp-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* HostelApp-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "HostelApp-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		37258EDFF9614DE9B5BD7225 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Light.ttf"; path = "../src/assets/fonts/OpenSans-Light.ttf"; sourceTree = "<group>"; };
@@ -143,7 +142,7 @@
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
-				13B07FB51A68108700A75B9A /* Images.xcassets */,
+				1FC98C4B252FA2CE00EC5E6D /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
@@ -192,7 +191,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* Kolay Sipariş.app */,
+				13B07F961A680F5B00A75B9A /* Çubukçu Ticaret.app */,
 				2D02E47B1E0B4A5D006451C7 /* HostelApp-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* HostelApp-tvOSTests.xctest */,
 			);
@@ -256,7 +255,7 @@
 			);
 			name = HostelApp;
 			productName = HostelApp;
-			productReference = 13B07F961A680F5B00A75B9A /* Kolay Sipariş.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* Çubukçu Ticaret.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2D02E47A1E0B4A5D006451C7 /* HostelApp-tvOS */ = {
@@ -349,7 +348,6 @@
 				1FD76F19252A374B00D56AA2 /* Roboto_medium.ttf in Resources */,
 				1FD76F1A252A374B00D56AA2 /* Roboto.ttf in Resources */,
 				1F26EF8425220C7F006F63EC /* LaunchScreen.xib in Resources */,
-				1F26EF8325220C7A006F63EC /* Images.xcassets in Resources */,
 				54B31333414A4002A574A203 /* OpenSans-Bold.ttf in Resources */,
 				00D074A73E044BA6A533B356 /* OpenSans-BoldItalic.ttf in Resources */,
 				C8E96730143842EC959CDD34 /* OpenSans-ExtraBold.ttf in Resources */,
@@ -362,6 +360,7 @@
 				9821C6184321465D8978CA3F /* OpenSans-SemiBoldItalic.ttf in Resources */,
 				6EA7D6D8C6DB4A7DAA8C6BB5 /* Ubuntu-Bold.ttf in Resources */,
 				0B6EE39ED9954033BD7BDE75 /* Ubuntu-BoldItalic.ttf in Resources */,
+				1FC98C4C252FA2CE00EC5E6D /* Images.xcassets in Resources */,
 				1F421F4EFB114442BDA510E0 /* Ubuntu-Italic.ttf in Resources */,
 				BC9AC9D2A777473E80FC008F /* Ubuntu-Light.ttf in Resources */,
 				3F64CAA06C1B45C19343D93B /* Ubuntu-LightItalic.ttf in Resources */,
@@ -375,7 +374,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -595,8 +593,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.kolaySiparis.app;
-				PRODUCT_NAME = "Kolay Sipariş";
+				PRODUCT_BUNDLE_IDENTIFIER = org.cubukcuTicaret.app;
+				PRODUCT_NAME = "Çubukçu Ticaret";
 				SWIFT_OBJC_BRIDGING_HEADER = "HostelApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -620,8 +618,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.kolaySiparis.app;
-				PRODUCT_NAME = "Kolay Sipariş";
+				PRODUCT_BUNDLE_IDENTIFIER = org.cubukcuTicaret.app;
+				PRODUCT_NAME = "Çubukçu Ticaret";
 				SWIFT_OBJC_BRIDGING_HEADER = "HostelApp-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
