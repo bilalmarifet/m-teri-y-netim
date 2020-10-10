@@ -157,7 +157,7 @@ class OrderDetailScreen extends Component<Props, State> {
         let order = this.props.orderDetail
         console.log(order)
         return(
-            <View>
+            <ScrollView>
                 <View style={{}}>
                     <View style={{padding:20,backgroundColor:'white',borderBottomColor:colors.borderColor,borderBottomWidth:1}}>
                     <View style={{flexDirection:'row',justifyContent:'space-between'}}>
@@ -206,7 +206,7 @@ class OrderDetailScreen extends Component<Props, State> {
                  
                     </View>
                 </View>
-            </View>
+            </ScrollView>
         )
       }
          
