@@ -53,6 +53,7 @@ export function GetOrders(
     axios
       .get(WATER_CUSTOMER_ORDERS_GET_CUSTOMER, {headers:headers})
       .then(response => {
+        console.log(response)
         if (response.data.isSuccess) {
           var takeTotal: number = response.data.result.takeTotalAmount;
           var tookTotal: number = response.data.result.tookTotalAmount;

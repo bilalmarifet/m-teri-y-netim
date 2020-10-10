@@ -47,16 +47,30 @@ interface State {
   limit: number;
   change: boolean;
   images: string[];
+  categories : Category[];
 }
 
+
+interface Category {
+  name: string;
+  image: string;
+  id : number;
+
+}
 
 
 const MyTitle = ({ navigation, productList }) => <TotalPriceText productList={productList} navigation={navigation} />;
 const MyConnectedTitle = connect((storeState: AppState) => ({ productList: storeState.CustomerproductForCustomer.productList }))(MyTitle);
 
 
-
-
+const categoryImageEt = require('../../../images/Category/et.jpg')
+const categoryImageElektronik = require('../../../images/Category/elektronik.jpg')
+const categoryImageicecek = require('../../../images/Category/icecek.jpg')
+const categoryImagekozmetik = require('../../../images/Category/kozmetik.jpg')
+const categoryImagemeyveSebze = require('../../../images/Category/meyveSebze.jpg')
+const categoryImagesutUrunleri = require('../../../images/Category/sutUrunleri.jpg')
+const categoryImagesutTemizlik = require('../../../images/Category/temizlik.jpg')
+const categoryCampaign = require('../../../images/Category/CampaignBakkal.png')
 
 class CustomerHomeScreen extends Component<Props, State> {
   constructor(props: Props) {
@@ -72,7 +86,16 @@ class CustomerHomeScreen extends Component<Props, State> {
         "https://source.unsplash.com/1024x768/?girl",
         "https://source.unsplash.com/1024x768/?tree", // Network image
 
-      ]
+      ],
+      categories : [{id:1,name:'Süt ve süt ürünleri',image: categoryImagesutUrunleri},
+      {id:1,name:'Et ve balık',image: categoryImageEt},
+      {id:1,name:'İçecek',image: categoryImageicecek},
+      {id:1,name:'Meyve sebze',image: categoryImagemeyveSebze},
+      {id:1,name:'Temizlik',image: categoryImagesutTemizlik},
+      {id:1,name:'Kozmetik',image:categoryImagekozmetik},
+      {id:1,name:'Elektronik',image: categoryImageElektronik}]
+      
+
     };
 
   }
@@ -106,7 +129,7 @@ class CustomerHomeScreen extends Component<Props, State> {
   static navigationOptions = ({ navigation }) => {
 
     return {
-      title: 'OzanSu Meşrubat',
+      title: 'Fill Market',
 
       headerStyle: {
         backgroundColor: colors.headerColorTop,
@@ -306,7 +329,7 @@ class CustomerHomeScreen extends Component<Props, State> {
 
       return (
         <View style={{
-          marginTop: 20, backgroundColor: '#fff', flex: 1, shadowOffset: {
+          marginTop: 0, backgroundColor: '#fff', flex: 1, shadowOffset: {
             width: 0,
             height: 2,
           },
@@ -317,7 +340,7 @@ class CustomerHomeScreen extends Component<Props, State> {
 
           <Text style={{ paddingLeft: 10, marginTop: 5, fontFamily: fonts.h3Font, color: '#555', fontSize: 16 }}>Fırsat Ürünleri</Text>
           <ScrollView horizontal={true} style={{ paddingTop: 10 }} showsHorizontalScrollIndicator={false}>
-            {campaignProductList.map((item: IProductItemCustomer, index) => {
+            {campaignProductList.reverse().map((item: IProductItemCustomer, index) => {
               return this.renderProductItem(item, index)
 
             })}
@@ -325,6 +348,46 @@ class CustomerHomeScreen extends Component<Props, State> {
         </View>
       )
     }
+  }
+  renderCategory() {
+    return(
+      <View style={{ marginTop: 10 }}>
+      <Text style={{ paddingLeft: 10, fontFamily: fonts.h3Font, color: '#555', fontWeight: '200', fontSize: 18 }}>Kategoriler</Text>
+      <FlatList
+          contentContainerStyle={{ paddingTop: 5 }}
+          data={this.state.categories}
+
+          keyExtractor={item => item.id}
+          renderItem={({ item, index }) => {
+            return (
+              <View style={{ marginBottom: 10,flex:.32 }}>
+
+
+                <View style={[styles.item,{paddingBottom:0,height:130,paddingLeft:0}]}>
+                  <View style={{ paddingVertical: 10, justifyContent: 'center', alignContent: 'center', alignSelf: 'center' }}>
+                    {/* <Image
+                      style={{ width: Dimensions.get('window').width / 3.5, height: Dimensions.get('window').width / 4 }}
+                      source={{ uri: item.imagePath }}
+                    /> */}
+                    <Image
+        style={{ width: Dimensions.get('window').width / 6, height: Dimensions.get('window').width / 6 }}
+        source={item.image}
+    />
+                  </View>
+
+                  <Text style={{ fontFamily: 'roboto', color: colors.textColor, width: '95%' ,textAlign:'center'}}>
+                    {item.name}
+                  </Text>
+                </View>
+
+              </View>
+            );
+          }}
+          numColumns={3}
+
+        />
+    </View>
+    )
   }
 
   render() {
@@ -335,16 +398,19 @@ class CustomerHomeScreen extends Component<Props, State> {
     return (
       <ScrollView style={{backgroundColor:colors.containerBg}} contentContainerStyle={{flexGrow:1}}>
         <View style={[styles.container]}>
-          {campaings &&
+          {/* {campaings && */}
             <SliderBox
+            sliderBoxHeight={250}
             autoplay={true}
             circleLoop
-              images={this.props.campaings.map((item) => { return item.photoPath; })}
+              // images={this.props.campaings.map((item) => { return item.photoPath; })}
+              images={[categoryCampaign]}
               onCurrentImagePressed={index => console.warn(`image ${index} pressed`)}
               currentImageEmitter={index => console.warn(`current pos is: ${index}`)}
             />
-          }
+          {/* } */}
           {this.renderCampaignProductsList()}
+          {this.renderCategory()}
           <View style={{ marginTop: 10 }}>
             <Text style={{ paddingLeft: 10, fontFamily: fonts.h3Font, color: '#555', fontWeight: '200', fontSize: 18 }}>Tüm Ürünlerimiz</Text>
           </View>
