@@ -98,7 +98,7 @@ class DistrictSelectionScreen extends Component<Props, State> {
       <View style={{flex:1}}>
         <SafeAreaView>
 
-       
+        <ScrollView style={{}}>
           <View style={{justifyContent: 'center'}}>
                       <View style={[styles.inputContainer]}>
                         <View
@@ -116,13 +116,16 @@ class DistrictSelectionScreen extends Component<Props, State> {
                         </View>
                        <Text style={{textAlign:'center',fontFamily:fonts.primaryFont,fontSize:18,marginBottom:20}}>Mahalleler</Text>
                         </View>
-        <FlatList
+                       
+                        <FlatList
         contentContainerStyle={{paddingHorizontal:20,flexGrow:1}} data={this.props.districtList}
          renderItem={({ item }) => (
             this.renderItem(item)
           )} 
-          ListFooterComponent={<SuccessButton disabled={this.state.selectedDistrictId === 0 } text="Devam et" style={{marginTop:20}} onPress={()=> this.sendToSignUp()} />
+          ListFooterComponent={<SuccessButton disabled={this.state.selectedDistrictId === 0 } text="Devam et" style={{marginTop:20,marginBottom:50}} onPress={()=> this.sendToSignUp()} />
         }/>
+                        </ScrollView>
+       
          </SafeAreaView>
            </View>
     );
