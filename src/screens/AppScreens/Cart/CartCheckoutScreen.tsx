@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, FlatList, ActivityIndicator, Button, Text, Image, TouchableOpacity,TouchableHighlight } from 'react-native';
+import { View, FlatList, ActivityIndicator, Button, Text, Image, TouchableOpacity,TouchableHighlight,TextInput } from 'react-native';
 import {
   NavigationScreenProp,
   NavigationState,
@@ -162,6 +162,20 @@ class CartScreen extends Component<Props, State> {
     }
   }
 
+  renderPaymentInfoText() {
+    return (
+      <View style={{borderColor:colors.IconColor,borderWidth:2,borderRadius:5,margin:20,backgroundColor:'white',paddingHorizontal:10,marginTop:0,paddingVertical:10}}>
+        <TextInput 
+        maxLength={250}
+        style={{minHeight:80,paddingTop: 0,
+          paddingBottom: 0,textAlignVertical: 'top'}}
+        multiline
+        placeholder="Sipariş Notu"
+         />
+      </View>
+    
+    )
+  }
   renderContent() {
    return(
      <View style={{flex:1}}>
@@ -183,6 +197,8 @@ class CartScreen extends Component<Props, State> {
         <Text style={{fontFamily:fonts.primaryFont,fontSize:15}}>Düzenle</Text>
       </TouchableOpacity> 
       </View>
+      {this.renderPaymentInfoText()}
+    
       {this.renderPaymentMethod()}
       
       <ButtonGradient loading={this.props.isLoadingAddOrder || this.props.loadingForGetPaymentMethods} onPress={()=>this.handleCartAction()} linearGredientStyle={{borderRadius:0,height:60}} style={{position:'absolute',bottom:0,left:0,right:0,height:60,borderRadius:0}} text="Alışverişi Tamamla" />
