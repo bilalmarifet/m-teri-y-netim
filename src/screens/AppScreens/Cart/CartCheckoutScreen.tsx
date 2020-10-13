@@ -97,8 +97,9 @@ class CartScreen extends Component<Props, State> {
   }
 
   handleCartAction(): void {
-    let selectedPaymentMethod =  this.props.paymentMethods ? this.props.paymentMethods.length > 0 ? this.props.selectedPaymentMethod ? this.props.paymentMethods[this.props.selectedPaymentMethod].paymentType : 0 : 0 : 0
+    let selectedPaymentMethod =  this.props.paymentMethods ? this.props.paymentMethods.length > 0 ? this.props.selectedPaymentMethod !== undefined ? this.props.paymentMethods[this.props.selectedPaymentMethod].paymentType : 0 : 0 : 0
     var products: product[] = [];
+    console.log(selectedPaymentMethod , this.props.paymentMethods , this.props.selectedPaymentMethod, this.props.selectedPaymentMethod !== undefined ? "true" : 'false')
     this.props.productList.map(element =>  {
       if(element.count > 0) {
         var product: product = {
@@ -125,6 +126,8 @@ class CartScreen extends Component<Props, State> {
           : undefined
         : undefined,
     );
+  
+  
   }
   renderPaymentMethod() {
     console.log(global.USERID)
