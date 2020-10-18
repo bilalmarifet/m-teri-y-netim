@@ -45,6 +45,7 @@ import DealerSelectionReducers from './reducers/DealerSelectionReducers';
 import productReducer from './reducersCustomer/productReducer';
 import { LOGOUT } from './types';
 import DistrictReducers from './reducers/DistrictReducers';
+import adressReducers from './reducers/adressReducers';
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
@@ -95,7 +96,8 @@ const appReducer = combineReducers({
   orderDetail: orderDetailReducers,
   dealerSelection: DealerSelectionReducers,
   CustomerproductForCustomer: productReducer,
-  District:DistrictReducers
+  District:DistrictReducers,
+  adress:adressReducers
 });
 
 const rootReducer = (state, action) => {

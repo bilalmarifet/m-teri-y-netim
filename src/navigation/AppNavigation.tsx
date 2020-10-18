@@ -35,6 +35,9 @@ import UpdateForgotPassowordScreen from "../screens/AuthScreens/Login/UpdateForg
 import CompareCodeScreen from "../screens/AuthScreens/Login/CompareCodeScreen";
 import UserAgreementScreen from "../screens/AuthScreens/Login/UserAgreementScreen";
 import StoreInfoScreen from "../screens/AppScreens/Profile/StoreInfoScreen";
+import MyAdressesScreen from "../screens/AppScreens/Profile/MyAdressesScreen";
+import AdressAddScreen from "../screens/AppScreens/Profile/AdressAddScreen";
+import AdressEditScreen from "../screens/AppScreens/Profile/AdressEditScreen";
 
 const MainStack = createStackNavigator(
   {
@@ -139,7 +142,10 @@ const CustomerProfileStack = createStackNavigator(
     CustomerEditProfile: CustomerEditProfileScreen,
     CustomerEditPassword: CustomerEditPasswordScreen,
     StoreInfo : StoreInfoScreen,
-    UserAgreement: UserAgreementScreen
+    UserAgreement: UserAgreementScreen,
+    MyAdresses: MyAdressesScreen,
+    AddAdress:AdressAddScreen,
+    EditAdress: AdressEditScreen
   },
   {
     initialRouteName: 'Profile',

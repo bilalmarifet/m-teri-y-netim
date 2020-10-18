@@ -27,6 +27,9 @@ import { AppState } from '../../../redux/store';
 import { UserInfo } from '../../../redux/actions/profileActions';
 import { ButtonGradient } from '../../../components/ButtonGradient';
 import Icon from 'react-native-vector-icons/Feather';
+import { adress, changeSelectedAdressId, getAdress } from '../../../redux/actions/adressAction';
+import RBSheet from "react-native-raw-bottom-sheet";
+import { Dimensions } from 'react-native';
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState>;
@@ -36,6 +39,8 @@ interface Props {
     isPaid: boolean,
     customerId: number,
     paymentType: number,
+    paymentInfoText: string,
+    addressId: number,
     type?: number,
     storeOwnerUserId?: number,
     customerName?: string,
@@ -47,18 +52,27 @@ interface Props {
   changePaymentMehtod : (index: number) => void;
   selectedPaymentMethod: number;
   isLoadingAddOrder : boolean;
+  getAdress: () => void;
+  isLoadingGetAdress: boolean;
+  adressList: adress[];
+  selectedAdressId: number;
+  changeSelectedAdressId: (adressId: number) =>void;
 }
 
 interface State {
+  paymentInfoText: string;
 }
 class CartScreen extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
-
+    this.state = {
+      paymentInfoText: ""
+    }
   }
 
   componentDidMount(){
     this.props.getPaymentMethod()
+    this.props.getAdress()
   }
 
   static navigationOptions = ({ navigation }) => {
@@ -84,14 +98,78 @@ class CartScreen extends Component<Props, State> {
     };
   };
  
+  renderChangeAdress() {
+    let selectedAdressId = this.props.selectedAdressId !== undefined ? this.props.selectedAdressId : 0
+    let selectedAdress = this.props.adressList.find(e=> e.id === selectedAdressId) 
+    
+    return(
+      <View>
+        <Text style={{fontFamily:fonts.primaryFont,fontSize:18,textAlign:'center',marginTop:10}}>Adreslerim</Text>
+        <TouchableOpacity onPress={()=> this.RBSheet.close()} style={{position:'absolute',right:5,top:10}}>
+          <Icon name="x" style={{fontSize:20}} />
+        </TouchableOpacity>
+       <ScrollView>
+       <FlatList
+          contentContainerStyle={{paddingBottom:10}}
+          style={{ }}
+          renderItem={({ item, index }) => {
+            return (
 
+              <TouchableHighlight onPress={()=> {this.props.changeSelectedAdressId(item.id)
+                      this.RBSheet.close()}}
+               underlayColor="#E5E5E5"  style={styles.itemAdressChange}>
+           <View style={{borderColor:colors.IconColor,borderWidth:2,borderRadius:5,margin:5,backgroundColor:'white',padding:10}}>
+
+
+     
+<View style={{flexDirection:'row',justifyContent:'space-between'}}>
+  <Text style={{fontFamily:fonts.primaryFont,fontWeight:"600"}}>{item.title}</Text>
+
+  {selectedAdressId === item.id && <View style={{backgroundColor:colors.viewBackground,padding:5,borderRadius:5,marginTop:-5}}>
+    <Text style={{color:colors.viewBackgroundText}}>Seçili Adres</Text>
+
+  </View>}
+
+</View>
+<Text style={{marginTop:20,fontFamily:fonts.primaryFont,color:colors.textColorLighter}}>{item.addressInfo}</Text>
+</View>
+              </TouchableHighlight>
+           
+           
+           );
+          }}
+          data={this.props.adressList ?? []}
+        />
+       </ScrollView>
+
+
+</View>
+
+    )
+  }
   render() {
 
     return (
       <View style={styles.container}>
 
         {this.renderContent()}
-
+        <RBSheet
+          ref={ref => {
+            this.RBSheet = ref;
+          }}
+          height={Dimensions.get('window').height - 100}
+          openDuration={250}
+          customStyles={{
+            container: {
+              justifyContent: "center",
+              alignItems: "center",
+              borderTopRightRadius:5,
+              borderTopLeftRadius:5
+            }
+          }}
+        >
+         {this.renderChangeAdress()}
+        </RBSheet>
       </View>
     );
   }
@@ -117,7 +195,8 @@ class CartScreen extends Component<Props, State> {
       products,
       false,
       global.CUSTOMER_ID,
-      selectedPaymentMethod,
+      selectedPaymentMethod,this.state.paymentInfoText,
+      this.props.selectedAdressId,
       1,
       global.STORE_OWNER_USER_ID,
       this.props.userInfo
@@ -169,6 +248,8 @@ class CartScreen extends Component<Props, State> {
     return (
       <View style={{borderColor:colors.IconColor,borderWidth:2,borderRadius:5,margin:20,backgroundColor:'white',paddingHorizontal:10,marginTop:0,paddingVertical:10}}>
         <TextInput 
+        onChangeText={(paymentInfoText) => this.setState({ paymentInfoText })}
+        value={this.state.paymentInfoText}
         maxLength={250}
         style={{minHeight:80,paddingTop: 0,
           paddingBottom: 0,textAlignVertical: 'top'}}
@@ -180,30 +261,43 @@ class CartScreen extends Component<Props, State> {
     )
   }
   renderContent() {
+
+    if(this.props.isLoadingGetAdress) {
+      <View style={{flex:1,justifyContent:'center',alignSelf:'center'}}>
+          <Spinner color={colors.IconColor} />
+      </View>
+    }
+    let selectedAdressId = this.props.selectedAdressId !== undefined ? this.props.selectedAdressId : 0
+    let selectedAdress = this.props.adressList.find(e=> e.id === selectedAdressId) 
+    
    return(
      <View style={{flex:1}}>
-      <View style={{borderColor:colors.IconColor,borderWidth:2,borderRadius:5,margin:20,backgroundColor:'white',paddingTop:20,paddingBottom:40,paddingHorizontal:10}}>
+       <ScrollView>
+
+      {(selectedAdress && selectedAdress !== undefined) ? <View style={{borderColor:colors.IconColor,borderWidth:2,borderRadius:5,margin:20,backgroundColor:'white',paddingTop:20,paddingBottom:40,paddingHorizontal:10}}>
 
 
      
-      <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-        <Text style={{fontFamily:fonts.primaryFont,fontWeight:"600"}}>Ev Adresi</Text>
+<View style={{flexDirection:'row',justifyContent:'space-between'}}>
+  <Text style={{fontFamily:fonts.primaryFont,fontWeight:"600"}}>{selectedAdress.title}</Text>
 
-        <View style={{backgroundColor:colors.viewBackground,padding:5,borderRadius:5,marginTop:-5}}>
-          <Text style={{color:colors.viewBackgroundText}}>Seçili Adres</Text>
+  <View style={{backgroundColor:colors.viewBackground,padding:5,borderRadius:5,marginTop:-5}}>
+    <Text style={{color:colors.viewBackgroundText}}>Seçili Adres</Text>
 
-        </View>
-  
-      </View>
-      <Text style={{marginTop:20,fontFamily:fonts.primaryFont,color:colors.textColorLighter}}>{this.props.userInfo.address}</Text>
-      <TouchableOpacity onPress={()=> this.props.navigation.navigate('CustomerEditProfile')} style={{position:'absolute',right:10,bottom:10}}>
-        <Text style={{fontFamily:fonts.primaryFont,fontSize:15}}>Düzenle</Text>
-      </TouchableOpacity> 
-      </View>
+  </View>
+
+</View>
+<Text style={{marginTop:20,fontFamily:fonts.primaryFont,color:colors.textColorLighter}}>{selectedAdress.addressInfo}</Text>
+<TouchableOpacity onPress={()=> this.RBSheet.open()} style={{position:'absolute',right:10,bottom:10}}>
+  <Text style={{fontFamily:fonts.primaryFont,fontSize:15}}>Değiştir</Text>
+</TouchableOpacity> 
+</View>
+: null}
+      
       {this.renderPaymentInfoText()}
     
       {this.renderPaymentMethod()}
-      
+      </ScrollView>
       <ButtonGradient loading={this.props.isLoadingAddOrder || this.props.loadingForGetPaymentMethods} onPress={()=>this.handleCartAction()} linearGredientStyle={{borderRadius:0,height:60}} style={{position:'absolute',bottom:0,left:0,right:0,height:60,borderRadius:0}} text="Alışverişi Tamamla" />
      </View>
    )
@@ -217,6 +311,9 @@ const mapStateToProps = (state: AppState) => ({
   loadingForGetPaymentMethods:state.addOrder.isLoadingGetPaymentMethods,
   selectedPaymentMethod: state.addOrder.selectedPaymentMethodsIndex,
   isLoadingAddOrder: state.addOrder.isLoading,
+  isLoadingGetAdress: state.adress.loading,
+  adressList : state.adress.adress,
+  selectedAdressId : state.adress.selectedAdressId
 });
 
 function bindToAction(dispatch: any) {
@@ -226,6 +323,8 @@ function bindToAction(dispatch: any) {
       isPaid: boolean,
       customerId: number,
       paymentType: number,
+      paymentInfoText: string,
+      addressId: number,
       type?: number,
       storeOwnerUserId?: number,
       customerName?: string,
@@ -236,6 +335,8 @@ function bindToAction(dispatch: any) {
           isPaid,
           customerId,
           paymentType,
+          paymentInfoText,
+          addressId,
           type,
           storeOwnerUserId,
           customerName,
@@ -245,7 +346,10 @@ function bindToAction(dispatch: any) {
       dispatch(getPaymentMethod()),
       changePaymentMehtod : (index: number) => 
       dispatch(changePaymentMehtod(index)),
-      
+      getAdress : () => 
+      dispatch(getAdress()),
+      changeSelectedAdressId: (adressId: number) => 
+      dispatch(changeSelectedAdressId(adressId))
   };
 }
 

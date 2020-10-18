@@ -142,6 +142,15 @@ class OrderDetailScreen extends Component<Props, State> {
           <Text style={{marginLeft:10}}>Siparişiniz tamamlandı.</Text></View></View>
  
         )
+        case OrderStatus.Cannceled:
+        return (
+          <View><Text style={{fontFamily:fonts.primaryFont,fontWeight:"600",fontSize:16,marginBottom:15}}>Sipariş Durumu</Text>
+          <View style={{flexDirection:'row',alignItems:'center',marginTop:10}}> 
+          <Icon  name="minus" style={{fontSize:12,color:colors.accent,marginTop:2}} />
+          <Text style={{marginLeft:10}}>Sipariş iptal edildi.</Text></View>
+         </View>
+ 
+        )
         break;
     
       default:
