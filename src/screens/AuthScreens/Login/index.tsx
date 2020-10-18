@@ -95,7 +95,7 @@ class Login extends Component<Props, {}> {
                     <View style={[styles.headStyle,{marginTop:Dimensions.get('window').height / 10}]}>
                       {/* <Image source={BaseImage} style={{width:100,height:100,marginBottom:10}} /> */}
                       <Text style={[styles.headText]}>
-                     Kolay Sipariş
+                      Bulduk Hayat Su
                       </Text>
                     </View>
                     <View style={[styles.inputContainer,{paddingBottom:0}]}>
@@ -125,7 +125,7 @@ class Login extends Component<Props, {}> {
                       <TouchableOpacity onPress={()=> this.props.navigation.navigate('ForgotPassword')}><Text style={{fontFamily:fonts.primaryFont,textAlign:'right',marginRight:5}}>Şifremi unuttum</Text></TouchableOpacity>
                 
                       <SuccessButton loading={this.props.isLoading} text="Giriş yap" onPress={props.handleSubmit} />
-                      <Button text="Üye ol" loading={this.props.isLoadingDistrict} style={{backgroundColor:colors.IconColor,paddingHorizontal: 10,  flexDirection:'row', justifyContent:'space-between'}} textStyle={{color:'white'}} onPress={()=> this.gotoDistrictOrNot()} />
+                      <Button text="Üye ol" loading={this.props.isLoadingDistrict} style={{backgroundColor:colors.SignUpButtonColor,paddingHorizontal: 10,  flexDirection:'row', justifyContent:'space-between'}} textStyle={{color:'white'}} onPress={()=> this.gotoDistrictOrNot()} />
                       <View
                             style={{
                               flexDirection: 'row',

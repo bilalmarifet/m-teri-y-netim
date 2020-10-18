@@ -15,12 +15,13 @@ export const colors = {
   containerBgSecond: '#84a9ac',
   containerBgThird: '#cae8d5',
   buttonBackgroundPrimary : '#30AE4A',
-  IconColor : '#5D9CF4',
+  IconColor : '#0099ED',
   IconNormalColor : '#393E46',
   headerTitleColor :'white',
   viewBackground: '#E5F1E5', // YESIL ARKA PLAN
   viewBackgroundText: '#56A6A4',
-  textColorLighter: '#636363'
+  textColorLighter: '#636363',
+  SignUpButtonColor: '#E1091F'
 };
 // export const colors = {
 //   primary: "#3F51B5",
