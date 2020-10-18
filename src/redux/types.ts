@@ -205,6 +205,7 @@ export const GET_CUSTOMER_ORDER_LIST_LOADING = 'getCustomerOrderListLoading';
 export const GET_CUSTOMER_ORDER_LIST_FAILED = 'getCustomerOrderListLoading';
 
 export const UPDATE_ORDER_DETAIL = 'updateOrderDetail';
+export const CANCEL_ORDER_LOADING = 'CANCEL_ORDER_LOADING';
 export const UPDATE_ORDER_DETAIL_LOADING = 'updateOrderDetailLoading';
 export const UPDATE_ORDER_DETAIL_FAILED = 'updateOrderDetailFailed';
 
