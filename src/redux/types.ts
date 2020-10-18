@@ -16,6 +16,11 @@ export const CUSTOMER_ADD_SUCCEED = 'CustomerAddSucceed';
 export const CUSTOMER_ADD_LOADING = 'CustomerAddLoading';
 export const CUSTOMER_ADD_FAILED = 'CustomerAddFailed';
 
+export const ADRESS_GET_LOADING = "ADRESS_GET_LOADING"
+export const ADRESS_ADD_LOADING = "ADRESS_ADD_LOADING"
+export const ADRESS_EDIT_LOADING = "ADRESS_EDIT_LOADING"
+export const ADRESS_GET = "ADRESS_GET"
+export const ADRESS_CHANGE_SELECTED_ID = "ADRESS_CHANGE_SELECTED_ID"
 export const CUSTOMER_DELETE_SUCCEED = 'CustomerDeleteSucceed';
 export const CUSTOMER_DELETE_FAILED = 'CustomerDeleteFailed';
 export const CUSTOMER_DELETE_LOADING = 'CustomerDeleteLoading';
