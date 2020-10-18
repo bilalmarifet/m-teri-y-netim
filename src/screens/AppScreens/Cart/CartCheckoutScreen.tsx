@@ -108,8 +108,9 @@ class CartScreen extends Component<Props, State> {
         <TouchableOpacity onPress={()=> this.RBSheet.close()} style={{position:'absolute',right:5,top:10}}>
           <Icon name="x" style={{fontSize:20}} />
         </TouchableOpacity>
-       <ScrollView>
+       <ScrollView bounces={false}>
        <FlatList
+       bounces={false}
           contentContainerStyle={{paddingBottom:10}}
           style={{ }}
           renderItem={({ item, index }) => {
@@ -161,8 +162,6 @@ class CartScreen extends Component<Props, State> {
           openDuration={250}
           customStyles={{
             container: {
-              justifyContent: "center",
-              alignItems: "center",
               borderTopRightRadius:5,
               borderTopLeftRadius:5
             }
@@ -269,7 +268,7 @@ class CartScreen extends Component<Props, State> {
     }
     let selectedAdressId = this.props.selectedAdressId !== undefined ? this.props.selectedAdressId : 0
     let selectedAdress = this.props.adressList.find(e=> e.id === selectedAdressId) 
-    
+    let isAdressCountHigerThanOne = this.props.adressList ? this.props.adressList.length > 1 ? true : false : false
    return(
      <View style={{flex:1}}>
        <ScrollView>
@@ -288,9 +287,9 @@ class CartScreen extends Component<Props, State> {
 
 </View>
 <Text style={{marginTop:20,fontFamily:fonts.primaryFont,color:colors.textColorLighter}}>{selectedAdress.addressInfo}</Text>
-<TouchableOpacity onPress={()=> this.RBSheet.open()} style={{position:'absolute',right:10,bottom:10}}>
+{isAdressCountHigerThanOne ? <TouchableOpacity onPress={()=> this.RBSheet.open()} style={{position:'absolute',right:10,bottom:10}}>
   <Text style={{fontFamily:fonts.primaryFont,fontSize:15}}>Değiştir</Text>
-</TouchableOpacity> 
+</TouchableOpacity> : null}
 </View>
 : null}
       
