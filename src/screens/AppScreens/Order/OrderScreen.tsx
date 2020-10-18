@@ -170,7 +170,7 @@ class OrderScreen extends Component<Props, State> {
         <LinearGradient
           start={{ x: 0, y: 0.5 }}
           end={{ x: 1, y: 0.5 }}
-          colors={['##FD7210', '#FFDA6D']}
+          colors={['#a81616', '#de4040']}
           style={{
             borderRadius: 5,
             padding: 5, justifyContent: 'center',

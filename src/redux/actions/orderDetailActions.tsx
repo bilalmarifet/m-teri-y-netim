@@ -1,7 +1,7 @@
 import axios from 'axios'
-import {WATER_GET_NOTIFICATIONS, WATER_GET_CUSTOMER_ORDER_DETAIL,WATER_UPDATE_CUSTOMER_ORDER_STATUS, WATER_ADD_ORDER, WATER_GET_ORDER_LIST, WATER_GET_CUSTOMER_ORDER_DETAIL_NEW,WATER_ADD_CASH,WATER_UPDATE_CARBOY_COUNT} from './../constants'
+import {WATER_GET_NOTIFICATIONS, WATER_GET_CUSTOMER_ORDER_DETAIL,WATER_UPDATE_CUSTOMER_ORDER_STATUS, WATER_ADD_ORDER, WATER_GET_ORDER_LIST, WATER_GET_CUSTOMER_ORDER_DETAIL_NEW,WATER_ADD_CASH,WATER_UPDATE_CARBOY_COUNT, WATER_CANCEL_ORDER} from './../constants'
 import { Dispatch } from "react";
-import { GET_CUSTOMER_ORDER_DETAIL, GET_CUSTOMER_ORDER_DETAIL_LOADING, GET_CUSTOMER_ORDER_DETAIL_FAILED, UPDATE_ORDER_DETAIL, UPDATE_ORDER_DETAIL_LOADING, UPDATE_ORDER_DETAIL_FAILED, GET_CUSTOMER_ORDER_LIST_LOADING, GET_CUSTOMER_ORDER_LIST_FAILED, GET_CUSTOMER_ORDER_LIST, GET_CUSTOMER_ORDER_LIST_MORE} from './../types'
+import { GET_CUSTOMER_ORDER_DETAIL, GET_CUSTOMER_ORDER_DETAIL_LOADING, GET_CUSTOMER_ORDER_DETAIL_FAILED, UPDATE_ORDER_DETAIL, UPDATE_ORDER_DETAIL_LOADING, UPDATE_ORDER_DETAIL_FAILED, GET_CUSTOMER_ORDER_LIST_LOADING, GET_CUSTOMER_ORDER_LIST_FAILED, GET_CUSTOMER_ORDER_LIST, GET_CUSTOMER_ORDER_LIST_MORE, CANCEL_ORDER_LOADING} from './../types'
 import {Action} from '../states'
 
 import {AsyncStorage } from 'react-native'
@@ -12,6 +12,8 @@ import { reset} from './loginAction';
 import { addOrder } from './addOrderAction';
 import { getNotifications } from './notificationAction';
 import { showMessage } from 'react-native-flash-message';
+import { showSimpleMessage } from '../../components/showMessage';
+import { NotificationService } from '../../services/NotificationService';
 
 export enum OrderStatus
     {
@@ -220,6 +222,53 @@ export function updateCarBoyOrGetPaid(IscarBoyUpdate : boolean , isGetPaidUpdate
 
 
 
+export function cancelOrder(orderId: number,canceledUsername: string) {
+  return (dispatch : Any) =>  {
+    dispatch(cancelOrderLoading(true))
+  AsyncStorage.multiGet(['userToken', 'userId']).then((res) => {
+    let token = res[0][1];
+    let userId = res[1][1];
+    
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+  }
+  axios.get(WATER_CANCEL_ORDER +`?orderId=${orderId}`,{
+      headers : headers
+    }).then((response) =>{
+    console.log(orderId,response)
+  if(response.data.isSuccess){
+    let tokenItems: String[] = []
+    if (response.data.result && response.data.result.length > 0) {
+      response.data.result.forEach((element: String) => {
+        tokenItems.push(element)
+      });
+
+      let notificationService = new NotificationService(0,1,orderId,tokenItems)
+      notificationService.sendPush("Sipariş iptali",`Müşteriniz ${canceledUsername} siparişini iptal etti.`)
+    }
+    dispatch(cancelOrderLoading(false))
+
+    }else {
+      dispatch(cancelOrderLoading(false))
+      showSimpleMessage("Siparişiniz işleme alındığı için iptal edilemez.","danger")
+    }
+  })
+  .catch(error => {   
+    dispatch(cancelOrderLoading(false))
+    showSimpleMessage("Siparişiniz iptal edilemedi daha sonra tekrar deneyiniz.","danger")
+  });
+
+}).catch(err=> {
+  dispatch(cancelOrderLoading(false))
+  showSimpleMessage("Siparişiniz iptal edilemedi daha sonra tekrar deneyiniz.","danger")
+})
+
+
+}
+
+}
+
 export function getCustomerOrderDetail(orderId : number) {
     return (dispatch : Any) =>  {
         dispatch(isLoading(true,''))
@@ -409,4 +458,10 @@ export const isLoadingStatusUpdate  = (loading : boolean, message : string ) => 
 export const updateOrderStatus = (message : string) => ({
   type : UPDATE_ORDER_DETAIL,
   payload : message
+})
+
+
+export const cancelOrderLoading = (loader : boolean) => ({
+  type : CANCEL_ORDER_LOADING,
+  payload : loader
 })
