@@ -3,7 +3,6 @@ import {
   View,
   FlatList,
   ActivityIndicator,
-  Button,
   Text,
   Alert,
   RefreshControl,
@@ -15,7 +14,7 @@ import {
   SafeAreaView,
 } from 'react-navigation';
 import {connect} from 'react-redux';
-import {Header} from '../../../components';
+import {Button, Header} from '../../../components';
 import styles from '../styles';
 import {AvatarItem} from '../../../components';
 import {logoutUserService} from '../../../redux/services/user';
@@ -35,9 +34,10 @@ import moment from 'moment';
 import {AppState} from '../../../redux/store';
 import { InfoItem } from '../../../components/InfoItem';
 import { ScrollView } from 'react-native-gesture-handler';
-import { getCustomerOrderDetail, orderDetail, orderListItem, OrderStatus } from '../../../redux/actions/orderDetailActions';
+import { cancelOrder, getCustomerOrderDetail, orderDetail, orderListItem, OrderStatus } from '../../../redux/actions/orderDetailActions';
 import { stat } from 'fs';
 import Icon from 'react-native-vector-icons/Feather';
+import { UserInfo } from '../../../redux/actions/profileActions';
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState>;
@@ -45,7 +45,9 @@ interface Props {
   orders: IOrderItem[];
   getCustomerOrderDetail: (orderId : number) => void;
   orderDetail : orderDetail;
-
+  cancelOrderLoading : boolean
+  cancelOrder : (orderId: number,canceledUsername: string) => void;
+  userInfo : UserInfo
 }
 
 interface State {
@@ -164,7 +166,8 @@ class OrderDetailScreen extends Component<Props, State> {
       } 
       if(this.props.orderDetail) {
         let order = this.props.orderDetail
-        console.log(order)
+        let orderStatus = order ? order.orderStatus ?  order.orderStatus : OrderStatus.Waiting : OrderStatus.Waiting 
+
         return(
             <ScrollView>
                 <View style={{}}>
@@ -214,6 +217,8 @@ class OrderDetailScreen extends Component<Props, State> {
                     <Text style={{fontFamily:fonts.primaryFont,color:colors.textColor,marginTop:5}}>Siparişiniz için teşekkür ederiz.</Text>
                  
                     </View>
+                    {orderStatus === OrderStatus.Waiting ? <Button loading={this.props.cancelOrderLoading} text="Siparişi iptal et" style={{backgroundColor:colors.accent,paddingHorizontal: 10,marginHorizontal:20,  flexDirection:'row', justifyContent:'space-between'}} textStyle={{color:'white'}} onPress={()=> this.props.cancelOrder(Number(this.props.navigation.getParam('orderId')),this.props.userInfo.nameSurname)} />
+                     : null}
                 </View>
             </ScrollView>
         )
@@ -238,13 +243,17 @@ const mapStateToProps = (state: AppState) => ({
   orders: state.orders.orders,
   loadingForOrderDetail: state.orderDetail.isLoading,
   orderDetail : state.orderDetail.orderDetail,
+  cancelOrderLoading : state.orderDetail.isCancelOrderLoading,
+  userInfo: state.profile.userInfo,
 
 });
 
 function bindToAction(dispatch: any) {
   return {
     getCustomerOrderDetail: (orderId : number) => 
-    dispatch(getCustomerOrderDetail(orderId))
+    dispatch(getCustomerOrderDetail(orderId)),
+    cancelOrder : (orderId: number,canceledUsername: string) => 
+    dispatch(cancelOrder(orderId,canceledUsername))
   };
 }
 
