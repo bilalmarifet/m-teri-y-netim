@@ -239,6 +239,8 @@ export function AddOrderMultiple(
   isPaid: boolean,
   customerId: number,
   paymentType: number,
+  paymentInfoText: string,
+  addressId: number,
   type?: number,
   storeOwnerUserId?: number,
   customerName?: string,
@@ -247,6 +249,7 @@ export function AddOrderMultiple(
   if (!type) {
     type = 0;
   }
+  console.log("paymentInfoText",paymentInfoText)
 
   return (dispatch: Any) => {
     dispatch(isLoading(true));
@@ -286,8 +289,10 @@ export function AddOrderMultiple(
               isPaid: isPaid,
               customerId: customerId,
               userId: userId,
+              orderNote: paymentInfoText,
               type: type,
-              paymentType: paymentType
+              addressId: addressId,
+              paymentType: paymentType,
             },
             {
               headers: headers,

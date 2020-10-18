@@ -136,6 +136,18 @@ class CustomerProfileScreen extends Component<Props, State> {
               <View style={{backgroundColor:colors.viewBackground,width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="chevron-forward" style={{color:colors.viewBackgroundText,fontSize:12}} /></View>
             </View>
             </TouchableHighlight>
+
+            <TouchableHighlight onPress={()=> this.props.navigation.navigate('MyAdresses')} underlayColor="#AAA"  style={{borderBottomWidth:1,borderBottomColor:colors.borderColor,padding:20,paddingVertical:15,backgroundColor:'white'}}>
+            <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+              <View style={{flexDirection:'row'}}>
+              <Image source={require("../../../images/profile/009-location.png")} style={{width:34,height:34, borderRadius:17}} />
+            <Text style={{alignSelf:'center',marginLeft:10,fontWeight:'600',fontFamily:fonts.primaryFont,fontSize:16}}>Adreslerim</Text>
+            
+              </View>
+              <View style={{backgroundColor:colors.viewBackground,width:24,height:24,borderRadius:12,justifyContent:'center',alignItems:'center',alignSelf:'center'}}><Icon name="chevron-forward" style={{color:colors.viewBackgroundText,fontSize:12}} /></View>
+            </View>
+            </TouchableHighlight>
+
             <TouchableHighlight onPress={()=> this.props.navigation.navigate('UserAgreement')} underlayColor="#AAA"  style={{borderBottomWidth:1,borderBottomColor:colors.borderColor,padding:20,paddingVertical:15,backgroundColor:'white'}}>
             <View style={{flexDirection:'row',justifyContent:'space-between'}}>
               <View style={{flexDirection:'row'}}>
