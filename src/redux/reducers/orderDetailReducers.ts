@@ -1,4 +1,4 @@
-import { NOTIFICATION_LIST_LOADING, NOTIFICATION_LIST_FAILED, NOTIFICATION_LIST_GET,RESET_PROPS, GET_CUSTOMER_ORDER_DETAIL_LOADING, GET_CUSTOMER_ORDER_DETAIL, GET_CUSTOMER_ORDER_DETAIL_FAILED, UPDATE_ORDER_DETAIL, UPDATE_ORDER_DETAIL_LOADING, UPDATE_ORDER_DETAIL_FAILED, GET_CUSTOMER_ORDER_LIST_LOADING, GET_CUSTOMER_ORDER_LIST_FAILED, GET_CUSTOMER_ORDER_LIST, GET_CUSTOMER_ORDER_LIST_MORE } from "../types";
+import { NOTIFICATION_LIST_LOADING, NOTIFICATION_LIST_FAILED, NOTIFICATION_LIST_GET,RESET_PROPS, GET_CUSTOMER_ORDER_DETAIL_LOADING, GET_CUSTOMER_ORDER_DETAIL, GET_CUSTOMER_ORDER_DETAIL_FAILED, UPDATE_ORDER_DETAIL, UPDATE_ORDER_DETAIL_LOADING, UPDATE_ORDER_DETAIL_FAILED, GET_CUSTOMER_ORDER_LIST_LOADING, GET_CUSTOMER_ORDER_LIST_FAILED, GET_CUSTOMER_ORDER_LIST, GET_CUSTOMER_ORDER_LIST_MORE, CANCEL_ORDER_LOADING } from "../types";
 import {Action} from '../states';
 
 import {notificationListItem, INotificationItem} from '../actions/notificationAction'
@@ -14,6 +14,7 @@ const intialState = {
     orderList : [],
     messageOrderList : '',
     isLodingOrderList : false || null, 
+    isCancelOrderLoading: false
 };
 
 export interface orderDetailState {
@@ -26,12 +27,17 @@ export interface orderDetailState {
     orderList : orderListItem[];
     isLodingOrderList : boolean | null;
     messageOrderList : string;
+    isCancelOrderLoading: boolean;
   }
 
 
 export default (state: orderDetailState = intialState, action: Action) => {
   switch (action.type) {
-
+    case CANCEL_ORDER_LOADING:
+      return {
+        ...state,
+        isCancelOrderLoading: action.payload
+      }
     case GET_CUSTOMER_ORDER_LIST_LOADING:
       return {
         ...state,

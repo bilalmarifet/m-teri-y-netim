@@ -129,6 +129,8 @@ export const WATER_GET_CUSTOMER_ORDER_DETAIL =
 export const WATER_GET_CUSTOMER_ORDER_DETAIL_NEW =
   WATER_BASE_URL_NEW + '/api/Order/OrderDetailNew';
 
+  export const WATER_CANCEL_ORDER = WATER_BASE_URL_NEW + '/api/Order/cancel'
+
 export const WATER_UPDATE_CUSTOMER_ORDER_STATUS =
   WATER_BASE_URL_NEW + '/api/Order/UpdateOrderStatus';
 
