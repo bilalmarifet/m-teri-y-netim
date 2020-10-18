@@ -68,6 +68,23 @@ paddingVertical:10,
     position:'relative',
 
   },
+  itemAdress: {
+
+    borderWidth: 0,
+paddingVertical:10,
+paddingHorizontal:10,
+    borderBottomWidth:1,
+    borderBottomColor:'#cccc',
+    
+    borderStyle:'solid',
+    flexDirection: 'column',
+
+    borderColor: colors.borderColor,
+    backgroundColor: colors.containerBgInner,
+    shadowColor: '#000',
+    position:'relative',
+
+  },
   itemOrder:{
     marginHorizontal:10,
     borderWidth: 0,
@@ -83,6 +100,21 @@ paddingVertical:10,
     position:'relative',
     marginBottom:10
   },
+  itemAdressChange:{
+    borderWidth: 0,
+    padding:10,
+    borderBottomWidth:1,
+    borderBottomColor:'#cccc',
+    borderStyle:'solid',
+    flexDirection: 'column',
+    borderRadius:10,
+    
+    backgroundColor: colors.containerBgInner,
+    shadowColor: '#000',
+    position:'relative',
+    marginBottom:10
+  },
+
   IncOrDecButton:{
     borderColor: '#e8e8e8',
      borderStyle: 'solid', 
