@@ -15,14 +15,19 @@ import { NavigationScreenProp, NavigationState } from "react-navigation";
 import { colors } from "../../constants";
 import { BaseImage, BaseImageWithName, BaseStoreOwnerUserId } from "../../services/AppConfig";
 import * as Animatable from 'react-native-animatable';
+import { connect } from "react-redux";
+import { getCategories } from "../../redux/actions/categoryAction";
+import { AppState } from "../../redux/store";
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState>;
+  getCategories : ()=>void;
 }
 
 class AuthLoading extends React.Component<Props, {}> {
   constructor(props: Props) {
     super(props);
+    this.props.getCategories()
     setTimeout(  () => this._bootstrapAsync(), 2000);
      
   }
@@ -53,4 +58,19 @@ class AuthLoading extends React.Component<Props, {}> {
   }
 }
 
-export default AuthLoading;
+const mapStateToProps = (state: AppState) => ({
+  
+});
+
+function bindToAction(dispatch: any) {
+  return {
+    getCategories : () => 
+    dispatch(getCategories())
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  bindToAction
+)(AuthLoading);
+

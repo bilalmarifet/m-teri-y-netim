@@ -9,6 +9,7 @@ export const colors = {
   headerColor: '#204051',
   textColorSecond: 'green',
   priceAndPlusColor : '#fe7171',
+  IconColorLighter : '#bd7a4b',
   iconColor: '#2A5163',
   iconColorSecond: '#204051',
   containerBgInner: '#fff',
@@ -20,7 +21,8 @@ export const colors = {
   headerTitleColor :'#393E46',
   viewBackground: '#E5F1E5', // YESIL ARKA PLAN
   viewBackgroundText: '#56A6A4',
-  textColorLighter: '#636363'
+  textColorLighter: '#636363',
+  textColorMoreLighter:"#828282"
 };
 // export const colors = {
 //   primary: "#3F51B5",

@@ -1,4 +1,4 @@
-package com.ozanSu;
+package com.fillMarketMusteri;
 
 import com.facebook.react.ReactActivity;
 

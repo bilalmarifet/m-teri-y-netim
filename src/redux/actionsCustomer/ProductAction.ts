@@ -21,6 +21,15 @@ export interface IProductItemCustomer extends IProductItem {
   isCampaign: boolean | null
   newPrice: number;
   productCount: number;
+  productCode :string;
+  price :number;
+  productStatus:boolean;
+  photoPath:string;
+  categoryId:number;
+  categoryName:string;
+  categoryParentName: string;
+  categoryParentId: string;
+
 }
 
 export interface ICampaignItem {
@@ -108,31 +117,35 @@ export function GetProductsForCustomer(productsList?: IProductItemCustomer[] = [
 
         axios
           .get(
-            WATER_GET_PRODUCTS_FOR_CUSTOMER + `?customerId=${global.CUSTOMER_ID}&storeId=${BasestoreId}`,
-
+            WATER_GET_PRODUCTS_FOR_CUSTOMER + `?storeId=${BasestoreId}`,
             { headers: headers },
           )
           .then(response => {
+            console.log(response)
             if (response.data.isSuccess) {
               var productModel: IProductItemCustomer[] = [];
-              response.data.result.homeProductItemModels.forEach(
+              response.data.result.forEach(
                 (product: any) => {
                   let index = productsList.findIndex(
-                    e => e.productId === product.productId,
+                    e => e.Id === product.id,
                   );
                   let count = index !== -1 ? productsList[index].count : 0;
                   var productItem: IProductItemCustomer = {
-                    productId: product.productId,
+                    id: product.id,
                     productName: product.productName,
                     productCode: product.productCode,
                     price: product.price,
                     productStatus: product.productStatus,
                     count: count,
-                    imagePath: product.imagePath,
+                    photoPath: product.photoPath ? product.photoPath : "",
                     active: product.active,   
                     newPrice: product.newPrice,
                     productCount: product.productCount,
-                    isCampaign: product.isCampaign
+                    isCampaign: product.isCampaign,
+                    categoryId:product.categoryId,
+                    categoryName:product.categoryName,
+                    categoryParentName: product.categoryParentName,
+                    categoryParentId:  product.categoryParentId
                   };
                   productModel.push(productItem);
                 },
@@ -164,11 +177,11 @@ export function IncOrDecItemFromCart(
   return (dispatch: Dispatch<Action>) => {
     var list = [];
     dispatch(loadingForIncDec(true, productId));
-
+    console.log(productId)
 
 
     if (index) {
-      index = productsList.findIndex(e => e.productId === productId)
+      index = productsList.findIndex(e => e.id === productId)
       let count = productsList[index].count;
       list = [
         ...productsList.slice(0, index),
@@ -182,7 +195,7 @@ export function IncOrDecItemFromCart(
       ];
     } else {
       list = productsList.map(e =>
-        e.productId === productId
+        e.id === productId
           ? { ...e, count: isIncrease ? e.count + 1 : e.count - 1 }
           : e,
       );

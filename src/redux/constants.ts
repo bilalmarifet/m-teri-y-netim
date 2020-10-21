@@ -33,7 +33,7 @@ export const WATER_ADD_CASH = WATER_BASE_URL_NEW + '/api/Cash';
 export const WATER_GET_PRODUCT =
   WATER_BASE_URL_NEW + '/api/Product/GetByUserId';
 
-export const WATER_GET_PRODUCTS_FOR_CUSTOMER =  WATER_BASE_URL_NEW + '/api/Product/ProductsForCustomer';
+export const WATER_GET_PRODUCTS_FOR_CUSTOMER =  WATER_BASE_URL_NEW + '/api/Product/shop/ProductsForCustomer';
   export const WATER_GET_CAMPAIGN=  WATER_BASE_URL_NEW + '/api/Campaign/GetByStoreId';
 
 export const WATER_EDIT_PRODUCT = WATER_BASE_URL_NEW + '/api/Product/Update';
@@ -108,6 +108,8 @@ export const WATER_CUSTOMER_ADD_NEW = WATER_BASE_URL_NEW + '/api/customer';
 export const WATER_ADRESS = WATER_BASE_URL_NEW + '/api/customer/address'
 export const WATER_USER_CREATE_CONTROL_EMAIL =
   WATER_BASE_URL_NEW + '/api/UserCreate/EmailCheck';
+  
+export const WATER_GET_CATEGORIES = WATER_BASE_URL_NEW + '/api/category/customer'
 
 export const WATER_CREATE_NOTIFICATION =
   WATER_BASE_URL_NEW + '/api/User/AddUserToken';

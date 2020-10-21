@@ -6,13 +6,13 @@ import { Header } from "../../../components";
 import styles from "../styles";
 import { AvatarItem } from "../../../components";
 import { logoutUserService } from "../../../redux/services/user";
-import { Thumbnail, Spinner } from 'native-base'
+import { Thumbnail, Spinner, Item } from 'native-base'
 import {
   fetchImageData,
   fetchMoreImageData
 } from "../../../redux/actions/fetch";
 
-import { showMessage } from "react-native-flash-message";
+import FlashMessage, { showMessage } from "react-native-flash-message";
 import { colors, fonts } from "../../../constants";
 import LinearGradient from 'react-native-linear-gradient';
 import { AppState } from "../../../redux/store";
@@ -50,6 +50,10 @@ interface State {
   change: boolean;
   images: string[];
   categories : Category[];
+  selectedBaseCategoryId: number;
+  selectedSecondCategoryId: number;
+  categoryId:number
+  categorySecondList: Category[]
 }
 
 
@@ -67,7 +71,7 @@ const categoryImagesutUrunleri = require('../../../images/Category/sutUrunleri.j
 const categoryImagesutTemizlik = require('../../../images/Category/temizlik.jpg')
 const categoryCampaign = require('../../../images/Category/CampaignBakkal.png')
 
-class CustomerHomeScreen extends Component<Props, State> {
+class ProductListWithCategoryScreen extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -88,14 +92,24 @@ class CustomerHomeScreen extends Component<Props, State> {
       {id:1,name:'Meyve sebze',image: categoryImagemeyveSebze},
       {id:1,name:'Temizlik',image: categoryImagesutTemizlik},
       {id:1,name:'Kozmetik',image:categoryImagekozmetik},
-      {id:1,name:'Elektronik',image: categoryImageElektronik}]
-      
+      {id:1,name:'Elektronik',image: categoryImageElektronik}],
+      selectedBaseCategoryId: 0,
+      selectedSecondCategoryId: 0,
+      categoryId:0,
+      categorySecondList: []
 
     };
 
   }
 
   componentDidMount() {
+    let categoryId =  Number(this.props.navigation.getParam('categoryId'))
+    let categoryList =this.props.categoryList.filter(e=> e.categoryParentId === categoryId)
+    if(categoryList && categoryList.length > 0) {
+      this.setState({selectedBaseCategoryId : categoryList[0].id})
+    }
+    this.setState({categoryId:categoryId,categorySecondList: categoryList})
+
     this.props.GetProductsForCustomer(this.props.productList);
     this.props.GetCampaignHome();
 
@@ -155,20 +169,85 @@ class CustomerHomeScreen extends Component<Props, State> {
     if (item.count > 0) {
       let cart = this.props.navigation.getParam('cart') ?? 0
       return (
-        <View style={{ backgroundColor: '#F1F1F1', position: 'absolute', paddingLeft: 5, paddingRight: 5, paddingVertical: 5, borderRadius: 15, right: 10, bottom: 10 }}>
-          {this.props.loadingIncDec && this.props.loadingIndex === item.productId && <Spinner style={{ position: "absolute", zIndex: 1, backgroundColor: colors.borderColor, opacity: .8, width: '100%', height: '100%' }} color={colors.headerColor} />}
+        <View style={{  position: 'absolute', borderRadius: 15, right: 10, bottom: 10 }}>
+          {this.props.loadingIncDec && this.props.loadingIndex === item.id && <Spinner style={{ position: "absolute", zIndex: 1, backgroundColor: colors.borderColor, opacity: .8, width: '100%', height: '100%' }} color={colors.headerColor} />}
 
           <View style={{
-            flexDirection: 'row', shadowColor: "#000",
-            shadowOffset: {
-              width: 0,
-              height: 3,
-            },
-            shadowOpacity: 0.29,
-            shadowRadius: 4.65,
+            flexDirection: 'row', 
+            // shadowColor: "#000",
+            // shadowOffset: {
+            //   width: 0,
+            //   height: 3,
+            // },
+            // shadowOpacity: 0.29,
+            // shadowRadius: 4.65,
 
-            elevation: 3,
+            // elevation: 3,
           }}>
+             <TouchableOpacity style={styles.IncOrDecButton} onPress={() => {
+              this.props.IncOrDecItemFromCart(this.props.productList, item.id, false);
+              this.props.navigation.setParams({ cart: cart - item.price });
+              this.setState({ change: !this.state.change })
+            }}><Icon name="minus"
+              style={{ color: colors.priceAndPlusColor, fontSize: 20 }} /></TouchableOpacity>
+
+          
+            <Text style={{ alignSelf: 'center', fontWeight: 'bold', paddingHorizontal: 5, color: colors.textColor }}>{item.count}</Text>
+           
+            <TouchableOpacity style={styles.IncOrDecButton} onPress={() => {
+              this.props.IncOrDecItemFromCart(this.props.productList, item.id, true);
+              this.props.navigation.setParams({ cart: cart + item.price });
+              this.setState({ page: this.state.page + 1 })
+            }}><Icon name="plus"
+              style={{ color: colors.priceAndPlusColor, fontSize: 20 }} /></TouchableOpacity>
+
+          </View>
+        </View>
+      )
+    }
+    else {
+      let cart = this.props.navigation.getParam('cart') ?? 0
+      return (
+        <View style={{ position: 'absolute',  borderRadius: 15, right: 10, bottom: 10 }}>
+          {this.props.loadingIncDec && this.props.loadingIndex === item.id && <Spinner style={{ position: "absolute", zIndex: 1, backgroundColor: colors.borderColor, opacity: .8, width: '100%', height: '100%' }} color={colors.headerColor} />}
+
+          <View style={{
+            flexDirection: 'row',
+            //  shadowColor: "#000",
+            // shadowOffset: {
+            //   width: 0,
+            //   height: 3,
+            // },
+            // shadowOpacity: 0.29,
+            // shadowRadius: 4.65,
+
+            // elevation: 3,
+          }}>
+            {this.props.loadingIncDec && this.props.loadingIndex === item.id && <Spinner style={{ zIndex: 1, backgroundColor: colors.borderColor, opacity: .8 }} size="small" color={colors.headerColor} />}
+            <TouchableOpacity style={styles.IncOrDecButton} onPress={() => {
+              this.props.IncOrDecItemFromCart(this.props.productList, item.id, true)
+              this.props.navigation.setParams({ cart: cart + item.price });
+              this.setState({ change: !this.state.change })
+            }}>
+
+              <Icon name="plus"
+                style={{ color: colors.priceAndPlusColor, fontSize: 20 }} /></TouchableOpacity>
+          </View>
+        </View>
+      )
+    }
+  }
+
+
+  renderPlusButtonCampaign(item: IProductItemCustomer, index: number) {
+
+    if (item.count > 0) {
+      let cart = this.props.navigation.getParam('cart') ?? 0
+      return (
+        <View style={{ position: 'absolute', top: 0, right: 0, zIndex: 10, paddingVertical: 5, paddingLeft: 5, paddingRight: 5 }}>
+          {this.props.loadingIncDec && this.props.loadingIndex === item.productId && <Spinner style={{ position: "absolute", backgroundColor: colors.borderColor, opacity: .8, width: '100%', height: '100%' }} color={colors.headerColor} />}
+
+          <View >
             <TouchableOpacity style={styles.IncOrDecButton} onPress={() => {
               this.props.IncOrDecItemFromCart(this.props.productList, item.productId, true);
               this.props.navigation.setParams({ cart: cart + item.price });
@@ -192,75 +271,13 @@ class CustomerHomeScreen extends Component<Props, State> {
     else {
       let cart = this.props.navigation.getParam('cart') ?? 0
       return (
-        <View style={{ backgroundColor: '#F1F1F1', position: 'absolute', paddingLeft: 5, paddingRight: 5, paddingVertical: 5, borderRadius: 15, right: 10, bottom: 10 }}>
+        <View style={{ position: 'absolute', top: 0, zIndex: 10, paddingVertical: 5, paddingLeft: 5, paddingRight: 5, right: 0 }}>
           {this.props.loadingIncDec && this.props.loadingIndex === item.productId && <Spinner style={{ position: "absolute", zIndex: 1, backgroundColor: colors.borderColor, opacity: .8, width: '100%', height: '100%' }} color={colors.headerColor} />}
 
-          <View style={{
-            flexDirection: 'row', shadowColor: "#000",
-            shadowOffset: {
-              width: 0,
-              height: 3,
-            },
-            shadowOpacity: 0.29,
-            shadowRadius: 4.65,
-
-            elevation: 3,
-          }}>
+          <View style={{ zIndex: 100 }} >
             {this.props.loadingIncDec && this.props.loadingIndex === item.productId && <Spinner style={{ zIndex: 1, backgroundColor: colors.borderColor, opacity: .8 }} size="small" color={colors.headerColor} />}
             <TouchableOpacity style={styles.IncOrDecButton} onPress={() => {
               this.props.IncOrDecItemFromCart(this.props.productList, item.productId, true)
-              this.props.navigation.setParams({ cart: cart + item.price });
-              this.setState({ change: !this.state.change })
-            }}>
-
-              <Icon name="plus"
-                style={{ color: colors.priceAndPlusColor, fontSize: 20 }} /></TouchableOpacity>
-          </View>
-        </View>
-      )
-    }
-  }
-
-
-  renderPlusButtonCampaign(item: IProductItemCustomer, index: number) {
-
-    if (item.count > 0) {
-      let cart = this.props.navigation.getParam('cart') ?? 0
-      return (
-        <View style={{ position: 'absolute', top: 0, right: 0, zIndex: 10, paddingVertical: 5, paddingLeft: 5, paddingRight: 5 }}>
-          {this.props.loadingIncDec && this.props.loadingIndex === item.id && <Spinner style={{ position: "absolute", backgroundColor: colors.borderColor, opacity: .8, width: '100%', height: '100%' }} color={colors.headerColor} />}
-
-          <View >
-            <TouchableOpacity style={styles.IncOrDecButton} onPress={() => {
-              this.props.IncOrDecItemFromCart(this.props.productList, item.id, true);
-              this.props.navigation.setParams({ cart: cart + item.price });
-              this.setState({ page: this.state.page + 1 })
-            }}><Icon name="plus"
-              style={{ color: colors.priceAndPlusColor, fontSize: 20 }} /></TouchableOpacity>
-            <Text style={{ alignSelf: 'center', fontWeight: 'bold', paddingHorizontal: 5, color: colors.textColor }}>{item.count}</Text>
-            <TouchableOpacity style={styles.IncOrDecButton} onPress={() => {
-              this.props.IncOrDecItemFromCart(this.props.productList, item.id, false);
-              this.props.navigation.setParams({ cart: cart - item.price });
-              this.setState({ change: !this.state.change })
-            }}><Icon name="minus"
-              style={{ color: colors.priceAndPlusColor, fontSize: 20 }} /></TouchableOpacity>
-
-
-
-          </View>
-        </View>
-      )
-    }
-    else {
-      let cart = this.props.navigation.getParam('cart') ?? 0
-      return (
-        <View style={{ position: 'absolute', top: 0, zIndex: 10, paddingVertical: 5, paddingLeft: 5, paddingRight: 5, right: 0 }}>
-          {this.props.loadingIncDec && this.props.loadingIndex === item.id && <Spinner style={{ position: "absolute", zIndex: 1, backgroundColor: colors.borderColor, opacity: .8, width: '100%', height: '100%' }} color={colors.headerColor} />}
-
-          <View style={{ zIndex: 100 }} >
-            {this.props.loadingIncDec && this.props.loadingIndex === item.id && <Spinner style={{ zIndex: 1, backgroundColor: colors.borderColor, opacity: .8 }} size="small" color={colors.headerColor} />}
-            <TouchableOpacity style={styles.IncOrDecButton} onPress={() => {
-              this.props.IncOrDecItemFromCart(this.props.productList, item.id, true)
               this.props.navigation.setParams({ cart: cart + item.price });
               this.setState({ change: !this.state.change })
             }}>
@@ -344,76 +361,265 @@ class CustomerHomeScreen extends Component<Props, State> {
       )
     }
   }
-  renderCategory() {
-    let baseCategories = this.props.categoryList ? this.props.categoryList.length > 0 ? this.props.categoryList.filter(e=>e.categoryParentId === 0) : [] : []
-    let width = Dimensions.get('window').width / 3 - 20 
-    return(
-      <View style={{ marginTop: 10 }}>
-      <Text style={{ paddingLeft: 10, fontFamily: fonts.h3Font, color: '#555', fontWeight: '200', fontSize: 18 }}>Kategoriler</Text>
-      <FlatList
-          contentContainerStyle={{ paddingTop: 5 }}
-          data={[...baseCategories,...baseCategories,...baseCategories,...baseCategories,...baseCategories,...baseCategories,...baseCategories,] }
+//   renderCategory() {
 
-          keyExtractor={item => item.id}
-          renderItem={({ item, index }) => {
-            return (
-              <TouchableHighlight underlayColor="#AAA" onPress={()=> this.props.navigation.navigate('ProductListWithCategory',{categoryId: item.id})} style={[styles.item,{paddingBottom:0,height:130,paddingLeft:0,marginBottom: 10,width:width }]}>
+//     let width = Dimensions.get('window').width / 3 - 20 
+//     return(
+//       <View style={{ marginTop: 10 }}>
+//       <Text style={{ paddingLeft: 10, fontFamily: fonts.h3Font, color: '#555', fontWeight: '200', fontSize: 18 }}>Kategoriler</Text>
+//       <FlatList
+//           contentContainerStyle={{ paddingTop: 5 }}
+//           data={ }
+// // Here is the magic : snap to the center of an item
+// snapToAlignment={'center'}  
+// // Defines here the interval between to item (basically the width of an item with margins)
+// snapToInterval={Dimensions.get('window').width / 5}    
+//           keyExtractor={item => item.id}
+//           renderItem={({ item, index }) => {
+//             return (
+//               <TouchableHighlight underlayColor="#AAA" onPress={()=> console.log()} style={[styles.item,{paddingBottom:0,height:130,paddingLeft:0,marginBottom: 10,width:width }]}>
 
 
-                <View style={[{}]}>
-                  <View style={{ paddingVertical: 10, justifyContent: 'center', alignContent: 'center', alignSelf: 'center' }}>
-                    {/* <Image
-                      style={{ width: Dimensions.get('window').width / 3.5, height: Dimensions.get('window').width / 4 }}
-                      source={{ uri: item.imagePath }}
-                    /> */}
-                    <Image
-        style={{ width: Dimensions.get('window').width / 6, height: Dimensions.get('window').width / 6 }}
-        source={{uri: item.photoPath ?? ""}}
-    />
-                  </View>
+//                 <View style={[{}]}>
+//                   <View style={{ paddingVertical: 10, justifyContent: 'center', alignContent: 'center', alignSelf: 'center' }}>
+//                     {/* <Image
+//                       style={{ width: Dimensions.get('window').width / 3.5, height: Dimensions.get('window').width / 4 }}
+//                       source={{ uri: item.imagePath }}
+//                     /> */}
+//                     <Image
+//         style={{ width: Dimensions.get('window').width / 6, height: Dimensions.get('window').width / 6 }}
+//         source={{uri: item.photoPath ?? ""}}
+//     />
+//                   </View>
 
-                  <Text style={{ fontFamily: 'roboto', color: colors.textColor, width: '95%' ,textAlign:'center'}}>
-                    {item.name}
-                  </Text>
-                </View>
+//                   <Text style={{ fontFamily: 'roboto', color: colors.textColor, width: '95%' ,textAlign:'center'}}>
+//                     {item.name}
+//                   </Text>
+//                 </View>
 
-              </TouchableHighlight>
-            );
-          }}
-          numColumns={3}
+//               </TouchableHighlight>
+//             );
+//           }}
+//           numColumns={3}
 
-        />
-    </View>
-    )
+//         />
+//     </View>
+//     )
+//   }
+
+  scrollToIndex(index: number,item:Category){
+    this.setState({selectedBaseCategoryId:item.id})
+    let randomIndex = index
+    this.flatListRef.scrollToIndex({animated: true, index: randomIndex,viewOffset: Dimensions.get('window').width / 2.5,});
+    this.flatListRefSecond.scrollToIndex({animated: true,index:index})
+    // this.flatListRefSecond.scrollToIndex({animated: true, index: randomIndex,viewOffset: Dimensions.get('window').width / 2.5,});
+    // this.flatListRefSecond.scrollToIndex({animated: true, index: randomIndex});
+
+  }
+  scrollToIndexSecond(index: number){
+    let itemId = this.state.categorySecondList[index].id ?? 0
+    this.setState({selectedBaseCategoryId:itemId})
+    let categorilist = [{id:1,name:"Taze Yemek"},{id:2,name:"Atistirmalik"},{id:3,name:"Meyve sebze"},{id:4,name:"Yiyecek"},{id:5,name:"Yok"}]
+    let randomIndex = index
+    this.flatListRef.scrollToIndex({animated: true, index: randomIndex,viewOffset: Dimensions.get('window').width / 2.5,});
+
   }
 
+renderTopCategoryItems() {
+
+  return (
+    <View style={{backgroundColor:colors.IconColor,height:50}}>
+         
+    <FlatList 
+    ref={(ref) => { this.flatListRef = ref; }}
+    horizontal
+
+    showsHorizontalScrollIndicator={false}
+    contentContainerStyle={{height:50}}
+    data={this.state.categorySecondList}
+    renderItem= {({index,item}) => 
+    <TouchableHighlight underlayColor={colors.IconColorLighter} onPress={()=> this.scrollToIndex(index,item)} style={{borderWidth:1,borderColor:this.state.selectedBaseCategoryId === item.id ? colors.IconColor : 'white',height:30,justifyContent:'center',marginLeft:20,alignSelf:'center',padding:5,borderRadius:5,backgroundColor:this.state.selectedBaseCategoryId === item.id ? 'white':colors.IconColor }}>
+    <Text style={{color:this.state.selectedBaseCategoryId === item.id ? colors.IconColor : 'white',fontFamily:fonts.primaryFont}}>{item.name}</Text>
+  </TouchableHighlight>
+  }
+  ListFooterComponent={() =>
+  <View style={{width:20}}/>}
+    />
+      </View>
+
+  )
+}
+
+
+onViewableItemsChanged = ({ viewableItems, changed }) => {
+  console.log("Visible items are", viewableItems);
+
+  console.log("Changed in this iteration", changed);
+  let index = changed ? changed.length ? 0 : 0 : 0
+  let ItemIndex = viewableItems[index] ? viewableItems[index] : 0
+  if(ItemIndex !== 0) {
+    console.log(ItemIndex)
+    this.setState({selectedItemIndex:ItemIndex })
+  }
+ 
+
+  
+}
+
+// onViewableItemsChanged = ({viewableItems}) => {
+    
+//   // Get the first viewable item
+//   const firstViewItem = viewableItems[0].key;
+//   // Get its index into the items
+//   const index = this.state.items.findIndex(item => item.key === firstViewItem);
+//   // If the index is a multiple of the number of items displayable on the screen
+//   // by checking for a reminder on the modulo operation
+//   if ((index % NB_ITEMS_SCREEN) === 0) {
+//     // get page
+//     const currentPage = index / NB_ITEMS_SCREEN;
+//     if (currentPage !== this.state.currentPage) {
+//       this.setState({
+//         currentPage: currentPage,
+//       })
+//     }
+//   }
+// }
+
+
+
+
+viewabilityConfig = {
+        viewAreaCoveragePercentThreshold: 33,
+
+};
+
+handleScroll = (event) => {
+  let yOffset = event.nativeEvent.contentOffset.x
+  let contentHeight = event.nativeEvent.contentSize.width
+  let value = yOffset / contentHeight
+  console.log(value)
+}
+
+
+renderSecondCategoryItems() {
+let list = this.props.productList.filter(e=>e.categoryId === this.state.selectedBaseCategoryId)
+let width = Dimensions.get('window').width / 3
+  return (
+
+         
+    
+    <FlatList
+    ref={(ref) => { this.flatListRefSecond = ref; }}
+    // style={{flex:1}}
+    horizontal  
+    alwaysBounceVertical
+    data={this.state.categorySecondList}
+    pagingEnabled
+    keyExtractor={item => item.id}
+    contentContainerStyle={{width:Dimensions.get('window').width * this.state.categorySecondList.length}}
+    // viewabilityConfig={this.viewabilityConfig}
+    onScrollEndDrag={(event) => {
+      let yOffset = event.nativeEvent.contentOffset.x
+  let contentHeight = event.nativeEvent.contentSize.width
+  let value = yOffset / contentHeight
+  let index = Math.round(value * this.state.categorySecondList.length)
+      console.log(event)
+  console.log("index",index)
+      this.scrollToIndexSecond(index)
+    }}
+
+    onScroll={this.handleScroll}
+    onViewableItemsChanged={this.onViewableItemsChanged}
+    
+    renderItem={({item}) => 
+  <View>
+    <Text style={{margin:5,marginLeft:10,fontFamily:fonts.primaryFont,fontSize:16,fontWeight:"900",color:colors.textColorMoreLighter}}>{item.name}</Text>
+
+    <FlatList
+
+    data={this.props.productList.filter(e=>e.categoryId === item.id)}
+    contentContainerStyle={{width: Dimensions.get('window').width}}
+    renderItem={({ item, index }) => {
+      return (
+        <View style={{ marginBottom: 10, width:width }}>
+          <View style={styles.item}>
+            <View style={{ paddingVertical: 10, justifyContent: 'center', alignContent: 'center', alignSelf: 'center' }}>
+              {/* <Image
+                style={{ width: Dimensions.get('window').width / 3.5, height: Dimensions.get('window').width / 4 }}
+                source={{ uri: item.imagePath }}
+              /> */}
+              <FastImage
+  style={{ width: Dimensions.get('window').width / 5, height: Dimensions.get('window').width / 5   }}
+  source={{
+      uri: item.photoPath,
+      priority: FastImage.priority.normal,
+  }}
+/>
+            </View>
+
+
+            {this.renderPlusButton(item, index)}
+
+            <Text style={{ fontFamily: 'roboto', color: colors.textColor, width: '90%' }}>
+              {item.productName}
+            </Text>
+            {item.isCampaign ?  <View style={{flexDirection:'row'}}>
+          <Text style={{ fontFamily: fonts.primaryFont, marginTop: 5, color: colors.textColorLighter,textDecorationLine:"line-through" }}>
+    {item.price} 
+      </Text>
+      <Text style={{ marginLeft:5,fontFamily: fonts.primaryFont, marginTop: 5, color: colors.priceAndPlusColor, fontWeight: 'bold'}}>
+    {item.newPrice} TL
+      </Text>
+          </View>
+          :<Text style={{ fontFamily: fonts.primaryFont, marginTop: 5, color: colors.priceAndPlusColor, fontWeight: 'bold' }}>
+          {item.price} TL
+ </Text>}
+            
+          </View>
+
+        </View>
+
+);
+    }}
+    numColumns={3}
+
+  />
+  </View>}
+   
+   
+   />
+
+
+  )
+}
+
+renderProducts() {
+
+}
   render() {
     const { navigation, imageData, fetchMoreImageData, loading, campaings } = this.props;
     console.log(campaings, "data geldi");
     const { page, limit } = this.state;
     console.log("home");
+    let baseCategories = this.props.categoryList ? this.props.categoryList.length > 0 ? this.props.categoryList.filter(e=>e.categoryParentId === 0) : [] : []
     return (
-      <ScrollView style={{backgroundColor:colors.containerBg}} contentContainerStyle={{flexGrow:1}}>
+     
         <View style={[styles.container]}>
-          {/* {campaings && */}
-            <SliderBox
-            sliderBoxHeight={250}
-            autoplay={true}
-            circleLoop
-              // images={this.props.campaings.map((item) => { return item.photoPath; })}
-              images={[categoryCampaign]}
-              onCurrentImagePressed={index => console.warn(`image ${index} pressed`)}
-              currentImageEmitter={index => console.warn(`current pos is: ${index}`)}
-            />
-          {this.renderCampaignProductsList()}
-          {this.renderCategory()}
+
+         {this.renderTopCategoryItems()}
+         <ScrollView style={{backgroundColor:colors.containerBg}} contentContainerStyle={{flexGrow:1}}>
+
+         {this.renderSecondCategoryItems()}
+         {/* {this.renderProducts()} */}
           {/* <View style={{ marginTop: 10 }}>
             <Text style={{ paddingLeft: 10, fontFamily: fonts.h3Font, color: '#555', fontWeight: '200', fontSize: 18 }}>Tüm Ürünlerimiz</Text>
-          </View>
+          </View> */}
 
-          {this.renderContent()} */}
+          {/* {this.renderContent()} */}
+          </ScrollView>
         </View>
-      </ScrollView>
+
+
     );
   }
   renderContent() {
@@ -444,7 +650,7 @@ class CustomerHomeScreen extends Component<Props, State> {
                     <FastImage
         style={{ width: Dimensions.get('window').width / 3.5, height: Dimensions.get('window').width / 4 }}
         source={{
-            uri: item.imagePath,
+            uri: item.photoPath,
             priority: FastImage.priority.normal,
         }}
     />
@@ -462,7 +668,8 @@ class CustomerHomeScreen extends Component<Props, State> {
                 </View>
 
               </View>
-            );
+     
+     );
           }}
           numColumns={2}
 
@@ -496,4 +703,4 @@ function bindToAction(dispatch: any) {
 export default connect(
   mapStateToProps,
   bindToAction
-)(CustomerHomeScreen);
+)(ProductListWithCategoryScreen);

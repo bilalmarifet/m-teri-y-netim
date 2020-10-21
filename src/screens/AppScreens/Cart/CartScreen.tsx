@@ -138,7 +138,7 @@ class CartScreen extends Component<Props, State> {
               onPress={() => {
                 this.props.IncOrDecItemFromCart(
                   this.props.productList,
-                  item.productId,
+                  item.id,
                   true,
                   index,
                 );
@@ -156,7 +156,7 @@ class CartScreen extends Component<Props, State> {
               onPress={() => {
                 this.props.IncOrDecItemFromCart(
                   this.props.productList,
-                  item.productId,
+                  item.id,
                   false,
                   index,
                 );
@@ -191,7 +191,7 @@ class CartScreen extends Component<Props, State> {
               onPress={() => {
                 this.props.IncOrDecItemFromCart(
                   this.props.productList,
-                  item.productId,
+                  item.id,
                   false,
                   index,
                 );
@@ -321,7 +321,7 @@ class CartScreen extends Component<Props, State> {
                     <FastImage
      style={{ width: 80, height: 80, marginLeft: 10 }}
         source={{
-            uri: item.imagePath,
+            uri: item.photoPath,
             priority: FastImage.priority.normal,
         }}
     />
