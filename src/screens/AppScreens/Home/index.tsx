@@ -324,7 +324,7 @@ class CustomerHomeScreen extends Component<Props, State> {
 
       return (
         <View style={{
-          marginTop: 0, backgroundColor: '#fff', flex: 1, shadowOffset: {
+          backgroundColor: '#fff', shadowOffset: {
             width: 0,
             height: 2,
           },
@@ -334,12 +334,18 @@ class CustomerHomeScreen extends Component<Props, State> {
         }}>
 
           <Text style={{ paddingLeft: 10, marginTop: 5, fontFamily: fonts.h3Font, color: '#555', fontSize: 16 }}>Fırsat Ürünleri</Text>
-          <ScrollView horizontal={true} style={{ paddingTop: 10 }} showsHorizontalScrollIndicator={false}>
-            {campaignProductList.reverse().map((item: IProductItemCustomer, index) => {
-              return this.renderProductItem(item, index)
+          {/* <ScrollView horizontal={true} style={{ paddingTop: 10 }} showsHorizontalScrollIndicator={false}> */}
+           
+           
+            <FlatList
+            showsHorizontalScrollIndicator={false}
+            keyExtractor={item => item.id}
+            horizontal
+            data={campaignProductList}
+            alwaysBounceHorizontal
+            renderItem = {({index,item}) => this.renderProductItem(item, index)}
+             />
 
-            })}
-          </ScrollView>
         </View>
       )
     }
@@ -351,8 +357,8 @@ class CustomerHomeScreen extends Component<Props, State> {
       <View style={{ marginTop: 10 }}>
       <Text style={{ paddingLeft: 10, fontFamily: fonts.h3Font, color: '#555', fontWeight: '200', fontSize: 18 }}>Kategoriler</Text>
       <FlatList
-          contentContainerStyle={{ paddingTop: 5 }}
-          data={[...baseCategories,...baseCategories,...baseCategories,...baseCategories,...baseCategories,...baseCategories,...baseCategories,] }
+          contentContainerStyle={{ paddingTop: 5 ,marginBottom:20}}
+          data={baseCategories }
 
           keyExtractor={item => item.id}
           renderItem={({ item, index }) => {
@@ -400,8 +406,7 @@ class CustomerHomeScreen extends Component<Props, State> {
             sliderBoxHeight={250}
             autoplay={true}
             circleLoop
-              // images={this.props.campaings.map((item) => { return item.photoPath; })}
-              images={[categoryCampaign]}
+              images={this.props.campaings.map((item) => { return item.photoPath; })}
               onCurrentImagePressed={index => console.warn(`image ${index} pressed`)}
               currentImageEmitter={index => console.warn(`current pos is: ${index}`)}
             />

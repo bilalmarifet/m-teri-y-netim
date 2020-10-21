@@ -127,7 +127,7 @@ export function GetProductsForCustomer(productsList?: IProductItemCustomer[] = [
               response.data.result.forEach(
                 (product: any) => {
                   let index = productsList.findIndex(
-                    e => e.Id === product.id,
+                    e => e.id === product.id,
                   );
                   let count = index !== -1 ? productsList[index].count : 0;
                   var productItem: IProductItemCustomer = {
