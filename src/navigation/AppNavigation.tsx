@@ -38,6 +38,8 @@ import StoreInfoScreen from "../screens/AppScreens/Profile/StoreInfoScreen";
 import MyAdressesScreen from "../screens/AppScreens/Profile/MyAdressesScreen";
 import AdressAddScreen from "../screens/AppScreens/Profile/AdressAddScreen";
 import AdressEditScreen from "../screens/AppScreens/Profile/AdressEditScreen";
+import ProductListWithCategoryScreen from "../screens/AppScreens/Home/ProductListWithCategoryScreen";
+import NotiTabBarIcon from "../components/NotiTabBarIcon";
 
 const MainStack = createStackNavigator(
   {
@@ -52,6 +54,7 @@ const MainStack = createStackNavigator(
 const CustomerMain = createStackNavigator(
   {
     CustomerHome: {screen: CustomerHomeScreen},
+    ProductListWithCategory: ProductListWithCategoryScreen
    
   },
   {
@@ -200,18 +203,21 @@ const CustomerMainStack = createBottomTabNavigator(
           },
           activeTintColor: colors.IconColor,
         },
-
-        tabBarIcon: ({focused}) => {
-          return focused ? (
-            <Icon name="shopping-cart"  style={{color: colors.IconColor,fontSize:24}}  />
-
-            
-          ) : (
-            <Icon name="shopping-cart" style={{color: colors.IconNormalColor,fontSize:24}}  />
+        tabBarIcon: ({ focused, tintcolor }) => (
+          <NotiTabBarIcon focused={focused} />
+        ),
+        // tabBarIcon: ({focused}) => {
+        //   return focused ? (
+        //     <Icon name="shopping-cart"  style={{color: colors.IconColor,fontSize:24}}  />
 
             
-          );
-        },
+        //   ) : (
+        //     <Icon name="shopping-cart" style={{color: colors.IconNormalColor,fontSize:24}}  />
+
+            
+        //   );
+
+        // },
       },
     },
     Order: {
