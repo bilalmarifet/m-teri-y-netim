@@ -24,7 +24,7 @@ import { InfoItem } from '../../../components/InfoItem';
 import { product } from '../../AppScreens/Customer/orderAdd';
 import { AddOrderMultiple, changePaymentMehtod, getPaymentMethod, PaymentMethod } from '../../../redux/actions/addOrderAction';
 import { AppState } from '../../../redux/store';
-import { UserInfo } from '../../../redux/actions/profileActions';
+import { getStoreInformationFromStoreId, storeInformation, UserInfo } from '../../../redux/actions/profileActions';
 import { ButtonGradient } from '../../../components/ButtonGradient';
 import Icon from 'react-native-vector-icons/Feather';
 import { adress, changeSelectedAdressId, getAdress } from '../../../redux/actions/adressAction';
@@ -57,6 +57,10 @@ interface Props {
   adressList: adress[];
   selectedAdressId: number;
   changeSelectedAdressId: (adressId: number) =>void;
+  loadingForStorInfo: boolean;
+  storeInformation: storeInformation;
+  getStoreInformationFromStoreId : () => void;
+
 }
 
 interface State {
@@ -73,6 +77,7 @@ class CartScreen extends Component<Props, State> {
   componentDidMount(){
     this.props.getPaymentMethod()
     this.props.getAdress()
+    this.props.getStoreInformationFromStoreId();
   }
 
   static navigationOptions = ({ navigation }) => {
@@ -218,7 +223,7 @@ class CartScreen extends Component<Props, State> {
     }
     else if(this.props.paymentMethods && this.props.paymentMethods.length > 0) {
       return(
-        <View style={{padding:20}}>
+        <View style={{padding:20,paddingTop:0}}>
           <Text style={{fontFamily:fonts.primaryFont,fontWeight:"600"}}>Ödeme Yöntemi </Text>
 
                         
@@ -243,9 +248,35 @@ class CartScreen extends Component<Props, State> {
     }
   }
 
+  renderDeliveryTime() {
+
+    if(this.props.loadingForStorInfo) {
+      return (
+        <View>
+          <Spinner />
+        </View>
+      )
+    }
+    else if(this.props.storeInformation && this.props.storeInformation.averageDuration && this.props.storeInformation.averageDuration > 0) {
+      let durationText = this.props.storeInformation.averageDuration 
+      let durationTextLonger = `${durationText - 10} - ${durationText + 10} dakika`
+      return(
+        <View style={{padding:20}}>
+          <Text style={{fontFamily:fonts.primaryFont,fontWeight:"600"}}>Ortalama getirme süresi</Text>
+            <View style={{flexDirection:'row',marginTop:10}}>
+              <Icon name="clock" style={{color:colors.IconColor,fontSize:18 }} />
+            <Text style={{fontFamily:fonts.primaryFont,marginLeft:10}}>{durationTextLonger}</Text>         
+            </View>
+        </View>
+      )
+    }else {
+      return (<View/>)
+    }
+  }
+
   renderPaymentInfoText() {
     return (
-      <View style={{borderColor:colors.IconColor,borderWidth:2,borderRadius:5,margin:20,backgroundColor:'white',paddingHorizontal:10,marginTop:0,paddingVertical:10}}>
+      <View style={{borderColor:colors.IconColor,borderWidth:2,borderRadius:5,margin:20,marginBottom:0,backgroundColor:'white',paddingHorizontal:10,marginTop:0,paddingVertical:10}}>
         <TextInput 
         onChangeText={(paymentInfoText) => this.setState({ paymentInfoText })}
         value={this.state.paymentInfoText}
@@ -262,9 +293,11 @@ class CartScreen extends Component<Props, State> {
   renderContent() {
 
     if(this.props.isLoadingGetAdress) {
-      <View style={{flex:1,justifyContent:'center',alignSelf:'center'}}>
+      return(
+        <View style={{flex:1,justifyContent:'center',alignSelf:'center'}}>
           <Spinner color={colors.IconColor} />
       </View>
+      )
     }
     let selectedAdressId = this.props.selectedAdressId !== undefined ? this.props.selectedAdressId : 0
     let selectedAdress = this.props.adressList.find(e=> e.id === selectedAdressId) 
@@ -294,7 +327,7 @@ class CartScreen extends Component<Props, State> {
 : null}
       
       {this.renderPaymentInfoText()}
-    
+      {this.renderDeliveryTime()}
       {this.renderPaymentMethod()}
       </ScrollView>
       <ButtonGradient loading={this.props.isLoadingAddOrder || this.props.loadingForGetPaymentMethods} onPress={()=>this.handleCartAction()} linearGredientStyle={{borderRadius:0,height:60}} style={{position:'absolute',bottom:0,left:0,right:0,height:60,borderRadius:0}} text="Alışverişi Tamamla" />
@@ -312,7 +345,9 @@ const mapStateToProps = (state: AppState) => ({
   isLoadingAddOrder: state.addOrder.isLoading,
   isLoadingGetAdress: state.adress.loading,
   adressList : state.adress.adress,
-  selectedAdressId : state.adress.selectedAdressId
+  selectedAdressId : state.adress.selectedAdressId,
+  loadingForStorInfo: state.profile.loading,
+  storeInformation: state.profile.storeInformation
 });
 
 function bindToAction(dispatch: any) {
@@ -348,7 +383,9 @@ function bindToAction(dispatch: any) {
       getAdress : () => 
       dispatch(getAdress()),
       changeSelectedAdressId: (adressId: number) => 
-      dispatch(changeSelectedAdressId(adressId))
+      dispatch(changeSelectedAdressId(adressId)),
+      getStoreInformationFromStoreId : () => 
+      dispatch(getStoreInformationFromStoreId())
   };
 }
 
