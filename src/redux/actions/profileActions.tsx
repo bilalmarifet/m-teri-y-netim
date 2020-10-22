@@ -145,6 +145,9 @@ export interface storeInformation {
   address: string;
   userNameSurname: string;
   phoneNumber: string;
+  averageDuration: number;
+  minFreeDelivery: number;
+  deliveryCost: number;
 }
 export function getStoreInformationFromStoreId() {
   return (dispatch: Dispatch<Action>) => {
