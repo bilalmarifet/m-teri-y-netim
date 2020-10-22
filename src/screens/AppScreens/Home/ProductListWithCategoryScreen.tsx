@@ -33,8 +33,9 @@ interface Props {
   GetProductsForCustomer: (productsList?: IProductItemCustomer[]) => void;
   IncOrDecItemFromCart: (productsList: IProductItemCustomer[], productId: number, isIncrease: boolean, index?: number) => void;
   GetCampaignHome: () => void;
-  loadingIndex: number;
+ 
   getUserInfo: () => void;
+  loadingIndex: number;
   loadingIncDec: boolean;
   campaings: ICampaignItem[];
   categoryList: Category[]
@@ -52,13 +53,14 @@ interface State {
   categories : Category[];
   selectedBaseCategoryId: number;
   selectedSecondCategoryId: number;
-  categoryId:number
-  categorySecondList: Category[]
+  categoryId:number;
+  categorySecondList: Category[];
+  topStateOnTouch: boolean;
 }
 
 
 
-const MyTitle = ({ navigation, productList }) => <TotalPriceText productList={productList} navigation={navigation} />;
+const MyTitle = ({ navigation, productList }) => <TotalPriceText productList={productList} navigation={navigation}  />;
 const MyConnectedTitle = connect((storeState: AppState) => ({ productList: storeState.CustomerproductForCustomer.productList }))(MyTitle);
 
 
@@ -96,7 +98,8 @@ class ProductListWithCategoryScreen extends Component<Props, State> {
       selectedBaseCategoryId: 0,
       selectedSecondCategoryId: 0,
       categoryId:0,
-      categorySecondList: []
+      categorySecondList: [],
+      topStateOnTouch: false
 
     };
 
@@ -424,16 +427,19 @@ class ProductListWithCategoryScreen extends Component<Props, State> {
     this.flatListRef.scrollToIndex({animated: true, index: randomIndex,viewOffset: Dimensions.get('window').width / 2.5,});
 
   }
-
+  doSomething(bool : boolean){
+    this.setState({topStateOnTouch: bool})
+  }
 renderTopCategoryItems() {
 
   return (
-    <View style={{backgroundColor:colors.IconColor,height:50}}>
+    <View 
+    style={{backgroundColor:colors.IconColor,height:50}}>
          
     <FlatList 
     ref={(ref) => { this.flatListRef = ref; }}
     horizontal
-
+    onScrollEndDrag={()=>console.log("scrollend")}
     showsHorizontalScrollIndicator={false}
     contentContainerStyle={{height:50}}
     data={this.state.categorySecondList}
@@ -494,10 +500,15 @@ viewabilityConfig = {
 };
 
 handleScroll = (event) => {
-  let yOffset = event.nativeEvent.contentOffset.x
-  let contentHeight = event.nativeEvent.contentSize.width
-  let value = yOffset / contentHeight
-  console.log(value)
+  console.log("event",event)
+
+    let yOffset = event.nativeEvent.contentOffset.x
+    let contentHeight = event.nativeEvent.contentSize.width
+    let value = yOffset / contentHeight
+    let index = Math.round(value * this.state.categorySecondList.length)
+    this.scrollToIndexSecond(index)
+    console.log(value)
+ 
 }
 
 
@@ -510,44 +521,35 @@ let width = Dimensions.get('window').width / 3
     
     <FlatList
     ref={(ref) => { this.flatListRefSecond = ref; }}
-    // style={{flex:1}}
+
     horizontal  
-    alwaysBounceVertical
+    showsHorizontalScrollIndicator={false}
+    showsVerticalScrollIndicator={false}
     data={this.state.categorySecondList}
     pagingEnabled
     keyExtractor={item => item.id}
-    contentContainerStyle={{width:Dimensions.get('window').width * this.state.categorySecondList.length}}
-    // viewabilityConfig={this.viewabilityConfig}
-    onScrollEndDrag={(event) => {
-      let yOffset = event.nativeEvent.contentOffset.x
-  let contentHeight = event.nativeEvent.contentSize.width
-  let value = yOffset / contentHeight
-  let index = Math.round(value * this.state.categorySecondList.length)
-      console.log(event)
-  console.log("index",index)
-      this.scrollToIndexSecond(index)
-    }}
 
-    onScroll={this.handleScroll}
+    contentContainerStyle={{width:Dimensions.get('window').width * this.state.categorySecondList.length}}
     onViewableItemsChanged={this.onViewableItemsChanged}
-    
+    onMomentumScrollEnd={this.handleScroll}
     renderItem={({item}) => 
   <View>
     <Text style={{margin:5,marginLeft:10,fontFamily:fonts.primaryFont,fontSize:16,fontWeight:"900",color:colors.textColorMoreLighter}}>{item.name}</Text>
 
     <FlatList
 
-    data={this.props.productList.filter(e=>e.categoryId === item.id)}
-    contentContainerStyle={{width: Dimensions.get('window').width}}
+      showsHorizontalScrollIndicator={false}
+      showsVerticalScrollIndicator={false}
+
+      extraData={this.state}
+      data={this.props.productList.filter(e=>e.categoryId === item.id)}
+      contentContainerStyle={{width: Dimensions.get('window').width}}
     renderItem={({ item, index }) => {
       return (
         <View style={{ marginBottom: 10, width:width }}>
           <View style={styles.item}>
             <View style={{ paddingVertical: 10, justifyContent: 'center', alignContent: 'center', alignSelf: 'center' }}>
-              {/* <Image
-                style={{ width: Dimensions.get('window').width / 3.5, height: Dimensions.get('window').width / 4 }}
-                source={{ uri: item.imagePath }}
-              /> */}
+
               <FastImage
   style={{ width: Dimensions.get('window').width / 5, height: Dimensions.get('window').width / 5   }}
   source={{
@@ -607,7 +609,7 @@ renderProducts() {
         <View style={[styles.container]}>
 
          {this.renderTopCategoryItems()}
-         <ScrollView style={{backgroundColor:colors.containerBg}} contentContainerStyle={{flexGrow:1}}>
+         {/* <ScrollView style={{backgroundColor:colors.containerBg}} > */}
 
          {this.renderSecondCategoryItems()}
          {/* {this.renderProducts()} */}
@@ -616,7 +618,7 @@ renderProducts() {
           </View> */}
 
           {/* {this.renderContent()} */}
-          </ScrollView>
+          {/* </ScrollView> */}
         </View>
 
 

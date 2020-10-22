@@ -40,6 +40,7 @@ import AdressAddScreen from "../screens/AppScreens/Profile/AdressAddScreen";
 import AdressEditScreen from "../screens/AppScreens/Profile/AdressEditScreen";
 import ProductListWithCategoryScreen from "../screens/AppScreens/Home/ProductListWithCategoryScreen";
 import NotiTabBarIcon from "../components/NotiTabBarIcon";
+import SearchScreen from "../screens/AppScreens/Search/SearchScreen";
 
 const MainStack = createStackNavigator(
   {
@@ -73,6 +74,29 @@ const CustomerMain = createStackNavigator(
     },
   },
 );
+const SearchMain = createStackNavigator(
+  {
+    Search: {screen: SearchScreen},
+
+   
+  },
+  {
+    initialRouteName: 'Search',
+    defaultNavigationOptions: {
+      headerTintColor : colors.headerTitleColor,
+      headerStyle: {
+        backgroundColor: '#f4511e',
+      },
+      headerTitleStyle: {
+        fontSize: 18,
+        fontWeight:'bold',
+        color:colors.headerTitleColor,
+        fontFamily: fonts.primaryFont,
+      },
+    },
+  },
+);
+
 
 
 const AuthStack = createStackNavigator(
@@ -188,6 +212,28 @@ const CustomerMainStack = createBottomTabNavigator(
       
           ) : (
             <Icon name="shopping-bag" style={{color: colors.IconNormalColor,fontSize:24}}  />
+
+          );
+        },
+      },
+    },
+    Search: {
+      screen: SearchMain,
+      navigationOptions: {
+        tabBarLabel: 'Arama',
+        tabBarOptions: {
+          labelStyle: {
+            color: colors.headerColor,
+          },
+          activeTintColor: colors.IconColor,
+        },
+        tabBarIcon: ({focused}) => {
+          return focused ? (
+            <Icon name="search" style={{color: colors.IconColor,fontSize:24}}  />
+
+      
+          ) : (
+            <Icon name="search" style={{color: colors.IconNormalColor,fontSize:24}}  />
 
           );
         },

@@ -9,7 +9,7 @@ import {
   LOADING_GET_PRODUCTS_FOR_CUSTOMER,
   GET_PRODUCTS_FOR_CUSTOMER,
   INC_OR_DEC_FROM_CART,
-  LOADING_INC_OR_DEC_FROM_CART, CAMPAIGN_LIST_GET
+  LOADING_INC_OR_DEC_FROM_CART, CAMPAIGN_LIST_GET, FILTERED_PRODUCT_LIST_GET
 } from '../typesCustomer';
 import { bool, date, string } from 'yup';
 import { BasestoreId } from '../../services/AppConfig';
@@ -99,6 +99,14 @@ export function GetCampaignHome() {
         dispatch(loading(false));
       });
   };
+}
+
+export function getFilteredProductList(productList:IProductItemCustomer[] = []) {
+  return (dispatch: Dispatch<Action>) => {
+
+    dispatch(returnFilteredProductList(productList))
+  }
+
 }
 export function GetProductsForCustomer(productsList?: IProductItemCustomer[] = []) {
   return (dispatch: Dispatch<Action>) => {
@@ -230,3 +238,9 @@ export const loadingForIncDec = (loading: boolean, index: number) => ({
   type: LOADING_INC_OR_DEC_FROM_CART,
   payload: [loading, index],
 });
+
+
+export const returnFilteredProductList = (productList: IProductItemCustomer[]) => ({
+  type: FILTERED_PRODUCT_LIST_GET,
+  payload: productList
+})

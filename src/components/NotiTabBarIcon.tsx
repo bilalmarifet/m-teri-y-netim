@@ -1,22 +1,4 @@
-// import { connect } from "react-redux";
-// import { AppState } from "../redux/store";
-// import { View ,Text, Image} from "react-native";
-// import React from "react";
 
-// export default connect((state: AppState) => ({
-//     notificationCount: 1,
-//   }))(({ dispatch, nav,focused }) => (
-//     <View>
-//         {/* {focused ? <Image style={{width:24,height:24}} source={require("../assets/bell.png")} /> : <Image style={{width:24,height:24}} source={require("../assets/bell-outline.png")} /> }
-
-//       {
-//         props.notificationCount > 0 ?
-//           <View style={{ position: 'absolute', right: 10, top: 5, backgroundColor: 'red', borderRadius: 9, width: 18, height: 18, justifyContent: 'center', alignItems: 'center' }}>
-//             <Text style={{ color: 'white' }}>{props.notificationCount}</Text>
-//           </View> : null
-//       } */}
-//     </View>
-//   ));
 
 
 import React, { Component } from "react";

@@ -47,6 +47,7 @@ import { LOGOUT } from './types';
 import DistrictReducers from './reducers/DistrictReducers';
 import adressReducers from './reducers/adressReducers';
 import categoryReducers from './reducers/categoryReducers';
+import filteredProductReducers from './reducers/filteredProductReducers';
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
@@ -99,7 +100,8 @@ const appReducer = combineReducers({
   CustomerproductForCustomer: productReducer,
   District:DistrictReducers,
   adress:adressReducers,
-  categories: categoryReducers
+  categories: categoryReducers,
+  filteredProduct: filteredProductReducers
 });
 
 const rootReducer = (state, action) => {

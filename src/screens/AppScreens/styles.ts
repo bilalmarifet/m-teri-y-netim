@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   },
   item: {
     height:220,
-    marginHorizontal: 10,
+    marginHorizontal: 5,
     borderWidth: 0,
     paddingLeft: 10,
     borderRadius: 4,

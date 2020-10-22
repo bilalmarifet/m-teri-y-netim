@@ -18,20 +18,24 @@ import * as Animatable from 'react-native-animatable';
 import { connect } from "react-redux";
 import { getCategories } from "../../redux/actions/categoryAction";
 import { AppState } from "../../redux/store";
+import { GetProductsForCustomer, IProductItemCustomer } from "../../redux/actionsCustomer/ProductAction";
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState>;
   getCategories : ()=>void;
+  GetProductsForCustomer: (productsList?: IProductItemCustomer[]) => void;
+  productList: IProductItemCustomer[];
+  loading:boolean;
 }
 
 class AuthLoading extends React.Component<Props, {}> {
   constructor(props: Props) {
     super(props);
     this.props.getCategories()
-    setTimeout(  () => this._bootstrapAsync(), 2000);
-     
+    this.props.GetProductsForCustomer(this.props.productList);
+    setTimeout(() => this._bootstrapAsync(), 2000);  
   }
-  
+
   _bootstrapAsync = async () => {
     const { navigation } = this.props;
     const userToken = await AsyncStorage.getItem("userToken");
@@ -43,11 +47,18 @@ class AuthLoading extends React.Component<Props, {}> {
     const userId = await AsyncStorage.getItem('userId');
     global.USERID = userId
   
+    this.props.navigation.navigate('AppStack')
    // navigation.navigate(userToken ? "AppStack" : "AuthStack");
-  navigation.navigate( "AppStack");
+ 
   };
 
+  componentDidMount() {
+
+
+
+  }
   render() {
+
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
          <Image source={BaseImageWithName} style={{height:200}} resizeMode="contain" />
@@ -59,13 +70,17 @@ class AuthLoading extends React.Component<Props, {}> {
 }
 
 const mapStateToProps = (state: AppState) => ({
-  
+  productList: state.CustomerproductForCustomer.productList,
+  loading: state.CustomerproductForCustomer.loading,
 });
 
 function bindToAction(dispatch: any) {
   return {
     getCategories : () => 
-    dispatch(getCategories())
+    dispatch(getCategories()),
+    GetProductsForCustomer: (productsList?: IProductItemCustomer[]) =>
+    dispatch(GetProductsForCustomer(productsList)),
+    
   };
 }
 
