@@ -315,13 +315,8 @@ class CartScreen extends Component<Props, State> {
         </View>
       )
     }
-    else if(this.props.storeInformation && this.props.storeInformation.averageDuration && this.props.storeInformation.averageDuration > 0) {
-      let durationText = this.props.storeInformation.averageDuration 
-      let durationTextLonger = `${durationText - 10} - ${durationText + 10} dakika`
-       
+
     return (
-
-
       <View style={{padding:20,marginBottom:50}}>
           <Text style={{fontFamily:fonts.primaryFont,fontWeight:"600",marginBottom:10}}>Ödeme Özeti</Text>
           <View style={{flexDirection:'row',justifyContent:'space-between'}}><Text style={{fontFamily:fonts.h3Font,marginLeft:15}}>Toplam Fiyat: </Text><Text style={{fontFamily:fonts.h3Font}}>{price} ₺</Text></View>
@@ -335,11 +330,6 @@ class CartScreen extends Component<Props, State> {
 
      
     )
-    }else {
-      return (<View/>)
-    }
-  
-  
   }
   renderContent() {
 
