@@ -24,7 +24,7 @@ export class NotificationService {
 
 
     async sendPush(message1 :string , title : string) {
-        const serverKey = 'AAAAyE8TtxA:APA91bE8aRkNWapUGBcGjXrWUYk3WMrs2pQPTtLlyZstLeCIaXY8HeLDkQSqaUtQcKfG60pR_TzEEDACSSZFRqUu008rZus474nldtxXK7UDpqfRHj8TKx4wi_pQdVb9sxsHltbqve2S';
+        const serverKey = 'AAAAzC9koMY:APA91bEKgkLOnm43vVaHm39k9yYJyyMORID-AuigbBrz2MTm5vgm2HhQj0BtKJXfUAtGJete0Q1VglaXabdBG1BddCgrrI7LDuI0dXpGp__TiP-zEFpTogPBswd1H2_7XNwhaDeHa9wQ';
         const FIREBASE_API_KEY = serverKey;
         const message = {
             registration_ids: this.tokenList,

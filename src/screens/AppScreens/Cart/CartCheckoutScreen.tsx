@@ -261,13 +261,13 @@ class CartScreen extends Component<Props, State> {
       let durationText = this.props.storeInformation.averageDuration 
       let durationTextLonger = `${durationText - 10} - ${durationText + 10} dakika`
       return(
-        <View style={{padding:20}}>
-          <Text style={{fontFamily:fonts.primaryFont,fontWeight:"600"}}>Ortalama getirme süresi</Text>
-            <View style={{flexDirection:'row',marginTop:10}}>
-              <Icon name="clock" style={{color:colors.IconColor,fontSize:18 }} />
-            <Text style={{fontFamily:fonts.primaryFont,marginLeft:10}}>{durationTextLonger}</Text>         
-            </View>
-        </View>
+          <View style={{padding:20}}>
+            <Text style={{fontFamily:fonts.primaryFont,fontWeight:"600"}}>Ortalama getirme süresi</Text>
+              <View style={{flexDirection:'row',marginTop:10}}>
+                <Icon name="clock" style={{color:colors.IconColor,fontSize:18 }} />
+              <Text style={{fontFamily:fonts.primaryFont,marginLeft:10}}>{durationTextLonger}</Text>         
+              </View>
+          </View>
       )
     }else {
       return (<View/>)
@@ -290,8 +290,60 @@ class CartScreen extends Component<Props, State> {
     
     )
   }
+
+  renderPaymentCosts() {
+
+    const cart = this.props.productList
+    ? this.props.productList.length > 0
+      ? this.props.productList.filter(e => e.count > 0)
+      : []
+    : [];
+
+  var price = 0;
+  cart.map(e => (price +=(e.isCampaign ? e.newPrice : e.price) * e.count));
+  if (price > 0) {
+    price = Number(price.toFixed(2))
+  }
+  var deliveryCost = this.props.storeInformation ? this.props.storeInformation.deliveryCost ?? 0 : 0
+  deliveryCost = this.props.storeInformation ? this.props.storeInformation.minFreeDelivery ? price > this.props.storeInformation.minFreeDelivery ? 0 : this.props.storeInformation.deliveryCost : 0 : 0
+  let minFreeDelivery = this.props.storeInformation ? this.props.storeInformation.minFreeDelivery ?? "" : ""
+  var totalCost = price + deliveryCost
+    if(this.props.loadingForStorInfo) {
+      return (
+        <View>
+          <Spinner />
+        </View>
+      )
+    }
+    else if(this.props.storeInformation && this.props.storeInformation.averageDuration && this.props.storeInformation.averageDuration > 0) {
+      let durationText = this.props.storeInformation.averageDuration 
+      let durationTextLonger = `${durationText - 10} - ${durationText + 10} dakika`
+       
+    return (
+
+
+      <View style={{padding:20,marginBottom:50}}>
+          <Text style={{fontFamily:fonts.primaryFont,fontWeight:"600",marginBottom:10}}>Ödeme Özeti</Text>
+          <View style={{flexDirection:'row',justifyContent:'space-between'}}><Text style={{fontFamily:fonts.h3Font,marginLeft:15}}>Toplam Fiyat: </Text><Text style={{fontFamily:fonts.h3Font}}>{price} ₺</Text></View>
+          <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:10,}}><Text style={{fontFamily:fonts.h3Font,marginLeft:15}}>Kurye Ücreti: </Text><Text style={{fontFamily:fonts.h3Font}}>{deliveryCost} ₺</Text></View>
+     <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:10,}}><Text style={{fontFamily:fonts.h3Font,marginLeft:15,fontWeight:'bold'}}>Toplam ödenecek Tutar: </Text><Text style={{fontFamily:fonts.h3Font,fontWeight:'bold'}}>{totalCost} ₺</Text></View>
+     {deliveryCost > 0 &&  <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:10,}}><Text style={{fontFamily:fonts.h3Font,marginLeft:15}}>Minimum ücretsiz teslimat tutarı: </Text><Text style={{fontFamily:fonts.h3Font}}>{minFreeDelivery} ₺</Text></View> }
+  
+  
+        </View>
+
+
+     
+    )
+    }else {
+      return (<View/>)
+    }
+  
+  
+  }
   renderContent() {
 
+  
     if(this.props.isLoadingGetAdress) {
       return(
         <View style={{flex:1,justifyContent:'center',alignSelf:'center'}}>
@@ -329,7 +381,9 @@ class CartScreen extends Component<Props, State> {
       {this.renderPaymentInfoText()}
       {this.renderDeliveryTime()}
       {this.renderPaymentMethod()}
+      {this.renderPaymentCosts()}
       </ScrollView>
+     
       <ButtonGradient loading={this.props.isLoadingAddOrder || this.props.loadingForGetPaymentMethods} onPress={()=>this.handleCartAction()} linearGredientStyle={{borderRadius:0,height:60}} style={{position:'absolute',bottom:0,left:0,right:0,height:60,borderRadius:0}} text="Alışverişi Tamamla" />
      </View>
    )

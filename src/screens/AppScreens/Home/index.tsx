@@ -352,7 +352,7 @@ class CustomerHomeScreen extends Component<Props, State> {
   }
   renderCategory() {
     let baseCategories = this.props.categoryList ? this.props.categoryList.length > 0 ? this.props.categoryList.filter(e=>e.categoryParentId === 0) : [] : []
-    let width = Dimensions.get('window').width / 3 - 20 
+    let width = Dimensions.get('window').width / 3  - 10
     return(
       <View style={{ marginTop: 10 }}>
       <Text style={{ paddingLeft: 10, fontFamily: fonts.h3Font, color: '#555', fontWeight: '200', fontSize: 18 }}>Kategoriler</Text>
@@ -403,7 +403,7 @@ class CustomerHomeScreen extends Component<Props, State> {
         <View style={[styles.container]}>
           {/* {campaings && */}
             <SliderBox
-            sliderBoxHeight={250}
+            sliderBoxHeight={200}
             autoplay={true}
             circleLoop
               images={this.props.campaings.map((item) => { return item.photoPath; })}
