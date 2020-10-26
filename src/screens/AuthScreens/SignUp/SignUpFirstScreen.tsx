@@ -65,7 +65,6 @@ const loginSchema = Yup.object().shape({
     .min(3,"İsim soyisim en az 3 karakter olmalıdır.")
     .required("İsim soyisim girilmesi zorunludur"),
   email: Yup.string()
-    .email("Lütfen geçerli bir email adresi giriniz")
     .min(4,"Email en az 4 karakter içermelidir.")
     .required("Email girilmesi zorunludur."),
   password: Yup.string()
