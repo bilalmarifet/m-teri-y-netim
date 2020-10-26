@@ -186,7 +186,7 @@ class CartScreen extends Component<Props, State> {
       if(element.count > 0) {
         var product: product = {
           index: 0,
-          productId: element.id,
+          productId: element.productId,
           unitPrice: element.isCampaign ? element.newPrice.toString() : element.price.toString(),
           productCount: element.count.toString(),
           productCode: element.productCode,
