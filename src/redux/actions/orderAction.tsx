@@ -49,7 +49,7 @@ export function GetOrders(
       pageIndex +
       '&pageSize=' +
       pageSize;
-
+    console.log(WATER_CUSTOMER_ORDERS_GET_CUSTOMER)
     axios
       .get(WATER_CUSTOMER_ORDERS_GET_CUSTOMER, {headers:headers})
       .then(response => {
