@@ -1,4 +1,4 @@
-package com.su24;
+package com.yagmurTicaret;
 
 import com.facebook.react.ReactActivity;
 

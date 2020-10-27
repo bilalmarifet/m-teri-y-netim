@@ -46,7 +46,7 @@ class AuthLoading extends React.Component<Props, {}> {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
          <Image source={BaseImageWithName} style={{height:200}} resizeMode="contain" />
-
+        <Text style={{color:'#0099ED',fontSize:30}}>Yağmur Ticaret</Text>
         <Spinner color={colors.IconColor} />
       </View>
     );

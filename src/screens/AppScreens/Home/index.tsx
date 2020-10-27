@@ -106,7 +106,7 @@ class CustomerHomeScreen extends Component<Props, State> {
   static navigationOptions = ({ navigation }) => {
 
     return {
-      title: 'Su 24',
+      title: 'Yağmur Ticaret',
 
       headerStyle: {
         backgroundColor: colors.headerColorTop,
