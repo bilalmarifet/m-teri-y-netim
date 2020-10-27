@@ -1,4 +1,4 @@
-package com.KolaySiparis;
+package com.su24;
 
 import android.app.Application;
 import android.content.Context;
