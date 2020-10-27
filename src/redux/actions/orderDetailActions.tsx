@@ -15,6 +15,7 @@ import { showMessage } from 'react-native-flash-message';
 import { showSimpleMessage } from '../../components/showMessage';
 import { NotificationService } from '../../services/NotificationService';
 import NavigationService from '../../services/NavigationService';
+import { GetOrders } from './orderAction';
 
 export enum OrderStatus
     {
@@ -249,7 +250,7 @@ export function cancelOrder(orderId: number,canceledUsername: string) {
       notificationService.sendPush("Sipariş iptali",`Müşteriniz ${canceledUsername} siparişini iptal etti.`)
     }
     showSimpleMessage("Siparişiniz başarıyla iptal edildi.","success")
-   Dispatch(GetOrders(global.CUSTOMER_ID, 1, 10))
+    dispatch(GetOrders(global.CUSTOMER_ID, 1, 10))
     NavigationService.navigate('Order')
     dispatch(cancelOrderLoading(false))
 
