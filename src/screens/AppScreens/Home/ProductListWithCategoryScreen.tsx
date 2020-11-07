@@ -144,7 +144,7 @@ class ProductListWithCategoryScreen extends Component<Props, State> {
   static navigationOptions = ({ navigation }) => {
 
     return {
-      title: 'Fill Market',
+      title: 'Güven Market',
 
       headerStyle: {
         backgroundColor: colors.headerColorTop,
@@ -645,7 +645,7 @@ let width = Dimensions.get('window').width / 3
             {this.renderPlusButton(item, index)}
 
             <Text style={{ fontFamily: 'roboto', color: colors.textColor, width: '90%' }}>
-              {item.productName}
+            {item.productName ? item.productName.length > 20 ? item.productName.slice(0,20) + "..." : item.productName : ""}
             </Text>
             {item.isCampaign ?  <View style={{flexDirection:'row'}}>
           <Text style={{ fontFamily: fonts.primaryFont, marginTop: 5, color: colors.textColorLighter,textDecorationLine:"line-through" }}>
@@ -681,19 +681,32 @@ renderItemsForProduct() {
   if(item) {
     return(
       <View style={{flex:1,backgroundColor:'white'}}>
-      <Text style={{fontFamily:fonts.primaryFont,fontSize:18,textAlign:'center',marginTop:10}}>{item.productName}</Text>
+      <Text style={{fontFamily:fonts.primaryFont,fontSize:18,textAlign:'center',marginTop:10,marginHorizontal:30}}>{item.productName}</Text>
       <TouchableOpacity onPress={()=> this.RBSheetItem.close()} style={{position:'absolute',right:5,top:10}}>
           <Icon name="x" style={{fontSize:20}} />
         </TouchableOpacity>
 
         <View style={{justifyContent:'space-between',flex:1}}>
-        <FastImage
+       <View>
+       <FastImage
         style={{ width: Dimensions.get('window').width/1.5 , height: Dimensions.get('window').width/1.5 ,justifyContent:'center',alignSelf:'center',marginTop:10}}
         source={{
             uri: item.photoPath,
             priority: FastImage.priority.normal,
         }}
     />
+    {item.isCampaign ?  <View style={{flexDirection:'row',justifyContent:'center'}}>
+          <Text style={{ fontFamily: fonts.primaryFont,fontSize:25, marginTop: 5, color: colors.textColorLighter,textDecorationLine:"line-through" }}>
+    {item.price} 
+      </Text>
+      <Text style={{ marginLeft:5,fontFamily: fonts.primaryFont,fontSize:25, marginTop: 5, color: colors.priceAndPlusColor, fontWeight: 'bold'}}>
+    {item.newPrice} TL
+      </Text>
+          </View>
+          :<Text style={{ fontFamily: fonts.primaryFont,fontSize:25, marginTop: 5, color: colors.priceAndPlusColor, fontWeight: 'bold',textAlign:'center' }}>
+          {item.price} TL
+ </Text>}
+       </View>
         </View>
     {this.renderPlusButtonForRBSheet(item)}
       </View>
@@ -760,7 +773,7 @@ renderProducts() {
           contentContainerStyle={{ paddingTop: 5 }}
           data={this.props.productList.filter(e => e.isCampaign !== true)}
 
-          keyExtractor={item => item.productId}
+          keyExtractor={item => item.id}
           renderItem={({ item, index }) => {
             return (
               <View style={{ marginBottom: 10, flex: .48 }}>
