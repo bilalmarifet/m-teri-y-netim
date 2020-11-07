@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, FlatList, ActivityIndicator, Button, Text, Image, Dimensions, TouchableOpacity,TouchableHighlight } from "react-native";
+import { View, FlatList, ActivityIndicator, Button, Text, Image, Dimensions, TouchableOpacity,TouchableHighlight,TouchableWithoutFeedback } from "react-native";
 import { NavigationScreenProp, NavigationState, SafeAreaView } from "react-navigation";
 import { connect } from "react-redux";
 import { Header } from "../../../components";
@@ -25,7 +25,7 @@ import { SliderBox } from "react-native-image-slider-box";
 import { ScrollView } from "react-native-gesture-handler";
 import FastImage from "react-native-fast-image";
 import { Category } from "../../../redux/actions/categoryAction";
-
+import RBSheet from "react-native-raw-bottom-sheet";
 interface Props {
   navigation: NavigationScreenProp<NavigationState>;
   productList: IProductItemCustomer[]
@@ -50,6 +50,7 @@ interface State {
   change: boolean;
   images: string[];
   categories : Category[];
+  selectedItemId: number;
 }
 
 
@@ -88,8 +89,8 @@ class CustomerHomeScreen extends Component<Props, State> {
       {id:1,name:'Meyve sebze',image: categoryImagemeyveSebze},
       {id:1,name:'Temizlik',image: categoryImagesutTemizlik},
       {id:1,name:'Kozmetik',image:categoryImagekozmetik},
-      {id:1,name:'Elektronik',image: categoryImageElektronik}]
-      
+      {id:1,name:'Elektronik',image: categoryImageElektronik}],
+      selectedItemId: 0
 
     };
 
@@ -103,6 +104,110 @@ class CustomerHomeScreen extends Component<Props, State> {
     this.props.productList ? this.props.productList.map(e => TotalPrice += e.price * e.count) : null
     this.props.navigation.setParams({ cart: TotalPrice })
     this.props.getUserInfo();
+  }
+
+  renderItemsForProduct() {
+    let item = this.props.productList.find(e=>e.id === this.state.selectedItemId) ?? null
+    if(item) {
+      return(
+        <View style={{flex:1,backgroundColor:'white'}}>
+        <Text style={{fontFamily:fonts.primaryFont,fontSize:18,textAlign:'center',marginTop:10}}>{item.productName}</Text>
+        <TouchableOpacity onPress={()=> this.RBSheetItem.close()} style={{position:'absolute',right:5,top:10}}>
+            <Icon name="x" style={{fontSize:20}} />
+          </TouchableOpacity>
+  
+          <View style={{justifyContent:'space-between',flex:1}}>
+          <FastImage
+          style={{ width: Dimensions.get('window').width/1.5 , height: Dimensions.get('window').width/1.5 ,justifyContent:'center',alignSelf:'center',marginTop:10}}
+          source={{
+              uri: item.photoPath,
+              priority: FastImage.priority.normal,
+          }}
+      />
+          </View>
+      {this.renderPlusButtonForRBSheet(item)}
+        </View>
+      )
+    }else {
+      ()=> this.RBSheetItem.close()
+    }
+    
+  }
+
+  renderPlusButtonForRBSheet(item: IProductItemCustomer, index?: number) {
+
+    if (item.count > 0) {
+      let cart = this.props.navigation.getParam('cart') ?? 0
+      return (
+        <View style={{ shadowColor: "#000",
+        shadowOffset: {
+          width: 5,
+          height: 2,
+        },
+        shadowOpacity: 0.41,
+        shadowRadius: 10.65,
+
+        elevation: 3,backgroundColor:'white',paddingBottom:30,paddingTop:20,height:100}}>
+          {this.props.loadingIncDec && this.props.loadingIndex === item.id && <Spinner style={{ position: "absolute", zIndex: 1, backgroundColor: colors.borderColor, opacity: .8, width: '100%', height: '100%' }} color={colors.headerColor} />}
+
+          <View  style={{  marginBottom:20,justifyContent:'center',alignSelf:'center',flexDirection:'row'  }}>
+             <TouchableOpacity style={[styles.IncOrDecButton,{height:50,width:50,borderRadius:25}]} onPress={() => {
+              this.props.IncOrDecItemFromCart(this.props.productList, item.id, false);
+              this.props.navigation.setParams({ cart: cart - item.price });
+              this.setState({ change: !this.state.change })
+            }}><Icon name="minus"
+              style={{ color: colors.priceAndPlusColor, fontSize: 45 }} /></TouchableOpacity>
+
+          
+            <Text style={{ alignSelf: 'center', fontWeight: 'bold', paddingHorizontal: 10, color: colors.textColor }}>{item.count}</Text>
+           
+            <TouchableOpacity  style={[styles.IncOrDecButton,{height:50,width:50,borderRadius:25}]} onPress={() => {
+              this.props.IncOrDecItemFromCart(this.props.productList, item.id, true);
+              this.props.navigation.setParams({ cart: cart + item.price });
+              this.setState({ page: this.state.page + 1 })
+            }}><Icon name="plus"
+              style={{ color: colors.priceAndPlusColor, fontSize: 45 }} /></TouchableOpacity>
+
+          </View>
+        </View>
+      )
+    }
+    else {
+      let cart = this.props.navigation.getParam('cart') ?? 0
+      return (
+
+          <View style={{ justifyContent:'center',alignSelf:'center',paddingBottom:30,paddingTop:20, shadowColor: "#000",height:100,
+          shadowOffset: {
+            width: 5,
+            height: 2,
+          },
+          shadowOpacity: 0.41,
+          shadowRadius: 10.65,
+  
+          elevation: 3, backgroundColor:'white',width:Dimensions.get('window').width}}>
+          {this.props.loadingIncDec && this.props.loadingIndex === item.id && <Spinner style={{ position: "absolute", zIndex: 1, backgroundColor: colors.borderColor, opacity: .8, width: '100%', height: '100%' }} color={colors.headerColor} />}
+
+            {this.props.loadingIncDec && this.props.loadingIndex === item.id && <Spinner style={{ zIndex: 1, backgroundColor: colors.borderColor, opacity: .8 }} size="small" color={colors.headerColor} />}
+            <TouchableOpacity  style={{backgroundColor:colors.IconColor,height:50,width:Dimensions.get('screen').width - 40,borderRadius:5,justifyContent:'center',shadowColor: "#000",alignSelf:'center',
+        shadowOffset: {
+          width: 5,
+          height: 2,
+        },
+        shadowOpacity: 0.41,
+        shadowRadius: 10.65,
+
+        elevation: 3,}} onPress={() => {
+              this.props.IncOrDecItemFromCart(this.props.productList, item.id, true)
+              this.props.navigation.setParams({ cart: cart + item.price });
+              this.setState({ change: !this.state.change })
+            }}>
+              <Text style={{color:'white',fontFamily:fonts.h3Font,textAlign:'center',fontSize:18}}>Sepete Ekle</Text>
+            </TouchableOpacity>
+
+        </View>
+
+      )
+    }
   }
 
   // componentDidUpdate(prevProps : Props, prevState : State) {
@@ -276,6 +381,8 @@ class CustomerHomeScreen extends Component<Props, State> {
 
   renderProductItem(item: IProductItemCustomer, index: number) {
     return (
+      <TouchableWithoutFeedback onPress={()=> this.setState({selectedItemId:item.id}, ()=> this.RBSheetItem.open())
+    }>
       <View style={{ marginBottom: 10 }}>
         <View style={styles.itemCampaign}>
           <View style={{ paddingVertical: 10, justifyContent: 'center', alignContent: 'center', alignSelf: 'center' }}>
@@ -305,6 +412,7 @@ class CustomerHomeScreen extends Component<Props, State> {
         </View>
 
       </View>
+      </TouchableWithoutFeedback>
 
     );
   }
@@ -417,6 +525,21 @@ class CustomerHomeScreen extends Component<Props, State> {
           </View>
 
           {this.renderContent()} */}
+          <RBSheet
+          ref={ref => {
+            this.RBSheetItem = ref;
+          }}
+          height={Dimensions.get('window').height - 100}
+          openDuration={250}
+          customStyles={{
+            container: {
+              borderTopRightRadius:5,
+              borderTopLeftRadius:5
+            }
+          }}
+        >
+         {this.renderItemsForProduct()}
+        </RBSheet>
         </View>
       </ScrollView>
     );
