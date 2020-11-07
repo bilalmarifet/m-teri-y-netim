@@ -111,12 +111,13 @@ class CustomerHomeScreen extends Component<Props, State> {
     if(item) {
       return(
         <View style={{flex:1,backgroundColor:'white'}}>
-        <Text style={{fontFamily:fonts.primaryFont,fontSize:18,textAlign:'center',marginTop:10}}>{item.productName}</Text>
+        <Text style={{fontFamily:fonts.primaryFont,fontSize:18,textAlign:'center',marginTop:10,marginHorizontal:30}}>{item.productName}</Text>
         <TouchableOpacity onPress={()=> this.RBSheetItem.close()} style={{position:'absolute',right:5,top:10}}>
             <Icon name="x" style={{fontSize:20}} />
           </TouchableOpacity>
   
           <View style={{justifyContent:'space-between',flex:1}}>
+          <View>
           <FastImage
           style={{ width: Dimensions.get('window').width/1.5 , height: Dimensions.get('window').width/1.5 ,justifyContent:'center',alignSelf:'center',marginTop:10}}
           source={{
@@ -124,6 +125,15 @@ class CustomerHomeScreen extends Component<Props, State> {
               priority: FastImage.priority.normal,
           }}
       />
+     <View style={{flexDirection:'row',justifyContent:'center',}}>
+          <Text style={{ fontFamily: fonts.primaryFont,fontSize:25, marginTop: 5, color: colors.textColorLighter,textDecorationLine:"line-through" }}>
+    {item.price} 
+      </Text>
+      <Text style={{ marginLeft:5,fontFamily: fonts.primaryFont,fontSize:25, marginTop: 5, color: colors.priceAndPlusColor, fontWeight: 'bold'}}>
+    {item.newPrice} TL
+      </Text>
+          </View>
+          </View>
           </View>
       {this.renderPlusButtonForRBSheet(item)}
         </View>

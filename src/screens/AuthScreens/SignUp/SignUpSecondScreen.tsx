@@ -137,7 +137,7 @@ class SignUpSecondScreen extends Component<Props, State> {
     user.storeOwnerUserId = BaseStoreOwnerUserId
     console.log(user)
     if(this.state.DistrictName && this.state.DistrictName.length > 0) {
-      user.address = this.state.DistrictName + user.address
+      user.address = this.state.DistrictName + " "+ user.address
     }
     this.props.createBaseUser(user);
   };

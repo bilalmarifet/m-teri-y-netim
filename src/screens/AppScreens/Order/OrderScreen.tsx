@@ -251,7 +251,7 @@ class OrderScreen extends Component<Props, State> {
                         fontFamily: fonts.primaryFont,
                         color: colors.textColor,
                       }}>
-                      {item.productName}
+                      {item.productName ? item.productName.length > 90 ? item.productName.slice(0,90) + "..." : item.productName : ""}
                     </Text>
                     <Text
                       style={{
