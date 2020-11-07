@@ -229,7 +229,7 @@ class CustomerHomeScreen extends Component<Props, State> {
   static navigationOptions = ({ navigation }) => {
 
     return {
-      title: 'Fill Market',
+      title: 'Güven Market',
 
       headerStyle: {
         backgroundColor: colors.headerColorTop,
