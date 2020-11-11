@@ -21,8 +21,10 @@ import { SuccessButton } from "../../../components/SuccessButton";
 import { TouchableHighlight, TouchableOpacity } from "react-native";
 import NavigationService from "../../../services/NavigationService";
 import Icon from 'react-native-vector-icons/Feather';
-import { BaseImage } from "../../../services/AppConfig";
+import { BaseImage, BasestoreId, BaseStoreOwnerUserId } from "../../../services/AppConfig";
 import { District, getDistrict } from "../../../redux/actions/DistrictAction";
+import { BaseUser, createUserControlIfNumberIsUsed } from "../../../redux/actions/signUpActions";
+import TextInputMask from 'react-native-text-input-mask';
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState>;
@@ -31,6 +33,7 @@ interface Props {
   getDistrict :() => void;
   isLoadingDistrict : boolean;
   districtList: District[];
+  createUserControlIfNumberIsUsed: (user: BaseUser,isLogin: boolean) => void;
 }
 interface userData {
   username: string;
@@ -39,20 +42,21 @@ interface userData {
 }
 
 const loginSchema = Yup.object().shape({
-  username: Yup.string()
-    .email("Lütfen email formatında giriniz.")
-    .min(4,"Email minimum 4 karakter olmalıdır.")
-    .required("Email girilmesi zorunludur."),
-  password: Yup.string()
-    .min(6,"Şifre minimum 6 karakter olmalıdır.")
-    .required("Şifre girilmesi zorunludur.")
+  phoneNumber: Yup.string()
+  .required("Lütfen telefon numaranızı giriniz"),
 });
 
 
 class Login extends Component<Props, {}> {
   handleLogin = (values: userData) => {
     const { navigation } = this.props;
-    this.props.loginUserService(values.username, values.password)
+    var user = {} as BaseUser
+    user.phoneNumber = values.phoneNumber
+    user.storeId = BasestoreId
+    user.storeOwnerUserId = BaseStoreOwnerUserId
+    user.userType = 3
+    this.props.createUserControlIfNumberIsUsed(user,true)
+    
   };
   componentDidMount() {
       this.props.getDistrict()
@@ -84,7 +88,7 @@ class Login extends Component<Props, {}> {
    
           <ScrollView bounces={false}>
             <Formik
-              initialValues={{ username: "", password: "" }}
+              initialValues={{ phoneNumber: "" }}
               validationSchema={loginSchema}
               onSubmit={values => this.handleLogin(values)}
             >
@@ -99,30 +103,31 @@ class Login extends Component<Props, {}> {
                       </Text>
                     </View>
                     <View style={[styles.inputContainer,{paddingBottom:0}]}>
-                      <Input
-                        placeholder="Email"
-                        value={props.values.username}
-                        onChangeText={props.handleChange("username")}
-                        onBlur={props.handleBlur("username")}
-                        error={props.touched.username && props.errors.username}
-                      />
-                      {props.touched.username && props.errors.username && <Text style={{fontSize:12,color:colors.accent}}>
-                        {props.errors.username}
-                      </Text>
-                      }
-                      <Input
-                        placeholder="Şifre"
-                        value={props.values.password}
-                        onChangeText={props.handleChange("password")}
-                        onBlur={props.handleBlur("password")}
-                        secureTextEntry
-                        error={props.touched.password && props.errors.password}
-                      />
-                      {props.touched.password && props.errors.password && <Text style={{fontSize:12,color:colors.accent}}>
-                        {props.errors.password}
-                        </Text>
-              }
-                      <TouchableOpacity onPress={()=> this.props.navigation.navigate('ForgotPassword')}><Text style={{fontFamily:fonts.primaryFont,textAlign:'right',marginRight:5}}>Şifremi unuttum</Text></TouchableOpacity>
+                    <TextInputMask
+                            style={{
+                              height: 40,
+                              borderBottomWidth: 1,
+                              borderBottomColor: (props.touched.phoneNumber && props.errors.phoneNumber) ? colors.accent : colors.borderColor,
+                              fontSize: 16,
+                              marginVertical: 10
+                            }}
+                            placeholder="Telefon numarası"
+                            refInput={ref => { this.input = ref }}
+                            onChangeText={(formatted, extracted) => {
+                              console.log(formatted) // +1 (123) 456-78-90
+                              console.log(extracted) // 1234567890
+                              props.setFieldValue("phoneNumber", extracted)
+                            }}
+                            onBlur={props.handleBlur("phoneNumber")}
+                            error={props.touched.phoneNumber && props.errors.phoneNumber}
+                            mask={"+90 ([000]) [000] [00] [00]"}
+                          />
+                          {props.touched.phoneNumber && props.errors.phoneNumber && <Text style={{ fontSize: 12, color: colors.accent }}>
+                            {props.errors.phoneNumber}
+                          </Text>
+                          }
+
+                      {/* <TouchableOpacity onPress={()=> this.props.navigation.navigate('ForgotPassword')}><Text style={{fontFamily:fonts.primaryFont,textAlign:'right',marginRight:5}}>Şifremi unuttum</Text></TouchableOpacity> */}
                 
                       <SuccessButton loading={this.props.isLoading} text="Giriş yap" onPress={props.handleSubmit} />
                       <Button text="Üye ol" loading={this.props.isLoadingDistrict} style={{backgroundColor:colors.IconColor,paddingHorizontal: 10,  flexDirection:'row', justifyContent:'space-between'}} textStyle={{color:'white'}} onPress={()=> this.gotoDistrictOrNot()} />
@@ -193,7 +198,9 @@ function bindToAction(dispatch: any) {
     loginUserService: (username: string, password: string) =>
       dispatch(loginUserService(username, password)),
       getDistrict :() =>
-      dispatch(getDistrict())
+      dispatch(getDistrict()),
+      createUserControlIfNumberIsUsed: (user: BaseUser,isLogin: boolean) => 
+      dispatch(createUserControlIfNumberIsUsed(user,isLogin))
   };
 }
 

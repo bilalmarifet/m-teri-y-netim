@@ -103,7 +103,7 @@ export const WATER_EMPLOYEECOST_DELETE =
   WATER_BASE_URL_NEW + '/api/employeCost/Delete';
 
 export const WATER_USER_CREATE = WATER_BASE_URL_NEW + '/SignUp';
-
+export const WATER_CONTROL_PHONE_NUMBER = WATER_BASE_URL_NEW + '/api/customer/CustomerByPhoneNew'
 export const WATER_CUSTOMER_ADD_NEW = WATER_BASE_URL_NEW + '/api/customer';
 export const WATER_ADRESS = WATER_BASE_URL_NEW + '/api/customer/address'
 export const WATER_USER_CREATE_CONTROL_EMAIL =
