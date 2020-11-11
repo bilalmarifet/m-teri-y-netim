@@ -25,6 +25,7 @@ import { BaseImage, BasestoreId, BaseStoreOwnerUserId } from "../../../services/
 import { District, getDistrict } from "../../../redux/actions/DistrictAction";
 import { BaseUser, createUserControlIfNumberIsUsed } from "../../../redux/actions/signUpActions";
 import TextInputMask from 'react-native-text-input-mask';
+import { showSimpleMessage } from "../../../components/showMessage";
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState>;
@@ -49,14 +50,18 @@ const loginSchema = Yup.object().shape({
 
 class Login extends Component<Props, {}> {
   handleLogin = (values: userData) => {
-    const { navigation } = this.props;
+
+    if(values && values.phoneNumber && values.phoneNumber.length !== 10) {
+      showSimpleMessage("Telefon numarasını doğru formatta giriniz","danger")
+    }else {
+
     var user = {} as BaseUser
-    user.phoneNumber = values.phoneNumber
+    user.phoneNumber = "0" + values.phoneNumber
     user.storeId = BasestoreId
     user.storeOwnerUserId = BaseStoreOwnerUserId
     user.userType = 3
     this.props.createUserControlIfNumberIsUsed(user,true)
-    
+    }
   };
   componentDidMount() {
       this.props.getDistrict()

@@ -45,6 +45,7 @@ import { colors, fonts } from '../../../constants';
 import TextInputMask from 'react-native-text-input-mask';
 import { SuccessButton } from '../../../components/SuccessButton';
 import { District } from '../../../redux/actions/DistrictAction';
+import { showSimpleMessage } from '../../../components/showMessage';
 
 // import Icon from 'react-native-vector-icons/Ionicons'
 // import { Input } from "react-native-elements";
@@ -124,16 +125,21 @@ class SignUpSecondScreen extends Component<Props, State> {
   }
 
   handleLogin = (values: userData) => {
-    const { isSucceed, navigation } = this.props;
-    var user = {} as BaseUser;
-    user.nameSurname = values.NameSurname
-    user.address = this.state.DistrictName ?? ""
-    user.phoneNumber = values.phoneNumber;
-    user.userType = 3
-    user.storeId = BasestoreId
-    user.storeOwnerUserId = BaseStoreOwnerUserId
-    console.log(user)
-    this.props.createUserControlIfNumberIsUsed(user,false)
+    if(values && values.phoneNumber && values.phoneNumber.length !== 10) {
+      showSimpleMessage("Telefon numarasını doğru formatta giriniz","danger")
+    }else {
+      const { isSucceed, navigation } = this.props;
+      var user = {} as BaseUser;
+      user.nameSurname = values.NameSurname
+      user.address = this.state.DistrictName ?? ""
+      user.phoneNumber = "0" + values.phoneNumber;
+      user.userType = 3
+      user.storeId = BasestoreId
+      user.storeOwnerUserId = BaseStoreOwnerUserId
+      console.log(user)
+      this.props.createUserControlIfNumberIsUsed(user,false)
+    }
+    
   };
 
   render() {
