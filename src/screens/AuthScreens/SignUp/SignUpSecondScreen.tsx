@@ -128,10 +128,17 @@ class SignUpSecondScreen extends Component<Props, State> {
     if(values && values.phoneNumber && values.phoneNumber.length !== 10) {
       showSimpleMessage("Telefon numarasını doğru formatta giriniz","danger")
     }else {
+      var adress = ""
+      if(this.state.DistrictName && this.state.DistrictName.length > 0) {
+        adress = this.state.DistrictName + " " + values.adress
+      }
+      else {
+        adress = values.adress
+      }
       const { isSucceed, navigation } = this.props;
       var user = {} as BaseUser;
       user.nameSurname = values.NameSurname
-      user.address = this.state.DistrictName ?? ""
+      user.address = adress
       user.phoneNumber = "0" + values.phoneNumber;
       user.userType = 3
       user.storeId = BasestoreId
@@ -151,7 +158,7 @@ class SignUpSecondScreen extends Component<Props, State> {
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
             <ScrollView bounces={false} contentContainerStyle={{ flexGrow: 1 }}>
               <Formik
-                initialValues={{ phoneNumber: '', NameSurname: '' }}
+                initialValues={{ phoneNumber: '', NameSurname: '',adress: '' }}
                 validationSchema={loginSchema}
                 onSubmit={values => this.handleLogin(values)}>
                 {props => {
@@ -205,6 +212,22 @@ class SignUpSecondScreen extends Component<Props, State> {
                             {props.errors.phoneNumber}
                           </Text>
                           }
+
+<View>
+                        {this.state.DistrictName ? <Text style={{fontFamily:fonts.primaryFont,fontSize:15,marginTop:10}}>{this.state.DistrictName}<Text style={{color:colors.textColorLighter,}}> (seçtiğiniz mahalleyi adrese eklemenize gerek yoktur.)</Text></Text> : null}
+                         </View>
+                          <Input
+                            placeholder="Adres"
+                            value={props.values.adress}
+                            onChangeText={props.handleChange("adress")}
+                            onBlur={props.handleBlur("adress")}
+                            error={props.touched.adress && props.errors.adress}
+                          />
+                          {props.touched.adress && props.errors.adress && <Text style={{ fontSize: 12, color: colors.accent }}>
+                            {props.errors.adress}
+                          </Text>
+                          }
+
 
                         </View>
                         <SuccessButton loading={this.props.isSecondLoading} text="Devam et" onPress={props.handleSubmit} />
