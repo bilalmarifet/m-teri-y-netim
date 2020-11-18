@@ -76,6 +76,9 @@ const loginSchema = Yup.object().shape({
     NameSurname: Yup.string()
     .min(3,"İsim soyisim en az 3 karakter olmalıdır.")
     .required("İsim soyisim girilmesi zorunludur"),
+    adress: Yup.string()
+    .max(250, "Adres maksimum 250 karakter olabilir")
+    .required("Lütfen adres giriniz."),
 });
 
 interface State {
@@ -128,17 +131,10 @@ class SignUpSecondScreen extends Component<Props, State> {
     if(values && values.phoneNumber && values.phoneNumber.length !== 10) {
       showSimpleMessage("Telefon numarasını doğru formatta giriniz","danger")
     }else {
-      var adress = ""
-      if(this.state.DistrictName && this.state.DistrictName.length > 0) {
-        adress = this.state.DistrictName + " " + values.adress
-      }
-      else {
-        adress = values.adress
-      }
       const { isSucceed, navigation } = this.props;
       var user = {} as BaseUser;
       user.nameSurname = values.NameSurname
-      user.address = adress
+      user.address = values.adress
       user.phoneNumber = "0" + values.phoneNumber;
       user.userType = 3
       user.storeId = BasestoreId
@@ -212,10 +208,6 @@ class SignUpSecondScreen extends Component<Props, State> {
                             {props.errors.phoneNumber}
                           </Text>
                           }
-
-<View>
-                        {this.state.DistrictName ? <Text style={{fontFamily:fonts.primaryFont,fontSize:15,marginTop:10}}>{this.state.DistrictName}<Text style={{color:colors.textColorLighter,}}> (seçtiğiniz mahalleyi adrese eklemenize gerek yoktur.)</Text></Text> : null}
-                         </View>
                           <Input
                             placeholder="Adres"
                             value={props.values.adress}
