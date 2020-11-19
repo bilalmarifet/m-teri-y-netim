@@ -5,6 +5,7 @@ import {
   WATER_USER_CREATE_CONTROL_EMAIL,
   WATER_USER_CREATE,
   WATER_USER_CREATE_EMAIL_CONTROL,
+  WATER_CONTROL_PHONE_NUMBER,
 } from './../constants';
 import {Dispatch} from 'react';
 import {
@@ -22,7 +23,8 @@ import {UserFirstData} from '../reducers/signUpReducers';
 import {navigate} from '../services/Navigator';
 import NavigationService from '../../services/NavigationService';
 import { showSimpleMessage } from '../../components/showMessage';
-import { BasestoreId } from '../../services/AppConfig';
+import { BasestoreId, BaseStoreOwnerUserId } from '../../services/AppConfig';
+import { User } from './createUserAction';
 
 export interface BaseUser {
   nameSurname: string;
@@ -36,6 +38,48 @@ export interface BaseUser {
   storeOwnerUserId: number;
 }
 
+
+export function createUserControlIfNumberIsUsed(user: BaseUser,isLogin: boolean) {
+  return (dispatch: Dispatch<any>) => {
+    dispatch(loadingSecond(true));
+    axios
+    .get(WATER_CONTROL_PHONE_NUMBER + `?userId=${BaseStoreOwnerUserId}&phoneNumber=${user.phoneNumber}`).then(res => {
+      if (res.data.result && res.data.result.authUserResult && res.data.result.authUserResult.token) {
+        let data = res.data.result.authUserResult
+        if(isLogin) {
+
+        }else {
+          showSimpleMessage("Böyle bir kullanıcı var giriş yapılıyor.","success")
+        }
+        AsyncStorage.multiSet([
+          ['UserType', user.userType.toString()],
+          ['storeOwnerUserId', BaseStoreOwnerUserId.toString()],
+          ['customerId', data.customerId.toString()],
+          ['userId',data.userId.toString()],
+          ['userToken',data.token.toString()]
+        ]).then(() => {
+          dispatch(loginIsSucceedSecond(true, ''));
+          dispatch(reset());
+          NavigationService.navigate("AuthLoading")
+        });
+         
+          dispatch(reset());
+        } else {
+          dispatch(reset());
+          if(isLogin) {
+            showSimpleMessage("Böyle bir kullanıcı bulunamadı.","danger")
+          }else {
+            dispatch(createBaseUser(user))
+          }
+      }
+    })
+    .catch(err => {
+      console.log(err)
+      dispatch(loginIsSucceedSecond(false, 'Bir Hata Meydana Geldi'));
+      dispatch(reset());
+    });
+}
+}
 export function createBaseUser(user: BaseUser) {
   return (dispatch: Dispatch<Action>) => {
     dispatch(loadingSecond(true));
@@ -43,15 +87,15 @@ export function createBaseUser(user: BaseUser) {
     let storeOwnerUserId = user.storeOwnerUserId
       ? user.storeOwnerUserId.toString()
       : '0';
-
+    console.log(user)
     axios
       .post(WATER_USER_CREATE, {
-        nameSurname: user.nameSurname,
+        nameSurname: user.nameSurname ,
         phoneNumber: user.phoneNumber,
-        email: user.email,
-        password: user.password,
-        companyName: user.userType === 3 ? '' : user.companyName,
-        address: user.address,
+        email: user.email ?? "",
+        password: user.password ?? "",
+        companyName: user.userType === 3 ? '' : user.companyName ,
+        address: user.address ?? "",
         userType: user.userType,
         appToken: '',
         storeId: user.userType === 3 ? user.storeId : 0,

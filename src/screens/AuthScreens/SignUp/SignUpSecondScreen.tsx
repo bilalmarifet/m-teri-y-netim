@@ -29,7 +29,7 @@ import {
 } from 'react-navigation';
 import { Formik } from 'formik';
 
-import { createBaseUser, BaseUser } from '../../../redux/actions/signUpActions';
+import { createBaseUser, BaseUser, createUserControlIfNumberIsUsed } from '../../../redux/actions/signUpActions';
 import styles from '../Login/styles';
 import { connect } from 'react-redux';
 import { AppState } from '../../../redux/store';
@@ -45,6 +45,7 @@ import { colors, fonts } from '../../../constants';
 import TextInputMask from 'react-native-text-input-mask';
 import { SuccessButton } from '../../../components/SuccessButton';
 import { District } from '../../../redux/actions/DistrictAction';
+import { showSimpleMessage } from '../../../components/showMessage';
 
 // import Icon from 'react-native-vector-icons/Ionicons'
 // import { Input } from "react-native-elements";
@@ -60,6 +61,7 @@ interface Props {
   createBaseUser: (user: BaseUser) => void;
   userFirstData: UserFirstData;
   districtList: District[]
+  createUserControlIfNumberIsUsed: (user: BaseUser,isLogin: boolean)  => void;
 }
 
 interface userData {
@@ -71,10 +73,9 @@ interface userData {
 const loginSchema = Yup.object().shape({
   phoneNumber: Yup.string()
     .required("Lütfen telefon numaranızı giriniz"),
-  companyName: Yup.string().max(50),
-  adress: Yup.string()
-    .max(250, "Adres maksimum 250 karakter olabilir")
-    .required("Lütfen adres giriniz."),
+    NameSurname: Yup.string()
+    .min(3,"İsim soyisim en az 3 karakter olmalıdır.")
+    .required("İsim soyisim girilmesi zorunludur"),
 });
 
 interface State {
@@ -124,22 +125,21 @@ class SignUpSecondScreen extends Component<Props, State> {
   }
 
   handleLogin = (values: userData) => {
-    const { isSucceed, navigation } = this.props;
-    var user = {} as BaseUser;
-    user.nameSurname = this.props.userFirstData.NameSurname;
-    user.email = this.props.userFirstData.email;
-    user.password = this.props.userFirstData.password;
-    user.address = values.adress;
-    user.companyName = "";
-    user.phoneNumber = values.phoneNumber;
-    user.userType = 3
-    user.storeId = BasestoreId
-    user.storeOwnerUserId = BaseStoreOwnerUserId
-    console.log(user)
-    if(this.state.DistrictName && this.state.DistrictName.length > 0) {
-      user.address = this.state.DistrictName + " " + user.address
+    if(values && values.phoneNumber && values.phoneNumber.length !== 10) {
+      showSimpleMessage("Telefon numarasını doğru formatta giriniz","danger")
+    }else {
+      const { isSucceed, navigation } = this.props;
+      var user = {} as BaseUser;
+      user.nameSurname = values.NameSurname
+      user.address = this.state.DistrictName ?? ""
+      user.phoneNumber = "0" + values.phoneNumber;
+      user.userType = 3
+      user.storeId = BasestoreId
+      user.storeOwnerUserId = BaseStoreOwnerUserId
+      console.log(user)
+      this.props.createUserControlIfNumberIsUsed(user,false)
     }
-    this.props.createBaseUser(user);
+    
   };
 
   render() {
@@ -151,7 +151,7 @@ class SignUpSecondScreen extends Component<Props, State> {
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
             <ScrollView bounces={false} contentContainerStyle={{ flexGrow: 1 }}>
               <Formik
-                initialValues={{ phoneNumber: '', companyName: '', adress: '' }}
+                initialValues={{ phoneNumber: '', NameSurname: '' }}
                 validationSchema={loginSchema}
                 onSubmit={values => this.handleLogin(values)}>
                 {props => {
@@ -169,6 +169,19 @@ class SignUpSecondScreen extends Component<Props, State> {
                           <Text style={{ fontFamily: fonts.primaryFont, color: '#ccc' }}>hızlıca sipariş vermeye başla</Text>
                         </View>
                         <View style={{ marginTop: '20%' }}>
+
+                        <Input
+                      placeholder="İsim soyisim"
+                      value={props.values.NameSurname}
+                      onChangeText={props.handleChange("NameSurname")}
+                      onBlur={props.handleBlur("NameSurname")}
+
+                      error={props.touched.NameSurname && props.errors.NameSurname}
+                    />
+                    {props.touched.NameSurname && props.errors.NameSurname && <Text style={{fontSize:12,color:colors.accent}}>
+                        {props.errors.NameSurname}
+                        </Text>
+              }
                           <TextInputMask
                             style={{
                               height: 40,
@@ -192,22 +205,6 @@ class SignUpSecondScreen extends Component<Props, State> {
                             {props.errors.phoneNumber}
                           </Text>
                           }
-
-                         <View>
-                        {this.state.DistrictName ? <Text style={{fontFamily:fonts.primaryFont,fontSize:15,marginTop:10}}>{this.state.DistrictName}<Text style={{color:colors.textColorLighter,}}> (seçtiğiniz mahalleyi adrese eklemenize gerek yoktur.)</Text></Text> : null}
-                         </View>
-                          <Input
-                            placeholder="Adres"
-                            value={props.values.adress}
-                            onChangeText={props.handleChange("adress")}
-                            onBlur={props.handleBlur("adress")}
-                            error={props.touched.adress && props.errors.adress}
-                          />
-                          {props.touched.adress && props.errors.adress && <Text style={{ fontSize: 12, color: colors.accent }}>
-                            {props.errors.adress}
-                          </Text>
-                          }
-
 
                         </View>
                         <SuccessButton loading={this.props.isSecondLoading} text="Devam et" onPress={props.handleSubmit} />
@@ -239,6 +236,8 @@ const mapStateToProps = (state: AppState) => ({
 function bindToAction(dispatch: any) {
   return {
     createBaseUser: (user: BaseUser) => dispatch(createBaseUser(user)),
+    createUserControlIfNumberIsUsed: (user: BaseUser,isLogin: boolean) => 
+    dispatch(createUserControlIfNumberIsUsed(user,isLogin))
   };
 }
 

@@ -149,6 +149,18 @@ class OrderScreen extends Component<Props, State> {
     }
     else if (status == 1) { 
       let isInFirstFiveMin = moment.duration(moment(new Date()).diff(moment(dateTime))).asMinutes()
+      var text = ""
+      if(isInFirstFiveMin / 6 < 1 ) {
+        text = "İşleniyor"
+      }else if (isInFirstFiveMin / 6 < 2 ) {
+        text = "Bölgeye aktarıldı"
+      }
+      else if (isInFirstFiveMin / 6 < 3 ) {
+        text = "Sıraya alındı"
+      }
+      else {
+        text = "Sevkiyatta"
+      }
       return (
         <LinearGradient
           start={{ x: 0, y: 0.5 }}
@@ -161,7 +173,7 @@ class OrderScreen extends Component<Props, State> {
             flexDirection: 'row',
             paddingTop: 5,
           }}>
-          <Text style={{ color: 'white', fontFamily: fonts.primaryFont }}>{isInFirstFiveMin > 5 ? "Sıraya Alındı": "İşlemde" }</Text>
+          <Text style={{ color: 'white', fontFamily: fonts.primaryFont }}>{text}</Text>
         </LinearGradient>
       );
     }

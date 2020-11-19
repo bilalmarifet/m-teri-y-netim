@@ -88,7 +88,7 @@ class DistrictSelectionScreen extends Component<Props, State> {
   sendToSignUp()
   {
     this.props.navigation.setParams({'DistrictId' : this.state.selectedDistrictId})
-    this.props.navigation.navigate("SignUp",{DistrictId: this.state.selectedDistrictId})
+    this.props.navigation.navigate("SignUpSecond",{DistrictId: this.state.selectedDistrictId})
   }
 
 
@@ -114,7 +114,7 @@ class DistrictSelectionScreen extends Component<Props, State> {
                           <Text style={{fontFamily:fonts.primaryFont, color:'#ccc'}}>mahalleni seç</Text>
                         </View>
                         </View>
-                       <Text style={{textAlign:'center',fontFamily:fonts.primaryFont,fontSize:18,marginBottom:20}}>Mahalleler</Text>
+                       <Text style={{textAlign:'center',fontFamily:fonts.primaryFont,fontSize:18,marginBottom:20}}>Hizmet verdiğimiz mahalleler</Text>
                         </View>
                        
                         <FlatList

@@ -31,7 +31,7 @@ class UserAgreementScreen extends Component<Props,{}> {
   
     static navigationOptions = ({ navigation }) => {
         return {
-          title: 'Kullanıcı Sözleşmesi',
+          title: 'Gizlilik',
     
           headerStyle: {
             backgroundColor: colors.headerColorTop,
