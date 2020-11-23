@@ -95,7 +95,7 @@ class CustomerHomeScreen extends Component<Props, State> {
     if(item) {
       return(
         <View style={{flex:1,backgroundColor:'white'}}>
-        <Text style={{fontFamily:fonts.primaryFont,fontSize:18,textAlign:'center',marginTop:10}}>{item.productName}</Text>
+        <Text style={{fontFamily:fonts.primaryFont,fontSize:18,textAlign:'center',marginTop:10,marginHorizontal:30}}>{item.productName}</Text>
         <TouchableOpacity onPress={()=> this.RBSheetItem.close()} style={{position:'absolute',right:5,top:10}}>
             <Icon name="x" style={{fontSize:20}} />
           </TouchableOpacity>
@@ -310,6 +310,62 @@ class CustomerHomeScreen extends Component<Props, State> {
     }
   }
 
+  renderBottomGotoCart() {
+    var totalPrice = 0;
+    this.props.productList
+      ? this.props.productList.length > 0
+        ? this.props.productList.map(e => (totalPrice += e.count * (e.isCampaign ? e.newPrice : e.price)))
+        : null
+      : null;
+      if(totalPrice > 0) {
+        return (
+          <TouchableHighlight
+
+          onPress={() =>this.props.navigation.navigate('Cart')}
+          underlayColor="#AAA"
+          style={{
+            position:'absolute',bottom:0
+            ,width:'100%',height:50
+              }}
+        >
+          <LinearGradient
+            start={{ x: 0, y: 0.5 }}
+            end={{ x: 1, y: 0.5 }}
+            colors={['#30AE4A', '#7BAD7B']}
+            style={{
+
+              paddingHorizontal: 10,
+              backgroundColor: colors.buttonBackgroundPrimary,
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems:'center',
+              height:50
+            }}>
+
+            <Text
+                  style={{
+                    fontFamily: 'Roboto',
+                    fontWeight: '600',
+                    color: '#fff',
+                  }}>
+                  Siparişi Tamamla
+            </Text>
+
+            <View>
+                  <Icon name="chevron-right" style={{ color: 'white', fontSize: 18 }} type="Feather" />
+
+
+            </View>
+
+
+          </LinearGradient>
+        </TouchableHighlight>
+   
+         )
+      }
+    
+  }
+
 
   renderPlusButtonCampaign(item: IProductItemCustomer, index: number) {
 
@@ -443,6 +499,9 @@ class CustomerHomeScreen extends Component<Props, State> {
     const { page, limit } = this.state;
     console.log("home");
     return (
+      <View>
+
+      
       <ScrollView style={{backgroundColor:colors.containerBg}} contentContainerStyle={{flexGrow:1}}>
         <View style={[styles.container]}>
           {campaings &&
@@ -476,7 +535,10 @@ class CustomerHomeScreen extends Component<Props, State> {
          {this.renderItemsForProduct()}
         </RBSheet>
         </View>
+      
       </ScrollView>
+      {this.renderBottomGotoCart()}
+      </View>
     );
   }
   renderContent() {
@@ -489,7 +551,7 @@ class CustomerHomeScreen extends Component<Props, State> {
       return (
 
         <FlatList
-          contentContainerStyle={{ paddingTop: 5 }}
+          contentContainerStyle={{ paddingTop: 5,marginBottom:50 }}
           data={this.props.productList.filter(e => e.isCampaign !== true)}
 
           keyExtractor={item => item.productId}
