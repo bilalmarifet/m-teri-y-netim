@@ -317,7 +317,7 @@ export function getCustomerOrderDetail(orderId : number) {
         orderDetail.totalPrice = data.totalPrice;
         orderDetail.paymentText = data.paymentText;
         orderDetail.courierNameSurname = data.courierNameSurname;
-        orderDetail.courierPhoneNumber = data.courierPhoneNumber ? (data.courierPhoneNumber.length === 10  && data.courierPhoneNumber.charAt(0) !== '0') ? "0" + data.courierPhoneNumber : data.courierPhoneNumber : ""
+        orderDetail.courierPhoneNumber = data.courierPhoneNumber ? (data.courierPhoneNumber.length === 10) ? "0" + data.courierPhoneNumber : data.courierPhoneNumber : ""
 
         var orderProducts : IOrderProductItem[] = [] as IOrderProductItem[];
 

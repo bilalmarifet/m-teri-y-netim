@@ -44,6 +44,7 @@ export function createUserControlIfNumberIsUsed(user: BaseUser,isLogin: boolean)
     dispatch(loadingSecond(true));
     axios
     .get(WATER_CONTROL_PHONE_NUMBER + `?userId=${BaseStoreOwnerUserId}&phoneNumber=${user.phoneNumber}`).then(res => {
+      console.log(res,"responsee")
       if (res.data.result && res.data.result.authUserResult && res.data.result.authUserResult.token) {
         let data = res.data.result.authUserResult
         if(isLogin) {

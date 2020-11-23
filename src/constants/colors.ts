@@ -21,6 +21,7 @@ export const colors = {
   viewBackgroundText: '#56A6A4',
   textColorLighter: '#636363',
   borderColorInner: '#193B52',
+};
 // export const colors = {
 //   primary: "#3F51B5",
 //   accent: "#AF2923",
