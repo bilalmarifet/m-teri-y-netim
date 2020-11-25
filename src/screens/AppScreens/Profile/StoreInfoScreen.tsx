@@ -115,8 +115,11 @@ class StoreInfoScreen extends Component<Props, State> {
         let storeInfo = this.props.storeInformation
         let userNameSurname = storeInfo ? storeInfo.userNameSurname ?? "" : ""
         let address = storeInfo ? storeInfo.address ?? "" : ""
-        let phoneNumber = storeInfo ? storeInfo.phoneNumber ?? "" : ""
+        var phoneNumber = storeInfo ? storeInfo.phoneNumber ?? "" : ""
         let storeName = storeInfo ? storeInfo.storeName ?? "" : ""
+        if(phoneNumber.length == 10) {
+          phoneNumber = "0" + phoneNumber
+        }
         return(
 
           <View>
@@ -129,7 +132,7 @@ class StoreInfoScreen extends Component<Props, State> {
             </Text>
             </View>
   
-            <TouchableHighlight onPress={()=> () => Linking.openURL(`tel:${phoneNumber}`)} underlayColor="#AAA"  style={{borderBottomWidth:1,borderBottomColor:colors.borderColor,padding:20,paddingVertical:15,backgroundColor:'white'}}>
+            <TouchableHighlight onPress={()=> Linking.openURL(`tel:${phoneNumber}`)} underlayColor="#AAA"  style={{borderBottomWidth:1,borderBottomColor:colors.borderColor,padding:20,paddingVertical:15,backgroundColor:'white'}}>
             <View style={{flexDirection:'row',justifyContent:'space-between'}}>
               <View style={{flexDirection:'row'}}>
               <Image source={require("../../../images/profile/007-phone-call.png")} style={{width:34,height:34, borderRadius:17}} />
