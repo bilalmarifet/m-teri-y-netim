@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "32287028655",
+    "firebase_url": "https://alpsucu-5ffc1.firebaseio.com",
+    "project_id": "alpsucu-5ffc1",
+    "storage_bucket": "alpsucu-5ffc1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:32287028655:android:629332c6fb4916a0226b5a",
+        "android_client_info": {
+          "package_name": "com.alpSucu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "32287028655-pilcm7d89q965ap2qfqgp1m6e0qgbqas.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFZ8sToDtckCV4BCpq2cyj76JgtBbMpP0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "32287028655-pilcm7d89q965ap2qfqgp1m6e0qgbqas.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "32287028655-cfn99u8blttfnvd81cc61ptvfjr8hj9v.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.alpSucu.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

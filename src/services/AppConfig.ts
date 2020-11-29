@@ -1,5 +1,5 @@
-export const BasestoreId = 2263;
-export const BaseStoreOwnerUserId = 2416;
+export const BasestoreId = 2314;
+export const BaseStoreOwnerUserId = 4684;
 
 
 export const BaseImage = require('../assets/BaseImage.png')

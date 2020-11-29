@@ -98,7 +98,7 @@ class Login extends Component<Props, {}> {
                     <View style={[styles.headStyle,{marginTop:Dimensions.get('window').height / 10}]}>
                       {/* <Image source={BaseImage} style={{width:100,height:100,marginBottom:10}} /> */}
                       <Text style={[styles.headText]}>
-                     Kolay Sipariş
+                      Alp Dağıtım
                       </Text>
                     </View>
                     <View style={[styles.inputContainer,{paddingBottom:0}]}>

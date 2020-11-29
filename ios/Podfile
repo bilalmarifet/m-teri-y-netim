@@ -34,10 +34,10 @@ target 'HostelApp' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 pod 'RNInputMask', :path => '../node_modules/react-native-text-input-mask/ios/InputMask'
-
+pod 'Firebase/Core', '~> 6.13.0'
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
- 
+ pod 'Firebase/Messaging', '~> 6.13.0'
 
   use_native_modules!
 end
