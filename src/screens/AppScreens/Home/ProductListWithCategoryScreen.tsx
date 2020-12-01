@@ -145,12 +145,11 @@ class ProductListWithCategoryScreen extends Component<Props, State> {
 
     return {
       title: 'Güven Market',
-
+      
       headerStyle: {
         backgroundColor: colors.headerColorTop,
         headerTitleStyle: {
           fontFamily: 'Roboto',
-         
         },
         header:
         {
@@ -163,7 +162,7 @@ class ProductListWithCategoryScreen extends Component<Props, State> {
 
         },
         elevation: 0,
-        borderBottomWidth: 0.5,
+        borderBottomWidth: 0,
         borderBottomColor: '#ccc'
       },
       headerRight:
