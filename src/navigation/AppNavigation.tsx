@@ -60,7 +60,8 @@ const CustomerMain = createStackNavigator(
   },
   {
     initialRouteName: 'CustomerHome',
-    defaultNavigationOptions: {
+    defaultNavigationOptions: { 
+headerBackTitle: 'Geri',
       headerTintColor : colors.headerTitleColor,
       headerStyle: {
         backgroundColor: '#f4511e',
@@ -82,7 +83,8 @@ const SearchMain = createStackNavigator(
   },
   {
     initialRouteName: 'Search',
-    defaultNavigationOptions: {
+    defaultNavigationOptions: { 
+headerBackTitle: 'Geri', 
       headerTintColor : colors.headerTitleColor,
       headerStyle: {
         backgroundColor: '#f4511e',
@@ -124,7 +126,8 @@ const cartStack = createStackNavigator(
   },
   {
     initialRouteName: 'Cart',
-    defaultNavigationOptions: {
+    defaultNavigationOptions: { 
+headerBackTitle: 'Geri',
       headerStyle: {
         backgroundColor: '#f4511e',
       },
@@ -148,7 +151,8 @@ const CustomerOrderStack = createStackNavigator(
   },
   {
     initialRouteName: 'Order',
-    defaultNavigationOptions: {
+    defaultNavigationOptions: { 
+headerBackTitle: 'Geri',
       headerStyle: {
         backgroundColor: '#f4511e',
       },
@@ -176,7 +180,8 @@ const CustomerProfileStack = createStackNavigator(
   },
   {
     initialRouteName: 'Profile',
-    defaultNavigationOptions: {
+    defaultNavigationOptions: { 
+headerBackTitle: 'Geri',
       headerStyle: {
         backgroundColor: '#f4511e',
       },
