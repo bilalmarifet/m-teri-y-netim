@@ -308,6 +308,7 @@ class CartScreen extends Component<Props, State> {
   deliveryCost = this.props.storeInformation ? this.props.storeInformation.minFreeDelivery ? price > this.props.storeInformation.minFreeDelivery ? 0 : this.props.storeInformation.deliveryCost : 0 : 0
   let minFreeDelivery = this.props.storeInformation ? this.props.storeInformation.minFreeDelivery ?? "" : ""
   var totalCost = price + deliveryCost
+  var minumumOrderAmount = this.props.storeInformation.minumumOrderAmount ?? ""
     if(this.props.loadingForStorInfo) {
       return (
         <View>
@@ -321,6 +322,7 @@ class CartScreen extends Component<Props, State> {
           <Text style={{fontFamily:fonts.primaryFont,fontWeight:"600",marginBottom:10}}>Ödeme Özeti</Text>
           <View style={{flexDirection:'row',justifyContent:'space-between'}}><Text style={{fontFamily:fonts.h3Font,marginLeft:15}}>Toplam Fiyat: </Text><Text style={{fontFamily:fonts.h3Font}}>{price} ₺</Text></View>
           <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:10,}}><Text style={{fontFamily:fonts.h3Font,marginLeft:15}}>Kurye Ücreti: </Text><Text style={{fontFamily:fonts.h3Font}}>{deliveryCost} ₺</Text></View>
+          <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:10,}}><Text style={{fontFamily:fonts.h3Font,marginLeft:15}}>Minimum Sipariş Tutarı: </Text><Text style={{fontFamily:fonts.h3Font}}>{minumumOrderAmount} ₺</Text></View>
      <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:10,}}><Text style={{fontFamily:fonts.h3Font,marginLeft:15,fontWeight:'bold'}}>Toplam ödenecek Tutar: </Text><Text style={{fontFamily:fonts.h3Font,fontWeight:'bold'}}>{totalCost} ₺</Text></View>
      {deliveryCost > 0 &&  <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:10,}}><Text style={{fontFamily:fonts.h3Font,marginLeft:15}}>Minimum ücretsiz teslimat tutarı: </Text><Text style={{fontFamily:fonts.h3Font}}>{minFreeDelivery} ₺</Text></View> }
   
