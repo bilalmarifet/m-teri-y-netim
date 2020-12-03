@@ -150,6 +150,7 @@ class ProductListWithCategoryScreen extends Component<Props, State> {
         backgroundColor: colors.headerColorTop,
         headerTitleStyle: {
           fontFamily: 'Roboto',
+          color:colors.headerTitleColor,
         },
         header:
         {
@@ -162,7 +163,7 @@ class ProductListWithCategoryScreen extends Component<Props, State> {
 
         },
         elevation: 0,
-        borderBottomWidth: 0,
+        borderBottomWidth: 0.5,
         borderBottomColor: '#ccc'
       },
       headerRight:

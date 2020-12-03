@@ -247,12 +247,13 @@ class CustomerHomeScreen extends Component<Props, State> {
 
     return {
       title: 'Güven Market',
-
+      headerTintColor : 'white',
       headerStyle: {
-        backgroundColor: colors.headerColorTop,
+        backgroundColor: '#FF7F00',
+        color:colors.headerTitleColor,
         headerTitleStyle: {
           fontFamily: 'Roboto',
-
+          color:'white',
         },
         header:
         {

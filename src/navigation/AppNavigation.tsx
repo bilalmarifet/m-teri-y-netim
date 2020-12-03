@@ -69,7 +69,7 @@ headerBackTitle: 'Geri',
       headerTitleStyle: {
         fontSize: 18,
         fontWeight:'bold',
-        color:colors.headerTitleColor,
+        // color:'white',
         fontFamily: fonts.primaryFont,
       },
     },
