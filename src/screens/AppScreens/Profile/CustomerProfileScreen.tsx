@@ -95,7 +95,7 @@ class CustomerProfileScreen extends Component<Props, State> {
   };
 
   render() {
-    return <View style={styles.container}><ScrollView bounces={false} contentContainerStyle={{flex:1}}>
+    return <View style={styles.container}><ScrollView   contentContainerStyle={{paddingBottom:30}}>
       
       {this.renderContentNew()}</ScrollView></View>;
   }
