@@ -1,4 +1,4 @@
-package com.su24;
+package com.kurtkoySuSiparis;
 
 import android.app.Application;
 import android.content.Context;

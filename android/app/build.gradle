@@ -131,7 +131,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.su24"
+        applicationId "com.kurtkoySuSiparis"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion 29
         versionCode 1

@@ -1,4 +1,4 @@
-package com.su24;
+package com.kurtkoySuSiparis;
 
 import com.facebook.react.ReactActivity;
 
