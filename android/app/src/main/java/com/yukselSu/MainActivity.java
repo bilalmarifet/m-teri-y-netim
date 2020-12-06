@@ -1,4 +1,4 @@
-package com.KolaySiparis;
+package com.yukselSu;
 
 import com.facebook.react.ReactActivity;
 
