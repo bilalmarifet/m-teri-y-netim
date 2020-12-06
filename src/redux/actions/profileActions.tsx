@@ -148,6 +148,8 @@ export interface storeInformation {
   averageDuration: number;
   minFreeDelivery: number;
   deliveryCost: number;
+  minumumOrderAmount: number;
+
 }
 export function getStoreInformationFromStoreId() {
   return (dispatch: Dispatch<Action>) => {
