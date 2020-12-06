@@ -6,7 +6,7 @@ import {
   Text,
   Alert,
   RefreshControl,
-  TouchableOpacity
+  TouchableOpacity,Linking
 } from 'react-native';
 import {
   NavigationScreenProp,
@@ -38,6 +38,7 @@ import { cancelOrder, getCustomerOrderDetail, orderDetail, orderListItem, OrderS
 import { stat } from 'fs';
 import Icon from 'react-native-vector-icons/Feather';
 import { UserInfo } from '../../../redux/actions/profileActions';
+
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState>;
@@ -207,6 +208,8 @@ class OrderDetailScreen extends Component<Props, State> {
                     
                     
                     </View>
+                   
+                   
                     <View style={{padding:20,backgroundColor:'white',borderBottomColor:colors.borderColor,borderBottomWidth:1}}>
                     <View style={{flexDirection:'row',justifyContent:'space-between'}}>
                     <Text style={{fontFamily:fonts.primaryFont,fontWeight:"600",fontSize:16}}>Toplam</Text>
@@ -215,8 +218,24 @@ class OrderDetailScreen extends Component<Props, State> {
                     </View>
                     <Text style={{fontFamily:fonts.primaryFont,color:colors.textColor,marginTop:10}}>Sipariş detayınzı bu sayfadan kontrol edebilirsiniz.</Text>
                     <Text style={{fontFamily:fonts.primaryFont,color:colors.textColor,marginTop:5}}>Siparişiniz için teşekkür ederiz.</Text>
-                 
+                    
                     </View>
+                    {order.courierPhoneNumber ? order.courierPhoneNumber.length > 0 ? <View style={{padding:20,borderBottomColor:colors.borderColor,borderBottomWidth:1}}>
+                    <Text style={{fontFamily:fonts.primaryFont,fontWeight:"600",fontSize:16}}>Kurye Bilgileri</Text>
+                        <TouchableOpacity onPress={()=>Linking.openURL(`tel:${order.courierPhoneNumber}`)} style={{flexDirection:'row',justifyContent:'space-between',marginTop:10}}>
+                    <View style={{flexDirection:'row'}}>
+                      <Icon name="phone-call" style={{fontSize:18,marginRight:10}} />
+                    <Text style={{fontFamily:fonts.primaryFont}}>{order.courierNameSurname}</Text>
+                    </View>
+                    <Text style={{fontFamily:fonts.primaryFont}}>{order.courierPhoneNumber}</Text>
+                    </TouchableOpacity>
+                      
+                  
+                    
+                    
+                    </View>: null : null}
+                   
+                   
                     {orderStatus === OrderStatus.Waiting ? <Button loading={this.props.cancelOrderLoading} text="Siparişi iptal et" style={{backgroundColor:colors.accent,paddingHorizontal: 10,marginHorizontal:20,  flexDirection:'row', justifyContent:'space-between'}} textStyle={{color:'white'}} onPress={()=> this.props.cancelOrder(Number(this.props.navigation.getParam('orderId')),this.props.userInfo.nameSurname)} />
                      : null}
                 </View>
