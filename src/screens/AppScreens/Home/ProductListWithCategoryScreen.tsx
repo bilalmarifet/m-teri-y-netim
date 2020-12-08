@@ -175,7 +175,7 @@ class ProductListWithCategoryScreen extends Component<Props, State> {
     if (item.count > 0) {
       let cart = this.props.navigation.getParam('cart') ?? 0
       return (
-        <View style={{  position: 'absolute', borderRadius: 15, right: 10, bottom: 10 }}>
+        <View style={{  position: 'absolute', borderRadius: 15, right: 10, bottom: 10 ,zIndex:100 }}>
           {this.props.loadingIncDec && this.props.loadingIndex === item.id && <Spinner style={{ position: "absolute", zIndex: 1, backgroundColor: colors.borderColor, opacity: .8, width: '100%', height: '100%' }} color={colors.headerColor} />}
 
           <View style={{
@@ -214,7 +214,7 @@ class ProductListWithCategoryScreen extends Component<Props, State> {
     else {
       let cart = this.props.navigation.getParam('cart') ?? 0
       return (
-        <View style={{ position: 'absolute',  borderRadius: 15, right: 10, bottom: 10 }}>
+        <View style={{ position: 'absolute',  borderRadius: 15, right: 10, bottom: 10 ,zIndex:100 }}>
           {this.props.loadingIncDec && this.props.loadingIndex === item.id && <Spinner style={{ position: "absolute", zIndex: 1, backgroundColor: colors.borderColor, opacity: .8, width: '100%', height: '100%' }} color={colors.headerColor} />}
 
           <View style={{
