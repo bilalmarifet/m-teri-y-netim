@@ -134,8 +134,8 @@ android {
         applicationId "com.ozanSu"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion 29
-        versionCode 17
-        versionName "2.6"
+        versionCode 18
+        versionName "2.7"
     }
     splits {
         abi {
