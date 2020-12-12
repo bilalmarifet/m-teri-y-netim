@@ -16,7 +16,7 @@ export const colors = {
   containerBgSecond: '#84a9ac',
   containerBgThird: '#cae8d5',
   buttonBackgroundPrimary : '#30AE4A',
-  IconColor : '#FF7F00',
+  IconColor : '#ECC344',
   IconNormalColor : '#393E46',
   headerTitleColor :'#393E46',
   viewBackground: '#E5F1E5', // YESIL ARKA PLAN

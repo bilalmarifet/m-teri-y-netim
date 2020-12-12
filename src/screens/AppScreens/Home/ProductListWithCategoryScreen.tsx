@@ -144,7 +144,7 @@ class ProductListWithCategoryScreen extends Component<Props, State> {
   static navigationOptions = ({ navigation }) => {
 
     return {
-      title: 'Güven Market',
+      title: 'Yıldırım Market',
       
       headerStyle: {
         backgroundColor: colors.headerColorTop,

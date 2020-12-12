@@ -246,10 +246,10 @@ class CustomerHomeScreen extends Component<Props, State> {
   static navigationOptions = ({ navigation }) => {
 
     return {
-      title: 'Güven Market',
+      title: 'Yıldırım Market',
       headerTintColor : 'white',
       headerStyle: {
-        backgroundColor: '#FF7F00',
+        backgroundColor: '#ECC344',
         color:colors.headerTitleColor,
         headerTitleStyle: {
           fontFamily: 'Roboto',
