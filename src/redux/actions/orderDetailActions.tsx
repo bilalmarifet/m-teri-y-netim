@@ -46,6 +46,8 @@ export interface orderDetail {
     customerId : number;
     totalPrice : number;
     paymentText: string;
+    courierNameSurname: string;
+    courierPhoneNumber: string;
 
   }
 
@@ -294,6 +296,7 @@ export function getCustomerOrderDetail(orderId : number) {
           var count = 0
       if(response.data.isSuccess){
          let data = response.data.result
+         console.log(data,"orderDetayLog")
          orderDetail.companyName = data.companyName;
          orderDetail.count = data.count;
          orderDetail.createdDate = data.createdDate;
@@ -313,6 +316,8 @@ export function getCustomerOrderDetail(orderId : number) {
         orderDetail.customerId = data.customerId;
         orderDetail.totalPrice = data.totalPrice;
         orderDetail.paymentText = data.paymentText;
+        orderDetail.courierNameSurname = data.courierNameSurname;
+        orderDetail.courierPhoneNumber = data.courierPhoneNumber ? (data.courierPhoneNumber.length === 10) ? "0" + data.courierPhoneNumber : data.courierPhoneNumber : ""
 
         var orderProducts : IOrderProductItem[] = [] as IOrderProductItem[];
 
