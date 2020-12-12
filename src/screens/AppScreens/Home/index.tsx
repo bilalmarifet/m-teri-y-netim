@@ -511,7 +511,7 @@ class CustomerHomeScreen extends Component<Props, State> {
           keyExtractor={item => item.id}
           renderItem={({ item, index }) => {
             return (
-              <TouchableHighlight underlayColor="#AAA" onPress={() => this.props.navigation.navigate('ProductListWithCategory', { categoryId: item.id })} style={[styles.item, {paddingBottom: 0, height: 140, paddingLeft: 0, marginBottom: 10, width: width }]}>
+              <TouchableHighlight underlayColor="#AAA" onPress={() => this.props.navigation.navigate('ProductListWithCategory', { categoryId: item.id })} style={[styles.item, {paddingBottom: 0, height: width+20, paddingLeft: 0, marginBottom: 10, width: width }]}>
 
 
                 <View style={{justifyContent:'space-between',flex:1}}>
