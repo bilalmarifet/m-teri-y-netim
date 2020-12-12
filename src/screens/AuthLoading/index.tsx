@@ -105,7 +105,7 @@ class AuthLoading extends React.Component<Props, State> {
             isPermissionRequested: true,
           });
           await firebase.messaging().requestPermission();
-          await this.requestPermissionForNotification(d);
+          await this.requestPermissionForNotification();
         } else {
           this.props.navigation.navigate( "AppStack");
         }
