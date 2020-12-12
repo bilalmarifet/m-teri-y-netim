@@ -92,6 +92,7 @@ class CustomerHomeScreen extends Component<Props, State> {
 
   renderItemsForProduct() {
     let item = this.props.productList.find(e=>e.productId === this.state.selectedItemId) ?? null
+    let itemIsFirsat = item?.isCampaign === true
     if(item) {
       return(
         <View style={{flex:1,backgroundColor:'white'}}>
@@ -101,6 +102,7 @@ class CustomerHomeScreen extends Component<Props, State> {
           </TouchableOpacity>
   
           <View style={{justifyContent:'space-between',flex:1}}>
+            <View>
           <FastImage
           style={{ width: Dimensions.get('window').width/1.5 , height: Dimensions.get('window').width/1.5 ,justifyContent:'center',alignSelf:'center',marginTop:10}}
           source={{
@@ -108,6 +110,19 @@ class CustomerHomeScreen extends Component<Props, State> {
               priority: FastImage.priority.normal,
           }}
       />
+       {itemIsFirsat ? <View style={{ flexDirection: 'row', justifyContent: 'center', }}>
+                <Text style={{ fontFamily: fonts.primaryFont, fontSize: 25, marginTop: 5, color: colors.textColorLighter, textDecorationLine: "line-through" }}>
+                  {item.price}
+                </Text>
+                <Text style={{ marginLeft: 5, fontFamily: fonts.primaryFont, fontSize: 25, marginTop: 5, color: colors.priceAndPlusColor, fontWeight: 'bold' }}>
+                  {item.newPrice} TL
+      </Text>
+              </View> : <View style={{ flexDirection: 'row', justifyContent: 'center', }}>
+                <Text style={{ marginLeft: 5, fontFamily: fonts.primaryFont, fontSize: 25, marginTop: 5, color: colors.priceAndPlusColor, fontWeight: 'bold' }}>
+                  {item.price} TL
+      </Text>
+              </View>}
+              </View>
           </View>
       {this.renderPlusButtonForRBSheet(item)}
         </View>
@@ -117,6 +132,8 @@ class CustomerHomeScreen extends Component<Props, State> {
     }
     
   }
+
+  
 
   renderPlusButtonForRBSheet(item: IProductItemCustomer, index?: number) {
 
@@ -439,7 +456,7 @@ class CustomerHomeScreen extends Component<Props, State> {
           {this.renderPlusButtonCampaign(item, index)}
 
           <Text style={{ fontFamily: 'roboto', color: colors.textColor, width: '90%' }}>
-            {item.productName}
+          {item.productName ? item.productName.length > 25 ? item.productName.slice(0,23) + "..." : item.productName : ""}
           </Text>
           <View style={{flexDirection:'row'}}>
           <Text style={{ fontFamily: fonts.primaryFont, marginTop: 5, color: colors.textColorLighter,textDecorationLine:"line-through" }}>

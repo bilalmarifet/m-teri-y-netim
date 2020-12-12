@@ -200,7 +200,7 @@ class OrderDetailScreen extends Component<Props, State> {
                     {order.orderProducts && order.orderProducts.map(element => {
                       return(
                         <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:10}}>
-                    <Text style={{fontFamily:fonts.primaryFont}}>{element.productName}</Text>
+                    <Text style={{fontFamily:fonts.primaryFont,flex:1}}>{element.productName}</Text>
                     <Text style={{fontFamily:fonts.primaryFont}}>{element.count} x {element.unitPrice}      {element.totalPrice}</Text>
                     </View>
                       )
