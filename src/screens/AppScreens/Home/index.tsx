@@ -92,15 +92,17 @@ class CustomerHomeScreen extends Component<Props, State> {
 
   renderItemsForProduct() {
     let item = this.props.productList.find(e=>e.productId === this.state.selectedItemId) ?? null
+    let itemIsFirsat = item?.isCampaign === true
     if(item) {
       return(
         <View style={{flex:1,backgroundColor:'white'}}>
-        <Text style={{fontFamily:fonts.primaryFont,fontSize:18,textAlign:'center',marginTop:10}}>{item.productName}</Text>
+        <Text style={{fontFamily:fonts.primaryFont,fontSize:18,textAlign:'center',marginTop:10,marginHorizontal:30}}>{item.productName}</Text>
         <TouchableOpacity onPress={()=> this.RBSheetItem.close()} style={{position:'absolute',right:5,top:10}}>
             <Icon name="x" style={{fontSize:20}} />
           </TouchableOpacity>
   
           <View style={{justifyContent:'space-between',flex:1}}>
+            <View>
           <FastImage
           style={{ width: Dimensions.get('window').width/1.5 , height: Dimensions.get('window').width/1.5 ,justifyContent:'center',alignSelf:'center',marginTop:10}}
           source={{
@@ -108,6 +110,19 @@ class CustomerHomeScreen extends Component<Props, State> {
               priority: FastImage.priority.normal,
           }}
       />
+       {itemIsFirsat ? <View style={{ flexDirection: 'row', justifyContent: 'center', }}>
+                <Text style={{ fontFamily: fonts.primaryFont, fontSize: 25, marginTop: 5, color: colors.textColorLighter, textDecorationLine: "line-through" }}>
+                  {item.price}
+                </Text>
+                <Text style={{ marginLeft: 5, fontFamily: fonts.primaryFont, fontSize: 25, marginTop: 5, color: colors.priceAndPlusColor, fontWeight: 'bold' }}>
+                  {item.newPrice} TL
+      </Text>
+              </View> : <View style={{ flexDirection: 'row', justifyContent: 'center', }}>
+                <Text style={{ marginLeft: 5, fontFamily: fonts.primaryFont, fontSize: 25, marginTop: 5, color: colors.priceAndPlusColor, fontWeight: 'bold' }}>
+                  {item.price} TL
+      </Text>
+              </View>}
+              </View>
           </View>
       {this.renderPlusButtonForRBSheet(item)}
         </View>
@@ -117,6 +132,8 @@ class CustomerHomeScreen extends Component<Props, State> {
     }
     
   }
+
+  
 
   renderPlusButtonForRBSheet(item: IProductItemCustomer, index?: number) {
 
@@ -131,7 +148,7 @@ class CustomerHomeScreen extends Component<Props, State> {
         shadowOpacity: 0.41,
         shadowRadius: 10.65,
 
-        elevation: 3,backgroundColor:'white',paddingBottom:30,paddingTop:20,height:100}}>
+        elevation: 3,backgroundColor:'white',paddingBottom:30,paddingTop:20,height:100,zIndex:100}}>
           {this.props.loadingIncDec && this.props.loadingIndex === item.productId && <Spinner style={{ position: "absolute", zIndex: 1, backgroundColor: colors.borderColor, opacity: .8, width: '100%', height: '100%' }} color={colors.headerColor} />}
 
           <View  style={{  marginBottom:20,justifyContent:'center',alignSelf:'center',flexDirection:'row'  }}>
@@ -168,7 +185,7 @@ class CustomerHomeScreen extends Component<Props, State> {
           shadowOpacity: 0.41,
           shadowRadius: 10.65,
   
-          elevation: 3, backgroundColor:'white',width:Dimensions.get('window').width}}>
+          elevation: 3, backgroundColor:'white',width:Dimensions.get('window').width,zIndex:100}}>
           {this.props.loadingIncDec && this.props.loadingIndex === item.productId && <Spinner style={{ position: "absolute", zIndex: 1, backgroundColor: colors.borderColor, opacity: .8, width: '100%', height: '100%' }} color={colors.headerColor} />}
 
             {this.props.loadingIncDec && this.props.loadingIndex === item.productId && <Spinner style={{ zIndex: 1, backgroundColor: colors.borderColor, opacity: .8 }} size="small" color={colors.headerColor} />}
@@ -244,7 +261,7 @@ class CustomerHomeScreen extends Component<Props, State> {
     if (item.count > 0) {
       let cart = this.props.navigation.getParam('cart') ?? 0
       return (
-        <View style={{ backgroundColor: '#F1F1F1', position: 'absolute', paddingLeft: 5, paddingRight: 5, paddingVertical: 5, borderRadius: 15, right: 10, bottom: 10 }}>
+        <View style={{ backgroundColor: '#F1F1F1', position: 'absolute', paddingLeft: 5, paddingRight: 5, paddingVertical: 5, borderRadius: 15, right: 10, bottom: 10 ,zIndex:100}}>
           {this.props.loadingIncDec && this.props.loadingIndex === item.productId && <Spinner style={{ position: "absolute", zIndex: 1, backgroundColor: colors.borderColor, opacity: .8, width: '100%', height: '100%' }} color={colors.headerColor} />}
 
           <View style={{
@@ -316,7 +333,7 @@ class CustomerHomeScreen extends Component<Props, State> {
     if (item.count > 0) {
       let cart = this.props.navigation.getParam('cart') ?? 0
       return (
-        <View style={{ position: 'absolute', top: 0, right: 0, zIndex: 10, paddingVertical: 5, paddingLeft: 5, paddingRight: 5 }}>
+        <View style={{ position: 'absolute', top: 0, right: 0, zIndex: 10, paddingVertical: 5, paddingLeft: 5, paddingRight: 5,zIndex:100}}>
           {this.props.loadingIncDec && this.props.loadingIndex === item.productId && <Spinner style={{ position: "absolute", backgroundColor: colors.borderColor, opacity: .8, width: '100%', height: '100%' }} color={colors.headerColor} />}
 
           <View >
@@ -343,7 +360,7 @@ class CustomerHomeScreen extends Component<Props, State> {
     else {
       let cart = this.props.navigation.getParam('cart') ?? 0
       return (
-        <View style={{ position: 'absolute', top: 0, zIndex: 10, paddingVertical: 5, paddingLeft: 5, paddingRight: 5, right: 0 }}>
+        <View style={{ position: 'absolute', top: 0, zIndex: 10, paddingVertical: 5, paddingLeft: 5, paddingRight: 5, right: 0 ,zIndex:100}}>
           {this.props.loadingIncDec && this.props.loadingIndex === item.productId && <Spinner style={{ position: "absolute", zIndex: 1, backgroundColor: colors.borderColor, opacity: .8, width: '100%', height: '100%' }} color={colors.headerColor} />}
 
           <View style={{ zIndex: 100 }} >
@@ -383,7 +400,7 @@ class CustomerHomeScreen extends Component<Props, State> {
           {this.renderPlusButtonCampaign(item, index)}
 
           <Text style={{ fontFamily: 'roboto', color: colors.textColor, width: '90%' }}>
-            {item.productName}
+          {item.productName ? item.productName.length > 25 ? item.productName.slice(0,23) + "..." : item.productName : ""}
           </Text>
           <View style={{flexDirection:'row'}}>
           <Text style={{ fontFamily: fonts.primaryFont, marginTop: 5, color: colors.textColorLighter,textDecorationLine:"line-through" }}>
