@@ -1,4 +1,4 @@
-package com.guvenMarket;
+package com.yildirimMarket;
 
 import com.facebook.react.ReactActivity;
 

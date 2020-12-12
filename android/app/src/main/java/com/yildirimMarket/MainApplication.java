@@ -1,4 +1,4 @@
-package com.guvenMarket;
+package com.yildirimMarket;
 
 import android.app.Application;
 import android.content.Context;

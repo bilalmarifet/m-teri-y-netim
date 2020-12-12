@@ -131,11 +131,11 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.guvenMarket"
+        applicationId "com.yildirimMarket"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion 29
-        versionCode 2
-        versionName "1.1"
+        versionCode 1
+        versionName "1.0"
     }
     splits {
         abi {
