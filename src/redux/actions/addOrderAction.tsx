@@ -373,8 +373,19 @@ export function AddOrderMultiple(
                     }
                     
                 }
+              }else {
+                dispatch(addOrder(false))
+              }
+            }else {
+              if (response.data.message ===  "Order.Post.MinumumAmount.Error")
+              {showSimpleMessage("Minimum sipariş üstünde sipariş verebiirsiniz.","danger")
+              
+            }
+              else if(response.data.message == "Order.Post.WorkingHour.Error") {
+                showSimpleMessage("Çalışma saatleri dışındasınız.","danger","Daha sonra sipariş verebilirsiniz.")
               }
             }
+            dispatch(addOrder(false))
             
           })
           .catch(error => {
