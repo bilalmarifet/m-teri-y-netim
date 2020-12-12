@@ -25,7 +25,8 @@ export default (state: AddOrder = initalState, action: Action) => {
     case PAYMENT_METHODS_LOADING:
       return {
         ...state,
-        isLoadingGetPaymentMethods:action.payload
+        isLoadingGetPaymentMethods:action.payload,
+        isLoading: false
       }
     case GET_PAYMENT_METHODS:
       return {
