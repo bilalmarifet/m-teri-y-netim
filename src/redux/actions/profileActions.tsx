@@ -148,15 +148,15 @@ export interface storeInformation {
   averageDuration: number;
   minFreeDelivery: number;
   deliveryCost: number;
+  minumumOrderAmount: number;
 }
 export function getStoreInformationFromStoreId() {
   return (dispatch: Dispatch<Action>) => {
     dispatch(loadingForGetStoreInformation(true))
-
   axios.get(WATER_GET_STORE_INFO_BY_STORE_ID +`?storeId=${BasestoreId}`).then((res) => {
 
     if (res.data.isSuccess) {
-      console.log(res)
+      console.log(res,"store informationn")
       let data: storeInformation = res.data.result
       dispatch(GetStoreInformation(data))
 
