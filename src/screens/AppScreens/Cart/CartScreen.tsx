@@ -106,7 +106,7 @@ class CartScreen extends Component<Props, State> {
   renderPlusButton(item: IProductItemCustomer, index: number) {
     if (item.count > 0) {
       return (
-        <View style={{ backgroundColor: '#F1F1F1', position: 'absolute', paddingLeft: 5, paddingRight: 5, paddingVertical: 5, borderRadius: 15, right: 10, bottom: 15 }}>
+        <View style={{ backgroundColor: '#F1F1F1', position: 'absolute', paddingLeft: 5, paddingRight: 5, paddingVertical: 5, borderRadius: 15, right: 10, bottom: 15,zIndex:100 }}>
           {this.props.loadingIncDec &&
             this.props.loadingIndex === item.productId && (
               <Spinner
@@ -178,7 +178,7 @@ class CartScreen extends Component<Props, State> {
         // <Icon name="ios-add-circle" style={{color : colors.iconColorSecond}}/>
         //        </TouchableOpacity>
 
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1 ,zIndex:100}}>
           <View style={{ flex: 1, flexDirection: 'row' }}>
             <TouchableOpacity
               style={{
