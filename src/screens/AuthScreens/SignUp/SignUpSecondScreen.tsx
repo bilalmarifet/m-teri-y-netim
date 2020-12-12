@@ -131,7 +131,7 @@ class SignUpSecondScreen extends Component<Props, State> {
     user.password = this.props.userFirstData.password;
     user.address = values.adress;
     user.companyName = "";
-    user.phoneNumber = values.phoneNumber;
+    user.phoneNumber = "0" + values.phoneNumber;
     user.userType = 3
     user.storeId = BasestoreId
     user.storeOwnerUserId = BaseStoreOwnerUserId
@@ -139,6 +139,8 @@ class SignUpSecondScreen extends Component<Props, State> {
     if(this.state.DistrictName && this.state.DistrictName.length > 0) {
       user.address = this.state.DistrictName + " " + user.address
     }
+
+    console.log(user)
     this.props.createBaseUser(user);
   };
 
