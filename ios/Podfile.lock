@@ -319,11 +319,11 @@ PODS:
     - React
     - SDWebImage (~> 5.8)
     - SDWebImageWebPCoder (~> 0.6.1)
-  - RNFirebase (5.6.0):
+  - RNFirebase (5.5.7):
     - Firebase/Core
     - React
-    - RNFirebase/Crashlytics (= 5.6.0)
-  - RNFirebase/Crashlytics (5.6.0):
+    - RNFirebase/Crashlytics (= 5.5.7)
+  - RNFirebase/Crashlytics (5.5.7):
     - Crashlytics
     - Fabric
     - Firebase/Core
@@ -526,7 +526,7 @@ SPEC CHECKSUMS:
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
   RNCAsyncStorage: 3c304d1adfaea02ec732ac218801cb13897aa8c0
   RNFastImage: e19ba191922e7dab9d932a4d59d62d76660aa222
-  RNFirebase: 37daa9a346d070f9f6ee1f3b4aaf4c8e3b1d5d1c
+  RNFirebase: 3c0d26909841ad3c72ca46d85aba333ef49903bc
   RNGestureHandler: 946a7691e41df61e2c4b1884deab41a4cdc3afff
   RNInputMask: 815461ebdf396beb62cf58916c35cf6930adb991
   RNReanimated: b2ab0b693dddd2339bd2f300e770f6302d2e960c
