@@ -178,7 +178,7 @@ class CartScreen extends Component<Props, State> {
         // <Icon name="ios-add-circle" style={{color : colors.iconColorSecond}}/>
         //        </TouchableOpacity>
 
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1 ,zIndex:100}}>
           <View style={{ flex: 1, flexDirection: 'row' }}>
             <TouchableOpacity
               style={{
