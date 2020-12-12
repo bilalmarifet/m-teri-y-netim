@@ -21,8 +21,11 @@ import { SuccessButton } from "../../../components/SuccessButton";
 import { TouchableHighlight, TouchableOpacity } from "react-native";
 import NavigationService from "../../../services/NavigationService";
 import Icon from 'react-native-vector-icons/Feather';
-import { BaseImage } from "../../../services/AppConfig";
+import { BaseImage, BasestoreId, BaseStoreOwnerUserId } from "../../../services/AppConfig";
 import { District, getDistrict } from "../../../redux/actions/DistrictAction";
+import { BaseUser, createUserControlIfNumberIsUsed } from "../../../redux/actions/signUpActions";
+import TextInputMask from 'react-native-text-input-mask';
+import { showSimpleMessage } from "../../../components/showMessage";
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState>;
