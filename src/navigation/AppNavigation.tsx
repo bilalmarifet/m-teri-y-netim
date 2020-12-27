@@ -38,6 +38,7 @@ import StoreInfoScreen from "../screens/AppScreens/Profile/StoreInfoScreen";
 import MyAdressesScreen from "../screens/AppScreens/Profile/MyAdressesScreen";
 import AdressAddScreen from "../screens/AppScreens/Profile/AdressAddScreen";
 import AdressEditScreen from "../screens/AppScreens/Profile/AdressEditScreen";
+import HomeBaseScreen from "../screens/AppScreens/HomeBase/HomeBaseScreen";
 
 const MainStack = createStackNavigator(
   {
@@ -46,6 +47,16 @@ const MainStack = createStackNavigator(
   {
     initialRouteName: "Home",
     // headerMode: "none"
+  }
+);
+
+
+const HomeBaseWithItemsStack = createStackNavigator(
+  {HomeBase: HomeBaseScreen},
+
+  {
+    initialRouteName: "HomeBase",
+    headerMode: "none"
   }
 );
 
@@ -271,7 +282,8 @@ export default createAppContainer(
     {
       AuthLoading: AuthLoading,
       AuthStack: AuthStack,
-      AppStack: CustomerMainStack
+      AppStack: CustomerMainStack,
+      HomeBaseWithItemsStack: HomeBaseWithItemsStack
     },
     {
       initialRouteName: "AuthLoading"

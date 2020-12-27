@@ -30,6 +30,8 @@ import { showSimpleMessage } from '../../../components/showMessage';
 import Icon from 'react-native-vector-icons/Feather';
 import IconMat from 'react-native-vector-icons/MaterialCommunityIcons'
 import FastImage from 'react-native-fast-image';
+import IconNew from 'react-native-vector-icons/Ionicons'
+
 interface Props {
   navigation: NavigationScreenProp<NavigationState>;
 
@@ -99,9 +101,13 @@ class CartScreen extends Component<Props, State> {
         },
         elevation: 0,
         borderBottomWidth:0.5,
-        borderBottomColor:'#ccc'
+        borderBottomColor:'#ccc',
+        
       },
+      headerLeft: <TouchableOpacity onPress={()=> navigation.navigate('HomeBaseWithItemsStack')}><IconNew name="ios-chevron-back-outline" style={{fontSize:30,color:colors.headerTitleColor}} /></TouchableOpacity>,
+
     };
+
   };
   renderPlusButton(item: IProductItemCustomer, index: number) {
     if (item.count > 0) {

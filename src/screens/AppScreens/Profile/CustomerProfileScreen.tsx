@@ -41,6 +41,7 @@ import {getUserInfo, UserInfo} from '../../../redux/actions/profileActions';
 import {logOut} from '../../../redux/actions/loginAction';
 import { AppState } from '../../../redux/store';
 import Icon from 'react-native-vector-icons/Ionicons';
+import IconNew from 'react-native-vector-icons/Ionicons'
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState>;
@@ -89,8 +90,11 @@ class CustomerProfileScreen extends Component<Props, State> {
         },
         elevation: 0,
         borderBottomWidth:0.5,
-        borderBottomColor:'#ccc'
+        borderBottomColor:'#ccc',
+       
       },
+      headerLeft: <TouchableOpacity onPress={()=> navigation.navigate('HomeBaseWithItemsStack')}><IconNew name="ios-chevron-back-outline" style={{fontSize:30,color:colors.headerTitleColor}} /></TouchableOpacity>,
+
     };
   };
 

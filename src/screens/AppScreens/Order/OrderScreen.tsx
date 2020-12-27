@@ -36,6 +36,7 @@ import { AppState } from '../../../redux/store';
 import { InfoItem } from '../../../components/InfoItem';
 import { stat } from 'fs';
 import Icon from 'react-native-vector-icons/Feather';
+import IconNew from 'react-native-vector-icons/Ionicons'
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState>;
@@ -104,9 +105,10 @@ class OrderScreen extends Component<Props, State> {
         },
         elevation: 0,
         borderBottomWidth: 0.5,
-        borderBottomColor: '#ccc'
+        borderBottomColor: '#ccc',
+      },
+      headerLeft: <TouchableOpacity onPress={()=> navigation.navigate('HomeBaseWithItemsStack')}><IconNew name="ios-chevron-back-outline" style={{fontSize:30,color:colors.headerTitleColor}} /></TouchableOpacity>,
 
-      }
     };
   };
   renderStatus(status: number,dateTime: string) {

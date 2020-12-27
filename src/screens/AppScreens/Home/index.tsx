@@ -21,6 +21,7 @@ import { GetProductsForCustomer, IProductItemCustomer, IncOrDecItemFromCart, ICa
 import { TotalPriceText } from "../../../components/TotalPriceText";
 import { getUserInfo } from "../../../redux/actions/profileActions";
 import Icon from "react-native-vector-icons/Feather";
+import IconNew from 'react-native-vector-icons/Ionicons'
 import { SliderBox } from "react-native-image-slider-box";
 import { ScrollView } from "react-native-gesture-handler";
 import FastImage from "react-native-fast-image";
@@ -252,6 +253,7 @@ class CustomerHomeScreen extends Component<Props, State> {
         borderBottomWidth: 0.5,
         borderBottomColor: '#ccc'
       },
+      headerLeft: <TouchableOpacity onPress={()=> navigation.navigate('HomeBaseWithItemsStack')}><IconNew name="ios-chevron-back-outline" style={{fontSize:30,color:colors.headerTitleColor}} /></TouchableOpacity>,
       headerRight:
         <MyConnectedTitle navigation={navigation} />
     }

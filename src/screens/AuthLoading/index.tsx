@@ -39,7 +39,8 @@ class AuthLoading extends React.Component<Props, {}> {
     global.USERID = userId
   
    // navigation.navigate(userToken ? "AppStack" : "AuthStack");
-  navigation.navigate( "AppStack");
+  // navigation.navigate("AppStack");
+    navigation.navigate("HomeBaseWithItemsStack");
   };
 
   render() {
