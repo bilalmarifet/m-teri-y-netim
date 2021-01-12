@@ -20,7 +20,6 @@ export const colors = {
   viewBackground: '#E5F1E5', // YESIL ARKA PLAN
   viewBackgroundText: '#56A6A4',
   textColorLighter: '#636363',
-  borderColorInner: '#193B52',
 };
 // export const colors = {
 //   primary: "#3F51B5",

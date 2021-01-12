@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "388760856293",
+    "project_id": "ozansu-a63b2",
+    "storage_bucket": "ozansu-a63b2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:388760856293:android:b81df98e4441bdc1c8160c",
+        "android_client_info": {
+          "package_name": "com.ozanSu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "388760856293-eahuenlj83f2l99bmpjotqkpod72e34v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCs_T5FDuR6wchzXribHtgqMgy6VXAaUkw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "388760856293-eahuenlj83f2l99bmpjotqkpod72e34v.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "388760856293-udjo80gp5n8v72arurh6m068vvaf3bv0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.ozanSu.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

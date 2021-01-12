@@ -1,4 +1,4 @@
-import { NOTIFICATION_LIST_LOADING, NOTIFICATION_LIST_FAILED, NOTIFICATION_LIST_GET, RESET_PROPS, NOTIFICATION_COUNT_FAILED, NOTIFICATION_COUNT_LOADING, NOTIFICATION_COUNT_GET, NOTIFICATION_LIST_GET_MORE, NOTIFICATION_LIST_LOADING_MORE } from "../types";
+import { NOTIFICATION_LIST_LOADING, NOTIFICATION_LIST_FAILED, NOTIFICATION_LIST_GET, RESET_PROPS, NOTIFICATION_COUNT_FAILED, NOTIFICATION_COUNT_LOADING, NOTIFICATION_COUNT_GET, NOTIFICATION_LIST_GET_MORE, NOTIFICATION_LIST_LOADING_MORE, NOTIFICATION_LIST_DELETE } from "../types";
 import { Action } from '../states';
 
 import { notificationListItem, INotificationItem } from '../actions/notificationAction'
@@ -27,6 +27,14 @@ export interface notificationState {
 
 export default (state: notificationState = intialState, action: Action) => {
   switch (action.type) {
+    case NOTIFICATION_LIST_DELETE:
+      return {
+        ...state,
+        notificationListItem: [
+          ...state.notificationListItem.slice(0, action.payload),
+          ...state.notificationListItem.slice(action.payload + 1)
+      ],
+      };
     case NOTIFICATION_LIST_LOADING:
       return {
         ...state,

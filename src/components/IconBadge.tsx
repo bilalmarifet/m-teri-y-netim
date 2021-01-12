@@ -1,11 +1,12 @@
 import React from "react";
-import { View, Text, Icon } from "native-base";
+import { View, Text } from "native-base";
+import Icon from "react-native-vector-icons/Feather";
 
 
 function IconWithBadge({ badgeCount}) {
     return (
       <View style={{ width: 24, height: 24, margin: 5 }}>
-        <Icon name="ios-profile"   />
+        <Icon name="inbox" />
         {badgeCount > 0 && (
           <View
             style={{

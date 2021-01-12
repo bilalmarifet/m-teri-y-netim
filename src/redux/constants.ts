@@ -117,6 +117,8 @@ export const WATER_GET_NEW_NOTIFICATION_COUNT =
   WATER_BASE_URL_NEW + '/api/notification/NewNotificationCount';
 export const WATER_NOTIFICATIONS_UPDATED_VIEWED =
   WATER_BASE_URL_NEW + '/api/notification/UpdateSeen';
+  export const WATER_REMOVE_NOTIFICATION = WATER_BASE_URL_NEW + '/api/notification/Delete'
+
 export const WATER_NOTIFICATION_DELETE_BYID =
   WATER_BASE_URL_NEW + '/api/notification';
 export const WATER_NOTIFICATION_TOKEN_DELETE =

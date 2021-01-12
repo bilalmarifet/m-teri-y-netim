@@ -39,6 +39,8 @@ import MyAdressesScreen from "../screens/AppScreens/Profile/MyAdressesScreen";
 import AdressAddScreen from "../screens/AppScreens/Profile/AdressAddScreen";
 import AdressEditScreen from "../screens/AppScreens/Profile/AdressEditScreen";
 import HomeBaseScreen from "../screens/AppScreens/HomeBase/HomeBaseScreen";
+import NotificationScreen from "../screens/AppScreens/Notification/NotificationScreen";
+import { IconBadge } from "../components/NotificationIconBadge";
 
 const MainStack = createStackNavigator(
   {
@@ -82,6 +84,28 @@ const CustomerMain = createStackNavigator(
   },
 );
 
+
+
+const NotificationStack = createStackNavigator(
+  {
+    Notification: NotificationScreen
+  },
+  {
+    initialRouteName: 'Notification',
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: '#f4511e',
+      },
+      headerTintColor : colors.headerTitleColor,
+      headerTitleStyle: {
+        fontSize: 18,
+        fontWeight:'bold',
+        fontFamily: fonts.primaryFont,
+        color:colors.headerTitleColor,
+      },
+    },
+  },
+)
 
 const AuthStack = createStackNavigator(
   {
@@ -246,6 +270,25 @@ const CustomerMainStack = createBottomTabNavigator(
           );
         },
       },
+    },
+    Notification: {
+      screen: NotificationStack,
+
+      navigationOptions: ({screenProps}) => ({
+        tabBarLabel: 'Bildirimler',
+        tabBarOptions: {
+          labelStyle: {
+            color: colors.headerColor,
+          },
+        },
+        tabBarIcon: ({focused}) => (
+          <IconBadge
+            badgeCount={screenProps.badgeCount}
+            focused={focused}
+            name="inbox" 
+          />
+        ),
+      }),
     },
     Profile: {
       screen: CustomerProfileStack,

@@ -3,6 +3,7 @@ import {
   WATER_GET_NOTIFICATIONS,
   WATER_NOTIFICATIONS_UPDATED_VIEWED,
   WATER_GET_NEW_NOTIFICATION_COUNT,
+  WATER_REMOVE_NOTIFICATION,
 } from './../constants';
 import {Dispatch} from 'react';
 
@@ -15,6 +16,7 @@ import {
   NOTIFICATION_COUNT_GET,
   NOTIFICATION_LIST_GET_MORE,
   NOTIFICATION_LIST_LOADING_MORE,
+  NOTIFICATION_LIST_DELETE,
 } from './../types';
 import {Action} from '../states';
 
@@ -38,6 +40,45 @@ export interface INotificationItem {
   key: string;
   value: notificationListItem;
 }
+
+export function removeNotification(index : number, id : number) {
+  return (dispatch: any) => {
+      dispatch(notificationDelete(index))
+      AsyncStorage.multiGet(['userToken', 'userId'])
+      .then(res => {
+        let token = res[0][1];
+        let userId = res[1][1];
+
+        const headers = {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        };
+        console.log(WATER_REMOVE_NOTIFICATION + `?notificationId=${id}`)
+        axios
+          .get(WATER_REMOVE_NOTIFICATION + `?notificationId=${id}`, {
+            headers: headers,
+          })
+          .then(response => {
+            if (response.data.isSuccess) {
+              console.log(response.data.result, `not data`);
+              dispatch(notificationCount(response.data.result));
+              dispatch(getNotifications(false, 1));
+            } else {
+            }
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+
+  };
+}
+
+
 
 function UpdateNotificationViewed(userId: string, userToken: string) {
   return (dispatch: any) => {
@@ -95,6 +136,7 @@ export function getNotifications(
             },
           )
           .then(response => {
+            console.log("NOTREspinse",response)
             var notificationList: INotificationItem[] = [];
             if (page == 1 || !page) {
               counter = 0;
@@ -165,6 +207,7 @@ export function getNotificationCount() {
             headers: headers,
           })
           .then(response => {
+            console.log("notifaiotn COnutn",response)
             if (response.data.isSuccess) {
               console.log(response.data.result, `not data`);
               dispatch(notificationCount(response.data.result));
@@ -181,6 +224,12 @@ export function getNotificationCount() {
       });
   };
 }
+
+export const notificationDelete = (index: number) => ({
+  type: NOTIFICATION_LIST_DELETE,
+  payload:index
+})
+
 
 export const isLoading = (loading: boolean, message: string) => ({
   type: NOTIFICATION_LIST_LOADING

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>388760856293-udjo80gp5n8v72arurh6m068vvaf3bv0.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.388760856293-udjo80gp5n8v72arurh6m068vvaf3bv0</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDVj6e2Kh9WBnVlYF9ZXp4wiu5nJmE87Gw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>388760856293</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.ozanSu.app</string>
+	<key>PROJECT_ID</key>
+	<string>ozansu-a63b2</string>
+	<key>STORAGE_BUCKET</key>
+	<string>ozansu-a63b2.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:388760856293:ios:0ef9db47f00e47dac8160c</string>
+</dict>
+</plist>
