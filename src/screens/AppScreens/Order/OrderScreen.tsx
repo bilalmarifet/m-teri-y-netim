@@ -161,7 +161,7 @@ class OrderScreen extends Component<Props, State> {
             flexDirection: 'row',
             paddingTop: 5,
           }}>
-          <Text style={{ color: 'white', fontFamily: fonts.primaryFont }}>{isInFirstFiveMin > 5 ? "Sıraya Alındı": "İşlemde" }</Text>
+          <Text style={{ color: 'white', fontFamily: fonts.primaryFont }}>{isInFirstFiveMin > 5 ? "Hazırlanıyor": "Hazırlanıyor" }</Text>
         </LinearGradient>
       );
     }
