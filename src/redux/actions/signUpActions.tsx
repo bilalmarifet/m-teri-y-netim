@@ -108,33 +108,35 @@ export function controlEmail(
     user.email = email;
     user.password = password;
 
-    dispatch(loading(true));
-
-    axios
-      .post(WATER_USER_CREATE_EMAIL_CONTROL, {
-        email: email,
-        storeId: BasestoreId
-      })
-      .then(res => {
-        console.log(res)
-        if (res.data.result) {
-          dispatch(signUpFirstSucceed(user));
+    dispatch(signUpFirstSucceed(user));
           dispatch(loginIsSucceed(true, ''));
           dispatch(reset());
-        } else {
-          if (res.data.message === 'Error.User.EmailCheck.EmailFound') {
-              showSimpleMessage('Bu email adresi ile tanımlı kullanıcı bulundu. Şifrenizi unuttuysanız yeni şifre alabilirsiniz.',"danger")
-            dispatch(reset());
-          } else {
-            showSimpleMessage( 'Bir Hata meydana geldi.',"danger")
-            dispatch(reset());
-          }
-        }
-      })
-      .catch(err => {
-        showSimpleMessage( 'Bir Hata meydana geldi.',"danger")
-        dispatch(reset());
-      });
+
+    // axios
+    //   .post(WATER_USER_CREATE_EMAIL_CONTROL, {
+    //     email: email,
+    //     storeId: BasestoreId
+    //   })
+    //   .then(res => {
+    //     console.log(res)
+    //     if (res.data.result) {
+    //       dispatch(signUpFirstSucceed(user));
+    //       dispatch(loginIsSucceed(true, ''));
+    //       dispatch(reset());
+    //     } else {
+    //       if (res.data.message === 'Error.User.EmailCheck.EmailFound') {
+    //           showSimpleMessage('Bu email adresi ile tanımlı kullanıcı bulundu. Şifrenizi unuttuysanız yeni şifre alabilirsiniz.',"danger")
+    //         dispatch(reset());
+    //       } else {
+    //         showSimpleMessage( 'Bir Hata meydana geldi.',"danger")
+    //         dispatch(reset());
+    //       }
+    //     }
+    //   })
+    //   .catch(err => {
+    //     showSimpleMessage( 'Bir Hata meydana geldi.',"danger")
+    //     dispatch(reset());
+    //   });
 
   };
 }
