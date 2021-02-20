@@ -43,9 +43,10 @@ import deleteEmployeeCostReducers from './reducers/deleteEmployeeCostReducers';
 import orderDetailReducers from './reducers/orderDetailReducers';
 import DealerSelectionReducers from './reducers/DealerSelectionReducers';
 import productReducer from './reducersCustomer/productReducer';
-import { LOGOUT } from './types';
+import { APP_KILLED, LOGOUT } from './types';
 import DistrictReducers from './reducers/DistrictReducers';
 import adressReducers from './reducers/adressReducers';
+import { ActionSheet } from 'native-base';
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
@@ -103,7 +104,10 @@ const appReducer = combineReducers({
 const rootReducer = (state, action) => {
   if (action.type === LOGOUT) {
     state = undefined
-  };
+  }
+  else if(action.type === APP_KILLED){
+    state = undefined
+  }
   
   return appReducer(state, action)
 }

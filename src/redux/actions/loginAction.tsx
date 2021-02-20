@@ -4,6 +4,7 @@ import axios from 'axios';
 import {WATER_GET_USER_TERM, WATER_UPDATE_PASSWORD_FORGOT, WATER_USER_FORGOT_PASSWORD, WATER_USER_LOGIN} from './../constants';
 import {Dispatch} from 'react';
 import {
+  APP_KILLED,
   GET_USER_AGREEMENT,
   LOADING_FORGOT_PASSWORD,
   LOADING_FORGOT_PASSWORD_CHANGE,
@@ -215,6 +216,12 @@ export function forgotPassword(email:string) {
   };
 }
 
+export function appKilled() {
+  return (dispatch: Dispatch<Action>) => {
+    dispatch(appKilledAction());
+  }
+}
+
 
 export function logOut(navigation?: NavigationScreenProp<NavigationState>) {
   return (dispatch: Dispatch<Action>) => {
@@ -271,6 +278,11 @@ export const loadingChangePasswordFromForgot =(loader: boolean) => ({
 
 export const logout = () => ({
   type: LOGOUT,
+  payload: "",
+});
+
+export const appKilledAction = () => ({
+  type: APP_KILLED,
   payload: "",
 });
 

@@ -379,10 +379,11 @@ export function AddOrderMultiple(
             }else {
               if (response.data.message ===  "Order.Post.MinumumAmount.Error")
               {showSimpleMessage("Minimum sipariş üstünde sipariş verebiirsiniz.","danger")
-              
+              dispatch(isLoading(false));
             }
               else if(response.data.message == "Order.Post.WorkingHour.Error") {
                 showSimpleMessage("Çalışma saatleri dışındasınız.","danger","Daha sonra sipariş verebilirsiniz.")
+                dispatch(isLoading(false));
               }
             }
             dispatch(addOrder(false))

@@ -41,6 +41,7 @@ export const LOADING_FORGOT_PASSWORD_CHANGE =  'LOADING_FORGOT_PASSWORD_CHANGE';
 export const LOGIN_SUCCEED = 'loginSucceed';
 export const LOGIN_FAILED = 'loginFailed';
 export const LOGOUT="logOutDis"
+export const APP_KILLED= "App_Killed";
 export const RESET_PROPS = 'resetProps';
 
 export const SIGNUP_STARTED = 'SignUpStarted';

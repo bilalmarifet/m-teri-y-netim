@@ -188,13 +188,13 @@ class OrderScreen extends Component<Props, State> {
     this.props.GetOrders(global.CUSTOMER_ID, 1, 10);
   }
   renderContent() {
-    if (this.props.loading) {
+    if (this.props.isOrderLoading && (!this.props.orders || (this.props.orders && this.props.orders.length < 1))) {
       return (
         <View style={{ flex: 1 }}>
           <Spinner style={{ justifyContent: 'center', alignSelf: 'center' }} />
         </View>
       )
-    } else if (!this.props.loading && (!this.props.orders || (this.props.orders && this.props.orders.length < 1))) {
+    } else if (!this.props.isOrderLoading && (!this.props.orders || (this.props.orders && this.props.orders.length < 1))) {
       return (
         <InfoItem
           style={{ marginTop: 30 }}

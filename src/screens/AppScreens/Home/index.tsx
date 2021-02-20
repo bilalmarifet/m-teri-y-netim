@@ -25,6 +25,7 @@ import { SliderBox } from "react-native-image-slider-box";
 import { ScrollView } from "react-native-gesture-handler";
 import FastImage from "react-native-fast-image";
 import RBSheet from "react-native-raw-bottom-sheet";
+import { appKilled } from "../../../redux/actions/loginAction";
 interface Props {
   navigation: NavigationScreenProp<NavigationState>;
   productList: IProductItemCustomer[]
@@ -36,6 +37,7 @@ interface Props {
   getUserInfo: () => void;
   loadingIncDec: boolean;
   campaings: ICampaignItem[];
+
 }
 
 interface itemProp {
@@ -219,14 +221,7 @@ class CustomerHomeScreen extends Component<Props, State> {
   //     // this.props.navigation.setParams({cart : totalPrice})
 
   // }
-
-  handleLogout = () => {
-    const { navigation } = this.props;
-    logoutUserService().then(() => {
-      navigation.navigate("AuthStack");
-    });
-  };
-
+  
   static navigationOptions = ({ navigation }) => {
 
     return {
