@@ -42,10 +42,8 @@ interface userData {
 }
 
 const loginSchema = Yup.object().shape({
-  username: Yup.string()
-    .email("Lütfen email formatında giriniz.")
-    .min(4,"Email minimum 4 karakter olmalıdır.")
-    .required("Email girilmesi zorunludur."),
+    username: Yup.string()
+    .required("Lütfen telefon numaranızı giriniz"),
   password: Yup.string()
     .min(6,"Şifre minimum 6 karakter olmalıdır.")
     .required("Şifre girilmesi zorunludur.")
@@ -102,17 +100,29 @@ class Login extends Component<Props, {}> {
                       </Text>
                     </View>
                     <View style={[styles.inputContainer,{paddingBottom:0}]}>
-                      <Input
-                        placeholder="Email"
-                        value={props.values.username}
-                        onChangeText={props.handleChange("username")}
-                        onBlur={props.handleBlur("username")}
-                        error={props.touched.username && props.errors.username}
-                      />
-                      {props.touched.username && props.errors.username && <Text style={{fontSize:12,color:colors.accent}}>
-                        {props.errors.username}
-                      </Text>
-                      }
+                          <TextInputMask
+                            style={{
+                              height: 40,
+                              borderBottomWidth: 1,
+                              borderBottomColor: (props.touched.username && props.errors.username) ? colors.accent : colors.borderColor,
+                              fontSize: 16,
+                              marginVertical: 10
+                            }}
+                            placeholder="Telefon numarası"
+                            refInput={ref => { this.input = ref }}
+                            onChangeText={(formatted, extracted) => {
+                              console.log(formatted) // +1 (123) 456-78-90
+                              console.log(extracted) // 1234567890
+                              props.setFieldValue("username", extracted)
+                            }}
+                            onBlur={props.handleBlur("username")}
+                            error={props.touched.username && props.errors.username}
+                            mask={"+90 ([000]) [000] [00] [00]"}
+                          />
+                          {props.touched.username && props.errors.username && <Text style={{ fontSize: 12, color: colors.accent }}>
+                            {props.errors.username}
+                          </Text>
+                          }
                       <Input
                         placeholder="Şifre"
                         value={props.values.password}
