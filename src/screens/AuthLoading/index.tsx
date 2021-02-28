@@ -50,7 +50,7 @@ class AuthLoading extends React.Component<Props, {}> {
   render() {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-         <Image source={BaseImageWithName} style={{height:200}} resizeMode="contain" />
+         <Image source={BaseImageWithName} style={{height:200,marginRight:10}} resizeMode="contain" />
 
         <Spinner color={colors.IconColor} />
       </View>
