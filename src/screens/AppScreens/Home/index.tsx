@@ -263,7 +263,7 @@ class CustomerHomeScreen extends Component<Props, State> {
           canUserBuyFreeProduct = false
           break; 
         }
-        if (element.count == 1 && element.freePoint <= userFreePoint) {
+        if (element.count == 1 && element.freePoint && element.freePoint <= userFreePoint) {
           canUserBuyFreeProduct = true
         }
       }
