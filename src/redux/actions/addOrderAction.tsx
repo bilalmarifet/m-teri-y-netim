@@ -29,6 +29,7 @@ import { user } from './getUserAction';
 import { BasestoreId } from '../../services/AppConfig';
 import { showSimpleMessage } from '../../components/showMessage';
 import NavigationService from '../../services/NavigationService';
+import { getUserInfo } from './profileActions';
 
 export function chooseEmployee(userId: string) {}
 export interface userWithToken {
@@ -375,6 +376,7 @@ export function AddOrderMultiple(
                 }
               }else {
                 dispatch(addOrder(false))
+                dispatch(getUserInfo())
               }
             }else {
               if (response.data.message ===  "Order.Post.MinumumAmount.Error")
