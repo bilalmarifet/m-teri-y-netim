@@ -34,6 +34,7 @@ export interface UserInfo {
   dayOfWeeks: string;
   description: string;
   fountainCount: number;
+  point: number;
 }
 
 
@@ -208,7 +209,7 @@ export function getUserInfo() {
             userInfo.companyName = data.companyName;
             userInfo.dayOfWeeks = data.dayOfWeeks;
             userInfo.description = data.description;
-
+            userInfo.point = data.point 
             dispatch(getUserInfoConst(userInfo));
           }
 

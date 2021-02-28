@@ -105,15 +105,16 @@ class CustomerProfileScreen extends Component<Props, State> {
     if(userToken){
       if(this.props.userInfo) {
         let user = this.props.userInfo
+        let userPoint = user.point ? user.point : 0
         return(
           <View>
             <View style={{borderBottomWidth:0.5,borderBottomColor:colors.borderColor,paddingBottom:30}}>
               <Text style={{marginLeft:30,marginTop:10,fontFamily:fonts.primaryFont,fontSize:18}}>
               {user.nameSurname}
             </Text>
-            <Text style={{marginLeft:30,marginTop:10,fontFamily:fonts.primaryFont,fontSize:18,color:colors.textColorLighter}}>
-              {user.email}
-            </Text>
+            {userPoint > 0 && <Text style={{marginLeft:30,marginTop:10,fontFamily:fonts.primaryFont,fontSize:18,color:colors.textColorLighter}}>
+              Kazandığın Puanlar: {userPoint}
+            </Text>}
             </View>
   
             <TouchableHighlight onPress={()=> this.props.navigation.navigate('CustomerEditProfile')} underlayColor="#AAA"  style={{borderBottomWidth:1,borderBottomColor:colors.borderColor,padding:20,paddingVertical:15,backgroundColor:'white'}}>

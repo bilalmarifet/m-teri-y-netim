@@ -209,8 +209,29 @@ class CartScreen extends Component<Props, State> {
 
   checkLogin(){
     if(global.TOKEN){
-      this.props.navigation.navigate('CartCheckout');
-    }
+
+    let userFreePoint = this.props.userInfo ? this.props.userInfo.point ? this.props.userInfo.point : 0 : 0
+    var canUserBuyFreeProduct = false
+    if (userFreePoint > 0){ 
+     
+      let productList = this.props.productList ?? []
+      for (let index = 0; index < productList.length; index++) {
+        const element = productList[index];
+        if (element.count > 0 && canUserBuyFreeProduct) {
+          canUserBuyFreeProduct = false
+          break; 
+        }
+        if (element.count == 1 && element.freePoint <= userFreePoint) {
+          canUserBuyFreeProduct = true
+        }
+      }
+      console.log("free order",canUserBuyFreeProduct)
+      this.props.navigation.navigate('CartCheckout',{freeOrder: canUserBuyFreeProduct});
+    }else{
+      console.log("free order degil",canUserBuyFreeProduct)
+      this.props.navigation.navigate('CartCheckout',{freeOrder: false});    }
+   
+  }
     else{
       showSimpleMessage("Sipariş verebilmek için lütfen giriş yapınız", "info");
       this.props.navigation.navigate("Login");

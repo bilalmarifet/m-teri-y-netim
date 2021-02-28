@@ -19,7 +19,7 @@ import { AppState } from "../../../redux/store";
 import { IProductItem } from "../../../redux/models/productModel";
 import { GetProductsForCustomer, IProductItemCustomer, IncOrDecItemFromCart, ICampaignItem, GetCampaignHome } from "../../../redux/actionsCustomer/ProductAction";
 import { TotalPriceText } from "../../../components/TotalPriceText";
-import { getUserInfo } from "../../../redux/actions/profileActions";
+import { getUserInfo, UserInfo } from "../../../redux/actions/profileActions";
 import Icon from "react-native-vector-icons/Feather";
 import { SliderBox } from "react-native-image-slider-box";
 import { ScrollView } from "react-native-gesture-handler";
@@ -37,7 +37,7 @@ interface Props {
   getUserInfo: () => void;
   loadingIncDec: boolean;
   campaings: ICampaignItem[];
-
+  userInfo: UserInfo;
 }
 
 interface itemProp {
@@ -250,6 +250,88 @@ class CustomerHomeScreen extends Component<Props, State> {
         <MyConnectedTitle navigation={navigation} />
     }
   };
+
+  checkIfFreeProductExist() {
+    let userFreePoint = this.props.userInfo ? this.props.userInfo.point ? this.props.userInfo.point : 0 : 0
+    var canUserBuyFreeProduct = false
+    if (userFreePoint > 0){ 
+     
+      let productList = this.props.productList ?? []
+      for (let index = 0; index < productList.length; index++) {
+        const element = productList[index];
+        if (element.count > 0 && canUserBuyFreeProduct) {
+          canUserBuyFreeProduct = false
+          break; 
+        }
+        if (element.count == 1 && element.freePoint <= userFreePoint) {
+          canUserBuyFreeProduct = true
+        }
+      }
+      if (canUserBuyFreeProduct) {
+
+      
+      return (
+        <TouchableHighlight
+
+          onPress={() => this.props.navigation.navigate('CartCheckout',{freeOrder: true})}
+          underlayColor="#AAA"
+          style={{
+            borderRadius: 5,
+              marginLeft: 10,
+              marginRight: 10,
+              marginTop: 10,
+              marginBottom:10,
+              }}
+        >
+          <LinearGradient
+            start={{ x: 0, y: 0.5 }}
+            end={{ x: 1, y: 0.5 }}
+            colors={['#30AE4A', '#7BAD7B']}
+            style={{
+              borderRadius: 5,
+              paddingTop: 5,
+              paddingHorizontal: 10,
+              paddingBottom: 10,
+              backgroundColor: colors.buttonBackgroundPrimary,
+              flexDirection: 'row',
+              
+              justifyContent: 'space-between',
+            }}>
+
+            <View style={{}}>
+              <View style={{flexDirection:'row'}}>
+              <Image source={require('../../../assets/UCRETSIZ.png')} style={{marginRight:10,marginTop:5}} width={40} height={40} resizeMode="contain" />
+              <View style={{marginTop:5}}>
+              <Text
+                  style={{
+                    fontFamily: 'Roboto',
+                    fontWeight: '600',
+                    color: '#fff',
+                  }}>
+                  Bu ürünü kazandığınız 
+            </Text>
+              <Text style={{
+                fontFamily: 'Roboto',
+                color: '#fff',
+              }}>puanlarla almak ister misiniz?</Text>
+              </View>
+              </View>
+              </View>
+ 
+            <View>
+                  <Icon name="chevron-right" style={{ color: 'white', marginTop: 15, fontSize: 18 }} type="Feather" />
+
+
+            </View>
+
+
+          </LinearGradient>
+        </TouchableHighlight>
+      );
+    }
+  }  
+
+  }
   renderPlusButton(item: IProductItemCustomer, index: number) {
 
     if (item.count > 0) {
@@ -257,7 +339,6 @@ class CustomerHomeScreen extends Component<Props, State> {
       return (
         <View style={{ backgroundColor: '#F1F1F1', position: 'absolute', paddingLeft: 5, paddingRight: 5, paddingVertical: 5, borderRadius: 15, right: 10, bottom: 10 ,zIndex:100}}>
           {this.props.loadingIncDec && this.props.loadingIndex === item.productId && <Spinner style={{ position: "absolute", zIndex: 1, backgroundColor: colors.borderColor, opacity: .8, width: '100%', height: '100%' }} color={colors.headerColor} />}
-
           <View style={{
             flexDirection: 'row', shadowColor: "#000",
             shadowOffset: {
@@ -266,7 +347,6 @@ class CustomerHomeScreen extends Component<Props, State> {
             },
             shadowOpacity: 0.29,
             shadowRadius: 4.65,
-
             elevation: 3,
           }}>
             <TouchableOpacity style={styles.IncOrDecButton} onPress={() => {
@@ -455,6 +535,7 @@ class CustomerHomeScreen extends Component<Props, State> {
     console.log("home");
     return (
       <ScrollView style={{backgroundColor:colors.containerBg}} contentContainerStyle={{flexGrow:1}}>
+        {this.checkIfFreeProductExist()}
         <View style={[styles.container]}>
           {campaings &&
             <SliderBox
@@ -554,7 +635,8 @@ const mapStateToProps = (state: AppState) => ({
   productList: state.CustomerproductForCustomer.productList,
   loadingIndex: state.CustomerproductForCustomer.loadingIndex,
   loadingIncDec: state.CustomerproductForCustomer.loadingIncDec,
-  campaings: state.CustomerproductForCustomer.campaings
+  campaings: state.CustomerproductForCustomer.campaings,
+  userInfo: state.profile.userInfo,
 });
 
 function bindToAction(dispatch: any) {

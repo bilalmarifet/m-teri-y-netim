@@ -65,12 +65,16 @@ interface Props {
 
 interface State {
   paymentInfoText: string;
+  freeOrder: boolean;
+  isFreeOrderChoosen: boolean;
 }
 class CartScreen extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      paymentInfoText: ""
+      paymentInfoText: "",
+      freeOrder: this.props.navigation.getParam('freeOrder') ?? false,
+      isFreeOrderChoosen: this.props.navigation.getParam('freeOrder') ?? false
     }
   }
 
@@ -179,7 +183,8 @@ class CartScreen extends Component<Props, State> {
   }
 
   handleCartAction(): void {
-    let selectedPaymentMethod =  this.props.paymentMethods ? this.props.paymentMethods.length > 0 ? this.props.selectedPaymentMethod !== undefined ? this.props.paymentMethods[this.props.selectedPaymentMethod].paymentType : 0 : 0 : 0
+    var selectedPaymentMethod =  this.props.paymentMethods ? this.props.paymentMethods.length > 0 ? this.props.selectedPaymentMethod !== undefined ? this.props.paymentMethods[this.props.selectedPaymentMethod].paymentType : 0 : 0 : 0
+    selectedPaymentMethod = this.state.isFreeOrderChoosen ? 5 : selectedPaymentMethod
     var products: product[] = [];
     console.log(selectedPaymentMethod , this.props.paymentMethods , this.props.selectedPaymentMethod, this.props.selectedPaymentMethod !== undefined ? "true" : 'false')
     this.props.productList.map(element =>  {
@@ -214,7 +219,32 @@ class CartScreen extends Component<Props, State> {
   }
   renderPaymentMethod() {
     console.log(global.USERID)
-    if(this.props.loadingForGetPaymentMethods) {
+    if(this.state.freeOrder === true && this.state.isFreeOrderChoosen) {
+      return (
+     <View style={{padding:20,paddingTop:0}}>
+       <Text style={{fontFamily:fonts.primaryFont,fontWeight:"600"}}>Ödeme Yöntemi </Text>
+
+         <TouchableOpacity style={{marginLeft:15,height:50,borderBottomColor:'#BBB',borderBottomWidth:0.5,justifyContent:'center'}}>
+          <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+
+              <Text style={{fontFamily:fonts.primaryFont}}>Kazandığım puanlarla ödeme yap</Text>
+
+<Icon  name="check" style={{marginRight:15,fontSize:18,color:colors.IconColor}} />
+
+          </View>
+          </TouchableOpacity>
+          
+          <TouchableOpacity onPress={()=> this.setState({isFreeOrderChoosen: false})} style={{marginLeft:15,height:50,borderBottomColor:'#BBB',borderBottomWidth:0.5,justifyContent:'center'}}>
+          <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+
+              <Text style={{fontFamily:fonts.primaryFont}}>Normal ödeme yöntemi seç</Text>
+
+          </View>
+          </TouchableOpacity>
+     </View>
+      )
+    }
+    else if(this.props.loadingForGetPaymentMethods) {
       return (
         <View>
           <Spinner />
@@ -240,6 +270,14 @@ class CartScreen extends Component<Props, State> {
           </TouchableOpacity>
             )
           })}
+
+ {this.state.freeOrder && <TouchableOpacity onPress={()=> this.setState({isFreeOrderChoosen: true})} style={{marginLeft:15,height:50,borderBottomColor:'#BBB',borderBottomWidth:0.5,justifyContent:'center'}}>
+          <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+
+              <Text style={{fontFamily:fonts.primaryFont}}>Kazandığım puanlarla ödeme yap</Text>
+
+          </View>
+          </TouchableOpacity>}
          
         </View>
       )
@@ -309,6 +347,7 @@ class CartScreen extends Component<Props, State> {
   let minFreeDelivery = this.props.storeInformation ? this.props.storeInformation.minFreeDelivery ?? 0 : 0
   var totalCost = price + deliveryCost
   var minumumOrderAmount = this.props.storeInformation.minumumOrderAmount ?? ""
+  var totalCostAfterFree = this.state.isFreeOrderChoosen ? 0 : totalCost
     if(this.props.loadingForStorInfo) {
       return (
         <View>
@@ -323,8 +362,9 @@ class CartScreen extends Component<Props, State> {
           <View style={{flexDirection:'row',justifyContent:'space-between'}}><Text style={{fontFamily:fonts.h3Font,marginLeft:15}}>Toplam Fiyat: </Text><Text style={{fontFamily:fonts.h3Font}}>{price} ₺</Text></View>
           {deliveryCost > 0 ? <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:10,}}><Text style={{fontFamily:fonts.h3Font,marginLeft:15}}>Kurye Ücreti: </Text><Text style={{fontFamily:fonts.h3Font}}>{deliveryCost} ₺</Text></View> : null }
           {minumumOrderAmount > 0 ? <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:10,}}><Text style={{fontFamily:fonts.h3Font,marginLeft:15}}>Minimum Sipariş Tutarı: </Text><Text style={{fontFamily:fonts.h3Font}}>{minumumOrderAmount} ₺</Text></View> : null }
-     <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:10,}}><Text style={{fontFamily:fonts.h3Font,marginLeft:15,fontWeight:'bold'}}>Toplam ödenecek Tutar: </Text><Text style={{fontFamily:fonts.h3Font,fontWeight:'bold'}}>{totalCost} ₺</Text></View>
-
+          {this.state.isFreeOrderChoosen ? <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:10,}}><Text style={{fontFamily:fonts.h3Font,marginLeft:15}}>İndirim Tutarı: </Text><Text style={{fontFamily:fonts.h3Font}}>{totalCost} ₺</Text></View> : null }
+     <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:10,}}><Text style={{fontFamily:fonts.h3Font,marginLeft:15,fontWeight:'bold'}}>Toplam ödenecek Tutar: </Text><Text style={{fontFamily:fonts.h3Font,fontWeight:'bold'}}>{totalCostAfterFree} ₺</Text></View>
+      
   
   
         </View>

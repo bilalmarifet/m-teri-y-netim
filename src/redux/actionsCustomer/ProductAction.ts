@@ -21,6 +21,8 @@ export interface IProductItemCustomer extends IProductItem {
   isCampaign: boolean | null
   newPrice: number;
   productCount: number;
+  pointPerOrder: number;
+  freePoint: number;
 }
 
 export interface ICampaignItem {
@@ -114,6 +116,7 @@ export function GetProductsForCustomer(productsList?: IProductItemCustomer[] = [
           )
           .then(response => {
             if (response.data.isSuccess) {
+              console.log(response.data,"productResponse")
               var productModel: IProductItemCustomer[] = [];
               response.data.result.homeProductItemModels.forEach(
                 (product: any) => {
@@ -132,7 +135,9 @@ export function GetProductsForCustomer(productsList?: IProductItemCustomer[] = [
                     active: product.active,   
                     newPrice: product.newPrice,
                     productCount: product.productCount,
-                    isCampaign: product.isCampaign
+                    isCampaign: product.isCampaign,
+                    freePoint: 200,
+                    pointPerOrder: product.pointPerOrder
                   };
                   productModel.push(productItem);
                 },
