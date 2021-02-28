@@ -221,7 +221,7 @@ class CartScreen extends Component<Props, State> {
           canUserBuyFreeProduct = false
           break; 
         }
-        if (element.count == 1 && element.freePoint <= userFreePoint) {
+        if (element.count == 1 && element.freePoint > 0 && element.freePoint <= userFreePoint) {
           canUserBuyFreeProduct = true
         }
       }
