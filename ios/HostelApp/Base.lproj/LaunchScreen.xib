@@ -13,18 +13,16 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sy" translatesAutoresizingMaskIntoConstraints="NO" id="ikf-M1-uMX">
-                    <rect key="frame" x="140" y="140" width="200" height="200"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="200" id="I1y-Kr-T09"/>
-                        <constraint firstAttribute="height" constant="200" id="bMO-Io-3YC"/>
-                    </constraints>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iTunesArtwork-1" translatesAutoresizingMaskIntoConstraints="NO" id="ikf-M1-uMX">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="ikf-M1-uMX" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="6Wd-Hi-5DE"/>
-                <constraint firstItem="ikf-M1-uMX" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="I5Q-0y-NRQ"/>
+                <constraint firstItem="ikf-M1-uMX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="BY4-OG-NxN"/>
+                <constraint firstItem="ikf-M1-uMX" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Lyc-DH-Bin"/>
+                <constraint firstItem="ikf-M1-uMX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="h0b-03-hzB"/>
+                <constraint firstItem="ikf-M1-uMX" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="i7J-FB-5w9"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -32,6 +30,6 @@
         </view>
     </objects>
     <resources>
-        <image name="sy" width="500" height="500"/>
+        <image name="iTunesArtwork-1" width="768" height="768"/>
     </resources>
 </document>

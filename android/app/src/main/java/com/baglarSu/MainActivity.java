@@ -1,4 +1,4 @@
-package com.su24;
+package com.baglarSu;
 
 import com.facebook.react.ReactActivity;
 
