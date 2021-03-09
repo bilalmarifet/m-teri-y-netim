@@ -67,6 +67,7 @@ interface State {
   paymentInfoText: string;
   freeOrder: boolean;
   isFreeOrderChoosen: boolean;
+  usedFreePoint: number | undefined;
 }
 class CartScreen extends Component<Props, State> {
   constructor(props: Props) {
@@ -74,7 +75,8 @@ class CartScreen extends Component<Props, State> {
     this.state = {
       paymentInfoText: "",
       freeOrder: this.props.navigation.getParam('freeOrder') ?? false,
-      isFreeOrderChoosen: this.props.navigation.getParam('freeOrder') ?? false
+      isFreeOrderChoosen: this.props.navigation.getParam('freeOrder') ?? false,
+      usedFreePoint: this.props.navigation.getParam('usedFreePoint') ?? null
     }
   }
 
@@ -196,6 +198,7 @@ class CartScreen extends Component<Props, State> {
           productCount: element.count.toString(),
           productCode: element.productCode,
           productGotUnitPrice: false,
+          freePoint: element.freePoint ?? 0
         };
         products.push(product);
       }

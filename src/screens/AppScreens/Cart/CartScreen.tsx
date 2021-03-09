@@ -222,6 +222,7 @@ class CartScreen extends Component<Props, State> {
           break; 
         }
         if (element.count == 1 && element.freePoint > 0 && element.freePoint <= userFreePoint) {
+          usedFreePoint = element.freePoint
           canUserBuyFreeProduct = true
         }
       }
@@ -338,7 +339,6 @@ class CartScreen extends Component<Props, State> {
                 <View style={styles.itemCart}>
                   {this.renderPlusButton(item,index)}
                   <View style={{ width: '60%', flexDirection: 'row' }}>
-                    <View>
                     <FastImage
      style={{ width: 80, height: 80, marginLeft: 10 }}
         source={{
@@ -348,20 +348,19 @@ class CartScreen extends Component<Props, State> {
     />
 
 
-                    </View>
-                    <View style={{ marginTop: 10, marginLeft: 10 }}>
+
+                    <View style={{ marginTop: 10, marginLeft: 10}}>
 
                       <Text
                         style={{
                           fontFamily: 'roboto',
                           color: colors.textColor,
-                          alignSelf: 'center',
+                          alignSelf: 'flex-start',
 
                         }}>
                         {item.productName}
                       </Text>
                       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <View style={{ flex: 0.5 }}>
                           <Text>{item.isCampaign ? item.newPrice:  item.price} TL</Text>
                         </View>
 
@@ -369,7 +368,7 @@ class CartScreen extends Component<Props, State> {
 
 
 
-                      </View>
+
 
                     </View>
 

@@ -26,6 +26,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import FastImage from "react-native-fast-image";
 import RBSheet from "react-native-raw-bottom-sheet";
 import { appKilled } from "../../../redux/actions/loginAction";
+import { showSimpleMessage } from "../../../components/showMessage";
 interface Props {
   navigation: NavigationScreenProp<NavigationState>;
   productList: IProductItemCustomer[]
@@ -254,6 +255,7 @@ class CustomerHomeScreen extends Component<Props, State> {
   checkIfFreeProductExist() {
     let userFreePoint = this.props.userInfo ? this.props.userInfo.point ? this.props.userInfo.point : 0 : 0
     var canUserBuyFreeProduct = false
+    var usedFreePoint = 0
     if (userFreePoint > 0){ 
      
       let productList = this.props.productList ?? []
@@ -268,12 +270,11 @@ class CustomerHomeScreen extends Component<Props, State> {
         }
       }
       if (canUserBuyFreeProduct) {
-
-      
+        showSimpleMessage("Puanlarını kullan","info","Sepetinizdeki ürünü bir adet olarak puanınızla bedava satın alabilirsiniz.")
       return (
         <TouchableHighlight
 
-          onPress={() => this.props.navigation.navigate('CartCheckout',{freeOrder: true})}
+          onPress={() => this.props.navigation.navigate('CartCheckout',{freeOrder: canUserBuyFreeProduct})}
           underlayColor="#AAA"
           style={{
             borderRadius: 5,
