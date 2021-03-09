@@ -225,7 +225,7 @@ class CustomerHomeScreen extends Component<Props, State> {
   static navigationOptions = ({ navigation }) => {
 
     return {
-      title: 'Su 24',
+      title: 'Bağlar Su',
 
       headerStyle: {
         backgroundColor: colors.headerColorTop,
@@ -572,7 +572,6 @@ class CustomerHomeScreen extends Component<Props, State> {
     );
   }
   renderContent() {
-
     if (!this.props.productList && this.props.loading) {
       return (
         <Spinner color={colors.borderColor} />

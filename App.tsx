@@ -19,7 +19,7 @@ export default class App extends Component {
         }} />
           </PersistGate>
         </Provider>
-        <FlashMessage style={{marginBottom:30,marginHorizontal:20,borderRadius:5,opacity:.8}} position="bottom" animated={true} />
+        <FlashMessage style={{marginBottom:30,marginHorizontal:20,paddingRight:60,borderRadius:5,opacity:.8}} position="bottom" animated={true} />
       </View>
     );
   }
