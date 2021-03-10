@@ -589,17 +589,17 @@ class CustomerHomeScreen extends Component<Props, State> {
             return (
               <TouchableWithoutFeedback onPress={()=> this.setState({selectedItemId:item.productId}, ()=> this.RBSheetItem.open())
             }>
-              <View style={{ marginBottom: 10, flex: .48 }}>
+              <View style={{ marginBottom: 10, flex: .33 }}>
 
 
                 <View style={styles.item}>
-                  <View style={{ paddingVertical: 10, justifyContent: 'center', alignContent: 'center', alignSelf: 'center' }}>
+                  <View style={{ paddingVertical: 0, justifyContent: 'center', alignContent: 'center', alignSelf: 'center' }}>
                     {/* <Image
                       style={{ width: Dimensions.get('window').width / 3.5, height: Dimensions.get('window').width / 4 }}
                       source={{ uri: item.imagePath }}
                     /> */}
                     <FastImage
-        style={{ width: Dimensions.get('window').width / 3.5, height: Dimensions.get('window').width / 4 }}
+        style={{ width: Dimensions.get('window').width / 4, height: Dimensions.get('window').width / 4 }}
         source={{
             uri: item.imagePath,
             priority: FastImage.priority.normal,
@@ -611,7 +611,7 @@ class CustomerHomeScreen extends Component<Props, State> {
                   {this.renderPlusButton(item, index)}
 
                   <Text style={{ fontFamily: 'roboto', color: colors.textColor, width: '90%' }}>
-                    {item.productName}
+                    {item.productName ? item.productName.length > 25 ? item.productName.slice(0,23) + "..." : item.productName : ""}
                   </Text>
                   <Text style={{ fontFamily: fonts.primaryFont, marginTop: 5, color: colors.priceAndPlusColor, fontWeight: 'bold' }}>
                     {item.price} TL
@@ -622,7 +622,7 @@ class CustomerHomeScreen extends Component<Props, State> {
           </TouchableWithoutFeedback>
             );
           }}
-          numColumns={2}
+          numColumns={3}
 
         />
       )

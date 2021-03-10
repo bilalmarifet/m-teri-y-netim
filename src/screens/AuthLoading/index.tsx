@@ -23,14 +23,23 @@ interface Props {
   navigation: NavigationScreenProp<NavigationState>;
   appKilled: () => void;
 }
+interface State {
+  userId: string | null;
+  token: string | null;
+  notificationToken: string | null;
+  isPermissionRequested: boolean;
+}
 
-class AuthLoading extends React.Component<Props, {}> {
+class AuthLoading extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.props.appKilled()
     setTimeout(  () => this._bootstrapAsync(), 2000);
      
   }
+
+
+
   
   _bootstrapAsync = async () => {
     const { navigation } = this.props;
@@ -42,9 +51,7 @@ class AuthLoading extends React.Component<Props, {}> {
     global.CUSTOMER_ID = customerId;
     const userId = await AsyncStorage.getItem('userId');
     global.USERID = userId
-  
-   // navigation.navigate(userToken ? "AppStack" : "AuthStack");
-  navigation.navigate( "AppStack");
+    navigation.navigate( "AppStack");
   };
 
   render() {
