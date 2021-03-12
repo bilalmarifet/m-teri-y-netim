@@ -136,7 +136,7 @@ export function GetProductsForCustomer(productsList?: IProductItemCustomer[] = [
                     newPrice: product.newPrice,
                     productCount: product.productCount,
                     isCampaign: product.isCampaign,
-                    freePoint: 200,
+                    freePoint: product.freePoint,
                     pointPerOrder: product.pointPerOrder
                   };
                   productModel.push(productItem);
