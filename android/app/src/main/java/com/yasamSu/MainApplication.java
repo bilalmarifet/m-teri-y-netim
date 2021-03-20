@@ -1,4 +1,4 @@
-package com.edirneSuSiparisi;
+package com.yasamSu;
 
 import android.app.Application;
 import android.content.Context;

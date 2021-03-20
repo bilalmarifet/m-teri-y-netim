@@ -94,9 +94,22 @@ class Login extends Component<Props, {}> {
                 return (
                   <View>
                     <View style={[styles.headStyle,{marginTop:Dimensions.get('window').height / 10}]}>
-                      {/* <Image source={BaseImage} style={{width:100,height:100,marginBottom:10}} /> */}
+                      <View style={{shadowColor:colors.IconColor,backgroundColor:'white',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.32,
+    shadowRadius: 5.46,
+    elevation: 2,
+    borderRadius:50,
+    width:100,height:100,
+  }}>
+<Image source={BaseImage} style={{width:100,height:100,marginBottom:10,borderRadius:50}} />
+                      </View>
+                      
                       <Text style={[styles.headText]}>
-                      Edirne Su Sipariş
+                      Yaşam Su
                       </Text>
                     </View>
                     <View style={[styles.inputContainer,{paddingBottom:0}]}>

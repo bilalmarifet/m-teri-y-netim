@@ -1,4 +1,4 @@
-package com.edirneSuSiparisi;
+package com.yasamSu;
 
 import com.facebook.react.ReactActivity;
 

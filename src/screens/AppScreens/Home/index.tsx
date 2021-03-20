@@ -225,7 +225,7 @@ class CustomerHomeScreen extends Component<Props, State> {
   static navigationOptions = ({ navigation }) => {
 
     return {
-      title: 'Edirne Su Sipariş',
+      title: 'Yaşam Su',
 
       headerStyle: {
         backgroundColor: colors.headerColorTop,
@@ -466,11 +466,16 @@ class CustomerHomeScreen extends Component<Props, State> {
             />
           }
           {this.renderCampaignProductsList()}
-          <View style={{ marginTop: 10 }}>
-            <Text style={{ paddingLeft: 10, fontFamily: fonts.h3Font, color: '#555', fontWeight: '200', fontSize: 18 }}>Tüm Ürünlerimiz</Text>
-          </View>
+          {this.props.loading ?   <Spinner color={colors.IconColor} /> :
+           <View>
+             <View style={{ marginTop: 10 }}>
+           <Text style={{ paddingLeft: 10, fontFamily: fonts.h3Font, color: '#555', fontWeight: '200', fontSize: 18 }}>Tüm Ürünlerimiz</Text>
+         </View>
 
-          {this.renderContent()}
+         {this.renderContent()} 
+         </View>
+        }
+         
           <RBSheet
           ref={ref => {
             this.RBSheetItem = ref;
