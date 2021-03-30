@@ -136,3 +136,6 @@ export const WATER_UPDATE_CUSTOMER_ORDER_STATUS =
 
 export const WATER_UPDATE_CARBOY_COUNT =
   WATER_BASE_URL_NEW + '/api/customer/UpdateCarboyCount';
+
+
+export const WATER_GET_ORDER_BY_ID = WATER_BASE_URL_NEW + '/api/Order/GetOrderById?orderId='

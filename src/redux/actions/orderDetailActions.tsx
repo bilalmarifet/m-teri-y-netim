@@ -9,7 +9,7 @@ import {AsyncStorage } from 'react-native'
 
 import { navigate } from '../services/Navigator';
 import { reset} from './loginAction';
-import { addOrder } from './addOrderAction';
+import { addOrder, sendNotificationFromResponseData } from './addOrderAction';
 import { getNotifications } from './notificationAction';
 import { showMessage } from 'react-native-flash-message';
 import { showSimpleMessage } from '../../components/showMessage';
@@ -48,6 +48,7 @@ export interface orderDetail {
     paymentText: string;
     courierNameSurname: string;
     courierPhoneNumber: string;
+    paymentType: number;
 
   }
 
@@ -269,12 +270,50 @@ export function cancelOrder(orderId: number,canceledUsername: string) {
 }).catch(err=> {
   dispatch(cancelOrderLoading(false))
   showSimpleMessage("Siparişiniz iptal edilemedi daha sonra tekrar deneyiniz.","danger")
-})
+})}}
 
+
+
+export function getCustomerOrderForCheckingPaymentWithCreditCard(orderId : number,notificationResponse?:any,customerName?:string ) {
+  return (dispatch : Any) =>  {
+    AsyncStorage.multiGet(['userToken', 'userId']).then((res) => {
+      let token = res[0][1];
+      let userId = res[1][1];
+      
+      const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+    }
+    axios.get(WATER_GET_CUSTOMER_ORDER_DETAIL_NEW +`?orderId=${orderId}`,{
+        headers : headers
+      }).then((response) =>{
+        console.log(response, "orderFromafterCardPaymentAfter")
+    if(response.data.isSuccess){
+      let isPaid = response.data.result.isPaid
+      if (isPaid === true) {
+          showSimpleMessage("Ödemeniz alındı en kısa sürede size iletilecektir","success")
+      }
+      else {
+        showSimpleMessage("Ödemeniz alınamadı sipariş detayından tekrar ödeme yapabilirsiniz veya bayiyle iletişime geçebilirsiniz","info")
+      }
+
+      }
+      else {
+
+      }
+    })
+    .catch(error => {   
+    });
+
+  }).catch(err=> {
+  
+  })
+  
+
+  }
 
 }
 
-}
 
 export function getCustomerOrderDetail(orderId : number) {
     return (dispatch : Any) =>  {
@@ -318,7 +357,7 @@ export function getCustomerOrderDetail(orderId : number) {
         orderDetail.paymentText = data.paymentText;
         orderDetail.courierNameSurname = data.courierNameSurname;
         orderDetail.courierPhoneNumber = data.courierPhoneNumber ? (data.courierPhoneNumber.length === 10) ? "0" + data.courierPhoneNumber : data.courierPhoneNumber : ""
-
+        orderDetail.paymentType = data.paymentType;
         var orderProducts : IOrderProductItem[] = [] as IOrderProductItem[];
 
         data.orderProductItems.map((item:any)=>{

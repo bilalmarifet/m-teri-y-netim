@@ -160,7 +160,6 @@ class CartScreen extends Component<Props, State> {
     )
   }
   render() {
-
     return (
       <View style={styles.container}>
 
@@ -186,6 +185,7 @@ class CartScreen extends Component<Props, State> {
 
   handleCartAction(): void {
     var selectedPaymentMethod =  this.props.paymentMethods ? this.props.paymentMethods.length > 0 ? this.props.selectedPaymentMethod !== undefined ? this.props.paymentMethods[this.props.selectedPaymentMethod].paymentType : 0 : 0 : 0
+    
     selectedPaymentMethod = this.state.isFreeOrderChoosen ? 5 : selectedPaymentMethod
     var products: product[] = [];
     console.log(selectedPaymentMethod , this.props.paymentMethods , this.props.selectedPaymentMethod, this.props.selectedPaymentMethod !== undefined ? "true" : 'false')
