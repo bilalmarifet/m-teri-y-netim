@@ -64,10 +64,9 @@ const loginSchema = Yup.object().shape({
   NameSurname: Yup.string()
     .min(3,"İsim soyisim en az 3 karakter olmalıdır.")
     .required("İsim soyisim girilmesi zorunludur"),
-  // email: Yup.string()
-  //   .email("Lütfen geçerli bir email adresi giriniz")
-  //   .min(4,"Email en az 4 karakter içermelidir.")
-  //   .required("Email girilmesi zorunludur."),
+  email: Yup.string()
+    .email("Lütfen geçerli bir email adresi giriniz")
+    .min(4,"Email en az 4 karakter içermelidir."),
   password: Yup.string()
     .min(6,"Şifre en az 6 karakter olmalıdır.")
     .required("Şifre girilmesi zorunludur."),
@@ -153,8 +152,8 @@ class SignUpFirstScreen extends Component<Props, State> {
                         {props.errors.NameSurname}
                         </Text>
               }
-                           {/* <Input
-                        placeholder="Email"
+                           <Input
+                        placeholder="Email (zorunlu değil)"
                         value={props.values.email}
                         onChangeText={props.handleChange("email")}
                         onBlur={props.handleBlur("email")}
@@ -164,7 +163,7 @@ class SignUpFirstScreen extends Component<Props, State> {
                       {props.touched.email && props.errors.email && <Text style={{fontSize:12,color:colors.accent}}>
                         {props.errors.email}
                         </Text>
-              } */}
+              }
                        <Input
                         placeholder="Şifre"
                         value={props.values.password}
