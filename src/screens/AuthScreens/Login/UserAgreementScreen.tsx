@@ -15,7 +15,7 @@ import {
 import { NavigationScreenProp, NavigationState, ScrollView, SafeAreaView } from "react-navigation";
 import { connect } from "react-redux";
 import { colors, fonts } from "../../../constants";
-import { forgotPassword, getUserAgreement } from "../../../redux/actions/loginAction";
+import { forgotPassword, getUserAgreement, getUserAgreementIptal, getUserAgreementMesafe } from "../../../redux/actions/loginAction";
 import { AppState } from "../../../redux/store";
 
 interface Props {
@@ -23,6 +23,12 @@ interface Props {
     loading: boolean;
     aggrement: string;
     getUserAgreement : () => void;
+    loadingMesafe: boolean;
+    aggrementMesafe: string;
+    getUserAgreementMesafe : () => void;
+    loadingIptal: boolean;
+    aggrementIptal: string;
+    getUserAgreementIptal : () => void;
 }
 
 
@@ -31,7 +37,7 @@ class UserAgreementScreen extends Component<Props,{}> {
   
     static navigationOptions = ({ navigation }) => {
         return {
-          title: 'Gizlilik',
+          title: navigation.getParam('title') ,
     
           headerStyle: {
             backgroundColor: colors.headerColorTop,
@@ -53,7 +59,16 @@ class UserAgreementScreen extends Component<Props,{}> {
       };
         
       componentDidMount(){
-          this.props.getUserAgreement()
+          let type = this.props.navigation.getParam('type')
+          if(type === "gizlilik") {
+            this.props.getUserAgreement()
+          }
+          else if( type  === "mesafe"){
+              this.props.getUserAgreementMesafe()
+          }
+          else if(type === "iptal") {
+              this.props.getUserAgreementIptal()
+          }
       }
 
 renderContent() {
@@ -64,8 +79,9 @@ renderContent() {
         </View>
         )
     }else {
+        let title = this.props.navigation.getParam('title') 
         return (
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
                                               <View style={{padding:20}}>
 
                                               <Text
@@ -73,9 +89,9 @@ renderContent() {
                                                             fontFamily: fonts.primaryFont,
                                                             fontSize: 32,
                                                         }}>
-                                                        Gizlilik Sözleşmesi
+                                                        {title}
                           </Text>
-                                                    <Text style={{ fontFamily: fonts.primaryFont, color: '#ccc' }}>Uygulama gizlilik sözleşmesi</Text>
+                                                    <Text style={{ fontFamily: fonts.primaryFont, color: '#ccc' }}>Uygulama {title}</Text>
                                              
                                              
                                               </View>
@@ -107,13 +123,21 @@ renderContent() {
 
 const mapStateToProps = (state: AppState) => ({
     loading: state.login.loadingForAgreement,
-    aggrement: state.login.agremeent
+    aggrement: state.login.agremeent,
+    loadingIptal: state.login.loadingForAgreement,
+    aggrementIptal: state.login.agremeent,
+    loadingMesafe: state.login.loadingForAgreement,
+    aggrementMesafe: state.login.agremeent,
 });
 
 function bindToAction(dispatch: any) {
   return {
     getUserAgreement : () =>
-    dispatch(getUserAgreement())
+    dispatch(getUserAgreement()),
+    getUserAgreementMesafe : () =>
+    dispatch(getUserAgreementMesafe()),
+    getUserAgreementIptal : () =>
+    dispatch(getUserAgreementIptal())
   };
 }
 

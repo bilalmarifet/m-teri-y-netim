@@ -169,7 +169,7 @@ class Login extends Component<Props, {}> {
                             </Text>
                             <TouchableOpacity
                               onPress={() =>
-                                this.props.navigation.navigate('UserAgreement')
+                                this.props.navigation.navigate('UserAgreement',{title: "Gizlilik Sözleşmesi",type: "gizlilik"})
                               }>
                               <Text
                                 style={{
@@ -187,6 +187,48 @@ class Login extends Component<Props, {}> {
                                 color:colors.textColorLighter
                               }}>
                               Kabul Etmiş Sayılırsınız.
+                            </Text>
+                            <TouchableOpacity
+                              onPress={() =>
+                                this.props.navigation.navigate('UserAgreement',{title: "İptal İade Sözleşmesi",type: "iptal"})
+                              }>
+                              <Text
+                                style={{
+                                  fontFamily: 'Avenir Next',
+                                  fontSize: 16,
+
+                                }}>
+                                İptal iade Sözleşmesini{' '}
+                              </Text>
+                            </TouchableOpacity>
+                            <Text
+                              style={{
+                                fontFamily: 'Avenir Next',
+                                fontSize: 16,
+                                color:colors.textColorLighter
+                              }}>
+                              ve 
+                            </Text>
+                            <TouchableOpacity
+                              onPress={() =>
+                                this.props.navigation.navigate('UserAgreement',{title: "Mesafeli Satış Sözleşmesi",type: "mesafe"})
+                              }>
+                              <Text
+                                style={{
+                                  fontFamily: 'Avenir Next',
+                                  fontSize: 16,
+
+                                }}>
+                                {' '}mesafeli satış sözleşmesini{' '}
+                              </Text>
+                            </TouchableOpacity>
+                            <Text
+                              style={{
+                                fontFamily: 'Avenir Next',
+                                fontSize: 16,
+                                color:colors.textColorLighter
+                              }}>
+                              inceleyebilirsiniz
                             </Text>
                           </View>
                        

@@ -6,9 +6,13 @@ import {Dispatch} from 'react';
 import {
   APP_KILLED,
   GET_USER_AGREEMENT,
+  GET_USER_AGREEMENT_IPTAL,
+  GET_USER_AGREEMENT_MESAFE,
   LOADING_FORGOT_PASSWORD,
   LOADING_FORGOT_PASSWORD_CHANGE,
   LOADING_USER_AGREEMENT,
+  LOADING_USER_AGREEMENT_IPTAL,
+  LOADING_USER_AGREEMENT_MESAFE,
   LOGIN_FAILED,
   LOGIN_STARTED,
   LOGIN_SUCCEED,
@@ -189,6 +193,63 @@ export function getUserAgreement() {
   };
 }
 
+
+export function getUserAgreementMesafe() {
+  return (dispatch: Dispatch<Action>) => {
+
+    dispatch(loadingUserAgreementMesafe(true));
+
+    axios
+      .get(WATER_GET_USER_TERM +`?storeId=${BasestoreId}&type=mesafe`)
+      .then(response => {
+        if (response.data.isSuccess) {
+
+          dispatch(UsergetAgreementMesafe(response.data.result))
+
+        } else {
+
+          showSimpleMessage("Bir hata meydana geldi.","danger")
+          dispatch(loadingUserAgreementMesafe(false));
+          }
+        }
+      )
+      .catch(err => {
+        console.log(err)
+        showSimpleMessage("Bir hata meydana geldi.","danger")
+        dispatch(loadingUserAgreementMesafe(false));
+      });
+  };
+}
+
+export function getUserAgreementIptal() {
+  return (dispatch: Dispatch<Action>) => {
+
+    dispatch(loadingUserAgreementIptal(true));
+
+    axios
+      .get(WATER_GET_USER_TERM +`?storeId=${BasestoreId}&type=iptal`)
+      .then(response => {
+        if (response.data.isSuccess) {
+
+          dispatch(UsergetAgreementIptal(response.data.result))
+
+        } else {
+
+          showSimpleMessage("Bir hata meydana geldi.","danger")
+          dispatch(loadingUserAgreementIptal(false));
+          }
+        }
+      )
+      .catch(err => {
+        console.log(err)
+        showSimpleMessage("Bir hata meydana geldi.","danger")
+        dispatch(loadingUserAgreementIptal(false));
+      });
+  };
+}
+
+
+
 export function forgotPassword(email:string) {
   return (dispatch: Dispatch<Action>) => {
     console.log("girdi")
@@ -265,10 +326,31 @@ export const loadingUserAgreement = (loader: boolean) => ({
   payload: loader,
 });
 
+export const loadingUserAgreementMesafe = (loader: boolean) => ({
+  type: LOADING_USER_AGREEMENT_MESAFE,
+  payload: loader,
+});
+
 export const UsergetAgreement = (value : string) => ({
   type: GET_USER_AGREEMENT,
   payload: value,
 });
+
+export const UsergetAgreementMesafe = (value : string) => ({
+  type: GET_USER_AGREEMENT_MESAFE,
+  payload: value,
+});
+
+export const loadingUserAgreementIptal= (loader: boolean) => ({
+  type: LOADING_USER_AGREEMENT_IPTAL,
+  payload: loader,
+});
+
+export const UsergetAgreementIptal = (value : string) => ({
+  type: GET_USER_AGREEMENT_IPTAL,
+  payload: value,
+});
+
 
 export const loadingChangePasswordFromForgot =(loader: boolean) => ({
   type: LOADING_FORGOT_PASSWORD_CHANGE,
