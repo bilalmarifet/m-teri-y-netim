@@ -1,4 +1,4 @@
-package com.edirneSuSiparisi;
+package com.cemalDagitim;
 
 import android.app.Application;
 import android.content.Context;

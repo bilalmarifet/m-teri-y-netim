@@ -1,4 +1,4 @@
-package com.edirneSuSiparisi;
+package com.cemalDagitim;
 
 import com.facebook.react.ReactActivity;
 
