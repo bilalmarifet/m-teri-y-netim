@@ -165,7 +165,7 @@ class OrderDetailScreen extends Component<Props, State> {
     let ipAdress = await NetworkInfo.getIPV4Address()
     let orderId = this.props.orderDetail ? this.props.orderDetail.orderId ? this.props.orderDetail.orderId : null : null
     if (ipAdress && orderId) {
-    let webUri = `http://apiv2.fillsoftware.com/payment/pay?OrderId=${orderId}&userIpAdress=${ipAdress}`
+    let webUri = `http://apiv2.baglarsu.com/payment/pay?OrderId=${orderId}&userIpAdress=${ipAdress}`
     this.props.navigation.navigate('WebView',{webUri:webUri,orderId:orderId})
     }
     
@@ -248,7 +248,7 @@ class OrderDetailScreen extends Component<Props, State> {
                    
                     {(paymentType !== 4 && orderStatus === OrderStatus.Waiting) || (paymentType === 4 && isPaid === false && orderStatus === OrderStatus.Waiting) ? <Button loading={this.props.cancelOrderLoading} text="Siparişi iptal et" style={{backgroundColor:colors.accent,paddingHorizontal: 10,marginHorizontal:20,  flexDirection:'row', justifyContent:'space-between'}} textStyle={{color:'white'}} onPress={()=> this.props.cancelOrder(Number(this.props.navigation.getParam('orderId')),this.props.userInfo.nameSurname)} />
                      : null}
-                    {(paymentType === 4 && isPaid === false && orderStatus !== OrderStatus.Exported ) ? <Button text="Yeniden Ödeme Yap" style={{backgroundColor:colors.headerColorTop,paddingHorizontal: 10,marginHorizontal:20,  flexDirection:'row', justifyContent:'space-between'}} textStyle={{color:'white'}} onPress={()=> this.trytoPayWithCreditCardAgain()} /> : null}
+                    {(paymentType === 4 && isPaid === false && !(orderStatus === OrderStatus.Exported || orderStatus === OrderStatus.Cannceled) ) ? <Button text="Yeniden Ödeme Yap" style={{backgroundColor:colors.headerColorTop,paddingHorizontal: 10,marginHorizontal:20,  flexDirection:'row', justifyContent:'space-between'}} textStyle={{color:'white'}} onPress={()=> this.trytoPayWithCreditCardAgain()} /> : null}
                 </View>
             </ScrollView>
         )

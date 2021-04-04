@@ -27,6 +27,8 @@ import { AppState } from '../../../redux/store';
 import { getStoreInformationFromStoreId, storeInformation, UserInfo } from '../../../redux/actions/profileActions';
 import { ButtonGradient } from '../../../components/ButtonGradient';
 import Icon from 'react-native-vector-icons/Feather';
+import IconNew from 'react-native-vector-icons/Ionicons'
+
 import { adress, changeSelectedAdressId, getAdress } from '../../../redux/actions/adressAction';
 import RBSheet from "react-native-raw-bottom-sheet";
 import { Dimensions } from 'react-native';
@@ -104,8 +106,9 @@ class CartScreen extends Component<Props, State> {
         },
         elevation: 0,
         borderBottomWidth:0.5,
-        borderBottomColor:'#ccc'
+        borderBottomColor:'#ccc',
       },
+      headerLeft: <TouchableOpacity onPress={()=> navigation.navigate('Cart')}><IconNew name="ios-chevron-back-outline" style={{fontSize:30,color:colors.headerTitleColor}} /></TouchableOpacity>,
     };
   };
  
