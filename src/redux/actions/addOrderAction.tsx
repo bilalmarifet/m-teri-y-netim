@@ -330,7 +330,7 @@ export function AddOrderMultiple(
                   let orderId = Number(response.data.result.orderId) ?? 0
                   console.log(orderId, "orderId", ipAdress , "ipAdress")
                   if (orderId > 0 && ipAdress != null) {
-                    let webUri = `http://apiv2.fillsoftware.com/payment/pay?OrderId=${orderId}&userIpAdress=${ipAdress}`
+                    let webUri = `http://apiv2.baglarsu.com/payment/pay?OrderId=${orderId}&userIpAdress=${ipAdress}`
                     console.log("data from credit card",data)
                     NavigationService.navigate('WebView',{webUri:webUri, notificationResponse: data,orderId:orderId,customerName:customerName})
                   }
