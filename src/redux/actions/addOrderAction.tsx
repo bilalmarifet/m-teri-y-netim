@@ -337,9 +337,10 @@ export function AddOrderMultiple(
                   else {
                     showSimpleMessage("Sipariş oluşturulurken bir hata meydana geldi.","danger","Daha sonra sipariş verebilirsiniz.")
                   }
+                }else {
+                  dispatch(sendNotificationFromResponseData(response.data.result,paymentType,customerName,freePoints))
                 }
-                dispatch(sendNotificationFromResponseData(response.data.result,paymentType,customerName,freePoints))
-               
+                
                 
               }else {
                 dispatch(addOrder(false))

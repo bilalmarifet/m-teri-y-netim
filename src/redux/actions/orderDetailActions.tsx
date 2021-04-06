@@ -292,6 +292,7 @@ export function getCustomerOrderForCheckingPaymentWithCreditCard(orderId : numbe
       let isPaid = response.data.result.isPaid
       if (isPaid === true) {
           showSimpleMessage("Ödemeniz alındı en kısa sürede size iletilecektir","success")
+          dispatch(sendNotificationFromResponseData(notificationResponse,4,customerName))
       }
       else {
         showSimpleMessage("Ödemeniz alınamadı sipariş detayından tekrar ödeme yapabilirsiniz veya bayiyle iletişime geçebilirsiniz","info")

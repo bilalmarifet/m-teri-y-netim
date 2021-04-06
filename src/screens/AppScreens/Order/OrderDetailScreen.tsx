@@ -163,10 +163,11 @@ class OrderDetailScreen extends Component<Props, State> {
   }
   async trytoPayWithCreditCardAgain() {
     let ipAdress = await NetworkInfo.getIPV4Address()
+    let customerName = this.props.orderDetail ? this.props.orderDetail.customerName ? this.props.orderDetail.customerName : "" : ""
     let orderId = this.props.orderDetail ? this.props.orderDetail.orderId ? this.props.orderDetail.orderId : null : null
     if (ipAdress && orderId) {
     let webUri = `http://apiv2.baglarsu.com/payment/pay?OrderId=${orderId}&userIpAdress=${ipAdress}`
-    this.props.navigation.navigate('WebView',{webUri:webUri,orderId:orderId})
+    this.props.navigation.navigate('WebView',{webUri:webUri,orderId:orderId,customerName:customerName})
     }
     
   }

@@ -36,7 +36,7 @@ import { Dimensions } from 'react-native';
 interface Props {
   navigation: NavigationScreenProp<NavigationState>;
   getCustomerOrderDetail: (orderId : number) => void;
-  getCustomerOrderForCheckingPaymentWithCreditCard: (orderId : number) => void;
+  getCustomerOrderForCheckingPaymentWithCreditCard: (orderId : number,notificationResponse?:any,customerName?:string ) => void;
 }
 
 
@@ -90,7 +90,7 @@ class WebViewScreen extends Component<Props, State> {
   callingFun = () => {
     // let orderId = 12312
     // this.props.getCustomerOrderDetail(orderId)
-    this.props.getCustomerOrderForCheckingPaymentWithCreditCard(this.state.orderId)
+    this.props.getCustomerOrderForCheckingPaymentWithCreditCard(this.state.orderId,this.state.notificationResponse,this.state.customerName)
     this.props.navigation.goBack()
 }
 componentDidMount() {
@@ -124,8 +124,8 @@ function bindToAction(dispatch: any) {
   return {
     getCustomerOrderDetail: (orderId : number) => 
     dispatch(getCustomerOrderDetail(orderId)),
-    getCustomerOrderForCheckingPaymentWithCreditCard: (orderId : number) => 
-    dispatch(getCustomerOrderForCheckingPaymentWithCreditCard(orderId))
+    getCustomerOrderForCheckingPaymentWithCreditCard: (orderId : number,notificationResponse?:any,customerName?:string ) => 
+    dispatch(getCustomerOrderForCheckingPaymentWithCreditCard(orderId,notificationResponse,customerName))
   };
 }
 
