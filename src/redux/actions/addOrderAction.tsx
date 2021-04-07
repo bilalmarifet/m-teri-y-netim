@@ -29,6 +29,7 @@ import { user } from './getUserAction';
 import { BasestoreId } from '../../services/AppConfig';
 import { showSimpleMessage } from '../../components/showMessage';
 import NavigationService from '../../services/NavigationService';
+import { getUserInfo } from './profileActions';
 
 export function chooseEmployee(userId: string) {}
 export interface userWithToken {
@@ -249,7 +250,8 @@ export function AddOrderMultiple(
   if (!type) {
     type = 0;
   }
-  console.log("paymentInfoText",paymentInfoText)
+  
+    console.log("paymentInfoText",paymentInfoText)
 
   return (dispatch: Any) => {
     dispatch(isLoading(true));
@@ -270,17 +272,21 @@ export function AddOrderMultiple(
           unitPrice: string;
           productCount: string;
         }[] = [];
+        var freePoints = 0
         productList.map(element => {
           let OrderItem = {
             productId: element.productId,
             unitPrice: element.unitPrice,
             productCount: element.productCount,
           };
-
+          let productCount = element.productCount ? Number(element.productCount) : 0
+          let freePoint = element.freePoint ?? 0
+          freePoints += (productCount * freePoint)
+          console.log(productCount," ", freePoint)
           list.push(OrderItem);
         });
-
-        console.log("order addd",list,isPaid,customerId,userId,type)
+        console.log(freePoints,"freee points")
+        console.log("order addd",paymentType,list,isPaid,customerId,userId,type)
         axios
           .post(
             WATER_ADD_ORDER_MULTIPLE_PRODUCT,
@@ -334,9 +340,12 @@ export function AddOrderMultiple(
                 NavigationService.navigate('Order')
                 if (type === 1) {
                   dispatch(resetCartValues());
-
-                  showSimpleMessage("Şiparişiniz alındı en kısa sürede size iletilecektir","success")
-                         
+                  if (paymentType !== 5) {
+                    showSimpleMessage("Şiparişiniz alındı en kısa sürede size iletilecektir","success",`Siparişiniz onaylandıktan sonra ${freePoints} puan kazanacaksınız puanlarınızı biriktirip bedava ürün kazanabilirsiniz.`)
+                  }else {
+                    showSimpleMessage("Şiparişiniz alındı en kısa sürede size iletilecektir","success")
+                  }
+                       
                   let tmpEmployee = notificationItemResponsesList.find(e=> e.isOwner === false);
                   let notificationInsertReponse: notificationInsertReponseModel = response.data.result.notificationInsertReponseModel
                   if(notificationInsertReponse && notificationInsertReponse.message ) {
@@ -375,6 +384,7 @@ export function AddOrderMultiple(
                 }
               }else {
                 dispatch(addOrder(false))
+                dispatch(getUserInfo())
               }
             }else {
               if (response.data.message ===  "Order.Post.MinumumAmount.Error")

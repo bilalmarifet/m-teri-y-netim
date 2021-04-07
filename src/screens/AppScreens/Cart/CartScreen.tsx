@@ -209,8 +209,30 @@ class CartScreen extends Component<Props, State> {
 
   checkLogin(){
     if(global.TOKEN){
-      this.props.navigation.navigate('CartCheckout');
-    }
+
+    let userFreePoint = this.props.userInfo ? this.props.userInfo.point ? this.props.userInfo.point : 0 : 0
+    var canUserBuyFreeProduct = false
+    if (userFreePoint > 0){ 
+     
+      let productList = this.props.productList ?? []
+      for (let index = 0; index < productList.length; index++) {
+        const element = productList[index];
+        if (element.count > 0 && canUserBuyFreeProduct) {
+          canUserBuyFreeProduct = false
+          break; 
+        }
+        if (element.count == 1 && element.freePoint > 0 && element.freePoint <= userFreePoint) {
+          usedFreePoint = element.freePoint
+          canUserBuyFreeProduct = true
+        }
+      }
+      console.log("free order",canUserBuyFreeProduct)
+      this.props.navigation.navigate('CartCheckout',{freeOrder: canUserBuyFreeProduct});
+    }else{
+      console.log("free order degil",canUserBuyFreeProduct)
+      this.props.navigation.navigate('CartCheckout',{freeOrder: false});    }
+   
+  }
     else{
       showSimpleMessage("Sipariş verebilmek için lütfen giriş yapınız", "info");
       this.props.navigation.navigate("Login");
@@ -317,7 +339,6 @@ class CartScreen extends Component<Props, State> {
                 <View style={styles.itemCart}>
                   {this.renderPlusButton(item,index)}
                   <View style={{ width: '60%', flexDirection: 'row' }}>
-                    <View>
                     <FastImage
      style={{ width: 80, height: 80, marginLeft: 10 }}
         source={{
@@ -327,20 +348,19 @@ class CartScreen extends Component<Props, State> {
     />
 
 
-                    </View>
-                    <View style={{ marginTop: 10, marginLeft: 10 }}>
+
+                    <View style={{ marginTop: 10, marginLeft: 10}}>
 
                       <Text
                         style={{
                           fontFamily: 'roboto',
                           color: colors.textColor,
-                          alignSelf: 'center',
+                          alignSelf: 'flex-start',
 
                         }}>
                         {item.productName}
                       </Text>
                       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <View style={{ flex: 0.5 }}>
                           <Text>{item.isCampaign ? item.newPrice:  item.price} TL</Text>
                         </View>
 
@@ -348,7 +368,7 @@ class CartScreen extends Component<Props, State> {
 
 
 
-                      </View>
+
 
                     </View>
 
