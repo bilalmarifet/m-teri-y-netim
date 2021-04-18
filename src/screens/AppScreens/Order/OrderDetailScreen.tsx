@@ -38,6 +38,7 @@ import { cancelOrder, getCustomerOrderDetail, orderDetail, orderListItem, OrderS
 import { stat } from 'fs';
 import Icon from 'react-native-vector-icons/Feather';
 import { UserInfo } from '../../../redux/actions/profileActions';
+import { NetworkInfo } from 'react-native-network-info';
 
 
 interface Props {
@@ -160,7 +161,15 @@ class OrderDetailScreen extends Component<Props, State> {
         break;
     }
   }
-
+  async trytoPayWithCreditCardAgain() {
+    let ipAdress = await NetworkInfo.getIPV4Address()
+    let orderId = this.props.orderDetail ? this.props.orderDetail.orderId ? this.props.orderDetail.orderId : null : null
+    if (ipAdress && orderId) {
+    let webUri = `http://apiv2.baglarsu.com/payment/pay?OrderId=${orderId}&userIpAdress=${ipAdress}`
+    this.props.navigation.navigate('WebView',{webUri:webUri,orderId:orderId})
+    }
+    
+  }
   renderContent() {
       if(this.props.loadingForOrderDetail) {
         return(<Spinner color={colors.IconColor} style={{flex:1}} />)
@@ -168,7 +177,8 @@ class OrderDetailScreen extends Component<Props, State> {
       if(this.props.orderDetail) {
         let order = this.props.orderDetail
         let orderStatus = order ? order.orderStatus ?  order.orderStatus : OrderStatus.Waiting : OrderStatus.Waiting 
-
+        let paymentType = order ? order.paymentType ? order.paymentType : null : null
+        let isPaid = order ? order.isPaid ? order.isPaid : false : false
         return(
             <ScrollView>
                 <View style={{}}>
@@ -236,8 +246,9 @@ class OrderDetailScreen extends Component<Props, State> {
                     </View>: null : null}
                    
                    
-                    {orderStatus === OrderStatus.Waiting ? <Button loading={this.props.cancelOrderLoading} text="Siparişi iptal et" style={{backgroundColor:colors.accent,paddingHorizontal: 10,marginHorizontal:20,  flexDirection:'row', justifyContent:'space-between'}} textStyle={{color:'white'}} onPress={()=> this.props.cancelOrder(Number(this.props.navigation.getParam('orderId')),this.props.userInfo.nameSurname)} />
+                    {(paymentType !== 4 && orderStatus === OrderStatus.Waiting) || (paymentType === 4 && isPaid === false && orderStatus === OrderStatus.Waiting) ? <Button loading={this.props.cancelOrderLoading} text="Siparişi iptal et" style={{backgroundColor:colors.accent,paddingHorizontal: 10,marginHorizontal:20,  flexDirection:'row', justifyContent:'space-between'}} textStyle={{color:'white'}} onPress={()=> this.props.cancelOrder(Number(this.props.navigation.getParam('orderId')),this.props.userInfo.nameSurname)} />
                      : null}
+                    {(paymentType === 4 && isPaid === false && !(orderStatus === OrderStatus.Exported || orderStatus === OrderStatus.Cannceled) ) ? <Button text="Yeniden Ödeme Yap" style={{backgroundColor:colors.headerColorTop,paddingHorizontal: 10,marginHorizontal:20,  flexDirection:'row', justifyContent:'space-between'}} textStyle={{color:'white'}} onPress={()=> this.trytoPayWithCreditCardAgain()} /> : null}
                 </View>
             </ScrollView>
         )

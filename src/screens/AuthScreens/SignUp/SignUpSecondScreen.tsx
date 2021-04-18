@@ -127,7 +127,7 @@ class SignUpSecondScreen extends Component<Props, State> {
     const { isSucceed, navigation } = this.props;
     var user = {} as BaseUser;
     user.nameSurname = this.props.userFirstData.NameSurname;
-    user.email = '';
+    user.email = this.props.userFirstData.email ?? '';
     user.password = this.props.userFirstData.password;
     user.address = values.adress;
     user.companyName = "";

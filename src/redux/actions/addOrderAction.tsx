@@ -29,7 +29,8 @@ import { user } from './getUserAction';
 import { BasestoreId } from '../../services/AppConfig';
 import { showSimpleMessage } from '../../components/showMessage';
 import NavigationService from '../../services/NavigationService';
-
+import { getUserInfo } from './profileActions';
+import {NetworkInfo} from 'react-native-network-info';
 export function chooseEmployee(userId: string) {}
 export interface userWithToken {
   id: number;
@@ -249,7 +250,8 @@ export function AddOrderMultiple(
   if (!type) {
     type = 0;
   }
-  console.log("paymentInfoText",paymentInfoText)
+  
+    console.log("paymentInfoText",paymentInfoText)
 
   return (dispatch: Any) => {
     dispatch(isLoading(true));
@@ -270,17 +272,21 @@ export function AddOrderMultiple(
           unitPrice: string;
           productCount: string;
         }[] = [];
+        var freePoints = 0
         productList.map(element => {
           let OrderItem = {
             productId: element.productId,
             unitPrice: element.unitPrice,
             productCount: element.productCount,
           };
-
+          let productCount = element.productCount ? Number(element.productCount) : 0
+          let freePoint = element.freePoint ?? 0
+          freePoints += (productCount * freePoint)
+          console.log(productCount," ", freePoint)
           list.push(OrderItem);
         });
-
-        console.log("order addd",list,isPaid,customerId,userId,type)
+        console.log(freePoints,"freee points")
+        console.log("order addd",paymentType,list,isPaid,customerId,userId,type)
         axios
           .post(
             WATER_ADD_ORDER_MULTIPLE_PRODUCT,
@@ -298,7 +304,7 @@ export function AddOrderMultiple(
               headers: headers,
             },
           )
-          .then(response => {
+          .then(async response => {
             console.log('addOrderResponse', response);
             console.log(
               'orderItems:',
@@ -314,68 +320,31 @@ export function AddOrderMultiple(
             );
             if (response.data.isSuccess) {
               if (response.data.result) {
-                let data = response.data.result.userWithTokenItemResponses;
-                var notificationItemResponsesList: userWithTokenItemResponses[] = []
-                data.forEach((element: userWithTokenItemResponses) => {
-                  var notificationItemResponse = {} as userWithTokenItemResponses
-                  notificationItemResponse.id = element.id
-                  notificationItemResponse.isOwner = element.isOwner
-                  notificationItemResponse.name = element.name
-                  var tokenList : String[] = []
-                  element.tokens.forEach((e:string) => {
-                    tokenList.push(e)
-                  })
-                  notificationItemResponse.tokens = tokenList
-                  notificationItemResponsesList.push(notificationItemResponse)
-                });
                 dispatch(reset());
                 dispatch(GetOrders(customerId, 1, 10));
-                NavigationService.navigate('Cart')
-                NavigationService.navigate('Order')
-                if (type === 1) {
-                  dispatch(resetCartValues());
-
-                  showSimpleMessage("Şiparişiniz alındı en kısa sürede size iletilecektir","success")
-                         
-                  let tmpEmployee = notificationItemResponsesList.find(e=> e.isOwner === false);
-                  let notificationInsertReponse: notificationInsertReponseModel = response.data.result.notificationInsertReponseModel
-                  if(notificationInsertReponse && notificationInsertReponse.message ) {
-                    console.log(tmpEmployee, "tmpEmployee")
-                    if(tmpEmployee) {
-                      const notificationService = new NotificationService(
-                        tmpEmployee.id,
-                        1,
-                        response.data.result.orderId,
-                        tmpEmployee.tokens,
-                      );
-                      console.log(notificationService.orderId,notificationService.toUserId,notificationService.tokenList)
-                      notificationService.sendPush(notificationInsertReponse.message, notificationInsertReponse.title);
-                      notificationService.addNotification();
-                    }
-                      
+                dispatch(resetCartValues());
+                console.log(paymentType, "paymentTypee")
+                if(paymentType === 4) {
+                  let ipAdress = await NetworkInfo.getIPV4Address()
+                  let data = response.data.result
+                  let orderId = Number(response.data.result.orderId) ?? 0
+                  console.log(orderId, "orderId", ipAdress , "ipAdress")
+                  if (orderId > 0 && ipAdress != null) {
+                    let webUri = `http://apiv2.fillsoftware.com/payment/garantipos?orderId=${orderId}&ipAddress=${ipAdress}`
+                    console.log("data from credit card",data)
+                    NavigationService.navigate('WebView',{webUri:webUri, notificationResponse: data,orderId:orderId,customerName:customerName})
                   }
-                    let tmpBase = notificationItemResponsesList.find(e => e.isOwner === true)
-                    console.log(tmpBase, "tmpBase")
-                    if(tmpBase) {
-                      const notificationServiceForBase = new NotificationService(
-                        global.STORE_OWNER_USER_ID,
-                        1,
-                        response.data.result.orderId,
-                        tmpBase.tokens,
-                      );
-                      let text = customerName
-                        ? `Müşteriniz ${customerName}'den hemen teslim edilmek üzere sipariş alındı`
-                        : 'Müşterinizden hemen teslim edilmek üzere sipariş alındı';
-                        let textUnder = tmpEmployee ? `Gelen sipariş ${tmpEmployee.name} adlı çalışana atandı` : 
-                        "Teslim edilmek üzere siparişiniz alındı."
-                        notificationServiceForBase.sendPush(textUnder, text);
-                    
-                    }
-                    
+                  else {
+                    showSimpleMessage("Sipariş oluşturulurken bir hata meydana geldi.","danger","Daha sonra sipariş verebilirsiniz.")
+                  }
                 }
+                dispatch(sendNotificationFromResponseData(response.data.result,paymentType,customerName,freePoints))
+               
+                
               }else {
                 dispatch(addOrder(false))
-              }
+                dispatch(getUserInfo())
+              } 
             }else {
               if (response.data.message ===  "Order.Post.MinumumAmount.Error")
               {showSimpleMessage("Minimum sipariş üstünde sipariş verebiirsiniz.","danger")
@@ -400,6 +369,87 @@ export function AddOrderMultiple(
         dispatch(reset());
       });
   };
+}
+
+
+export function sendNotificationFromResponseData(result: any,paymentType: number,customerName?:string,freePoints?:number) {
+  return (dispatch: Any) => {
+    let data = result.userWithTokenItemResponses;
+    var notificationItemResponsesList: userWithTokenItemResponses[] = []
+    data.forEach((element: userWithTokenItemResponses) => {
+      var notificationItemResponse = {} as userWithTokenItemResponses
+      notificationItemResponse.id = element.id
+      notificationItemResponse.isOwner = element.isOwner
+      notificationItemResponse.name = element.name
+      var tokenList : String[] = []
+      element.tokens.forEach((e:string) => {
+        tokenList.push(e)
+      })
+      notificationItemResponse.tokens = tokenList
+      notificationItemResponsesList.push(notificationItemResponse)
+    });
+    
+    if (paymentType !== 4) {
+      NavigationService.navigate('Cart')
+      NavigationService.navigate('Order')
+    }
+      if (paymentType !== 5 ) {
+        if (paymentType !== 4) {
+          showSimpleMessage("Şiparişiniz alındı en kısa sürede size iletilecektir","success",`Siparişiniz onaylandıktan sonra ${freePoints} puan kazanacaksınız puanlarınızı biriktirip bedava ürün kazanabilirsiniz.`)
+    
+        }
+        else {
+           showSimpleMessage("Şiparişiniz alındı en kısa sürede size iletilecektir. Ödeme ekranına yönlendiriliyorsunuz","success",`Siparişiniz onaylandıktan sonra ${freePoints} puan kazanacaksınız puanlarınızı biriktirip bedava ürün kazanabilirsiniz.`)
+        }
+          }else {
+        showSimpleMessage("Şiparişiniz alındı en kısa sürede size iletilecektir","success")
+      }
+           
+      let tmpEmployee = notificationItemResponsesList.find(e=> e.isOwner === false);
+      let notificationInsertReponse: notificationInsertReponseModel = result.notificationInsertReponseModel
+      if(notificationInsertReponse && notificationInsertReponse.message ) {
+        console.log(tmpEmployee, "tmpEmployee")
+        if(tmpEmployee) {
+          const notificationService = new NotificationService(
+            tmpEmployee.id,
+            1,
+            result.orderId,
+            tmpEmployee.tokens,
+          );
+          console.log(notificationService.orderId,notificationService.toUserId,notificationService.tokenList)
+          notificationService.sendPush(notificationInsertReponse.message, notificationInsertReponse.title);
+          notificationService.addNotification();
+        }
+          
+      }
+        let tmpBase = notificationItemResponsesList.find(e => e.isOwner === true)
+        console.log(tmpBase, "tmpBase")
+        if(tmpBase) {
+          const notificationServiceForBase = new NotificationService(
+            global.STORE_OWNER_USER_ID,
+            1,
+            result.orderId,
+            tmpBase.tokens,
+          );
+          console.log(paymentType, " paymenttt type")
+            if (paymentType === 4) {
+             let text = customerName
+            ? `Müşteriniz ${customerName}'den hemen teslim edilmek üzere sipariş alındı `
+            : 'Müşterinizden hemen teslim edilmek üzere sipariş alındı';
+            let textUnder = tmpEmployee ? `Gelen sipariş ${tmpEmployee.name} adlı çalışana atandı. Kredi kartı ile sipariş alındı` : 
+            "Hemen teslim edilmek üzere kredi kartı ile siparişiniz alındı."
+            notificationServiceForBase.sendPush(textUnder, text);
+            }else {
+              let text = customerName
+              ? `Müşteriniz ${customerName}'den hemen teslim edilmek üzere sipariş alındı`
+              : 'Müşterinizden hemen teslim edilmek üzere sipariş alındı';
+              let textUnder = tmpEmployee ? `Gelen sipariş ${tmpEmployee.name} adlı çalışana atandı` : 
+              "Teslim edilmek üzere siparişiniz alındı."  
+              notificationServiceForBase.sendPush(textUnder, text);
+            }
+        }
+
+  }
 }
 
 export function AddOrder(

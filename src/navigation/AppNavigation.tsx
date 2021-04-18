@@ -38,6 +38,7 @@ import StoreInfoScreen from "../screens/AppScreens/Profile/StoreInfoScreen";
 import MyAdressesScreen from "../screens/AppScreens/Profile/MyAdressesScreen";
 import AdressAddScreen from "../screens/AppScreens/Profile/AdressAddScreen";
 import AdressEditScreen from "../screens/AppScreens/Profile/AdressEditScreen";
+import WebViewScreen from "../screens/AppScreens/Cart/WebViewScreen";
 
 const MainStack = createStackNavigator(
   {
@@ -88,18 +89,56 @@ const AuthStack = createStackNavigator(
     headerMode: "none"
   }
 );
+const modalStackWebView = createStackNavigator({
+  Cart: CartScreen,
+  WebView: WebViewScreen
+}, {
+  mode:'modal',
+  defaultNavigationOptions: {
+    headerStyle: {
+      backgroundColor: colors.headerColorTop,
+    },
+    headerTintColor : colors.headerTitleColor,
+    headerTitleStyle: {
+      fontSize: 18,
+      fontWeight:'bold',
+      fontFamily: fonts.primaryFont,
+      color:colors.headerTitleColor,
 
+    },
+  },
+})
+
+
+const cartCheckoutStack = createStackNavigator({
+  CartCheckout: CartCheckoutScreen,
+},{
+  defaultNavigationOptions: {
+    headerStyle: {
+      backgroundColor: colors.headerColorTop,
+    },
+    headerTintColor : colors.headerTitleColor,
+    headerTitleStyle: {
+      fontSize: 18,
+      fontWeight:'bold',
+      fontFamily: fonts.primaryFont,
+      color:colors.headerTitleColor,
+
+    },
+  },
+})
 const cartStack = createStackNavigator(
   {
-    Cart: CartScreen,
-    CartCheckout: CartCheckoutScreen,
+    Cart: modalStackWebView,
+    CartCheckout: cartCheckoutStack,
     CustomerEditProfile: CustomerEditProfileScreen,
   },
   {
+    headerMode:'none',
     initialRouteName: 'Cart',
     defaultNavigationOptions: {
       headerStyle: {
-        backgroundColor: '#f4511e',
+        backgroundColor: colors.headerColorTop,
       },
       headerTintColor : colors.headerTitleColor,
       headerTitleStyle: {
@@ -163,6 +202,7 @@ const CustomerProfileStack = createStackNavigator(
     },
   },
 );
+
 
 
 

@@ -80,11 +80,9 @@ class CartScreen extends Component<Props, State> {
   }
 
 
-
   static navigationOptions = ({ navigation }) => {
     return {
       title: 'Sepet',
-
       headerStyle: {
         backgroundColor: colors.headerColorTop,
         
